@@ -61,6 +61,11 @@
     <Compile Include="Helper\ReflectionClass.cs" />
     <Compile Include="Helper\SqlHelper.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="PropertiesClass\PropertyClassZaposleni.cs" />
+    <Compile Include="PropertiesClass\PropertyClassServisiranjeVozila.cs" />
+    <Compile Include="PropertiesClass\PropertyClassModel.cs" />
+    <Compile Include="PropertiesClass\PropertyClassProizvodjac.cs" />
+    <Compile Include="PropertiesClass\PropertyClassServis.cs" />
     <Compile Include="PropertiesClass\PropertyClassRegistracija.cs" />
     <Compile Include="PropertiesClass\PropertyClassVozila.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

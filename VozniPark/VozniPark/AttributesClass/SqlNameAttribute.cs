@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KonekcijaNaBazu.AttributesClass
+namespace VozniPark.AttributesClass
 {
     [AttributeUsage(AttributeTargets.Property)]
     class SqlNameAttribute : Attribute
