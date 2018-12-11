@@ -61,6 +61,7 @@
     <Compile Include="Helper\ReflectionClass.cs" />
     <Compile Include="Helper\SqlHelper.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="PropertiesClass\PropertyClassZaduzenja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyInterface.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -85,8 +86,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PropertiesClass\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
