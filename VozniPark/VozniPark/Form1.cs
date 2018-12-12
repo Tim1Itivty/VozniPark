@@ -40,7 +40,7 @@ namespace VozniPark
                 btnPodmeni.TabIndex = 0;
                 btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
                 btnPodmeni.UseVisualStyleBackColor = false;
-                btnPodmeni.Click += new System.EventHandler(this.btnVozila_Click);
+                //btnPodmeni.Click += new System.EventHandler(this.btnVozila_Click);
 
                 btnPodmeni.Width = flpPodmeni.Width;
                 btnPodmeni.Height = 55;
@@ -50,6 +50,7 @@ namespace VozniPark
                 {
                     btnPodmeni.Text = "Pregled svih vozila";
                     btnPodmeni.Name = "btnPregled";
+                    
                 }
                 if (i == 1)
                 {
@@ -61,75 +62,166 @@ namespace VozniPark
                     btnPodmeni.Text = "Unesi podatke o registraciji";
                     btnPodmeni.Name = "btnUnesiReg";
                 }
+                btnPodmeni.Click += BtnPodmeni_Click;
 
                 flpPodmeni.Controls.Add(btnPodmeni);
             }
         }
 
-        
+        private void BtnPodmeni_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Name == "btnPregled") { }
+            else if(button.Name == "btnDodajVozilo") { }
+            else if(button.Name == "btnUnesiReg") { }
+                
+        }
+
         private void btnZaposleni_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
 
-            Button btnPregled = new Button();
-            btnPregled.Text = "Pregled svih zaposlenih";
-            btnPregled.FlatStyle = FlatStyle.Flat;
-            btnPregled.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnPregled);
+            for (int i = 0; i < 2; i++)
+            {
+                Button btnPodmeniZaposleni = new Button();
+                btnPodmeniZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+                btnPodmeniZaposleni.FlatAppearance.BorderSize = 0;
+                btnPodmeniZaposleni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btnPodmeniZaposleni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                btnPodmeniZaposleni.ForeColor = System.Drawing.Color.Linen;
+                btnPodmeniZaposleni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+                btnPodmeniZaposleni.TabIndex = 0;
+                btnPodmeniZaposleni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                btnPodmeniZaposleni.UseVisualStyleBackColor = false;
+                //btnPodmeniZaposleni.Click += new System.EventHandler(this.btnVozila_Click);
 
-            Button btnDodaj = new Button();
-            btnDodaj.Text = "Dodaj novog zaposlenog";
-            btnDodaj.FlatStyle = FlatStyle.Flat;
-            btnDodaj.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnDodaj);
+                btnPodmeniZaposleni.Width = flpPodmeni.Width;
+                btnPodmeniZaposleni.Height = 55;
+
+                btnPodmeniZaposleni.FlatStyle = FlatStyle.Flat;
+                if (i == 0)
+                {
+                    btnPodmeniZaposleni.Text = "Pregled svih zaposlenih";
+                    btnPodmeniZaposleni.Name = "btnPregled";
+                }
+                if (i == 1)
+                {
+                    btnPodmeniZaposleni.Text = "Dodaj novog zaposlenog";
+                    btnPodmeniZaposleni.Name = "btnDodajZaposlenog";
+                }
+                btnPodmeniZaposleni.Click += BtnPodmeniZaposleni_Click;
+                flpPodmeni.Controls.Add(btnPodmeniZaposleni);
+            }
+            
+        }
+
+        private void BtnPodmeniZaposleni_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Name == "btnPregled") { }
+            else if (button.Name == "btnDodajZaposlenog") { }
         }
 
         private void btnZaduzenja_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
 
-            Button btnPregled = new Button();
-            btnPregled.Text = "Pregled trenutnih zaduzenja";
-            btnPregled.FlatStyle = FlatStyle.Flat;
-            btnPregled.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnPregled);
+            for (int i = 0; i < 4; i++)
+            {
+                Button btnPodmeniZaduzenja = new Button();
+                btnPodmeniZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+                btnPodmeniZaduzenja.FlatAppearance.BorderSize = 0;
+                btnPodmeniZaduzenja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btnPodmeniZaduzenja.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                btnPodmeniZaduzenja.ForeColor = System.Drawing.Color.Linen;
+                btnPodmeniZaduzenja.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+                btnPodmeniZaduzenja.TabIndex = 0;
+                btnPodmeniZaduzenja.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                btnPodmeniZaduzenja.UseVisualStyleBackColor = false;
+                //btnPodmeniZaduzenja.Click += new System.EventHandler(this.btnVozila_Click);
 
-            Button btnZaduzi = new Button();
-            btnZaduzi.Text = "Zaduzi vozilo";
-            btnZaduzi.FlatStyle = FlatStyle.Flat;
-            btnZaduzi.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnZaduzi);
+                btnPodmeniZaduzenja.Width = flpPodmeni.Width;
+                btnPodmeniZaduzenja.Height = 55;
 
-            Button btnRazduzi = new Button();
-            btnRazduzi.Text = "Razduzi vozilo";
-            btnRazduzi.FlatStyle = FlatStyle.Flat;
-            btnRazduzi.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnRazduzi);
+                btnPodmeniZaduzenja.FlatStyle = FlatStyle.Flat;
+                if (i == 0)
+                {
+                    btnPodmeniZaduzenja.Text = "Pregled trenutnih zaduzenja";
+                    btnPodmeniZaduzenja.Name = "btnPregled";
+                }
+                if (i == 1)
+                {
+                    btnPodmeniZaduzenja.Text = "Zaduzi vozilo";
+                    btnPodmeniZaduzenja.Name = "btnZaduzi";
+                }
+                if (i == 2)
+                {
+                    btnPodmeniZaduzenja.Text = "Razduzi vozilo";
+                    btnPodmeniZaduzenja.Name = "btnRazduzi";
+                }
+                if (i == 3)
+                {
+                    btnPodmeniZaduzenja.Text = "Istorija zaduzivanja";
+                    btnPodmeniZaduzenja.Name = "btnIstorija";
+                }
+                btnPodmeniZaduzenja.Click += BtnPodmeniZaduzenja_Click;
+                flpPodmeni.Controls.Add(btnPodmeniZaduzenja);
+            }
+            
+        }
 
-            Button btnIstorija = new Button();
-            btnIstorija.Text = "Istorija zaduzenja";
-            btnIstorija.FlatStyle = FlatStyle.Flat;
-            btnIstorija.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnIstorija);
+        private void BtnPodmeniZaduzenja_Click(object sender, EventArgs e)
+        {
+            tButton button = sender as Button;
+            if (button.Name == "btnPregled") { }
+            else if (button.Name == "btnZaduzi") { }
+            else if (button.Name == "btnRazduzi") { }
+            else if (button.Name == "btnIstorija") { }
         }
 
         private void btnServis_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
 
-            Button btnPregled = new Button();
-            btnPregled.Text = "Pregled svih servisa";
-            btnPregled.FlatStyle = FlatStyle.Flat;
-            btnPregled.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnPregled);
+            for (int i = 0; i < 2; i++)
+            {
+                Button btnPodmeniServis = new Button();
+                btnPodmeniServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+                btnPodmeniServis.FlatAppearance.BorderSize = 0;
+                btnPodmeniServis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btnPodmeniServis.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                btnPodmeniServis.ForeColor = System.Drawing.Color.Linen;
+                btnPodmeniServis.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+                btnPodmeniServis.TabIndex = 0;
+                btnPodmeniServis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                btnPodmeniServis.UseVisualStyleBackColor = false;
+                //btnPodmeniServis.Click += new System.EventHandler(this.btnVozila_Click);
 
-            Button btnDodaj = new Button();
-            btnDodaj.Text = "Unesi podatke o servisu";
-            btnDodaj.FlatStyle = FlatStyle.Flat;
-            btnDodaj.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnDodaj);
+                btnPodmeniServis.Width = flpPodmeni.Width;
+                btnPodmeniServis.Height = 55;
+
+                btnPodmeniServis.FlatStyle = FlatStyle.Flat;
+                if (i == 0)
+                {
+                    btnPodmeniServis.Text = "Pregled svih servisa";
+                    btnPodmeniServis.Name = "btnPregled";
+                }
+                if (i == 1)
+                {
+                    btnPodmeniServis.Text = "Unsei podatke o servisu";
+                    btnPodmeniServis.Name = "btnServis";
+                }
+                btnPodmeniServis.Click += BtnPodmeniServis_Click;
+                flpPodmeni.Controls.Add(btnPodmeniServis);
+            }
+            
         }
 
-        
+        private void BtnPodmeniServis_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Name == "btnPregled") { }
+            else if (button.Name == "btnServis") { }
+        }
     }
 }
