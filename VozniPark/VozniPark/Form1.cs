@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace VozniPark
 {
+    // colors: #05668D , #028090 , #00A896 , #02C39A , #F0F3BD
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
         public Form1()
@@ -24,27 +25,48 @@ namespace VozniPark
 
         private void btnVozila_Click(object sender, EventArgs e)
         {
+            
             flpPodmeni.Controls.Clear();
 
-            Button btnPregled = new Button();
-            btnPregled.Text = "Pregled svih vozila";
-            btnPregled.FlatStyle = FlatStyle.Flat;
-            btnPregled.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnPregled);
+            for (int i = 0; i < 3; i++)
+            {
+                Button btnPodmeni = new Button();
+                btnPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+                btnPodmeni.FlatAppearance.BorderSize = 0;
+                btnPodmeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btnPodmeni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                btnPodmeni.ForeColor = System.Drawing.Color.Linen;
+                btnPodmeni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+                btnPodmeni.TabIndex = 0;
+                btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+                btnPodmeni.UseVisualStyleBackColor = false;
+                btnPodmeni.Click += new System.EventHandler(this.btnVozila_Click);
 
-            Button btnDodaj = new Button();
-            btnDodaj.Text = "Dodaj novo vozilo";
-            btnDodaj.FlatStyle = FlatStyle.Flat;
-            btnDodaj.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnDodaj);
+                btnPodmeni.Width = flpPodmeni.Width;
+                btnPodmeni.Height = 55;
 
-            Button btnRegistracija = new Button();
-            btnRegistracija.Text = "Unesi podatke o registraciji";
-            btnRegistracija.FlatStyle = FlatStyle.Flat;
-            btnRegistracija.Width = flpPodmeni.Width;
-            flpPodmeni.Controls.Add(btnRegistracija);
+                btnPodmeni.FlatStyle = FlatStyle.Flat;
+                if (i == 0)
+                {
+                    btnPodmeni.Text = "Pregled svih vozila";
+                    btnPodmeni.Name = "btnPregled";
+                }
+                if (i == 1)
+                {
+                    btnPodmeni.Text = "Dodaj novo vozilo";
+                    btnPodmeni.Name = "btnDodajVozilo";
+                }
+                if (i == 2)
+                {
+                    btnPodmeni.Text = "Unesi podatke o registraciji";
+                    btnPodmeni.Name = "btnUnesiReg";
+                }
+
+                flpPodmeni.Controls.Add(btnPodmeni);
+            }
         }
 
+        
         private void btnZaposleni_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
@@ -108,9 +130,6 @@ namespace VozniPark
             flpPodmeni.Controls.Add(btnDodaj);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            btnVozila_Click(sender, e);
-        }
+        
     }
 }
