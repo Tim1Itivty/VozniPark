@@ -51,6 +51,7 @@
             this.btnVozila.TabIndex = 0;
             this.btnVozila.Text = "Vozila";
             this.btnVozila.UseVisualStyleBackColor = false;
+            this.btnVozila.Click += new System.EventHandler(this.btnVozila_Click);
             // 
             // pnlMeni
             // 
@@ -78,6 +79,7 @@
             this.btnServis.TabIndex = 0;
             this.btnServis.Text = "Servis";
             this.btnServis.UseVisualStyleBackColor = false;
+            this.btnServis.Click += new System.EventHandler(this.btnServis_Click);
             // 
             // btnZaposleni
             // 
@@ -91,6 +93,7 @@
             this.btnZaposleni.TabIndex = 0;
             this.btnZaposleni.Text = "Zaposleni";
             this.btnZaposleni.UseVisualStyleBackColor = false;
+            this.btnZaposleni.Click += new System.EventHandler(this.btnZaposleni_Click);
             // 
             // btnZaduzenja
             // 
@@ -104,6 +107,7 @@
             this.btnZaduzenja.TabIndex = 0;
             this.btnZaduzenja.Text = "Zaduzenja";
             this.btnZaduzenja.UseVisualStyleBackColor = false;
+            this.btnZaduzenja.Click += new System.EventHandler(this.btnZaduzenja_Click);
             // 
             // pnlWorkspace
             // 
@@ -124,6 +128,7 @@
             // 
             // flpPodmeni
             // 
+            this.flpPodmeni.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpPodmeni.Location = new System.Drawing.Point(245, 51);
             this.flpPodmeni.Name = "flpPodmeni";
             this.flpPodmeni.Size = new System.Drawing.Size(184, 400);
@@ -142,6 +147,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlMeni.ResumeLayout(false);
             this.pnlMeni.PerformLayout();
             this.ResumeLayout(false);
