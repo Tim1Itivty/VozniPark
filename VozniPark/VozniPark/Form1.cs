@@ -306,6 +306,12 @@ namespace VozniPark
                 }
             
         }
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            btnVozila_Click(sender, e);
+            BtnPodmeni_Click(sender, e);
+        }
+
 
     }
 }
