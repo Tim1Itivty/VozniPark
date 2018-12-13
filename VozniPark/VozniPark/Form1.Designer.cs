@@ -51,7 +51,7 @@
             this.btnVozila.Location = new System.Drawing.Point(0, 0);
             this.btnVozila.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVozila.Name = "btnVozila";
-            this.btnVozila.Size = new System.Drawing.Size(228, 54);
+            this.btnVozila.Size = new System.Drawing.Size(199, 54);
             this.btnVozila.TabIndex = 0;
             this.btnVozila.Text = "    Vozila";
             this.btnVozila.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -71,7 +71,7 @@
             this.btnZaduzenja.Location = new System.Drawing.Point(0, 110);
             this.btnZaduzenja.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnZaduzenja.Name = "btnZaduzenja";
-            this.btnZaduzenja.Size = new System.Drawing.Size(228, 54);
+            this.btnZaduzenja.Size = new System.Drawing.Size(199, 54);
             this.btnZaduzenja.TabIndex = 0;
             this.btnZaduzenja.Text = "    Zaduzenja";
             this.btnZaduzenja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -91,7 +91,7 @@
             this.btnZaposleni.Location = new System.Drawing.Point(0, 55);
             this.btnZaposleni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnZaposleni.Name = "btnZaposleni";
-            this.btnZaposleni.Size = new System.Drawing.Size(228, 54);
+            this.btnZaposleni.Size = new System.Drawing.Size(199, 54);
             this.btnZaposleni.TabIndex = 0;
             this.btnZaposleni.Text = "    Zaposleni";
             this.btnZaposleni.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -112,7 +112,7 @@
             this.btnServis.Location = new System.Drawing.Point(0, 165);
             this.btnServis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnServis.Name = "btnServis";
-            this.btnServis.Size = new System.Drawing.Size(228, 54);
+            this.btnServis.Size = new System.Drawing.Size(199, 54);
             this.btnServis.TabIndex = 0;
             this.btnServis.Text = "    Servis";
             this.btnServis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
