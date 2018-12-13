@@ -34,7 +34,10 @@ namespace VozniPark
         {
             
             flpPodmeni.Controls.Clear();
-
+            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             for (int i = 0; i < 3; i++)
             {
                 Button btnPodmeni = new Button();
@@ -72,6 +75,8 @@ namespace VozniPark
                 }
                 btnPodmeni.Click += BtnPodmeni_Click;
 
+
+
                 flpPodmeni.Controls.Add(btnPodmeni);
             }
         }
@@ -104,7 +109,10 @@ namespace VozniPark
         private void btnZaposleni_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
-
+            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             for (int i = 0; i < 2; i++)
             {
                 Button btnPodmeniZaposleni = new Button();
@@ -150,7 +158,10 @@ namespace VozniPark
         private void btnZaduzenja_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
-
+            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             for (int i = 0; i < 4; i++)
             {
                 Button btnPodmeniZaduzenja = new Button();
@@ -218,7 +229,10 @@ namespace VozniPark
         private void btnServis_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
-
+            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             for (int i = 0; i < 2; i++)
             {
                 Button btnPodmeniServis = new Button();
@@ -244,7 +258,7 @@ namespace VozniPark
                 }
                 if (i == 1)
                 {
-                    btnPodmeniServis.Text = "Unsei podatke o servisu";
+                    btnPodmeniServis.Text = "Unesi podatke o servisu";
                     btnPodmeniServis.Name = "btnServis";
                 }
                 btnPodmeniServis.Click += BtnPodmeniServis_Click;
