@@ -191,7 +191,17 @@ namespace VozniPark
         private void BtnPodmeniZaduzenja_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (button.Name == "btnPregled") { }
+            if (button.Name == "btnPregled")
+            {
+                DataGridView dtg = new DataGridView();
+                myProperty = new PropertyClassZaduzenja();
+
+                //refresujGrid();
+
+                pnlDashboard.Controls.Add(dtg);
+                PopulateGrid();
+
+            }
             else if (button.Name == "btnZaduzi") { }
             else if (button.Name == "btnRazduzi") { }
             else if (button.Name == "btnIstorija") { }
@@ -231,21 +241,26 @@ namespace VozniPark
                 }
                 btnPodmeniServis.Click += BtnPodmeniServis_Click;
                 flpPodmeni.Controls.Add(btnPodmeniServis);
-            }
-            
+            }          
         }
 
         private void BtnPodmeniServis_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (button.Name == "btnPregled") { }
+            if (button.Name == "btnPregled")
+            {
+                DataGridView dtg = new DataGridView();
+                myProperty = new PropertyClassServisiranjeVozila();
+
+                //refresujGrid();
+
+                pnlDashboard.Controls.Add(dtg);
+                PopulateGrid();
+            }
             else if (button.Name == "btnServis") { }
         }
         private void PopulateGrid()
-        {
-           
-
-
+        {          
                 DataTable dt = new DataTable();
 
                 DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
@@ -261,13 +276,10 @@ namespace VozniPark
                 var type = myProperty.GetType();
                 var properties = type.GetProperties();
 
-
-
                 foreach (DataGridViewColumn item in grid.Columns)
                 {
                     item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
                                           ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
-
                 }
             
         }
