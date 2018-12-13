@@ -97,7 +97,8 @@ namespace VozniPark
             }
             else if(button.Name == "btnDodajVozilo")
             {
-                
+                myProperty = new PropertyClassVozila();
+                PopulateControls();
             }
             else if(button.Name == "btnUnesiReg")
             {
@@ -159,10 +160,29 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
             }
-            else if (button.Name == "btnDodajZaposlenog") { }           
+            else if (button.Name == "btnDodajZaposlenog")
+            {
+                myProperty = new PropertyClassZaposleni();
+                PopulateControls();
+
+            }           
         }
 
-        
+        public void PopulateControls()
+        {
+            int visina = 0;
+            foreach (PropertyInfo item in myProperty.GetType().GetProperties())
+            {
+                InputControl ic = new InputControl();
+                ic.Location = new Point(10, visina);
+                ic.Naziv = item.Name;
+
+                visina += 60;
+                
+                pnlDashboard.Controls.Add(ic);
+            }
+           
+        }
 
         private void btnZaduzenja_Click(object sender, EventArgs e)
         {
