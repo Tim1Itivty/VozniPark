@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -151,9 +152,16 @@ namespace VozniPark
         {
            
             Button button = sender as Button;
-            if (button.Name == "btnPregled") { }
+            if (button.Name == "btnPregled")
+            {
+                myProperty = new PropertyClassZaposleni();
+                
+                panel1.Controls.Add(dtg);
+            }
             else if (button.Name == "btnDodajZaposlenog") { }
         }
+
+        
 
         private void btnZaduzenja_Click(object sender, EventArgs e)
         {

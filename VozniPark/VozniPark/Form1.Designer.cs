@@ -132,7 +132,7 @@
             this.pnlMeni.Location = new System.Drawing.Point(21, 60);
             this.pnlMeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMeni.Name = "pnlMeni";
-            this.pnlMeni.Size = new System.Drawing.Size(199, 564);
+            this.pnlMeni.Size = new System.Drawing.Size(199, 559);
             this.pnlMeni.TabIndex = 1;
             // 
             // flpPodmeni
@@ -144,7 +144,7 @@
             this.flpPodmeni.Location = new System.Drawing.Point(220, 60);
             this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpPodmeni.Name = "flpPodmeni";
-            this.flpPodmeni.Size = new System.Drawing.Size(262, 564);
+            this.flpPodmeni.Size = new System.Drawing.Size(262, 559);
             this.flpPodmeni.TabIndex = 5;
             // 
             // pnlDashboard
