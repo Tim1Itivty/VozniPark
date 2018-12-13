@@ -90,8 +90,14 @@ namespace VozniPark
                 PopulateGrid();
 
             }
-            else if(button.Name == "btnDodajVozilo") { }
-            else if(button.Name == "btnUnesiReg") { }
+            else if(button.Name == "btnDodajVozilo")
+            {
+                
+            }
+            else if(button.Name == "btnUnesiReg")
+            {
+
+            }
                 
         }
 
@@ -283,16 +289,6 @@ namespace VozniPark
                 }
             
         }
-        //private void refresujGrid()
-        //{
-        //    DataTable dataTable = new DataTable();
-        //    SqlDataReader dataReader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text, myProperty.GetSelectQuery());
-
-        //    dataTable.Load(dataReader);
-        //    dataReader.Close();
-        //    dtg.DataSource = dataTable;
-        //}
-
 
     }
 }

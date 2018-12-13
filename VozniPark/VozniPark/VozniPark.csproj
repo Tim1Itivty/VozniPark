@@ -69,6 +69,18 @@
     <Compile Include="Helper\DataReaderToDataSource.cs" />
     <Compile Include="Helper\ReflectionClass.cs" />
     <Compile Include="Helper\SqlHelper.cs" />
+    <Compile Include="InputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InputControl.Designer.cs">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LookupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LookupControl.Designer.cs">
+      <DependentUpon>LookupControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="PropertiesClass\PropertyClassZaduzenja.cs" />
     <Compile Include="PropertiesClass\PropertyClassZaposleni.cs" />
@@ -82,6 +94,12 @@
     <Compile Include="PropertyInterface.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputControl.resx">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookupControl.resx">
+      <DependentUpon>LookupControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
