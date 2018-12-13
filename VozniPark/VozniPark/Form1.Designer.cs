@@ -35,7 +35,7 @@
             this.btnServis = new System.Windows.Forms.Button();
             this.pnlMeni = new System.Windows.Forms.Panel();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlDashboard = new System.Windows.Forms.Panel();
             this.pnlMeni.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,20 +147,20 @@
             this.flpPodmeni.Size = new System.Drawing.Size(262, 564);
             this.flpPodmeni.TabIndex = 5;
             // 
-            // panel1
+            // pnlDashboard
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(482, 60);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(530, 564);
-            this.panel1.TabIndex = 6;
+            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlDashboard.Location = new System.Drawing.Point(482, 60);
+            this.pnlDashboard.Name = "pnlDashboard";
+            this.pnlDashboard.Size = new System.Drawing.Size(530, 564);
+            this.pnlDashboard.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 645);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.flpPodmeni);
             this.Controls.Add(this.pnlMeni);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
@@ -181,7 +181,7 @@
         private System.Windows.Forms.Button btnServis;
         private System.Windows.Forms.Panel pnlMeni;
         private System.Windows.Forms.FlowLayoutPanel flpPodmeni;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlDashboard;
     }
 }
 

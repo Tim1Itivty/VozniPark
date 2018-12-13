@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VozniPark.AttributesClass;
+using System.Reflection;
+using VozniPark.PropertiesClass;
 
 namespace VozniPark
 {
     // colors: #05668D , #028090 , #00A896 , #02C39A , #F0F3BD
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
+        public PropertyInterface myProperty;
+        
         public Form1()
         {
             InitializeComponent();
+          
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -51,6 +58,7 @@ namespace VozniPark
                     btnPodmeni.Text = "Pregled svih vozila";
                     btnPodmeni.Name = "btnPregled";
                     
+                    
                 }
                 if (i == 1)
                 {
@@ -70,8 +78,18 @@ namespace VozniPark
 
         private void BtnPodmeni_Click(object sender, EventArgs e)
         {
+            pnlDashboard.Controls.Clear();
             Button button = sender as Button;
-            if (button.Name == "btnPregled") { }
+            if (button.Name == "btnPregled") {
+                DataGridView dtg = new DataGridView();
+                myProperty = new PropertyClassVozila();
+                
+                //refresujGrid();
+               
+                pnlDashboard.Controls.Add(dtg);
+                PopulateGrid();
+
+            }
             else if(button.Name == "btnDodajVozilo") { }
             else if(button.Name == "btnUnesiReg") { }
                 
@@ -172,7 +190,7 @@ namespace VozniPark
 
         private void BtnPodmeniZaduzenja_Click(object sender, EventArgs e)
         {
-            tButton button = sender as Button;
+            Button button = sender as Button;
             if (button.Name == "btnPregled") { }
             else if (button.Name == "btnZaduzi") { }
             else if (button.Name == "btnRazduzi") { }
@@ -223,5 +241,46 @@ namespace VozniPark
             if (button.Name == "btnPregled") { }
             else if (button.Name == "btnServis") { }
         }
+        private void PopulateGrid()
+        {
+           
+
+
+                DataTable dt = new DataTable();
+
+                DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
+                SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text,
+                    myProperty.GetSelectQuery());
+
+                dt.Load(reader);
+                reader.Close();
+
+                grid.DataSource = dt;
+
+
+                var type = myProperty.GetType();
+                var properties = type.GetProperties();
+
+
+
+                foreach (DataGridViewColumn item in grid.Columns)
+                {
+                    item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
+                                          ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
+
+                }
+            
+        }
+        //private void refresujGrid()
+        //{
+        //    DataTable dataTable = new DataTable();
+        //    SqlDataReader dataReader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text, myProperty.GetSelectQuery());
+
+        //    dataTable.Load(dataReader);
+        //    dataReader.Close();
+        //    dtg.DataSource = dataTable;
+        //}
+
+
     }
 }

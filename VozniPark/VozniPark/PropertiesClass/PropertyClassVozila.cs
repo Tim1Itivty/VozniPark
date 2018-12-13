@@ -43,10 +43,10 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("Dostupnost")]
         public bool Dostupnost { get; set; }
 
-        [ForeignKeyAttribute("dbo.Registracija","RegistracijaID")]
-        [DisplayName("Registracija ID")]
-        [SqlNameAttribute("RegistracijaID")]
-        public int RegistracijaID { get; set; }
+        //[ForeignKeyAttribute("dbo.Registracija","RegistracijaID")]
+        //[DisplayName("Registracija ID")]
+        //[SqlNameAttribute("RegistracijaID")]
+        //public int RegistracijaID { get; set; }
 
         #endregion
 
@@ -54,13 +54,13 @@ namespace VozniPark.PropertiesClass
         #region query
         public string GetSelectQuery()
         {
-            return @"select VoziloID,ModelID,GodinaProizvodnje,Kilometraza,Boja,BrojVrata,Dostupnost,RegistracijaID
+            return @"select VoziloID,ModelID,GodinaProizvodnje,Kilometraza,Boja,BrojVrata,Dostupnost
                     from dbo.Vozila";
         }
 
         public string GetInsertQuery()
         {
-            return @"Insert Into dbo.Vozila (ModelID,GodinaProizvodnje,Kilometraza,Boja,BrojVrata,Dostupnost,RegistracijaID)values(@VoziloID,@ModelID,@GodinaProizvodnje,@Kilometraza,@Boja,@BrojVrata,@Dostupnost,@RegistracijaID)";
+            return @"Insert Into dbo.Vozila (ModelID,GodinaProizvodnje,Kilometraza,Boja,BrojVrata,Dostupnost)values(@VoziloID,@ModelID,@GodinaProizvodnje,@Kilometraza,@Boja,@BrojVrata,@Dostupnost)";
         }
 
         public string GetUpdateQuery()
@@ -70,8 +70,7 @@ namespace VozniPark.PropertiesClass
                             Kilometraza=@Kilometraza,
                             Boja=@Boja, 
                             BrojVrata=@BrojVrata,
-                            Dostupnost=@Dostupnost,
-                            RegistracijaID=@RegistracijaID
+                            Dostupnost=@Dostupnost
 
                                 
                         where VoziloID=@VoziloID";
@@ -137,11 +136,7 @@ namespace VozniPark.PropertiesClass
                 parameter.Value = Dostupnost;
                 list.Add(parameter);
             }
-            {
-                SqlParameter parameter = new SqlParameter("@RegistracijaID", System.Data.SqlDbType.Int);
-                parameter.Value = RegistracijaID;
-                list.Add(parameter);
-            }
+            
             return list;
         }
 
@@ -188,11 +183,7 @@ namespace VozniPark.PropertiesClass
                 parameter.Value = Dostupnost;
                 list.Add(parameter);
             }
-            {
-                SqlParameter parameter = new SqlParameter("@RegistracijaID", System.Data.SqlDbType.Int);
-                parameter.Value = RegistracijaID;
-                list.Add(parameter);
-            }
+            
             return list;
         }
 
