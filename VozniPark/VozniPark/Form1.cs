@@ -141,6 +141,7 @@ namespace VozniPark
 
         private void BtnPodmeniZaposleni_Click(object sender, EventArgs e)
         {
+           
             Button button = sender as Button;
             if (button.Name == "btnPregled") { }
             else if (button.Name == "btnDodajZaposlenog") { }
@@ -196,6 +197,7 @@ namespace VozniPark
 
         private void BtnPodmeniZaduzenja_Click(object sender, EventArgs e)
         {
+            pnlDashboard.Controls.Clear();
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
@@ -252,6 +254,7 @@ namespace VozniPark
 
         private void BtnPodmeniServis_Click(object sender, EventArgs e)
         {
+            pnlDashboard.Controls.Clear();
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
