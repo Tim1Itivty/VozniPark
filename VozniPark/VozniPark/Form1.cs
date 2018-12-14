@@ -99,6 +99,9 @@ namespace VozniPark
             else if(button.Name == "btnDodajVozilo")
             {
                 pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassVozila();
+             
+                PopulateControls();
             }
             else if(button.Name == "btnUnesiReg")
             {
@@ -185,6 +188,8 @@ namespace VozniPark
                     LookupControl lookup = new LookupControl(foreignInterface);
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
+                    lookup.Location = new Point(10, visina);
+                    visina += 60;
                     pnlDashboard.Controls.Add(lookup);
                 }
                 else { 

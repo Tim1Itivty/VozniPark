@@ -22,10 +22,12 @@ namespace VozniPark
         {
             InitializeComponent();
             myProperty = mp;
+            PopulateGrid();
         }
 
         private void PopulateGrid()
         {
+           
             DataTable dt = new DataTable();
 
             
