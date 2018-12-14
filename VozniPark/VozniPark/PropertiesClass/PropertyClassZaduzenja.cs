@@ -40,7 +40,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Vozila ID")]
         [SqlName("VozilaID")]
-        [ForeignKey("dbo.Vozila","VozilaID", "VozniPark.PropertyClassVozila")]
+        [ForeignKey("dbo.Vozila","VozilaID", "PropertiesClass.VozniPark.PropertyClassVozila")]
         public int VozilaID
         {
             get
@@ -55,7 +55,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Zaposleni ID")]
         [SqlName("ZaposleniID")]
-        [ForeignKey("dbo.Zaposleni","ZaposleniID", "VozniPark.PropertyClassZaposleni")]
+        [ForeignKey("dbo.Zaposleni","ZaposleniID", "PropertiesClass.VozniPark.PropertyClassZaposleni")]
         public int ZaposleniID
         {
             get

@@ -26,7 +26,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Proizvodjac ID")]
         [SqlName("ProizvodjacID")]
-        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertyClassProizvodjac")]
+        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertiesClass.PropertyClassProizvodjac")]
         public int ProizvodjacID { get; set; }
         #endregion
 
