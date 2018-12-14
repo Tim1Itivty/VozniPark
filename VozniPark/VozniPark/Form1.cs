@@ -93,6 +93,18 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
 
+                dtg.Width = pnlDashboard.Width;
+                dtg.Height = 250;
+                dtg.Location = new Point(50, 0);
+
+                dtg.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dtg.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dtg.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             }
             else if(button.Name == "btnDodajVozilo")
             {

@@ -34,12 +34,12 @@
             this.btnZaposleni = new System.Windows.Forms.Button();
             this.btnServis = new System.Windows.Forms.Button();
             this.pnlMeni = new System.Windows.Forms.Panel();
+            this.pnlSelected4 = new System.Windows.Forms.Panel();
+            this.pnlSelected2 = new System.Windows.Forms.Panel();
+            this.pnlSelected3 = new System.Windows.Forms.Panel();
+            this.pnlSelected1 = new System.Windows.Forms.Panel();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.Panel();
-            this.pnlSelected1 = new System.Windows.Forms.Panel();
-            this.pnlSelected3 = new System.Windows.Forms.Panel();
-            this.pnlSelected2 = new System.Windows.Forms.Panel();
-            this.pnlSelected4 = new System.Windows.Forms.Panel();
             this.pnlMeni.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -144,8 +144,40 @@
             this.pnlMeni.Location = new System.Drawing.Point(0, 60);
             this.pnlMeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMeni.Name = "pnlMeni";
-            this.pnlMeni.Size = new System.Drawing.Size(202, 585);
+            this.pnlMeni.Size = new System.Drawing.Size(202, 613);
             this.pnlMeni.TabIndex = 1;
+            // 
+            // pnlSelected4
+            // 
+            this.pnlSelected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected4.Location = new System.Drawing.Point(0, 165);
+            this.pnlSelected4.Name = "pnlSelected4";
+            this.pnlSelected4.Size = new System.Drawing.Size(10, 54);
+            this.pnlSelected4.TabIndex = 0;
+            // 
+            // pnlSelected2
+            // 
+            this.pnlSelected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected2.Location = new System.Drawing.Point(0, 55);
+            this.pnlSelected2.Name = "pnlSelected2";
+            this.pnlSelected2.Size = new System.Drawing.Size(10, 54);
+            this.pnlSelected2.TabIndex = 0;
+            // 
+            // pnlSelected3
+            // 
+            this.pnlSelected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected3.Location = new System.Drawing.Point(0, 110);
+            this.pnlSelected3.Name = "pnlSelected3";
+            this.pnlSelected3.Size = new System.Drawing.Size(10, 54);
+            this.pnlSelected3.TabIndex = 0;
+            // 
+            // pnlSelected1
+            // 
+            this.pnlSelected1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected1.Location = new System.Drawing.Point(0, 0);
+            this.pnlSelected1.Name = "pnlSelected1";
+            this.pnlSelected1.Size = new System.Drawing.Size(10, 54);
+            this.pnlSelected1.TabIndex = 0;
             // 
             // flpPodmeni
             // 
@@ -156,7 +188,7 @@
             this.flpPodmeni.Location = new System.Drawing.Point(202, 60);
             this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpPodmeni.Name = "flpPodmeni";
-            this.flpPodmeni.Size = new System.Drawing.Size(233, 585);
+            this.flpPodmeni.Size = new System.Drawing.Size(233, 613);
             this.flpPodmeni.TabIndex = 5;
             // 
             // pnlDashboard
@@ -164,46 +196,14 @@
             this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
             this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(566, 585);
+            this.pnlDashboard.Size = new System.Drawing.Size(892, 613);
             this.pnlDashboard.TabIndex = 6;
-            // 
-            // pnlSelected1
-            // 
-            this.pnlSelected1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
-            this.pnlSelected1.Location = new System.Drawing.Point(0, 0);
-            this.pnlSelected1.Name = "pnlSelected1";
-            this.pnlSelected1.Size = new System.Drawing.Size(10, 54);
-            this.pnlSelected1.TabIndex = 0;
-            // 
-            // pnlSelected3
-            // 
-            this.pnlSelected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
-            this.pnlSelected3.Location = new System.Drawing.Point(0, 110);
-            this.pnlSelected3.Name = "pnlSelected3";
-            this.pnlSelected3.Size = new System.Drawing.Size(10, 54);
-            this.pnlSelected3.TabIndex = 0;
-            // 
-            // pnlSelected2
-            // 
-            this.pnlSelected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
-            this.pnlSelected2.Location = new System.Drawing.Point(0, 55);
-            this.pnlSelected2.Name = "pnlSelected2";
-            this.pnlSelected2.Size = new System.Drawing.Size(10, 54);
-            this.pnlSelected2.TabIndex = 0;
-            // 
-            // pnlSelected4
-            // 
-            this.pnlSelected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
-            this.pnlSelected4.Location = new System.Drawing.Point(0, 165);
-            this.pnlSelected4.Name = "pnlSelected4";
-            this.pnlSelected4.Size = new System.Drawing.Size(10, 54);
-            this.pnlSelected4.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 645);
+            this.ClientSize = new System.Drawing.Size(1351, 673);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.flpPodmeni);
             this.Controls.Add(this.pnlMeni);
