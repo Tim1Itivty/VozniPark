@@ -83,9 +83,10 @@ namespace VozniPark
 
         private void BtnPodmeni_Click(object sender, EventArgs e)
         {
-            pnlDashboard.Controls.Clear();
+            
             Button button = sender as Button;
             if (button.Name == "btnPregled") {
+                pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassVozila();
                 
@@ -97,11 +98,11 @@ namespace VozniPark
             }
             else if(button.Name == "btnDodajVozilo")
             {
-                
+                pnlDashboard.Controls.Clear();
             }
             else if(button.Name == "btnUnesiReg")
             {
-
+                pnlDashboard.Controls.Clear();
             }
                 
         }
@@ -149,10 +150,11 @@ namespace VozniPark
 
         private void BtnPodmeniZaposleni_Click(object sender, EventArgs e)
         {
-            pnlDashboard.Controls.Clear();
+            
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
+                pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaposleni();
                 
@@ -161,6 +163,7 @@ namespace VozniPark
             }
             else if (button.Name == "btnDodajZaposlenog")
             {
+                pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
                 PopulateControls();
 
@@ -261,10 +264,11 @@ namespace VozniPark
 
         private void BtnPodmeniZaduzenja_Click(object sender, EventArgs e)
         {
-            pnlDashboard.Controls.Clear();
+            
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
+                pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
 
@@ -274,9 +278,15 @@ namespace VozniPark
                 PopulateGrid();
 
             }
-            else if (button.Name == "btnZaduzi") { }
-            else if (button.Name == "btnRazduzi") { }
-            else if (button.Name == "btnIstorija") { }
+            else if (button.Name == "btnZaduzi") {
+                pnlDashboard.Controls.Clear();
+            }
+            else if (button.Name == "btnRazduzi") {
+                pnlDashboard.Controls.Clear();
+            }
+            else if (button.Name == "btnIstorija") {
+                pnlDashboard.Controls.Clear();
+            }
         }
 
         private void btnServis_Click(object sender, EventArgs e)
@@ -321,10 +331,11 @@ namespace VozniPark
 
         private void BtnPodmeniServis_Click(object sender, EventArgs e)
         {
-            pnlDashboard.Controls.Clear();
+            
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
+                pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassServisiranjeVozila();
 
@@ -333,7 +344,9 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
             }
-            else if (button.Name == "btnServis") { }
+            else if (button.Name == "btnServis") {
+                pnlDashboard.Controls.Clear();
+            }
         }
         private void PopulateGrid()
         {          
