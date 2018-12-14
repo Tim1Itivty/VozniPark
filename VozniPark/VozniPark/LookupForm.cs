@@ -38,7 +38,7 @@ namespace VozniPark
             reader.Close();
 
             lookupGrid.DataSource = dt;
-
+      
 
             var type = myProperty.GetType();
             var properties = type.GetProperties();
