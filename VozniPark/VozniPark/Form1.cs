@@ -97,8 +97,7 @@ namespace VozniPark
             }
             else if(button.Name == "btnDodajVozilo")
             {
-                myProperty = new PropertyClassVozila();
-                PopulateControls();
+                
             }
             else if(button.Name == "btnUnesiReg")
             {
@@ -150,7 +149,7 @@ namespace VozniPark
 
         private void BtnPodmeniZaposleni_Click(object sender, EventArgs e)
         {
-           
+            pnlDashboard.Controls.Clear();
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
@@ -170,6 +169,7 @@ namespace VozniPark
 
         public void PopulateControls()
         {
+         
             int visina = 0;
             foreach (PropertyInfo item in myProperty.GetType().GetProperties())
             {
