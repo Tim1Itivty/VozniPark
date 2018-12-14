@@ -39,7 +39,7 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("Cijena")]
         public double Cijena { get; set; }
 
-        [ForeignKey("dbo.Vozila","VoziloID")]
+        [ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertyClassVozila")]
         [DisplayName("Vozilo id")]
         [SqlNameAttribute("VoziloID")]
         public int VoziloID { get; set; }

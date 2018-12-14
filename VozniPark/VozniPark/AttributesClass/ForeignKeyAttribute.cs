@@ -11,11 +11,13 @@ namespace VozniPark.AttributesClass
     {
         public string referencedTable;
         public string referencedColumn;
+        public string referencedClass;
 
-        public ForeignKeyAttribute(string refTable, string refColumn)
+        public ForeignKeyAttribute(string refTable, string refColumn, string refClass)
         {
             this.referencedTable = refTable;
             this.referencedColumn = refColumn;
+            referencedClass = refClass;
 
         }
     }

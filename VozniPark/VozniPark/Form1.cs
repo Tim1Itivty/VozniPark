@@ -18,7 +18,7 @@ namespace VozniPark
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
         public PropertyInterface myProperty;
-        
+        public StateEnum state;
         public Form1()
         {
             InitializeComponent();
@@ -173,13 +173,37 @@ namespace VozniPark
             int visina = 0;
             foreach (PropertyInfo item in myProperty.GetType().GetProperties())
             {
-                InputControl ic = new InputControl();
-                ic.Location = new Point(10, visina);
-                ic.Naziv = item.Name;
 
-                visina += 60;
+                if (item.GetCustomAttribute<ForeignKeyAttribute>() != null)
+                {
+                    PropertyInterface foreignInterface = Assembly.GetExecutingAssembly().
+                        CreateInstance(item.GetCustomAttribute<ForeignKeyAttribute>().referencedClass) as PropertyInterface;
+
+                    LookupControl lookup = new LookupControl(foreignInterface);
+                    lookup.Name = item.Name;
+                    lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
+                    pnlDashboard.Controls.Add(lookup);
+                }
+                else { 
+                    InputControl ic = new InputControl();
+                    ic.Location = new Point(10, visina);
+                    ic.Naziv = item.Name;
+
+                    visina += 60;
+                    if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                    {
+                        ic.Enabled = false;
+                    }
+
+                    if(state == StateEnum.Update)
+                    {
+                        ic.UnosPolje = item.GetValue(myProperty).ToString();
+                    }
+                    
+                    pnlDashboard.Controls.Add(ic);
+                }
+
                 
-                pnlDashboard.Controls.Add(ic);
             }
            
         }

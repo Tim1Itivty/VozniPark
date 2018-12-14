@@ -15,9 +15,10 @@ namespace VozniPark.PropertiesClass
         [PrimaryKey]
         [DisplayName("Vozilo ID")]
         [SqlNameAttribute("VoziloID")]
+        [LookupKey]
         public int VoziloID { get; set; }
 
-        [ForeignKeyAttribute("dbo.Model", "ModelID")]
+        [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertyClassModel")]
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
         public int ModelID { get; set; }

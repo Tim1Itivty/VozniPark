@@ -17,14 +17,17 @@ namespace VozniPark.PropertiesClass
         [DisplayName("ZaposleniID")]
         [SqlName("ZaposleniID")]
         [PrimaryKey]
+        [LookupKey]
         public int ZaposleniID { get; set; }
 
         [DisplayName("Ime")]
         [SqlName("Ime")]
+        [LookupValue]
         public string Ime { get; set; }
 
         [DisplayName("Prezime")]
         [SqlName("Prezime")]
+        [LookupValue]
         public string Prezime { get; set; }
 
         [DisplayName("Radno mjesto")]

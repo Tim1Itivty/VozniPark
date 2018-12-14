@@ -15,11 +15,13 @@ namespace VozniPark.PropertiesClass
         [DisplayName("Proizvodjac ID")]
         [SqlName("ProizvodjacID")]
         [PrimaryKey]
+        [LookupKey]
         public int ProizvodjacID { get; set; }
 
 
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
+        [LookupValue]
         public string Naziv { get; set; }
 
         public List<SqlParameter> GetInsertParameters()

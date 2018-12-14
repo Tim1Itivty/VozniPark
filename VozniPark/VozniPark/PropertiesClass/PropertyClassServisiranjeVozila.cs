@@ -19,7 +19,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Servis ID")]  
         [SqlName("ServisID")]   
-        [ForeignKey("dbo.Servis","ServisID")]
+        [ForeignKey("dbo.Servis","ServisID", "VozniPark.PropertyClassServis")]
         public int ServisId { get; set; }
 
         [DisplayName("Datum servisiranja")]
@@ -36,7 +36,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Vozilo ID")]
         [SqlName("VoziloID")]
-        [ForeignKey("dbo.Vozilo", "VoziloID")]
+        [ForeignKey("dbo.Vozilo", "VoziloID", "VozniPark.PropertyClassVozila")]
         public int VoziloId { get; set; }
 
         #endregion

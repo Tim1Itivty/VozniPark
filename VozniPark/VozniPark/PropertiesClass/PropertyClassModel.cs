@@ -15,16 +15,18 @@ namespace VozniPark.PropertiesClass
         [DisplayName("Model ID")]
         [SqlName("ModelID")]
         [PrimaryKey]
+        [LookupKey]
         public int ModelID { get; set; }
 
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
+        [LookupValue]
         public string Naziv { get; set; }
 
 
         [DisplayName("Proizvodjac ID")]
         [SqlName("ProizvodjacID")]
-        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID")]
+        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertyClassProizvodjac")]
         public int ProizvodjacID { get; set; }
         #endregion
 

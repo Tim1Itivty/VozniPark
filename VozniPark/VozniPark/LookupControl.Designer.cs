@@ -80,6 +80,7 @@
             this.btnLookup.TabIndex = 2;
             this.btnLookup.Text = "...";
             this.btnLookup.UseSelectable = true;
+            this.btnLookup.Click += new System.EventHandler(this.btnLookup_Click);
             // 
             // txtLookupNaziv
             // 
