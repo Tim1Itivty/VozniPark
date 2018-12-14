@@ -34,6 +34,10 @@ namespace VozniPark
         {
             
             flpPodmeni.Controls.Clear();
+            pnlSelected1.Visible = true;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = false;
 
             for (int i = 0; i < 3; i++)
             {
@@ -104,6 +108,10 @@ namespace VozniPark
         private void btnZaposleni_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = true;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = false;
 
             for (int i = 0; i < 2; i++)
             {
@@ -150,6 +158,11 @@ namespace VozniPark
         private void btnZaduzenja_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
+            pnlSelected3.Visible = true;
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = true;
+            pnlSelected4.Visible = false;
 
             for (int i = 0; i < 4; i++)
             {
@@ -218,6 +231,10 @@ namespace VozniPark
         private void btnServis_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = true;
 
             for (int i = 0; i < 2; i++)
             {
@@ -293,5 +310,12 @@ namespace VozniPark
             
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = false;
+        }
     }
 }
