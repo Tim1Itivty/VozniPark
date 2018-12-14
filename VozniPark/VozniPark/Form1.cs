@@ -278,7 +278,6 @@ namespace VozniPark
                 flpButoni.FlowDirection = FlowDirection.LeftToRight;
                 flpButoni.Width = pnlDashboard.Width;
                
-
                 pnlDashboard.Controls.Add(dtg);
                 pnlDashboard.Controls.Add(flpButoni);
 
@@ -308,7 +307,25 @@ namespace VozniPark
             }
             else if (button.Name == "btnZaduzi")
             {
+                myProperty = new PropertyClassZaduzenja();
+                PopulateControls();
+            }
+            else if (button.Name == "btnRazduzi")
+            {
+                DataGridView dtg = new DataGridView();
+                myProperty = new PropertyClassZaduzenja();
+                pnlDashboard.Controls.Add(dtg);
+                PopulateGrid();
 
+                FlowLayoutPanel flpButon = new FlowLayoutPanel();
+                flpButon.FlowDirection = FlowDirection.LeftToRight;
+                flpButon.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButon);
+
+                Button btnRazduzi = new Button();
+                btnRazduzi.Text = "RAZDUZI";
+                btnRazduzi.Name = "btnRazduzi";
+                flpButon.Controls.Add(btnRazduzi);
             }
             else if (button.Name == "btnZaduzi") {
                 pnlDashboard.Controls.Clear();
@@ -326,6 +343,9 @@ namespace VozniPark
             Button button = sender as Button;
             if (button.Name == "btnDodaj")
             {
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassZaduzenja();
+                PopulateControls();
             }
             else if (button.Name == "btnIzmijeni")
             {

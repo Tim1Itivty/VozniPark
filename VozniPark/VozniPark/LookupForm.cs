@@ -22,6 +22,8 @@ namespace VozniPark
         {
             InitializeComponent();
             myProperty = mp;
+
+            PopulateGrid();
         }
 
         private void PopulateGrid()
@@ -64,7 +66,7 @@ namespace VozniPark
 
             Value = row.Cells[columnName].Value.ToString();
 
-            this.Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }
