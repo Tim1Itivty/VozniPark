@@ -19,7 +19,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Servis ID")]  
         [SqlName("ServisID")]   
-        [ForeignKey("dbo.Servis","ServisID", "PropertiesClass.VozniPark.PropertyClassServis")]
+        [ForeignKey("dbo.Servis","ServisID", "VozniPark.PropertiesClass.PropertyClassServis")]
         public int ServisId { get; set; }
 
         [DisplayName("Datum servisiranja")]
