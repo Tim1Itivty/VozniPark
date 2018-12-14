@@ -274,8 +274,40 @@ namespace VozniPark
 
                 //refresujGrid();
 
+                FlowLayoutPanel flpButoni = new FlowLayoutPanel();
+                flpButoni.FlowDirection = FlowDirection.LeftToRight;
+                flpButoni.Width = pnlDashboard.Width;
+               
+
                 pnlDashboard.Controls.Add(dtg);
+                pnlDashboard.Controls.Add(flpButoni);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Button btnCrud = new Button();
+                    if (i == 0)
+                    {
+                        btnCrud.Text = "DODAJ";
+                        btnCrud.Name = "btnDodaj";
+                    }
+                    if (i == 1)
+                    {
+                        btnCrud.Text = "IZMIJENI";
+                        btnCrud.Name = "btnIzmijeni";
+                    }
+                    if (i == 2)
+                    {
+                        btnCrud.Text = "IZBRISI";
+                        btnCrud.Name = "btnIzbrisi";                       
+                    }
+                    flpButoni.Controls.Add(btnCrud);
+                    btnCrud.Click += BtnCrud_Click;
+                }
+              
                 PopulateGrid();
+            }
+            else if (button.Name == "btnZaduzi")
+            {
 
             }
             else if (button.Name == "btnZaduzi") {
@@ -287,6 +319,21 @@ namespace VozniPark
             else if (button.Name == "btnIstorija") {
                 pnlDashboard.Controls.Clear();
             }
+        }
+
+        private void BtnCrud_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Name == "btnDodaj")
+            {
+            }
+            else if (button.Name == "btnIzmijeni")
+            {
+            }
+            else if ((button.Name == "btnIzbrisi"))
+            {
+            }
+
         }
 
         private void btnServis_Click(object sender, EventArgs e)

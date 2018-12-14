@@ -35,7 +35,7 @@
             this.btnServis = new System.Windows.Forms.Button();
             this.pnlMeni = new System.Windows.Forms.Panel();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnlDashboard = new System.Windows.Forms.Panel();
+            this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlMeni.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,7 +132,7 @@
             this.pnlMeni.Location = new System.Drawing.Point(21, 60);
             this.pnlMeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMeni.Name = "pnlMeni";
-            this.pnlMeni.Size = new System.Drawing.Size(199, 559);
+            this.pnlMeni.Size = new System.Drawing.Size(199, 564);
             this.pnlMeni.TabIndex = 1;
             // 
             // flpPodmeni
@@ -144,15 +144,15 @@
             this.flpPodmeni.Location = new System.Drawing.Point(220, 60);
             this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpPodmeni.Name = "flpPodmeni";
-            this.flpPodmeni.Size = new System.Drawing.Size(262, 559);
+            this.flpPodmeni.Size = new System.Drawing.Size(262, 564);
             this.flpPodmeni.TabIndex = 5;
             // 
             // pnlDashboard
             // 
-            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlDashboard.Location = new System.Drawing.Point(482, 60);
+            this.pnlDashboard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlDashboard.Location = new System.Drawing.Point(480, 60);
             this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(530, 564);
+            this.pnlDashboard.Size = new System.Drawing.Size(556, 564);
             this.pnlDashboard.TabIndex = 6;
             // 
             // Form1
@@ -182,7 +182,7 @@
         private System.Windows.Forms.Button btnServis;
         private System.Windows.Forms.Panel pnlMeni;
         private System.Windows.Forms.FlowLayoutPanel flpPodmeni;
-        private System.Windows.Forms.Panel pnlDashboard;
+        private System.Windows.Forms.FlowLayoutPanel pnlDashboard;
     }
 }
 
