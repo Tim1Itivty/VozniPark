@@ -292,7 +292,7 @@ namespace VozniPark
         public void PopulateControls()
         {
          
-            int visina = 0;
+            
             foreach (PropertyInfo item in myProperty.GetType().GetProperties())
             {
 
@@ -304,16 +304,15 @@ namespace VozniPark
                     LookupControl lookup = new LookupControl(foreignInterface);
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
-                    lookup.Location = new Point(10, visina);
-                    visina += 60;
+                    
                     pnlDashboard.Controls.Add(lookup);
                 }
                 else { 
                     InputControl ic = new InputControl();
-                    ic.Location = new Point(10, visina);
+                    
                     ic.Naziv = item.Name;
 
-                    visina += 60;
+                    
                     if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null && state == StateEnum.Update)
                     {
                         ic.Enabled = false;

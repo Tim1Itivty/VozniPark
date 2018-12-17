@@ -41,7 +41,6 @@
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlMeni.SuspendLayout();
-            this.pnlDashboard.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnVozila
@@ -195,14 +194,11 @@
             // pnlDashboard
             // 
             this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlDashboard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(813, 613);
             this.pnlDashboard.TabIndex = 6;
-            // 
-            // button2
-            // 
-            
             // 
             // Form1
             // 
@@ -217,11 +213,10 @@
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(0, 60, 21, 0);
             this.Text = "Vozni park";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlMeni.ResumeLayout(false);
             this.pnlMeni.PerformLayout();
-            this.pnlDashboard.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
