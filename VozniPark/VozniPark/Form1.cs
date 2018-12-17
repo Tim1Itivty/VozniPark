@@ -27,6 +27,8 @@ namespace VozniPark
 
         }
 
+
+        #region meniVozila
         private void btnVozila_Click(object sender, EventArgs e)
         {
 
@@ -283,6 +285,10 @@ namespace VozniPark
             btnOtkazi.Visible = true;
         }
 
+        #endregion
+
+
+        #region meniZaposleni
         private void btnZaposleni_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
@@ -455,60 +461,11 @@ namespace VozniPark
             btn.Name = "btnDodajZaposlenog";
             BtnPodmeniZaposleni_Click(btn,e);
         }
-       
 
-        public void PopulateControls()
-        {
+        #endregion
 
-
-            foreach (PropertyInfo item in myProperty.GetType().GetProperties())
-            {
-
-                if (item.GetCustomAttribute<ForeignKeyAttribute>() != null)
-                {
-                    PropertyInterface foreignInterface = Assembly.GetExecutingAssembly().
-                        CreateInstance(item.GetCustomAttribute<ForeignKeyAttribute>().referencedClass) as PropertyInterface;
-
-                    LookupControl lookup = new LookupControl(foreignInterface);
-                    lookup.Name = item.Name;
-                    lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
-
-                    pnlDashboard.Controls.Add(lookup);
-                }
-                else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
-                {
-                    DateTimeControl dateTime = new DateTimeControl();
-                    dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
-                    pnlDashboard.Controls.Add(dateTime);
-
-                }
-                else
-                {
-                    InputControl ic = new InputControl();
-
-                    ic.Naziv = item.Name;
-
-
-                    if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null && state == StateEnum.Update)
-                    {
-                        ic.Enabled = false;
-                    }
-
-
-
-                    if (state == StateEnum.Update)
-                    {
-                        ic.UnosPolje = item.GetValue(myProperty).ToString();
-                    }
-
-                    pnlDashboard.Controls.Add(ic);
-                }
-
-
-            }
-
-        }
-
+        
+        #region meniZaduzenja
         private void btnZaduzenja_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
@@ -724,6 +681,11 @@ namespace VozniPark
 
         }
 
+        #endregion
+
+
+        #region meniServis
+
         private void btnServis_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
@@ -786,6 +748,11 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
             }
         }
+
+        #endregion
+
+
+        #region ostaleMetode
         private void PopulateGrid()
         {
             DataTable dt = new DataTable();
@@ -817,6 +784,55 @@ namespace VozniPark
 
 
         }
+
+        public void PopulateControls()
+        {
+            foreach (PropertyInfo item in myProperty.GetType().GetProperties())
+            {
+                if (item.GetCustomAttribute<ForeignKeyAttribute>() != null)
+                {
+                    PropertyInterface foreignInterface = Assembly.GetExecutingAssembly().
+                        CreateInstance(item.GetCustomAttribute<ForeignKeyAttribute>().referencedClass) as PropertyInterface;
+
+                    LookupControl lookup = new LookupControl(foreignInterface);
+                    lookup.Name = item.Name;
+                    lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
+
+                    pnlDashboard.Controls.Add(lookup);
+                }
+                else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
+                {
+                    DateTimeControl dateTime = new DateTimeControl();
+                    dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
+                    pnlDashboard.Controls.Add(dateTime);
+
+                }
+                else if (item.GetCustomAttribute<ForeignField>() != null)
+                {
+                    continue;
+                }
+                else
+                {
+                    InputControl ic = new InputControl();
+
+                    ic.Naziv = item.Name;
+
+
+                    if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null && state == StateEnum.Update)
+                    {
+                        ic.Enabled = false;
+                    }
+                    
+                    if (state == StateEnum.Update)
+                    {
+                        ic.UnosPolje = item.GetValue(myProperty).ToString();
+                    }
+
+                    pnlDashboard.Controls.Add(ic);
+                }
+            }
+        }
+
         private void Form1_Activated(object sender, EventArgs e)
         {
             btnVozila_Click(sender, e);
@@ -831,6 +847,7 @@ namespace VozniPark
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Normal;
             pnlSelected1.Visible = false;
             pnlSelected2.Visible = false;
             pnlSelected3.Visible = false;
@@ -945,8 +962,8 @@ namespace VozniPark
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
            
         }
-        
 
+        #endregion
     }
 }
 

@@ -48,7 +48,7 @@
             this.btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             this.btnVozila.FlatAppearance.BorderSize = 0;
             this.btnVozila.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVozila.Font = new System.Drawing.Font("Century Gothic", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVozila.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVozila.ForeColor = System.Drawing.Color.Linen;
             this.btnVozila.Image = ((System.Drawing.Image)(resources.GetObject("btnVozila.Image")));
             this.btnVozila.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -69,7 +69,7 @@
             this.btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             this.btnZaduzenja.FlatAppearance.BorderSize = 0;
             this.btnZaduzenja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZaduzenja.Font = new System.Drawing.Font("Century Gothic", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnZaduzenja.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnZaduzenja.ForeColor = System.Drawing.Color.Linen;
             this.btnZaduzenja.Image = ((System.Drawing.Image)(resources.GetObject("btnZaduzenja.Image")));
             this.btnZaduzenja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -90,7 +90,7 @@
             this.btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             this.btnZaposleni.FlatAppearance.BorderSize = 0;
             this.btnZaposleni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZaposleni.Font = new System.Drawing.Font("Century Gothic", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnZaposleni.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnZaposleni.ForeColor = System.Drawing.Color.Linen;
             this.btnZaposleni.Image = ((System.Drawing.Image)(resources.GetObject("btnZaposleni.Image")));
             this.btnZaposleni.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -112,7 +112,7 @@
             this.btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
             this.btnServis.FlatAppearance.BorderSize = 0;
             this.btnServis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnServis.Font = new System.Drawing.Font("Century Gothic", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnServis.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnServis.ForeColor = System.Drawing.Color.Linen;
             this.btnServis.Image = ((System.Drawing.Image)(resources.GetObject("btnServis.Image")));
             this.btnServis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

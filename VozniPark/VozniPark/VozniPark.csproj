@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributesClass\DateTimeAttribute.cs" />
+    <Compile Include="AttributesClass\ForeignField.cs" />
     <Compile Include="AttributesClass\ForeignKeyAttribute.cs" />
     <Compile Include="AttributesClass\LookupKey.cs" />
     <Compile Include="AttributesClass\LookupValue.cs" />

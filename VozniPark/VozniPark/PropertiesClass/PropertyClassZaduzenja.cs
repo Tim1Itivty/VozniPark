@@ -12,118 +12,92 @@ namespace VozniPark.PropertiesClass
 {
     class PropertyClassZaduzenja : PropertyInterface
     {
-        #region atributtes
-        public int zaduzenjaID;
-        public int vozilaID;
-        public int zaposleniID;
-        public int predjenaKilometraza;
-        public DateTime datumZaduzenja;
-        public DateTime datumRazduzenja;
-        public DateTime planiranoRazduzenje;
-        #endregion
 
-        #region properties
-        [DisplayName ("Zaduzenja ID")]
+        #region attributes
+        [DisplayName("Zaduzenja ID")]
         [SqlName("ZaduzenjaID")]
         [PrimaryKey]
-        public int ZaduzenjaID
-        {
-            get
-            {
-                return zaduzenjaID;
-            }
-            set
-            {
-                zaduzenjaID = value;
-            }
-        }
+        public int ZaduzenjaID { get; set; }
 
         [DisplayName("Vozila ID")]
         [SqlName("VozilaID")]
-        [ForeignKey("dbo.Vozila","VozilaID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        public int VozilaID
-        {
-            get
-            {
-                return vozilaID;
-            }
-            set
-            {
-                vozilaID = value;
-            }
-        }
+        [ForeignKey("dbo.Vozila", "VozilaID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        public int VozilaID { get; set; }
 
         [DisplayName("Zaposleni ID")]
         [SqlName("ZaposleniID")]
-        [ForeignKey("dbo.Zaposleni","ZaposleniID", "VozniPark.PropertiesClass.PropertyClassZaposleni")]
-        public int ZaposleniID
-        {
-            get
-            {
-                return zaposleniID;
-            }
-            set
-            {
-                zaposleniID = value;
-            }
-        }
+        [ForeignKey("dbo.Zaposleni", "ZaposleniID", "VozniPark.PropertiesClass.PropertyClassZaposleni")]
+        public int ZaposleniID { get; set; }
 
         [DisplayName("Predjena kilometraza")]
         [SqlName("PredjenaKilometraza")]
-        public int PredjenaKilometraza
-        {
-            get
-            {
-                return predjenaKilometraza;
-            }
-            set
-            {
-                predjenaKilometraza = value;
-            }
-        }
+        public int PredjenaKilometraza { get; set; }
+
         [DisplayName("Datum zaduzenja")]
         [SqlName("DatumZaduzenja")]
         [DateTime]
-        public DateTime DatumZaduzenja
-        {
-            get
-            {
-                return datumZaduzenja;
-            }
-            set
-            {
-                datumZaduzenja = value;
-            }
-        }
+        public DateTime DatumZaduzenja { get; set; }
 
         [DisplayName("Datum razduzenja")]
         [SqlName("DatumRazduzenja")]
         [DateTime]
-        public DateTime DatumRazduzenja
-        {
-            get
-            {
-                return datumRazduzenja;
-            }
-            set
-            {
-                datumRazduzenja = value;
-            }
-        }
+        public DateTime DatumRazduzenja { get; set; }
         [DisplayName("Planirano razduzenje")]
         [SqlName("PlaniranoRazduzenje")]
         [DateTime]
-        public DateTime PlaniranoRazduzenje
+        public DateTime PlaniranoRazduzenje { get; set; }
+
+        [DisplayName("Model")]
+        [SqlName("Naziv")]
+        [ForeignField]
+        public string Model { get; set; }
+
+        [DisplayName("Ime zaposlenog")]
+        [SqlName("Ime")]
+        [ForeignField]
+        public string ImeZaposlenog { get; set; }
+
+        [DisplayName("Prezime zaposlenog")]
+        [SqlName("Prezime")]
+        [ForeignField]
+        public string PrezimeZaposlenog { get; set; }
+        #endregion
+
+
+        #region queries
+
+        public string GetDeleteQuery()
         {
-            get
-            {
-                return planiranoRazduzenje;
-            }
-            set
-            {
-                planiranoRazduzenje = value;
-            }
+            return "delete from dbo.Zaduzenja where ZaduzenjaID = @ZaduzenjaID";
         }
+
+        public string GetInsertQuery()
+        {
+            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,PredjenaKilometraza,DatumZaduzenja,DatumRazduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@PredjenaKilometraza,@DatumZaduzenja,@DatumRazduzenja,@PlaniranoRazduzenje)";
+        }
+
+        public string GetSelectQuery()
+        {
+            return @"select 
+                     ZaduzenjaID,
+                     m.Naziv,
+                     zap.Ime,
+                     zap.Prezime,
+                     DatumZaduzenja,
+                     PlaniranoRazduzenje,
+                     DatumRazduzenja,
+                     PredjenaKilometraza
+                     from dbo.Zaduzenja as z
+                     join dbo.Zaposleni as zap on z.ZaposleniID = zap.ZaposleniID
+                     join dbo.Vozila as v on v.VoziloID = z.VozilaID
+                     join dbo.Model as m on m.ModelID = v.ModelID";
+        }
+
+        public string GetUpdateQuery()
+        {
+            return "update dbo.Zaposlenja set VozilaID = @VozilaID,ZaposleniID = @ZaposleniID,  PredjenaKilometraza = @PredjenaKilometraza, DatumZaduzenja = @DatumZaduzenja,DatumRazduzenja=@DatumRazduzenja, PlaniranoRazduzenje=@PlaniranoRazduzenje where ZaduzenjaID = @ZaduzenjaID";
+        }
+
         #endregion
 
         #region parameters
@@ -138,10 +112,7 @@ namespace VozniPark.PropertiesClass
             return list;
         }
 
-        public string GetDeleteQuery()
-        {
-            return "delete from dbo.Zaduzenja where ZaduzenjaID = @ZaduzenjaID";
-        }
+        
 
         public List<SqlParameter> GetInsertParameters()
         {
@@ -180,15 +151,7 @@ namespace VozniPark.PropertiesClass
             return list;
         }
 
-        public string GetInsertQuery()
-        {
-            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,PredjenaKilometraza,DatumZaduzenja,DatumRazduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@PredjenaKilometraza,@DatumZaduzenja,@DatumRazduzenja,@PlaniranoRazduzenje)";
-        }
-
-        public string GetSelectQuery()
-        {
-            return "select ZaduzenjaID,VozilaID,ZaposleniID,PredjenaKilometraza,DatumZaduzenja,DatumRazduzenja,PlaniranoRazduzenje from dbo.Zaduzenja";
-        }
+        
 
         public List<SqlParameter> GetUpdateParameters()
         {
@@ -231,10 +194,7 @@ namespace VozniPark.PropertiesClass
             return list;
         }
 
-        public string GetUpdateQuery()
-        {
-            return "update dbo.Zaposlenja set VozilaID = @VozilaID,ZaposleniID = @ZaposleniID,  PredjenaKilometraza = @PredjenaKilometraza, DatumZaduzenja = @DatumZaduzenja,DatumRazduzenja=@DatumRazduzenja, PlaniranoRazduzenje=@PlaniranoRazduzenje where ZaduzenjaID = @ZaduzenjaID";
-        }
+        
         #endregion
     }
 }
