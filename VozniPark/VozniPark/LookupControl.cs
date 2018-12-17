@@ -34,6 +34,8 @@ namespace VozniPark
 
             Key = lookupForm.Key;
             Value = lookupForm.Value;
+            txtLookupID.Text = Key.ToString();
+            txtLookupNaziv.Text = Value.ToString();
         }
     }
 }
