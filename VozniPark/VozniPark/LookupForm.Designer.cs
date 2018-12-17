@@ -32,6 +32,7 @@
             this.btnReturn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lookupGrid)).BeginInit();
             this.SuspendLayout();
+            this.lookupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
             // lookupGrid
             // 
