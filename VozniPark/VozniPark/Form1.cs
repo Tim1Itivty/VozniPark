@@ -91,16 +91,24 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassVozila();
-                
+
                 //refresujGrid();
-               
+
+                Button Add = new Button();
+                Button Update = new Button();
+                Button Delete = new Button();
+
+
                 pnlDashboard.Controls.Add(dtg);
+                pnlDashboard.Controls.Add(Add);
+                pnlDashboard.Controls.Add(Delete);
+                pnlDashboard.Controls.Add(Update);
                 PopulateGrid();
 
                 
                 dtg.Height = 250;
                 dtg.Location = new Point(50, 0);
-
+               
                dtg.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                dtg.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dtg.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
