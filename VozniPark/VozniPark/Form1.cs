@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using VozniPark.AttributesClass;
 using System.Reflection;
 using VozniPark.PropertiesClass;
+using System.Windows.Forms.VisualStyles;
 
 namespace VozniPark
 {
@@ -22,7 +23,6 @@ namespace VozniPark
         public Form1()
         {
             InitializeComponent();
-          
         }
 
         private void btnVozila_Click(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace VozniPark
                 btnPodmeni.UseVisualStyleBackColor = false;
                 btnPodmeni.FlatStyle = FlatStyle.Flat;
                 btnPodmeni.Width = flpPodmeni.Width;
-                btnPodmeni.Height = 55;
+                btnPodmeni.Height = 55;                
 
                 //btnPodmeni.Click += new System.EventHandler(this.btnVozila_Click);
 
@@ -85,15 +85,14 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassVozila();
-                
+
                 //refresujGrid();
-               
+
+                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
 
-                dtg.Location = new Point(50, 0);
-                dtg.Height = 250;
-                dtg.Width = pnlDashboard.Width - 50;
+                
 
             }
             else if(button.Name == "btnDodajVozilo")
@@ -261,9 +260,7 @@ namespace VozniPark
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaposleni();
 
-                dtg.Location = new Point(50, 0);
-                dtg.Height = 250;
-                dtg.Width = pnlDashboard.Width - 50;
+                dgvDimeznije(dtg);
 
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
@@ -446,9 +443,7 @@ namespace VozniPark
                 myProperty = new PropertyClassZaduzenja();
 
                 //refresujGrid();
-                dtg.Location = new Point(50, 0);
-                dtg.Height = 250;
-                dtg.Width = pnlDashboard.Width - 50;
+                dgvDimeznije(dtg);
 
                 FlowLayoutPanel flpButoni = new FlowLayoutPanel();
                 flpButoni.FlowDirection = FlowDirection.LeftToRight;
@@ -510,6 +505,7 @@ namespace VozniPark
                 myProperty = new PropertyClassZaduzenja();
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
+                dgvDimeznije(dtg);
 
                 FlowLayoutPanel flpButon = new FlowLayoutPanel();
                 flpButon.FlowDirection = FlowDirection.LeftToRight;
@@ -617,9 +613,7 @@ namespace VozniPark
                 myProperty = new PropertyClassServisiranjeVozila();
 
                 //refresujGrid();
-                dtg.Location = new Point(50, 0);
-                dtg.Height = 250;
-                dtg.Width = pnlDashboard.Width - 50;
+                dgvDimeznije(dtg);
 
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
@@ -713,6 +707,19 @@ namespace VozniPark
             SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
         }
+
+        private void dgvDimeznije(DataGridView dtg)
+        {
+            dtg.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dtg.Location = new Point(50, 0);
+            dtg.Height = 250;
+            dtg.Width = pnlDashboard.Width - 50;
+            dtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+           
+        }
+        
+
     }
 }
 
