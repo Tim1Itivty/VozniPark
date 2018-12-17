@@ -27,7 +27,6 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Prezime")]
         [SqlName("Prezime")]
-        [LookupValue]
         public string Prezime { get; set; }
 
         [DisplayName("Radno mjesto")]

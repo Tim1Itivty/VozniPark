@@ -83,6 +83,7 @@ namespace VozniPark.PropertiesClass
         }
         [DisplayName("Datum zaduzenja")]
         [SqlName("DatumZaduzenja")]
+        [DateTime]
         public DateTime DatumZaduzenja
         {
             get
@@ -97,6 +98,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Datum razduzenja")]
         [SqlName("DatumRazduzenja")]
+        [DateTime]
         public DateTime DatumRazduzenja
         {
             get
@@ -110,6 +112,7 @@ namespace VozniPark.PropertiesClass
         }
         [DisplayName("Planirano razduzenje")]
         [SqlName("PlaniranoRazduzenje")]
+        [DateTime]
         public DateTime PlaniranoRazduzenje
         {
             get
@@ -179,7 +182,7 @@ namespace VozniPark.PropertiesClass
 
         public string GetInsertQuery()
         {
-            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,PredjenaKilometraza,DatumZaduzenja,DatumRazduzenja,PlaniranoRazduzenje) values (@ZaduzenjaID,@VozilaID,@ZaposleniID,@PredjenaKilometraza,@DatumZaduzenja,@DatumRazduzenja,@PlaniranoRazduzenje)";
+            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,PredjenaKilometraza,DatumZaduzenja,DatumRazduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@PredjenaKilometraza,@DatumZaduzenja,@DatumRazduzenja,@PlaniranoRazduzenje)";
         }
 
         public string GetSelectQuery()
