@@ -34,10 +34,11 @@ namespace VozniPark
         {
             
             flpPodmeni.Controls.Clear();
-            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            pnlSelected1.Visible = true;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = false;
+
             for (int i = 0; i < 3; i++)
             {
                 Button btnPodmeni = new Button();
@@ -95,6 +96,20 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
 
+                
+                dtg.Height = 250;
+                dtg.Location = new Point(50, 0);
+
+               dtg.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+               dtg.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                dtg.Width = pnlDashboard.Width - 50;
+
             }
             else if(button.Name == "btnDodajVozilo")
             {
@@ -110,10 +125,11 @@ namespace VozniPark
         private void btnZaposleni_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
-            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = true;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = false;
+
             for (int i = 0; i < 2; i++)
             {
                 Button btnPodmeniZaposleni = new Button();
@@ -214,10 +230,12 @@ namespace VozniPark
         private void btnZaduzenja_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
-            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            pnlSelected3.Visible = true;
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = true;
+            pnlSelected4.Visible = false;
+
             for (int i = 0; i < 4; i++)
             {
                 Button btnPodmeniZaduzenja = new Button();
@@ -376,10 +394,11 @@ namespace VozniPark
         private void btnServis_Click(object sender, EventArgs e)
         {
             flpPodmeni.Controls.Clear();
-            btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-            btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = true;
+
             for (int i = 0; i < 2; i++)
             {
                 Button btnPodmeniServis = new Button();
@@ -462,6 +481,12 @@ namespace VozniPark
             BtnPodmeni_Click(sender, e);
         }
 
-
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = false;
+        }
     }
 }
