@@ -78,17 +78,17 @@ namespace VozniPark.PropertiesClass
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             {
-                SqlParameter parameter = new SqlParameter("@Ime", System.Data.SqlDbType.Int);
+                SqlParameter parameter = new SqlParameter("@Ime", System.Data.SqlDbType.NVarChar);
                 parameter.Value = Ime;
                 parameters.Add(parameter);
             }
             {
-                SqlParameter parameter = new SqlParameter("@Prezime", System.Data.SqlDbType.Int);
+                SqlParameter parameter = new SqlParameter("@Prezime", System.Data.SqlDbType.NVarChar);
                 parameter.Value = Prezime;
                 parameters.Add(parameter);
             }
             {
-                SqlParameter parameter = new SqlParameter("@RadnoMjesto", System.Data.SqlDbType.Int);
+                SqlParameter parameter = new SqlParameter("@RadnoMjesto", System.Data.SqlDbType.NVarChar);
                 parameter.Value = RadnoMjesto;
                 parameters.Add(parameter);
             }

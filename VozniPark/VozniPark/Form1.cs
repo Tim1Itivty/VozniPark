@@ -357,12 +357,12 @@ namespace VozniPark
                 flp.Location = new Point(10, 170);
                 pnlDashboard.Controls.Add(dtg);
                 pnlDashboard.Controls.Add(flp);
-
                 for (int i = 0; i < 4; i++)
                 {
                     Button btn = new Button();
                     if (i == 0)
                     {
+                        state = StateEnum.Add;
                         btn.Name = "btnDodaj";
                         btn.Text = "Dodaj";
                         btn.Click += Btn_Click;
@@ -371,6 +371,7 @@ namespace VozniPark
                     }
                     if (i == 1)
                     {
+                        state = StateEnum.Update;
                         btn.Name = "btnIzmjeni";
                         btn.Text = "Izmjeni";
                     }
@@ -411,6 +412,7 @@ namespace VozniPark
             DataGridView dgv = sender as DataGridView;
             if (btn.Name == "btnDodaj")
             {
+                state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
                 PopulateControls();
@@ -426,13 +428,23 @@ namespace VozniPark
                 btnDodaj.Click += BtnDodaj_Click;
                 
             }
-            if(btn.Name == "btnIzmjeni")
+           else if(btn.Name == "btnIzmjeni")
             {
-               
+                state = StateEnum.Update;
             }
-            if (btn.Name == "btnObrisi")
+            else if (btn.Name == "btnObrisi")
             {
-                
+
+                DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+                delete(dtg);
+                pnlDashboard.Controls.Clear();
+                MessageBox.Show("Zaposleni je obrisan");
+                btnZaposleni_Click(sender, e);
+                Button btnPregled = sender as Button;
+                btn.Name = "btnPregled";
+                BtnPodmeniZaposleni_Click(btnPregled, e);
+
+
             }
             if(btn.Name == "btnDetaljno")
             {
@@ -441,12 +453,22 @@ namespace VozniPark
             
         }
 
+        private void BtnObrisi_Click1(object sender, EventArgs e)
+        {
+            
+        }
+
         private void BtnDodaj_Click(object sender, EventArgs e)
         {
             Add();
+            pnlDashboard.Controls.Clear();
             MessageBox.Show("Dodan novi zaposleni!");
-            PopulateControls();
+            btnZaposleni_Click(sender,e);
+            Button btn = sender as Button;
+            btn.Name = "btnDodajZaposlenog";
+            BtnPodmeniZaposleni_Click(btn,e);
         }
+       
 
         public void PopulateControls()
         {
