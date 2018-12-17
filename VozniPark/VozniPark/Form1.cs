@@ -93,19 +93,38 @@ namespace VozniPark
                 myProperty = new PropertyClassVozila();
 
                 //refresujGrid();
-
+                Panel panel = new Panel();
                 Button Add = new Button();
-                Button Update = new Button();
-                Button Delete = new Button();
+                Add.Click += Add_Click;
 
+                Button Update = new Button();
+                Update.Click += Update_Click;
+
+                Button Delete = new Button();
+                Delete.Click += Delete_Click;
+
+                Add.Text = "ADD";
+                Delete.Text = "DELETE";
+               Update.Text = "UPDATE";
+               
+                Add.Location = new Point(10,10);
+                Update.Location = new Point(95,10);
+                Delete.Location = new Point(180,10);
 
                 pnlDashboard.Controls.Add(dtg);
-                pnlDashboard.Controls.Add(Add);
-                pnlDashboard.Controls.Add(Delete);
-                pnlDashboard.Controls.Add(Update);
+              
+                panel.Height = 100;
+                panel.Width = 470;
+               
+
+                panel.Location = new Point(250,150);
+                panel.Controls.Add(Add);
+               panel.Controls.Add(Delete);
+               panel.Controls.Add(Update);
+                pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
 
-                
+               
                 dtg.Height = 250;
                 dtg.Location = new Point(50, 0);
                
@@ -152,6 +171,40 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
             }
                 
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Add_Click(object sender, EventArgs e)
+        {
+            pnlDashboard.Controls.Clear();
+            myProperty = new PropertyClassVozila();
+
+            PopulateControls();
+
+
+            Button btnDodajVozilo = new Button();
+            Button btnOtkazi = new Button();
+
+            btnDodajVozilo.Location = new Point(70, 470);
+            btnDodajVozilo.Text = "Dodaj vozilo";
+
+            btnOtkazi.Location = new Point(270, 470);
+            btnOtkazi.Text = "Ocisti polja";
+
+            btnDodajVozilo.Click += BtnDodajVozilo_Click;
+            btnOtkazi.Click += BtnOtkazi_Click;
+
+            pnlDashboard.Controls.Add(btnDodajVozilo);
+            pnlDashboard.Controls.Add(btnOtkazi);
         }
 
         private void BtnDodajVozilo_Click(object sender, EventArgs e)
@@ -373,7 +426,7 @@ namespace VozniPark
                     
                     pnlDashboard.Controls.Add(lookup);
                 }
-                else { 
+                else  { 
                     InputControl ic = new InputControl();
                     
                     ic.Naziv = item.Name;
