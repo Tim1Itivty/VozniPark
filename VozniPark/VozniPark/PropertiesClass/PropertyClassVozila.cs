@@ -21,6 +21,7 @@ namespace VozniPark.PropertiesClass
         [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertiesClass.PropertyClassModel")]
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
+        [LookupValue]
         public int ModelID { get; set; }
 
 

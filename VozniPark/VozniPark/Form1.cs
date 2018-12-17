@@ -436,7 +436,14 @@ namespace VozniPark
                     
                     pnlDashboard.Controls.Add(lookup);
                 }
-                else  { 
+                else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
+                {
+                    DateTimeControl dateTime = new DateTimeControl();
+                    dateTime.Naziv = item.Name;
+                    pnlDashboard.Controls.Add(dateTime);
+                    
+                }
+                else { 
                     InputControl ic = new InputControl();
                     
                     ic.Naziv = item.Name;
@@ -606,6 +613,7 @@ namespace VozniPark
         {
             Add();
             MessageBox.Show("Dodano je novo zaduzenje!");
+            pnlDashboard.Controls.Clear();
             PopulateControls();
         }
 
@@ -763,6 +771,14 @@ namespace VozniPark
                     string value = input.UnosPolje;
 
                     PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+                else if(item.GetType() == typeof(DateTimeControl))
+                {
+                    DateTimeControl date = item as DateTimeControl;
+                    DateTime value = date.Unos;
+
+                    PropertyInfo property = properties.Where(x => date.Naziv == x.Name).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
             }
