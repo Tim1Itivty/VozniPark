@@ -478,7 +478,7 @@ namespace VozniPark
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
                 {
                     DateTimeControl dateTime = new DateTimeControl();
-                    dateTime.Naziv = item.Name;
+                    dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
                     pnlDashboard.Controls.Add(dateTime);
 
                 }
@@ -690,21 +690,7 @@ namespace VozniPark
             {
                 state = StateEnum.Update;
                 myProperty = new PropertyClassZaduzenja();
-                DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
-                var type = myProperty.GetType();
-                var properties = type.GetProperties();
-                int i = 0;
-                foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
-                {
-                    string value = cell.Value.ToString();
-                    PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                    
-                    i++;
-                }
                 
-                pnlDashboard.Controls.Clear();
-                PopulateControls();
                 ucitajVrijednostiUPolja();
                 FlowLayoutPanel flpButon = new FlowLayoutPanel();
                 flpButon.FlowDirection = FlowDirection.LeftToRight;
@@ -908,8 +894,22 @@ namespace VozniPark
 
         private void ucitajVrijednostiUPolja()
         {
+            DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
             var type = myProperty.GetType();
             var properties = type.GetProperties();
+            int i = 0;
+            foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
+            {
+                string value = cell.Value.ToString();
+                PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+
+                i++;
+            }
+
+            pnlDashboard.Controls.Clear();
+            PopulateControls();
+            
 
             foreach (var item in pnlDashboard.Controls)
             {
@@ -919,6 +919,18 @@ namespace VozniPark
 
                     PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                     if (property != null)control.UnosPolje = property.GetValue(myProperty).ToString();
+                }
+                else if(item.GetType() == typeof(DateTimeControl))
+                {
+                    DateTimeControl control = item as DateTimeControl;
+                    PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                    if (property != null) control.Unos = (DateTime)property.GetValue(myProperty);
+                }
+                else if (item.GetType() == typeof(LookupControl))
+                {
+                    LookupControl control = item as LookupControl;
+                    PropertyInfo property = properties.Where(x => control.getLabel() == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                    if (property != null) control.Key = property.GetValue(myProperty).ToString(); 
                 }
             }
         }

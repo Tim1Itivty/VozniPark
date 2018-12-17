@@ -13,8 +13,16 @@ namespace VozniPark
     public partial class LookupControl : UserControl
     {
         PropertyInterface myInterface;
-        public string Key;
-        public string Value;
+        public string Key
+        {
+            get { return txtLookupID.Text; }
+            set { txtLookupID.Text = value; }
+        }
+        public string Value
+        {
+            get { return txtLookupNaziv.Text; }
+            set { txtLookupNaziv.Text = value; }
+        }
 
         public LookupControl(PropertyInterface property)
         {
@@ -24,6 +32,10 @@ namespace VozniPark
         public void setLabel(string text)
         {
             lblLookup.Text = text;
+        }
+        public string getLabel()
+        {
+            return lblLookup.Text;
         }
 
         private void btnLookup_Click(object sender, EventArgs e)
