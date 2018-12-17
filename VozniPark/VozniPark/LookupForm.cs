@@ -28,6 +28,7 @@ namespace VozniPark
 
         private void PopulateGrid()
         {
+           
             DataTable dt = new DataTable();
 
             
@@ -38,7 +39,7 @@ namespace VozniPark
             reader.Close();
 
             lookupGrid.DataSource = dt;
-
+      
 
             var type = myProperty.GetType();
             var properties = type.GetProperties();
