@@ -175,7 +175,8 @@ namespace VozniPark
                         btn.Name = "btnDodaj";
                         btn.Text = "Dodaj";
                         btn.Click += Btn_Click;
-                        
+             
+
                     }
                     if(i == 1)
                     {
@@ -212,10 +213,16 @@ namespace VozniPark
                 PopulateControls();
             }           
         }
-
+        
         private void Btn_Click(object sender, EventArgs e)
         {
-            
+            Button btn = sender as Button;
+            if (btn.Name == "btnDodaj")
+            {
+                PopulateControls();
+                
+                
+            }
         }
 
        
