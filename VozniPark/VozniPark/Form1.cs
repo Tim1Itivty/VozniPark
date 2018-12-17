@@ -17,6 +17,7 @@ namespace VozniPark
     // colors: #05668D , #028090 , #00A896 , #02C39A , #F0F3BD
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
+        
         public PropertyInterface myProperty;
         public StateEnum state;
         public Form1()
@@ -90,6 +91,7 @@ namespace VozniPark
             if (button.Name == "btnPregled") {
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
+                pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassVozila();
 
                 //refresujGrid();
@@ -111,7 +113,7 @@ namespace VozniPark
                 Update.Location = new Point(95,10);
                 Delete.Location = new Point(180,10);
 
-                pnlDashboard.Controls.Add(dtg);
+                
               
                 panel.Height = 100;
                 panel.Width = 470;
@@ -175,7 +177,15 @@ namespace VozniPark
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+            delete(dtg);
+            MessageBox.Show("Vozilo je obrisano");
+
+            Button button = sender as Button;
+            button.Name = "btnPregled";
+
+            BtnPodmeni_Click(button, e);
+
         }
 
         private void Update_Click(object sender, EventArgs e)
@@ -758,6 +768,21 @@ namespace VozniPark
             }
             SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+        }
+        public void delete(DataGridView dg)
+        {
+            DataGridViewRow row = dg.SelectedRows[0];
+            var properties = myProperty.GetType().GetProperties();
+
+            foreach (PropertyInfo item in properties)
+            {
+                string value = row.Cells[item.GetCustomAttribute<SqlNameAttribute>().Name]
+                    .Value.ToString();
+
+                item.SetValue(myProperty, Convert.ChangeType(value, item.PropertyType));
+            }
+            SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                  myProperty.GetDeleteQuery(), myProperty.GetDeleteParameters().ToArray());
         }
     }
 }
