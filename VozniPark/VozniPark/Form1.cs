@@ -193,12 +193,56 @@ namespace VozniPark
         private void Update_Click(object sender, EventArgs e)
         {
             state = StateEnum.Update;
+            myProperty = new PropertyClassVozila();
+            DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
+            var type = myProperty.GetType();
+            var properties = type.GetProperties();
+            int i = 0;
+            foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
+            {
+                string value = cell.Value.ToString();
+                PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
 
-            DataGridView dg = pnlDashboard.Controls[0] as DataGridView;
-           
+                i++;
+            }
+
+            pnlDashboard.Controls.Clear();
+            PopulateControls();
+            ucitajVrijednostiUPolja();
+            Panel panel = new Panel();
+            Button btnDodajVozilo = new Button();
+            Button btnOtkazi = new Button();
 
 
-           
+
+            btnDodajVozilo.Location = new Point(10, 10);
+            btnDodajVozilo.Text = "Dodaj vozilo";
+
+            btnOtkazi.Location = new Point(100, 10);
+            btnOtkazi.Text = "Ocisti polja";
+
+            btnDodajVozilo.Click += BtnDodajVozilo_Click;
+            btnOtkazi.Click += BtnOtkazi_Click;
+
+
+
+            
+
+            panel.Height = 100;
+            panel.Width = 470;
+
+
+            panel.Location = new Point(70, 470);
+
+            panel.Controls.Add(btnDodajVozilo);
+            panel.Controls.Add(btnOtkazi);
+
+
+            pnlDashboard.Controls.Add(panel);
+
+
+
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -219,55 +263,59 @@ namespace VozniPark
 
         private void BtnDodajVozilo_Click(object sender, EventArgs e)
         {
-            Add();
+            AddUpdate();
 
-            foreach (var item in pnlDashboard.Controls)
+            if (state == StateEnum.Add)
             {
-                if (item.GetType() == typeof( LookupControl))
-                {
-                    LookupControl input = item as  LookupControl;
-                    string value = input.Key;
+                MessageBox.Show("Uneseno vozilo");
 
-                    PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                }
-                else if (item.GetType() == typeof(InputControl))
-                {
-                    InputControl input = item as InputControl;
-                    string value = input.UnosPolje;
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassVozila();
 
-                    PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                }
+                PopulateControls();
+
+
+                Panel panel = new Panel();
+                Button btnDodajVozilo = new Button();
+                Button btnOtkazi = new Button();
+
+
+
+                btnDodajVozilo.Location = new Point(10, 10);
+                btnDodajVozilo.Text = "Dodaj vozilo";
+
+                btnOtkazi.Location = new Point(100, 10);
+                btnOtkazi.Text = "Ocisti polja";
+
+                btnDodajVozilo.Click += BtnDodajVozilo_Click;
+                btnOtkazi.Click += BtnOtkazi_Click;
+
+
+
+                btnOtkazi.Visible = true;
+
+                panel.Height = 100;
+                panel.Width = 470;
+
+
+                panel.Location = new Point(70, 470);
+
+                panel.Controls.Add(btnDodajVozilo);
+                panel.Controls.Add(btnOtkazi);
+
+
+                pnlDashboard.Controls.Add(panel);
             }
-            SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                  myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+            else if (state == StateEnum.Update)
+            {
+                MessageBox.Show("Vozilo je izmijenjeno");
 
-            MessageBox.Show("Uneseno vozilo");
-
-            pnlDashboard.Controls.Clear();
-            myProperty = new PropertyClassVozila();
-
-            PopulateControls();
-
-
-            Button btnDodajVozilo = new Button();
-            Button btnOtkazi = new Button();
-
-            btnDodajVozilo.Location = new Point(70, 470);
-            btnDodajVozilo.Text = "Dodaj vozilo";
-
-            btnOtkazi.Location = new Point(270, 470);
-            btnOtkazi.Text = "Ocisti polja";
-
-            btnDodajVozilo.Click += BtnDodajVozilo_Click;
-            btnOtkazi.Click += BtnOtkazi_Click;
-
-            pnlDashboard.Controls.Add(btnDodajVozilo);
-            pnlDashboard.Controls.Add(btnOtkazi);
+                Button button = sender as Button;
+                button.Name = "btnPregled";
+                BtnPodmeni_Click(button, e);
+            }
 
 
-            btnOtkazi.Visible = true;
 
         }
 
