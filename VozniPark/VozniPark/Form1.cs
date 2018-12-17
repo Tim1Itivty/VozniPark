@@ -17,13 +17,13 @@ namespace VozniPark
     // colors: #05668D , #028090 , #00A896 , #02C39A , #F0F3BD
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
-        
+
         public PropertyInterface myProperty;
         public StateEnum state;
         public Form1()
         {
             InitializeComponent();
-          
+
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace VozniPark
 
         private void btnVozila_Click(object sender, EventArgs e)
         {
-            
+
             flpPodmeni.Controls.Clear();
             pnlSelected1.Visible = true;
             pnlSelected2.Visible = false;
@@ -62,8 +62,8 @@ namespace VozniPark
                 {
                     btnPodmeni.Text = "Pregled svih vozila";
                     btnPodmeni.Name = "btnPregled";
-                    
-                    
+
+
                 }
                 if (i == 1)
                 {
@@ -85,10 +85,11 @@ namespace VozniPark
 
         private void BtnPodmeni_Click(object sender, EventArgs e)
         {
-           
+
 
             Button button = sender as Button;
-            if (button.Name == "btnPregled") {
+            if (button.Name == "btnPregled")
+            {
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
@@ -107,31 +108,31 @@ namespace VozniPark
 
                 Add.Text = "ADD";
                 Delete.Text = "DELETE";
-               Update.Text = "UPDATE";
-               
-                Add.Location = new Point(10,10);
-                Update.Location = new Point(95,10);
-                Delete.Location = new Point(180,10);
+                Update.Text = "UPDATE";
 
-                
-              
+                Add.Location = new Point(10, 10);
+                Update.Location = new Point(95, 10);
+                Delete.Location = new Point(180, 10);
+
+
+
                 panel.Height = 100;
                 panel.Width = 470;
-               
 
-                panel.Location = new Point(250,150);
+
+                panel.Location = new Point(250, 150);
                 panel.Controls.Add(Add);
-               panel.Controls.Add(Delete);
-               panel.Controls.Add(Update);
+                panel.Controls.Add(Delete);
+                panel.Controls.Add(Update);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
 
-               
+
                 dtg.Height = 250;
                 dtg.Location = new Point(50, 0);
-               
-               dtg.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-               dtg.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                dtg.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dtg.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dtg.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dtg.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dtg.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -141,11 +142,11 @@ namespace VozniPark
                 dtg.Width = pnlDashboard.Width - 50;
 
             }
-            else if(button.Name == "btnDodajVozilo")
+            else if (button.Name == "btnDodajVozilo")
             {
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassVozila();
-               
+
                 PopulateControls();
 
 
@@ -164,15 +165,15 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(btnDodajVozilo);
                 pnlDashboard.Controls.Add(btnOtkazi);
 
-               
+
                 btnOtkazi.Visible = true;
 
             }
-            else if(button.Name == "btnUnesiReg")
+            else if (button.Name == "btnUnesiReg")
             {
                 pnlDashboard.Controls.Clear();
             }
-                
+
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -223,9 +224,9 @@ namespace VozniPark
 
             foreach (var item in pnlDashboard.Controls)
             {
-                if (item.GetType() == typeof( LookupControl))
+                if (item.GetType() == typeof(LookupControl))
                 {
-                    LookupControl input = item as  LookupControl;
+                    LookupControl input = item as LookupControl;
                     string value = input.Key;
 
                     PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
@@ -335,20 +336,20 @@ namespace VozniPark
                 btnPodmeniZaposleni.Click += BtnPodmeniZaposleni_Click;
                 flpPodmeni.Controls.Add(btnPodmeniZaposleni);
             }
-            
+
         }
 
         private void BtnPodmeniZaposleni_Click(object sender, EventArgs e)
         {
-            
+
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
-                myProperty = new PropertyClassZaposleni();                
-                
-                
+                myProperty = new PropertyClassZaposleni();
+
+
 
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
@@ -360,20 +361,20 @@ namespace VozniPark
                 for (int i = 0; i < 4; i++)
                 {
                     Button btn = new Button();
-                    if(i == 0)
+                    if (i == 0)
                     {
                         btn.Name = "btnDodaj";
                         btn.Text = "Dodaj";
                         btn.Click += Btn_Click;
-             
+
 
                     }
-                    if(i == 1)
+                    if (i == 1)
                     {
                         btn.Name = "btnIzmjeni";
                         btn.Text = "Izmjeni";
                     }
-                    if(i == 2)
+                    if (i == 2)
                     {
                         btn.Name = "btnObrisi";
                         btn.Text = "Obrisi";
@@ -385,7 +386,7 @@ namespace VozniPark
                     }
                     flp.Controls.Add(btn);
 
-                    
+
                 }
                 PopulateGrid();
 
@@ -399,29 +400,29 @@ namespace VozniPark
                 Button btnDodaj = new Button();
                 btnDodaj.Text = "Dodaj";
                 pnlDashboard.Controls.Add(btnDodaj);
-                
-            }           
+
+            }
         }
-        
+
         private void Btn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
             if (btn.Name == "btnDodaj")
             {
                 PopulateControls();
-                
-                
+
+
             }
         }
 
-       
 
-       
+
+
 
         public void PopulateControls()
         {
-         
-            
+
+
             foreach (PropertyInfo item in myProperty.GetType().GetProperties())
             {
 
@@ -433,7 +434,7 @@ namespace VozniPark
                     LookupControl lookup = new LookupControl(foreignInterface);
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
-                    
+
                     pnlDashboard.Controls.Add(lookup);
                 }
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
@@ -441,30 +442,33 @@ namespace VozniPark
                     DateTimeControl dateTime = new DateTimeControl();
                     dateTime.Naziv = item.Name;
                     pnlDashboard.Controls.Add(dateTime);
-                    
+
                 }
-                else { 
+                else
+                {
                     InputControl ic = new InputControl();
-                    
+
                     ic.Naziv = item.Name;
 
-                    
+
                     if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null && state == StateEnum.Update)
                     {
                         ic.Enabled = false;
                     }
 
-                    if(state == StateEnum.Update)
+
+
+                    if (state == StateEnum.Update)
                     {
                         ic.UnosPolje = item.GetValue(myProperty).ToString();
                     }
-                    
+
                     pnlDashboard.Controls.Add(ic);
                 }
 
-                
+
             }
-           
+
         }
 
         private void btnZaduzenja_Click(object sender, EventArgs e)
@@ -517,12 +521,12 @@ namespace VozniPark
                 btnPodmeniZaduzenja.Click += BtnPodmeniZaduzenja_Click;
                 flpPodmeni.Controls.Add(btnPodmeniZaduzenja);
             }
-            
+
         }
 
         private void BtnPodmeniZaduzenja_Click(object sender, EventArgs e)
         {
-            
+
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
@@ -535,7 +539,7 @@ namespace VozniPark
                 FlowLayoutPanel flpButoni = new FlowLayoutPanel();
                 flpButoni.FlowDirection = FlowDirection.LeftToRight;
                 flpButoni.Width = pnlDashboard.Width;
-               
+
                 pnlDashboard.Controls.Add(dtg);
                 pnlDashboard.Controls.Add(flpButoni);
 
@@ -555,12 +559,12 @@ namespace VozniPark
                     if (i == 2)
                     {
                         btnCrud.Text = "IZBRISI";
-                        btnCrud.Name = "btnIzbrisi";                       
+                        btnCrud.Name = "btnIzbrisi";
                     }
                     flpButoni.Controls.Add(btnCrud);
                     btnCrud.Click += BtnCrud_Click;
                 }
-              
+
                 PopulateGrid();
             }
             else if (button.Name == "btnZaduzi")
@@ -569,7 +573,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
                 PopulateControls();
-                
+
                 FlowLayoutPanel flpButon = new FlowLayoutPanel();
                 flpButon.FlowDirection = FlowDirection.LeftToRight;
                 flpButon.Width = pnlDashboard.Width;
@@ -580,7 +584,7 @@ namespace VozniPark
                 btnZaduzi.Name = "btnZaduzi";
                 flpButon.Controls.Add(btnZaduzi);
 
-                btnZaduzi.Click += BtnZaduzi_Click;         
+                btnZaduzi.Click += BtnZaduzi_Click;
 
 
             }
@@ -603,18 +607,21 @@ namespace VozniPark
                 btnRazduzi.Name = "btnRazduzi";
                 flpButon.Controls.Add(btnRazduzi);
             }
-                      
-            else if (button.Name == "btnIstorija") {
+
+            else if (button.Name == "btnIstorija")
+            {
                 pnlDashboard.Controls.Clear();
             }
         }
 
         private void BtnZaduzi_Click(object sender, EventArgs e)
         {
-            Add();
+            state = StateEnum.Add;
+            AddUpdate();
             MessageBox.Show("Dodano je novo zaduzenje!");
-            pnlDashboard.Controls.Clear();
-            PopulateControls();
+            pnlDashboard.Controls.Clear();        
+            btnZaduzenja_Click(sender, e);     
+            BtnPodmeniZaduzenja_Click(sender, e);
         }
 
         private void BtnCrud_Click(object sender, EventArgs e)
@@ -622,6 +629,7 @@ namespace VozniPark
             Button button = sender as Button;
             if (button.Name == "btnDodaj")
             {
+                state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
                 PopulateControls();
@@ -636,14 +644,57 @@ namespace VozniPark
                 btnZaduzi.Name = "btnZaduzi";
                 flpButon.Controls.Add(btnZaduzi);
 
-              
+
             }
             else if (button.Name == "btnIzmijeni")
             {
+                state = StateEnum.Update;
+                myProperty = new PropertyClassZaduzenja();
+                DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
+                var type = myProperty.GetType();
+                var properties = type.GetProperties();
+                int i = 0;
+                foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
+                {
+                    string value = cell.Value.ToString();
+                    PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    
+                    i++;
+                }
+                
+                pnlDashboard.Controls.Clear();
+                PopulateControls();
+                ucitajVrijednostiUPolja();
+                FlowLayoutPanel flpButon = new FlowLayoutPanel();
+                flpButon.FlowDirection = FlowDirection.LeftToRight;
+                flpButon.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButon);
+
+                Button btnZaduzi = new Button();
+                btnZaduzi.Text = "Zaduzi";
+                btnZaduzi.Name = "btnZaduzi";
+                flpButon.Controls.Add(btnZaduzi);
+
+                
+
             }
             else if ((button.Name == "btnIzbrisi"))
             {
+                DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+                delete(dtg);
+                Button btnPregled = sender as Button;
+                btnPregled.Name = "btnPregled";
+
+                //BtnPodmeniZaduzenja_Click(button, e);
+
+                MessageBox.Show("Zaduzenje je izbrisano!");
+
+                btnZaduzenja_Click(sender, e);
+                BtnPodmeniZaduzenja_Click(sender, e);
+
             }
+
 
         }
 
@@ -685,12 +736,12 @@ namespace VozniPark
                 }
                 btnPodmeniServis.Click += BtnPodmeniServis_Click;
                 flpPodmeni.Controls.Add(btnPodmeniServis);
-            }          
+            }
         }
 
         private void BtnPodmeniServis_Click(object sender, EventArgs e)
         {
-            
+
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
@@ -703,33 +754,34 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
             }
-            else if (button.Name == "btnServis") {
+            else if (button.Name == "btnServis")
+            {
                 pnlDashboard.Controls.Clear();
             }
         }
         private void PopulateGrid()
-        {          
-                DataTable dt = new DataTable();
+        {
+            DataTable dt = new DataTable();
 
-                DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
-                SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text,
-                    myProperty.GetSelectQuery());
+            DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
+            SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text,
+                myProperty.GetSelectQuery());
 
-                dt.Load(reader);
-                reader.Close();
+            dt.Load(reader);
+            reader.Close();
 
-                grid.DataSource = dt;
+            grid.DataSource = dt;
 
 
-                var type = myProperty.GetType();
-                var properties = type.GetProperties();
+            var type = myProperty.GetType();
+            var properties = type.GetProperties();
 
-                foreach (DataGridViewColumn item in grid.Columns)
-                {
-                    item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
-                                          ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
-                }
-            
+            foreach (DataGridViewColumn item in grid.Columns)
+            {
+                item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
+                                      ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
+            }
+
         }
         private void Form1_Activated(object sender, EventArgs e)
         {
@@ -741,7 +793,7 @@ namespace VozniPark
         {
 
         }
-    
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -751,7 +803,7 @@ namespace VozniPark
             pnlSelected4.Visible = false;
         }
 
-        public void Add()
+        public void AddUpdate()
         {
             var properties = myProperty.GetType().GetProperties();
 
@@ -773,7 +825,7 @@ namespace VozniPark
                     PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
-                else if(item.GetType() == typeof(DateTimeControl))
+                else if (item.GetType() == typeof(DateTimeControl))
                 {
                     DateTimeControl date = item as DateTimeControl;
                     DateTime value = date.Unos;
@@ -782,9 +834,14 @@ namespace VozniPark
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
             }
+            if(state == StateEnum.Add)
             SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+            else if(state == StateEnum.Update)
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                 myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
         }
+
         public void delete(DataGridView dg)
         {
             DataGridViewRow row = dg.SelectedRows[0];
@@ -799,6 +856,23 @@ namespace VozniPark
             }
             SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetDeleteQuery(), myProperty.GetDeleteParameters().ToArray());
+        }
+
+        private void ucitajVrijednostiUPolja()
+        {
+            var type = myProperty.GetType();
+            var properties = type.GetProperties();
+
+            foreach (var item in pnlDashboard.Controls)
+            {
+                if (item.GetType() == typeof(InputControl))
+                {
+                    InputControl control = item as InputControl;
+
+                    PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                    if (property != null)control.UnosPolje = property.GetValue(myProperty).ToString();
+                }
+            }
         }
     }
 }
