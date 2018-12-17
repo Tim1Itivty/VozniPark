@@ -83,7 +83,8 @@ namespace VozniPark
 
         private void BtnPodmeni_Click(object sender, EventArgs e)
         {
-            
+           
+
             Button button = sender as Button;
             if (button.Name == "btnPregled") {
                 pnlDashboard.Controls.Clear();
@@ -100,14 +101,113 @@ namespace VozniPark
             {
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassVozila();
-             
+               
                 PopulateControls();
+
+
+                Button btnDodajVozilo = new Button();
+                Button btnOtkazi = new Button();
+
+                btnDodajVozilo.Location = new Point(70, 470);
+                btnDodajVozilo.Text = "Dodaj vozilo";
+
+                btnOtkazi.Location = new Point(270, 470);
+                btnOtkazi.Text = "Ocisti polja";
+
+                btnDodajVozilo.Click += BtnDodajVozilo_Click;
+                btnOtkazi.Click += BtnOtkazi_Click;
+
+                pnlDashboard.Controls.Add(btnDodajVozilo);
+                pnlDashboard.Controls.Add(btnOtkazi);
+
+               
+                btnOtkazi.Visible = true;
+
             }
             else if(button.Name == "btnUnesiReg")
             {
                 pnlDashboard.Controls.Clear();
             }
                 
+        }
+
+        private void BtnDodajVozilo_Click(object sender, EventArgs e)
+        {
+            var properties = myProperty.GetType().GetProperties();
+
+            foreach (var item in pnlDashboard.Controls)
+            {
+                if (item.GetType() == typeof( LookupControl))
+                {
+                    LookupControl input = item as  LookupControl;
+                    string value = input.Key;
+
+                    PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+                else if (item.GetType() == typeof(InputControl))
+                {
+                    InputControl input = item as InputControl;
+                    string value = input.UnosPolje;
+
+                    PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+            }
+            SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                  myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+
+            MessageBox.Show("Uneseno vozilo");
+
+            pnlDashboard.Controls.Clear();
+            myProperty = new PropertyClassVozila();
+
+            PopulateControls();
+
+
+            Button btnDodajVozilo = new Button();
+            Button btnOtkazi = new Button();
+
+            btnDodajVozilo.Location = new Point(70, 470);
+            btnDodajVozilo.Text = "Dodaj vozilo";
+
+            btnOtkazi.Location = new Point(270, 470);
+            btnOtkazi.Text = "Ocisti polja";
+
+            btnDodajVozilo.Click += BtnDodajVozilo_Click;
+            btnOtkazi.Click += BtnOtkazi_Click;
+
+            pnlDashboard.Controls.Add(btnDodajVozilo);
+            pnlDashboard.Controls.Add(btnOtkazi);
+
+
+            btnOtkazi.Visible = true;
+
+        }
+
+        private void BtnOtkazi_Click(object sender, EventArgs e)
+        {
+            pnlDashboard.Controls.Clear();
+            myProperty = new PropertyClassVozila();
+
+            PopulateControls();
+            Button btnDodajVozilo = new Button();
+            Button btnOtkazi = new Button();
+
+            btnDodajVozilo.Location = new Point(70, 470);
+            btnDodajVozilo.Text = "Dodaj vozilo";
+
+            btnOtkazi.Location = new Point(270, 470);
+            btnOtkazi.Text = "Ocisti polja";
+
+            btnDodajVozilo.Click += BtnDodajVozilo_Click;
+            btnOtkazi.Click += BtnOtkazi_Click;
+
+            pnlDashboard.Controls.Add(btnDodajVozilo);
+            pnlDashboard.Controls.Add(btnOtkazi);
+
+
+            btnOtkazi.Visible = true;
         }
 
         private void btnZaposleni_Click(object sender, EventArgs e)
@@ -198,7 +298,7 @@ namespace VozniPark
                     ic.Naziv = item.Name;
 
                     visina += 60;
-                    if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                    if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null && state == StateEnum.Update)
                     {
                         ic.Enabled = false;
                     }
@@ -383,6 +483,9 @@ namespace VozniPark
             BtnPodmeni_Click(sender, e);
         }
 
+        private void btnOtkazi_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

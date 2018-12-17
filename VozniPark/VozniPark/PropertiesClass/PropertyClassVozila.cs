@@ -61,7 +61,13 @@ namespace VozniPark.PropertiesClass
 
         public string GetInsertQuery()
         {
-            return @"Insert Into dbo.Vozila (ModelID,GodinaProizvodnje,Kilometraza,Boja,BrojVrata,Dostupnost)values(@VoziloID,@ModelID,@GodinaProizvodnje,@Kilometraza,@Boja,@BrojVrata,@Dostupnost)";
+            return @"Insert Into dbo.Vozila (ModelID,
+                                             GodinaProizvodnje,
+                                             Kilometraza,
+                                             Boja,
+                                             BrojVrata,
+                                             Dostupnost)
+                    values(@ModelID, @GodinaProizvodnje, @Kilometraza, @Boja, @BrojVrata, @Dostupnost)";
         }
 
         public string GetUpdateQuery()

@@ -36,7 +36,9 @@
             this.pnlMeni = new System.Windows.Forms.Panel();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.pnlMeni.SuspendLayout();
+            this.pnlDashboard.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnVozila
@@ -132,7 +134,7 @@
             this.pnlMeni.Location = new System.Drawing.Point(21, 60);
             this.pnlMeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMeni.Name = "pnlMeni";
-            this.pnlMeni.Size = new System.Drawing.Size(199, 559);
+            this.pnlMeni.Size = new System.Drawing.Size(199, 564);
             this.pnlMeni.TabIndex = 1;
             // 
             // flpPodmeni
@@ -144,16 +146,26 @@
             this.flpPodmeni.Location = new System.Drawing.Point(220, 60);
             this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpPodmeni.Name = "flpPodmeni";
-            this.flpPodmeni.Size = new System.Drawing.Size(262, 559);
+            this.flpPodmeni.Size = new System.Drawing.Size(262, 564);
             this.flpPodmeni.TabIndex = 5;
             // 
             // pnlDashboard
             // 
+            this.pnlDashboard.Controls.Add(this.button2);
             this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDashboard.Location = new System.Drawing.Point(482, 60);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(530, 564);
             this.pnlDashboard.TabIndex = 6;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(275, 491);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(8, 8);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -171,6 +183,7 @@
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.pnlMeni.ResumeLayout(false);
             this.pnlMeni.PerformLayout();
+            this.pnlDashboard.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -183,6 +196,7 @@
         private System.Windows.Forms.Panel pnlMeni;
         private System.Windows.Forms.FlowLayoutPanel flpPodmeni;
         private System.Windows.Forms.Panel pnlDashboard;
+        private System.Windows.Forms.Button button2;
     }
 }
 
