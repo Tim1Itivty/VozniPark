@@ -487,6 +487,7 @@ namespace VozniPark
             }
             else if (button.Name == "btnZaduzi")
             {
+                state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
                 PopulateControls();
@@ -500,9 +501,14 @@ namespace VozniPark
                 btnZaduzi.Text = "Zaduzi";
                 btnZaduzi.Name = "btnZaduzi";
                 flpButon.Controls.Add(btnZaduzi);
+
+                btnZaduzi.Click += BtnZaduzi_Click;         
+
+
             }
             else if (button.Name == "btnRazduzi")
             {
+                state = StateEnum.Update;
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
@@ -525,6 +531,13 @@ namespace VozniPark
             }
         }
 
+        private void BtnZaduzi_Click(object sender, EventArgs e)
+        {
+            Add();
+            MessageBox.Show("Dodano je novo zaduzenje!");
+            PopulateControls();
+        }
+
         private void BtnCrud_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -543,6 +556,8 @@ namespace VozniPark
                 btnZaduzi.Text = "Zaduzi";
                 btnZaduzi.Name = "btnZaduzi";
                 flpButon.Controls.Add(btnZaduzi);
+
+              
             }
             else if (button.Name == "btnIzmijeni")
             {
@@ -655,6 +670,33 @@ namespace VozniPark
             pnlSelected2.Visible = false;
             pnlSelected3.Visible = false;
             pnlSelected4.Visible = false;
+        }
+
+        public void Add()
+        {
+            var properties = myProperty.GetType().GetProperties();
+
+            foreach (var item in pnlDashboard.Controls)
+            {
+                if (item.GetType() == typeof(LookupControl))
+                {
+                    LookupControl input = item as LookupControl;
+                    string value = input.Key;
+
+                    PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+                else if (item.GetType() == typeof(InputControl))
+                {
+                    InputControl input = item as InputControl;
+                    string value = input.UnosPolje;
+
+                    PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+            }
+            SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                  myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
         }
     }
 }
