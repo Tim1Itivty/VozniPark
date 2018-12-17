@@ -307,11 +307,23 @@ namespace VozniPark
             }
             else if (button.Name == "btnZaduzi")
             {
+                pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
                 PopulateControls();
+                
+                FlowLayoutPanel flpButon = new FlowLayoutPanel();
+                flpButon.FlowDirection = FlowDirection.LeftToRight;
+                flpButon.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButon);
+
+                Button btnZaduzi = new Button();
+                btnZaduzi.Text = "Zaduzi";
+                btnZaduzi.Name = "btnZaduzi";
+                flpButon.Controls.Add(btnZaduzi);
             }
             else if (button.Name == "btnRazduzi")
             {
+                pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
                 pnlDashboard.Controls.Add(dtg);
@@ -327,12 +339,7 @@ namespace VozniPark
                 btnRazduzi.Name = "btnRazduzi";
                 flpButon.Controls.Add(btnRazduzi);
             }
-            else if (button.Name == "btnZaduzi") {
-                pnlDashboard.Controls.Clear();
-            }
-            else if (button.Name == "btnRazduzi") {
-                pnlDashboard.Controls.Clear();
-            }
+                      
             else if (button.Name == "btnIstorija") {
                 pnlDashboard.Controls.Clear();
             }
@@ -346,6 +353,16 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
                 PopulateControls();
+
+                FlowLayoutPanel flpButon = new FlowLayoutPanel();
+                flpButon.FlowDirection = FlowDirection.LeftToRight;
+                flpButon.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButon);
+
+                Button btnZaduzi = new Button();
+                btnZaduzi.Text = "Zaduzi";
+                btnZaduzi.Name = "btnZaduzi";
+                flpButon.Controls.Add(btnZaduzi);
             }
             else if (button.Name == "btnIzmijeni")
             {
