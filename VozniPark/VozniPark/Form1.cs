@@ -344,20 +344,21 @@ namespace VozniPark
                 flp.Location = new Point(10, 170);
                 pnlDashboard.Controls.Add(dtg);
                 pnlDashboard.Controls.Add(flp);
-
                 for (int i = 0; i < 4; i++)
                 {
                     Button btn = new Button();
                     if (i == 0)
                     {
+                        state = StateEnum.Add;
                         btn.Name = "btnDodaj";
                         btn.Text = "Dodaj";
-                        btn.Click += Btn_Click;
+                        
 
 
                     }
                     if (i == 1)
                     {
+                        state = StateEnum.Update;
                         btn.Name = "btnIzmjeni";
                         btn.Text = "Izmjeni";
                     }
@@ -373,7 +374,7 @@ namespace VozniPark
                     }
                     flp.Controls.Add(btn);
 
-
+                    btn.Click += Btn_Click;
                 }
                 PopulateGrid();
 
@@ -381,30 +382,80 @@ namespace VozniPark
             }
             else if (button.Name == "btnDodajZaposlenog")
             {
+                state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
                 PopulateControls();
                 Button btnDodaj = new Button();
                 btnDodaj.Text = "Dodaj";
                 pnlDashboard.Controls.Add(btnDodaj);
-
-            }
+                btnDodaj.Click += BtnDodaj_Click;
+            }           
         }
 
         private void Btn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
+            DataGridView dgv = sender as DataGridView;
             if (btn.Name == "btnDodaj")
             {
+                state = StateEnum.Add;
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassZaposleni();
                 PopulateControls();
 
+                FlowLayoutPanel flp = new FlowLayoutPanel();
+                flp.FlowDirection = FlowDirection.LeftToRight;
+                pnlDashboard.Controls.Add(flp);
+
+                Button btnDodaj = new Button();
+                btnDodaj.Text = "Dodaj";
+                btnDodaj.Name = "btnDodaj";
+                flp.Controls.Add(btnDodaj);
+                btnDodaj.Click += BtnDodaj_Click;
+                
+            }
+           else if(btn.Name == "btnIzmjeni")
+            {
+                state = StateEnum.Update;
+            }
+            else if (btn.Name == "btnObrisi")
+            {
+                btnZaposleni_Click(sender, e);
+                BtnPodmeniZaposleni_Click(sender, e);
+                DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+                delete(dtg);
+                pnlDashboard.Controls.Clear();
+                btnZaposleni_Click(sender, e);
+                Button btnPregled = sender as Button;
+                btn.Name = "btnPregled";
+                BtnPodmeniZaposleni_Click(btnPregled, e);
+                MessageBox.Show("Zaposleni je obrisan");
 
             }
+            if(btn.Name == "btnDetaljno")
+            {
+
+            }
+            
         }
 
+        private void BtnObrisi_Click1(object sender, EventArgs e)
+        {
+            
+        }
 
-
-
+        private void BtnDodaj_Click(object sender, EventArgs e)
+        {
+            AddUpdate();
+            pnlDashboard.Controls.Clear();
+            MessageBox.Show("Dodan novi zaposleni!");
+            btnZaposleni_Click(sender,e);
+            Button btn = sender as Button;
+            btn.Name = "btnDodajZaposlenog";
+            BtnPodmeniZaposleni_Click(btn,e);
+        }
+       
 
         public void PopulateControls()
         {
