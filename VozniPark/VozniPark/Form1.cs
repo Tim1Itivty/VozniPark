@@ -26,11 +26,6 @@ namespace VozniPark
 
         }
 
-        private void btnQuit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void btnVozila_Click(object sender, EventArgs e)
         {
 
@@ -52,12 +47,13 @@ namespace VozniPark
                 btnPodmeni.TabIndex = 0;
                 btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
                 btnPodmeni.UseVisualStyleBackColor = false;
-                //btnPodmeni.Click += new System.EventHandler(this.btnVozila_Click);
-
+                btnPodmeni.FlatStyle = FlatStyle.Flat;
                 btnPodmeni.Width = flpPodmeni.Width;
                 btnPodmeni.Height = 55;
 
-                btnPodmeni.FlatStyle = FlatStyle.Flat;
+                //btnPodmeni.Click += new System.EventHandler(this.btnVozila_Click);
+
+
                 if (i == 0)
                 {
                     btnPodmeni.Text = "Pregled svih vozila";
@@ -75,10 +71,8 @@ namespace VozniPark
                     btnPodmeni.Text = "Unesi podatke o registraciji";
                     btnPodmeni.Name = "btnUnesiReg";
                 }
+
                 btnPodmeni.Click += BtnPodmeni_Click;
-
-
-
                 flpPodmeni.Controls.Add(btnPodmeni);
             }
         }
@@ -127,18 +121,8 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
 
-
-                dtg.Height = 250;
                 dtg.Location = new Point(50, 0);
-
-                dtg.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dtg.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dtg.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dtg.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dtg.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dtg.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dtg.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+                dtg.Height = 250;
                 dtg.Width = pnlDashboard.Width - 50;
 
             }
@@ -321,8 +305,8 @@ namespace VozniPark
 
                 btnPodmeniZaposleni.Width = flpPodmeni.Width;
                 btnPodmeniZaposleni.Height = 55;
-
                 btnPodmeniZaposleni.FlatStyle = FlatStyle.Flat;
+
                 if (i == 0)
                 {
                     btnPodmeniZaposleni.Text = "Pregled svih zaposlenih";
@@ -535,6 +519,9 @@ namespace VozniPark
                 myProperty = new PropertyClassZaduzenja();
 
                 //refresujGrid();
+                dtg.Location = new Point(50, 0);
+                dtg.Height = 250;
+                dtg.Width = pnlDashboard.Width - 50;
 
                 FlowLayoutPanel flpButoni = new FlowLayoutPanel();
                 flpButoni.FlowDirection = FlowDirection.LeftToRight;
@@ -750,6 +737,9 @@ namespace VozniPark
                 myProperty = new PropertyClassServisiranjeVozila();
 
                 //refresujGrid();
+                dtg.Location = new Point(50, 0);
+                dtg.Height = 250;
+                dtg.Width = pnlDashboard.Width - 50;
 
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
@@ -776,11 +766,18 @@ namespace VozniPark
             var type = myProperty.GetType();
             var properties = type.GetProperties();
 
-            foreach (DataGridViewColumn item in grid.Columns)
+                foreach (DataGridViewColumn item in grid.Columns)
+                {
+                    item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
+                                          ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
+                }
+
+            
+            for (int i = 0; i < grid.Columns.Count; i++)
             {
-                item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
-                                      ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
+                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
+
 
         }
         private void Form1_Activated(object sender, EventArgs e)
