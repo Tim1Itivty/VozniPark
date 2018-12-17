@@ -196,7 +196,7 @@
             this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
             this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(892, 613);
+            this.pnlDashboard.Size = new System.Drawing.Size(813, 613);
             this.pnlDashboard.TabIndex = 6;
             // 
             // Form1
