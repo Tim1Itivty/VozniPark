@@ -274,19 +274,103 @@ namespace VozniPark
 
                 //refresujGrid();
 
+                FlowLayoutPanel flpButoni = new FlowLayoutPanel();
+                flpButoni.FlowDirection = FlowDirection.LeftToRight;
+                flpButoni.Width = pnlDashboard.Width;
+               
+                pnlDashboard.Controls.Add(dtg);
+                pnlDashboard.Controls.Add(flpButoni);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Button btnCrud = new Button();
+                    if (i == 0)
+                    {
+                        btnCrud.Text = "DODAJ";
+                        btnCrud.Name = "btnDodaj";
+                    }
+                    if (i == 1)
+                    {
+                        btnCrud.Text = "IZMIJENI";
+                        btnCrud.Name = "btnIzmijeni";
+                    }
+                    if (i == 2)
+                    {
+                        btnCrud.Text = "IZBRISI";
+                        btnCrud.Name = "btnIzbrisi";                       
+                    }
+                    flpButoni.Controls.Add(btnCrud);
+                    btnCrud.Click += BtnCrud_Click;
+                }
+              
+                PopulateGrid();
+            }
+            else if (button.Name == "btnZaduzi")
+            {
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassZaduzenja();
+                PopulateControls();
+                
+                FlowLayoutPanel flpButon = new FlowLayoutPanel();
+                flpButon.FlowDirection = FlowDirection.LeftToRight;
+                flpButon.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButon);
+
+                Button btnZaduzi = new Button();
+                btnZaduzi.Text = "Zaduzi";
+                btnZaduzi.Name = "btnZaduzi";
+                flpButon.Controls.Add(btnZaduzi);
+            }
+            else if (button.Name == "btnRazduzi")
+            {
+                pnlDashboard.Controls.Clear();
+                DataGridView dtg = new DataGridView();
+                myProperty = new PropertyClassZaduzenja();
                 pnlDashboard.Controls.Add(dtg);
                 PopulateGrid();
 
+                FlowLayoutPanel flpButon = new FlowLayoutPanel();
+                flpButon.FlowDirection = FlowDirection.LeftToRight;
+                flpButon.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButon);
+
+                Button btnRazduzi = new Button();
+                btnRazduzi.Text = "RAZDUZI";
+                btnRazduzi.Name = "btnRazduzi";
+                flpButon.Controls.Add(btnRazduzi);
             }
-            else if (button.Name == "btnZaduzi") {
-                pnlDashboard.Controls.Clear();
-            }
-            else if (button.Name == "btnRazduzi") {
-                pnlDashboard.Controls.Clear();
-            }
+                      
             else if (button.Name == "btnIstorija") {
                 pnlDashboard.Controls.Clear();
             }
+        }
+
+        private void BtnCrud_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Name == "btnDodaj")
+            {
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassZaduzenja();
+                PopulateControls();
+
+                FlowLayoutPanel flpButon = new FlowLayoutPanel();
+                flpButon.FlowDirection = FlowDirection.LeftToRight;
+                flpButon.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButon);
+
+                Button btnZaduzi = new Button();
+                btnZaduzi.Text = "Zaduzi";
+                btnZaduzi.Name = "btnZaduzi";
+                flpButon.Controls.Add(btnZaduzi);
+            }
+            else if (button.Name == "btnIzmijeni")
+            {
+            }
+            else if ((button.Name == "btnIzbrisi"))
+            {
+            }
+
         }
 
         private void btnServis_Click(object sender, EventArgs e)

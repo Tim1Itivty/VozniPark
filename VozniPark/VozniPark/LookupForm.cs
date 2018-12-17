@@ -22,6 +22,8 @@ namespace VozniPark
         {
             InitializeComponent();
             myProperty = mp;
+
+            PopulateGrid();
         }
 
         private void PopulateGrid()
@@ -58,13 +60,10 @@ namespace VozniPark
                 .FirstOrDefault().GetCustomAttribute<SqlNameAttribute>().Name;
 
             Key = row.Cells[columnName].Value.ToString();
-
-            columnName = properties.Where(x => x.GetCustomAttribute<LookupValue>() != null)
-                .FirstOrDefault().GetCustomAttribute<SqlNameAttribute>().Name;
-
+        
             Value = row.Cells[columnName].Value.ToString();
 
-            this.Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }
