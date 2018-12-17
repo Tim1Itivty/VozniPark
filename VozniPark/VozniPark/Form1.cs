@@ -407,12 +407,32 @@ namespace VozniPark
         private void Btn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
+            DataGridView dgv = sender as DataGridView;
             if (btn.Name == "btnDodaj")
             {
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassZaposleni();
                 PopulateControls();
 
+                FlowLayoutPanel flp = new FlowLayoutPanel();
+                flp.FlowDirection = FlowDirection.LeftToRight;
+                pnlDashboard.Controls.Add(flp);
+
+                Button btnDodaj = new Button();
+                btnDodaj.Text = "Dodaj";
+                btnDodaj.Name = "btnDodaj";
+                flp.Controls.Add(btnDodaj);
+                
+            }
+            if(btn.Name == "btnIzmjeni")
+            {
 
             }
+            if (btn.Name == "btnObrisi")
+            {
+
+            }
+            
         }
 
 
