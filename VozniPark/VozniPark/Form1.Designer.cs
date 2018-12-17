@@ -227,7 +227,7 @@
         private System.Windows.Forms.Button btnServis;
         private System.Windows.Forms.Panel pnlMeni;
         private System.Windows.Forms.FlowLayoutPanel flpPodmeni;
-        private System.Windows.Forms.Panel pnlDashboard;
+       // private System.Windows.Forms.Panel pnlDashboard;
         private System.Windows.Forms.Panel pnlSelected1;
         private System.Windows.Forms.Panel pnlSelected4;
         private System.Windows.Forms.Panel pnlSelected2;
