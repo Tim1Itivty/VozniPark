@@ -324,12 +324,11 @@ namespace VozniPark
             {
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
-                Button btnDodaj = new Button();
-                btnDodaj.Text = "Dodaj zaposlenog";
-                btnDodaj.Location = new Point(170, 270);
-                pnlDashboard.Controls.Add(btnDodaj);
-                myProperty = new PropertyClassZaposleni();               
                 PopulateControls();
+                Button btnDodaj = new Button();
+                btnDodaj.Text = "Dodaj";
+                pnlDashboard.Controls.Add(btnDodaj);
+                
             }           
         }
         
