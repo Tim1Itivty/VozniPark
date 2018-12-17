@@ -394,14 +394,15 @@ namespace VozniPark
             }
             else if (button.Name == "btnDodajZaposlenog")
             {
+                state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
                 PopulateControls();
                 Button btnDodaj = new Button();
                 btnDodaj.Text = "Dodaj";
                 pnlDashboard.Controls.Add(btnDodaj);
-
-            }
+                btnDodaj.Click += BtnDodaj_Click;
+            }           
         }
 
         private void Btn_Click(object sender, EventArgs e)
@@ -422,22 +423,30 @@ namespace VozniPark
                 btnDodaj.Text = "Dodaj";
                 btnDodaj.Name = "btnDodaj";
                 flp.Controls.Add(btnDodaj);
+                btnDodaj.Click += BtnDodaj_Click;
                 
             }
             if(btn.Name == "btnIzmjeni")
             {
-
+               
             }
             if (btn.Name == "btnObrisi")
+            {
+                
+            }
+            if(btn.Name == "btnDetaljno")
             {
 
             }
             
         }
 
-
-
-
+        private void BtnDodaj_Click(object sender, EventArgs e)
+        {
+            Add();
+            MessageBox.Show("Dodan novi zaposleni!");
+            PopulateControls();
+        }
 
         public void PopulateControls()
         {
