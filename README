@@ -1,13 +1,11 @@
-1. Dodati funkcionalnosti na buttone u podmeniju Vozila
-2. Dodati funkcionalnosti na buttone u podmeniju Zaposleni
-3. Dodati funkcionalnosti na buttone u podmeniju Zaduženja
-4. Dodati funkcionalnosti na buttone u podmeniju Servis
-5. Osmisliti dizajn treceg panela*
-6. Doraditi dizajnt početne forme
-7. Nove forme za crud operacije
-8. User kotrola i lookup kontrola
-9. Upit za prikaz vozila sa registracijom
-10. Upit za detaljan prikaz vozila
-11. Upit za detaljan prikaz zaduženja
-12. Upit za prikaz svih zaduženja za pojedinačnog korisnika
-
+1. Zavrsiti sve funkcionalnosti u meniju vozila
+2. Zavrsiti sve funkcionalnosti u meniju zaposleni
+3. Zavrsiti sve funkcionalnosti u meniju zaduzenja
+4. Uraditi meni servisi
+5. Napraviti novu formu za detaljan pregled vozila
+6. Upit za sva zaduzivanja u odredjenom mjesecu
+7. Upit za sva zaduzivanja za jednog zaposlenog
+8. Upit za sva zaduzivanja za jedno vozilo
+9. Upit za sve servise u jednom mjesecu/godini
+10. Upit za sve registracje jednog vozila
+11. Prosiriti i ostale property klase
