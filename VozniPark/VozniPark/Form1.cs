@@ -275,19 +275,78 @@ namespace VozniPark
             {
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
-                myProperty = new PropertyClassZaposleni();
+                myProperty = new PropertyClassZaposleni();                
                 
+                
+
+                FlowLayoutPanel flp = new FlowLayoutPanel();
+                flp.FlowDirection = FlowDirection.LeftToRight;
+                flp.Width = pnlDashboard.Width;
+                flp.Location = new Point(10, 170);
                 pnlDashboard.Controls.Add(dtg);
+                pnlDashboard.Controls.Add(flp);
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Button btn = new Button();
+                    if(i == 0)
+                    {
+                        btn.Name = "btnDodaj";
+                        btn.Text = "Dodaj";
+                        btn.Click += Btn_Click;
+             
+
+                    }
+                    if(i == 1)
+                    {
+                        btn.Name = "btnIzmjeni";
+                        btn.Text = "Izmjeni";
+                    }
+                    if(i == 2)
+                    {
+                        btn.Name = "btnObrisi";
+                        btn.Text = "Obrisi";
+                    }
+                    if (i == 3)
+                    {
+                        btn.Name = "btnDetaljno";
+                        btn.Text = "Detaljno";
+                    }
+                    flp.Controls.Add(btn);
+
+                    
+                }
                 PopulateGrid();
+
+
             }
             else if (button.Name == "btnDodajZaposlenog")
             {
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
+                Button btnDodaj = new Button();
+                btnDodaj.Text = "Dodaj zaposlenog";
+                btnDodaj.Location = new Point(170, 270);
+                pnlDashboard.Controls.Add(btnDodaj);
+                myProperty = new PropertyClassZaposleni();               
                 PopulateControls();
-
             }           
         }
+        
+        private void Btn_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn.Name == "btnDodaj")
+            {
+                PopulateControls();
+                
+                
+            }
+        }
+
+       
+
+       
 
         public void PopulateControls()
         {
