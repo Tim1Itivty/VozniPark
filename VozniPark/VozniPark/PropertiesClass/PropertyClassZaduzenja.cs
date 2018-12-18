@@ -47,20 +47,21 @@ namespace VozniPark.PropertiesClass
         [DateTime]
         public DateTime PlaniranoRazduzenje { get; set; }
 
+        [DisplayName("ModelID")]
+        [SqlName("ModelID")]
+        [ForeignField]
+        public int ModelID { get; set; }
+
         [DisplayName("Model")]
         [SqlName("Naziv")]
         [ForeignField]
         public string Model { get; set; }
 
-        [DisplayName("Ime zaposlenog")]
-        [SqlName("Ime")]
+        [DisplayName("Zaposleni")]
+        [SqlName("ImeIPrezime")]
         [ForeignField]
         public string ImeZaposlenog { get; set; }
 
-        [DisplayName("Prezime zaposlenog")]
-        [SqlName("Prezime")]
-        [ForeignField]
-        public string PrezimeZaposlenog { get; set; }
         #endregion
 
 
@@ -80,9 +81,10 @@ namespace VozniPark.PropertiesClass
         {
             return @"select 
                      ZaduzenjaID,
-                     m.Naziv,
-                     zap.Ime,
-                     zap.Prezime,
+                     m.ModelID,
+                     p.Naziv + ' ' + m.Naziv as Naziv,
+                     zap.ZaposleniID,
+                     zap.Ime + ' ' + zap.Prezime as ImeIPrezime,
                      DatumZaduzenja,
                      PlaniranoRazduzenje,
                      DatumRazduzenja,
@@ -90,7 +92,8 @@ namespace VozniPark.PropertiesClass
                      from dbo.Zaduzenja as z
                      join dbo.Zaposleni as zap on z.ZaposleniID = zap.ZaposleniID
                      join dbo.Vozila as v on v.VoziloID = z.VozilaID
-                     join dbo.Model as m on m.ModelID = v.ModelID";
+                     join dbo.Model as m on m.ModelID = v.ModelID
+                     join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID";
         }
 
         public string GetUpdateQuery()
