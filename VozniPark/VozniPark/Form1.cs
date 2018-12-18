@@ -195,20 +195,10 @@ namespace VozniPark
             state = StateEnum.Update;
             myProperty = new PropertyClassVozila();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
-            var type = myProperty.GetType();
-            var properties = type.GetProperties();
-            int i = 0;
-            foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
-            {
-                string value = cell.Value.ToString();
-                PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+           
+           
 
-                i++;
-            }
-
-            pnlDashboard.Controls.Clear();
-            PopulateControls();
+           
             ucitajVrijednostiUPolja();
             Panel panel = new Panel();
             Button btnDodajVozilo = new Button();
