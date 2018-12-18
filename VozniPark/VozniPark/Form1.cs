@@ -640,6 +640,7 @@ namespace VozniPark
                 btnZaduzi.Text = "Zaduzi";
                 btnZaduzi.Name = "btnZaduzi";
                 flpButon.Controls.Add(btnZaduzi);
+                btnZaduzi.Click += BtnZaduzi_Click;
 
 
             }
@@ -895,7 +896,7 @@ namespace VozniPark
                     //if (!date.Enabled) continue;
                     DateTime value = date.Unos;
 
-                    PropertyInfo property = properties.Where(x => date.Naziv == x.Name).FirstOrDefault();
+                    PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
             }
@@ -914,10 +915,13 @@ namespace VozniPark
 
             foreach (PropertyInfo item in properties)
             {
-                string value = row.Cells[item.GetCustomAttribute<SqlNameAttribute>().Name]
-                    .Value.ToString();
+                if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                {
+                    string value = row.Cells[item.GetCustomAttribute<SqlNameAttribute>().Name]
+                        .Value.ToString();
 
-                item.SetValue(myProperty, Convert.ChangeType(value, item.PropertyType));
+                    item.SetValue(myProperty, Convert.ChangeType(value, item.PropertyType));
+                }
             }
             SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetDeleteQuery(), myProperty.GetDeleteParameters().ToArray());
@@ -934,7 +938,7 @@ namespace VozniPark
                 string value = cell.Value.ToString();
                 PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                 property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-
+                
                 i++;
             }
 
