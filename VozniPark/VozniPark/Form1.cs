@@ -796,18 +796,273 @@ namespace VozniPark
             {
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
-                myProperty = new PropertyClassServisiranjeVozila();
+                pnlDashboard.Controls.Add(dtg);
+                myProperty = new PropertyClassServis();
 
                 //refresujGrid();
-                dgvDimeznije(dtg);
 
+                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
+                Panel panel = new Panel();
+                Button Add1 = new Button();
+                Add1.Click += Add1_Click;
+
+                Button Update1 = new Button();
+                Update1.Click += Update1_Click;
+
+                Button Delete1 = new Button();
+                Delete1.Click += Delete1_Click;
+
+                Add1.Text = "ADD";
+                Delete1.Text = "DELETE";
+                Update1.Text = "UPDATE";
+
+                Add1.Location = new Point(10, 10);
+                Update1.Location = new Point(95, 10);
+                Delete1.Location = new Point(180, 10);
+
+
+
+                panel.Height = 100;
+                panel.Width = 470;
+
+
+                panel.Location = new Point(250, 150);
+                panel.Controls.Add(Add1);
+                panel.Controls.Add(Delete1);
+                panel.Controls.Add(Update1);
+                pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
             }
             else if (button.Name == "btnServis")
             {
+                state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassServis();
+
+                PopulateControls();
+
+                Panel panel = new Panel();
+                Button btnDodajServis = new Button();
+                Button btnOtkazi1 = new Button();
+
+
+
+                btnDodajServis.Location = new Point(10, 10);
+                btnDodajServis.Text = "Dodaj servis";
+
+                btnOtkazi1.Location = new Point(100, 10);
+                btnOtkazi1.Text = "Ocisti polja";
+
+                btnDodajServis.Click += BtnDodajServis_Click;
+                btnOtkazi1.Click += BtnOtkazi1_Click;
+
+
+
+                btnOtkazi1.Visible = true;
+
+                panel.Height = 100;
+                panel.Width = 470;
+
+
+                panel.Location = new Point(70, 470);
+
+                panel.Controls.Add(btnDodajServis);
+                panel.Controls.Add(btnOtkazi1);
+
+
+                pnlDashboard.Controls.Add(panel);
             }
+        }
+
+        private void BtnOtkazi1_Click(object sender, EventArgs e)
+        {
+            pnlDashboard.Controls.Clear();
+            myProperty = new PropertyClassServis();
+
+            PopulateControls();
+            Panel panel = new Panel();
+            Button btnDodajServis = new Button();
+            Button btnOtkazi1 = new Button();
+
+
+
+            btnDodajServis.Location = new Point(10, 10);
+            btnDodajServis.Text = "Dodaj servis";
+
+            btnOtkazi1.Location = new Point(100, 10);
+            btnOtkazi1.Text = "Ocisti polja";
+
+            btnDodajServis.Click += BtnDodajServis_Click;
+            btnOtkazi1.Click += BtnOtkazi1_Click;
+
+
+
+
+            panel.Height = 100;
+            panel.Width = 470;
+
+
+            panel.Location = new Point(70, 470);
+
+            panel.Controls.Add(btnDodajServis);
+            panel.Controls.Add(btnOtkazi1);
+
+
+            pnlDashboard.Controls.Add(panel);
+        }
+
+        private void BtnDodajServis_Click(object sender, EventArgs e)
+        {
+            AddUpdate();
+
+            if (state == StateEnum.Add)
+            {
+                MessageBox.Show("Unesen servis");
+
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassServis();
+
+                PopulateControls();
+
+
+                Panel panel = new Panel();
+                Button btnDodajServis = new Button();
+                Button btnOtkazi1 = new Button();
+
+
+
+                btnDodajServis.Location = new Point(10, 10);
+                btnDodajServis.Text = "Dodaj servis";
+
+                btnOtkazi1.Location = new Point(100, 10);
+                btnOtkazi1.Text = "Ocisti polja";
+
+                btnDodajServis.Click += BtnDodajServis_Click;
+                btnOtkazi1.Click += BtnOtkazi1_Click;
+
+
+
+                btnOtkazi1.Visible = true;
+
+                panel.Height = 100;
+                panel.Width = 470;
+
+
+                panel.Location = new Point(70, 470);
+
+                panel.Controls.Add(btnDodajServis);
+                panel.Controls.Add(btnOtkazi1);
+
+
+                pnlDashboard.Controls.Add(panel);
+            }
+            else if (state == StateEnum.Update)
+            {
+                MessageBox.Show("Servis je izmijenjen");
+
+                Button button = sender as Button;
+                button.Name = "btnServis";
+                btnServis_Click(button, e);
+            }
+        }
+
+        private void Delete1_Click(object sender, EventArgs e)
+        {
+            DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+            delete(dtg);
+            MessageBox.Show("Servis je obrisan");
+
+            Button button = sender as Button;
+            button.Name = "btnPregled";
+
+            BtnPodmeniServis_Click(button, e);
+        }
+
+        private void Update1_Click(object sender, EventArgs e)
+        {
+            state = StateEnum.Update;
+            myProperty = new PropertyClassServis();
+            DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
+
+
+
+
+            ucitajVrijednostiUPolja();
+            Panel panel = new Panel();
+            Button btnDodajServis = new Button();
+            Button btnOtkazi1 = new Button();
+
+
+
+            btnDodajServis.Location = new Point(10, 10);
+            btnDodajServis.Text = "Dodaj servis";
+
+            btnOtkazi1.Location = new Point(100, 10);
+            btnOtkazi1.Text = "Ocisti polja";
+
+            btnDodajServis.Click += BtnDodajServis_Click;
+            btnOtkazi1.Click += BtnOtkazi1_Click;
+
+
+
+
+
+            panel.Height = 100;
+            panel.Width = 470;
+
+
+            panel.Location = new Point(70, 470);
+
+            panel.Controls.Add(btnDodajServis);
+            panel.Controls.Add(btnOtkazi1);
+
+
+            pnlDashboard.Controls.Add(panel);
+        }
+
+        private void Add1_Click(object sender, EventArgs e)
+        {
+            state = StateEnum.Add;
+            pnlDashboard.Controls.Clear();
+            myProperty = new PropertyClassServis();
+
+            PopulateControls();
+
+            btnServis_Click(sender, e);
+            Button btn = sender as Button;
+            btn.Name = "btnPregled";
+            Panel panel = new Panel();
+            Button btnDodajServis = new Button();
+            Button btnOtkazi1 = new Button();
+
+
+
+            btnDodajServis.Location = new Point(10, 10);
+            btnDodajServis.Text = "Dodaj servis";
+
+            btnOtkazi1.Location = new Point(100, 10);
+            btnOtkazi1.Text = "Ocisti polja";
+
+            btnDodajServis.Click += BtnDodajServis_Click;
+            btnOtkazi1.Click += BtnOtkazi1_Click;
+
+
+
+
+
+            panel.Height = 100;
+            panel.Width = 470;
+
+
+            panel.Location = new Point(70, 470);
+
+            panel.Controls.Add(btnDodajServis);
+            panel.Controls.Add(btnOtkazi1);
+
+
+            pnlDashboard.Controls.Add(panel);
+
         }
 
         #endregion
