@@ -13,6 +13,7 @@ using System.Reflection;
 using VozniPark.PropertiesClass;
 using System.Windows.Forms.VisualStyles;
 
+
 namespace VozniPark
 {
     // colors: #05668D , #028090 , #00A896 , #02C39A , #F0F3BD
@@ -255,15 +256,15 @@ namespace VozniPark
         private void BtnDodajVozilo_Click(object sender, EventArgs e)
         {
             int brojac = 0;
-            for (int i = 0; i < pnlDashboard.Controls.Count; i++)
-            {
-                if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
-                {
-                    MessageBox.Show("Popuni sve podatke");
-                    brojac += 1;
-                    break;
-                }
-            }
+            //for (int i = 0; i < pnlDashboard.Controls.Count; i++)
+            //{
+            //    if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
+            //    {
+            //        MessageBox.Show("Popuni sve podatke");
+            //        brojac += 1;
+            //        break;
+            //    }
+            //}
            
             if (brojac == 0)
             {
@@ -325,39 +326,48 @@ namespace VozniPark
 
         private void BtnOtkazi_Click(object sender, EventArgs e)
         {
-            pnlDashboard.Controls.Clear();
-            myProperty = new PropertyClassVozila();
+            if (state == StateEnum.Add)
+            {
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassVozila();
 
-            PopulateControls();
-            Panel panel = new Panel();
-            Button btnDodajVozilo = new Button();
-            Button btnOtkazi = new Button();
-
-
-
-            btnDodajVozilo.Location = new Point(10, 10);
-            btnDodajVozilo.Text = "Dodaj vozilo";
-
-            btnOtkazi.Location = new Point(100, 10);
-            btnOtkazi.Text = "Ocisti polja";
-
-            btnDodajVozilo.Click += BtnDodajVozilo_Click;
-            btnOtkazi.Click += BtnOtkazi_Click;
+                PopulateControls();
+                Panel panel = new Panel();
+                Button btnDodajVozilo = new Button();
+                Button btnOtkazi = new Button();
 
 
 
+                btnDodajVozilo.Location = new Point(10, 10);
+                btnDodajVozilo.Text = "Dodaj vozilo";
 
-            panel.Height = 100;
-            panel.Width = 470;
+                btnOtkazi.Location = new Point(100, 10);
+                btnOtkazi.Text = "Ocisti polja";
+
+                btnDodajVozilo.Click += BtnDodajVozilo_Click;
+                btnOtkazi.Click += BtnOtkazi_Click;
 
 
-            panel.Location = new Point(70, 470);
-
-            panel.Controls.Add(btnDodajVozilo);
-            panel.Controls.Add(btnOtkazi);
 
 
-            pnlDashboard.Controls.Add(panel);
+                panel.Height = 100;
+                panel.Width = 470;
+
+
+                panel.Location = new Point(70, 470);
+
+                panel.Controls.Add(btnDodajVozilo);
+                panel.Controls.Add(btnOtkazi);
+
+
+                pnlDashboard.Controls.Add(panel);
+            }
+            else if (state == StateEnum.Update)
+            {
+                Button button = sender as Button;
+                button.Name = "btnPregled";
+                BtnPodmeni_Click(button, e);
+            }
         }
 
         #endregion
@@ -930,15 +940,15 @@ namespace VozniPark
         private void BtnDodajServis_Click(object sender, EventArgs e)
         {
             int brojac = 0;
-            for (int i = 0; i < pnlDashboard.Controls.Count; i++)
-            {
-                if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
-                {
-                    MessageBox.Show("Popuni sve podatke");
-                    brojac += 1;
-                    break;
-                }
-            }
+            //for (int i = 0; i < pnlDashboard.Controls.Count; i++)
+            //{
+            //    if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
+            //    {
+            //        MessageBox.Show("Popuni sve podatke");
+            //        brojac += 1;
+            //        break;
+            //    }
+            //}
             if (brojac == 0)
             {
                 AddUpdate();
@@ -1282,15 +1292,20 @@ namespace VozniPark
             var type = myProperty.GetType();
             var properties = type.GetProperties();
             int i = 0;
-            foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
-            {
-                string value = cell.Value.ToString();
-                PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                
-                i++;
-            }
 
+            
+                    foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
+                    {
+                        string value = cell.Value.ToString();
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+
+                        i++;
+
+                    }
+                
+            
             pnlDashboard.Controls.Clear();
             PopulateControls();
             
