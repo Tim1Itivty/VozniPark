@@ -73,7 +73,7 @@ namespace VozniPark.PropertiesClass
 
         public string GetUpdateQuery()
         {
-            return @"Update  dbo.Radnik SET ModelID=@ModelID ,
+            return @"Update  dbo.Vozila SET ModelID=@ModelID ,
                            GodinaProizvodnje=@GodinaProizvodnje,
                             Kilometraza=@Kilometraza,
                             Boja=@Boja, 
