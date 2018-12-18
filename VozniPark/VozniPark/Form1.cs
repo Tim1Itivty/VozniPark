@@ -180,6 +180,7 @@ namespace VozniPark
         private void Delete_Click(object sender, EventArgs e)
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+
             delete(dtg);
             MessageBox.Show("Vozilo je obrisano");
 
@@ -253,60 +254,73 @@ namespace VozniPark
 
         private void BtnDodajVozilo_Click(object sender, EventArgs e)
         {
-            AddUpdate();
-
-            if (state == StateEnum.Add)
+            int brojac = 0;
+            for (int i = 0; i < pnlDashboard.Controls.Count; i++)
             {
-                MessageBox.Show("Uneseno vozilo");
-
-                pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassVozila();
-
-                PopulateControls();
-
-
-                Panel panel = new Panel();
-                Button btnDodajVozilo = new Button();
-                Button btnOtkazi = new Button();
-
-
-
-                btnDodajVozilo.Location = new Point(10, 10);
-                btnDodajVozilo.Text = "Dodaj vozilo";
-
-                btnOtkazi.Location = new Point(100, 10);
-                btnOtkazi.Text = "Ocisti polja";
-
-                btnDodajVozilo.Click += BtnDodajVozilo_Click;
-                btnOtkazi.Click += BtnOtkazi_Click;
-
-
-
-                btnOtkazi.Visible = true;
-
-                panel.Height = 100;
-                panel.Width = 470;
-
-
-                panel.Location = new Point(70, 470);
-
-                panel.Controls.Add(btnDodajVozilo);
-                panel.Controls.Add(btnOtkazi);
-
-
-                pnlDashboard.Controls.Add(panel);
+                if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
+                {
+                    MessageBox.Show("Popuni sve podatke");
+                    brojac += 1;
+                    break;
+                }
             }
-            else if (state == StateEnum.Update)
+           
+            if (brojac == 0)
             {
-                MessageBox.Show("Vozilo je izmijenjeno");
+                AddUpdate();
 
-                Button button = sender as Button;
-                button.Name = "btnPregled";
-                BtnPodmeni_Click(button, e);
+                if (state == StateEnum.Add)
+                {
+                    MessageBox.Show("Uneseno vozilo");
+
+                    pnlDashboard.Controls.Clear();
+                    myProperty = new PropertyClassVozila();
+
+                    PopulateControls();
+
+
+                    Panel panel = new Panel();
+                    Button btnDodajVozilo = new Button();
+                    Button btnOtkazi = new Button();
+
+
+
+                    btnDodajVozilo.Location = new Point(10, 10);
+                    btnDodajVozilo.Text = "Dodaj vozilo";
+
+                    btnOtkazi.Location = new Point(100, 10);
+                    btnOtkazi.Text = "Ocisti polja";
+
+                    btnDodajVozilo.Click += BtnDodajVozilo_Click;
+                    btnOtkazi.Click += BtnOtkazi_Click;
+
+
+
+                    btnOtkazi.Visible = true;
+
+                    panel.Height = 100;
+                    panel.Width = 470;
+
+
+                    panel.Location = new Point(70, 470);
+
+                    panel.Controls.Add(btnDodajVozilo);
+                    panel.Controls.Add(btnOtkazi);
+
+
+                    pnlDashboard.Controls.Add(panel);
+                }
+                else if (state == StateEnum.Update)
+                {
+                    MessageBox.Show("Vozilo je izmijenjeno");
+
+                    Button button = sender as Button;
+                    button.Name = "btnPregled";
+                    BtnPodmeni_Click(button, e);
+                }
+
+
             }
-
-
-
         }
 
         private void BtnOtkazi_Click(object sender, EventArgs e)
@@ -914,56 +928,69 @@ namespace VozniPark
 
         private void BtnDodajServis_Click(object sender, EventArgs e)
         {
-            AddUpdate();
-
-            if (state == StateEnum.Add)
+            int brojac = 0;
+            for (int i = 0; i < pnlDashboard.Controls.Count; i++)
             {
-                MessageBox.Show("Unesen servis");
-
-                pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassServis();
-
-                PopulateControls();
-
-
-                Panel panel = new Panel();
-                Button btnDodajServis = new Button();
-                Button btnOtkazi1 = new Button();
-
-
-
-                btnDodajServis.Location = new Point(10, 10);
-                btnDodajServis.Text = "Dodaj servis";
-
-                btnOtkazi1.Location = new Point(100, 10);
-                btnOtkazi1.Text = "Ocisti polja";
-
-                btnDodajServis.Click += BtnDodajServis_Click;
-                btnOtkazi1.Click += BtnOtkazi1_Click;
-
-
-
-                btnOtkazi1.Visible = true;
-
-                panel.Height = 100;
-                panel.Width = 470;
-
-
-                panel.Location = new Point(70, 470);
-
-                panel.Controls.Add(btnDodajServis);
-                panel.Controls.Add(btnOtkazi1);
-
-
-                pnlDashboard.Controls.Add(panel);
+                if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
+                {
+                    MessageBox.Show("Popuni sve podatke");
+                    brojac += 1;
+                    break;
+                }
             }
-            else if (state == StateEnum.Update)
+            if (brojac == 0)
             {
-                MessageBox.Show("Servis je izmijenjen");
+                AddUpdate();
 
-                Button button = sender as Button;
-                button.Name = "btnServis";
-                btnServis_Click(button, e);
+                if (state == StateEnum.Add)
+                {
+                    MessageBox.Show("Unesen servis");
+
+                    pnlDashboard.Controls.Clear();
+                    myProperty = new PropertyClassServis();
+
+                    PopulateControls();
+
+
+                    Panel panel = new Panel();
+                    Button btnDodajServis = new Button();
+                    Button btnOtkazi1 = new Button();
+
+
+
+                    btnDodajServis.Location = new Point(10, 10);
+                    btnDodajServis.Text = "Dodaj servis";
+
+                    btnOtkazi1.Location = new Point(100, 10);
+                    btnOtkazi1.Text = "Ocisti polja";
+
+                    btnDodajServis.Click += BtnDodajServis_Click;
+                    btnOtkazi1.Click += BtnOtkazi1_Click;
+
+
+
+                    btnOtkazi1.Visible = true;
+
+                    panel.Height = 100;
+                    panel.Width = 470;
+
+
+                    panel.Location = new Point(70, 470);
+
+                    panel.Controls.Add(btnDodajServis);
+                    panel.Controls.Add(btnOtkazi1);
+
+
+                    pnlDashboard.Controls.Add(panel);
+                }
+                else if (state == StateEnum.Update)
+                {
+                    MessageBox.Show("Servis je izmijenjen");
+
+                    Button button = sender as Button;
+                    button.Name = "btnServis";
+                    btnServis_Click(button, e);
+                }
             }
         }
 
@@ -1127,12 +1154,17 @@ namespace VozniPark
                 {
                     continue;
                 }
+               else if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                {
+                    continue;
+                }
                 else
                 {
                     InputControl ic = new InputControl();
 
                     ic.Naziv = item.Name;
 
+                   
 
                     if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null && state == StateEnum.Update)
                     {
