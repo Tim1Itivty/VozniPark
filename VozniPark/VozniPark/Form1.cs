@@ -798,13 +798,20 @@ namespace VozniPark
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
 
+                 
                     pnlDashboard.Controls.Add(lookup);
+                   
                 }
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
                 {
                     DateTimeControl dateTime = new DateTimeControl();
                     dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
                     pnlDashboard.Controls.Add(dateTime);
+
+                    if (state == StateEnum.Add && dateTime.Naziv == "Datum razduzenja")  
+                        dateTime.Enabled = false;
+
+                    
 
                 }
                 else if (item.GetCustomAttribute<ForeignField>() != null)
@@ -815,10 +822,10 @@ namespace VozniPark
                 {
                     InputControl ic = new InputControl();
 
-                    ic.Naziv = item.Name;
+                    ic.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
 
 
-                    if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null && state == StateEnum.Update)
+                    if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
                     {
                         ic.Enabled = false;
                     }
@@ -827,8 +834,13 @@ namespace VozniPark
                     {
                         ic.UnosPolje = item.GetValue(myProperty).ToString();
                     }
-
+                    if (ic.Naziv == "Predjena kilometraza" && state == StateEnum.Add)
+                        ic.Enabled = false;
+                    ic.UnosPolje = "0";
                     pnlDashboard.Controls.Add(ic);
+
+                   
+
                 }
             }
         }
@@ -871,6 +883,7 @@ namespace VozniPark
                 else if (item.GetType() == typeof(InputControl))
                 {
                     InputControl input = item as InputControl;
+                    if (!input.Enabled) continue;
                     string value = input.UnosPolje;
 
                     PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
@@ -879,6 +892,7 @@ namespace VozniPark
                 else if (item.GetType() == typeof(DateTimeControl))
                 {
                     DateTimeControl date = item as DateTimeControl;
+                    //if (!date.Enabled) continue;
                     DateTime value = date.Unos;
 
                     PropertyInfo property = properties.Where(x => date.Naziv == x.Name).FirstOrDefault();

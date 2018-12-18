@@ -74,7 +74,7 @@ namespace VozniPark.PropertiesClass
 
         public string GetInsertQuery()
         {
-            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,PredjenaKilometraza,DatumZaduzenja,DatumRazduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@PredjenaKilometraza,@DatumZaduzenja,@DatumRazduzenja,@PlaniranoRazduzenje)";
+            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,DatumZaduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@DatumZaduzenja,@PlaniranoRazduzenje)";
         }
 
         public string GetSelectQuery()
@@ -131,21 +131,13 @@ namespace VozniPark.PropertiesClass
                 parameter.Value = ZaposleniID;
                 list.Add(parameter);
             }
-            {
-                SqlParameter parameter = new SqlParameter("PredjenaKilometraza", System.Data.SqlDbType.Int);
-                parameter.Value = PredjenaKilometraza;
-                list.Add(parameter);
-            }
+           
             {
                 SqlParameter parameter = new SqlParameter("DatumZaduzenja", System.Data.SqlDbType.DateTime);
                 parameter.Value = DatumZaduzenja;
                 list.Add(parameter);
             }
-            {
-                SqlParameter parameter = new SqlParameter("DatumRazduzenja", System.Data.SqlDbType.DateTime);
-                parameter.Value = DatumRazduzenja;
-                list.Add(parameter);
-            }
+           
             {
                 SqlParameter parameter = new SqlParameter("PlaniranoRazduzenje", System.Data.SqlDbType.DateTime);
                 parameter.Value = PlaniranoRazduzenje;
