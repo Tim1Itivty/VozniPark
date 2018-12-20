@@ -213,7 +213,7 @@ namespace VozniPark
 
         private void Registruj_Click(object sender, EventArgs e)
         {
-            state = StateEnum.Add;
+            state = StateEnum.Update;
             pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassRegistracija();
           
