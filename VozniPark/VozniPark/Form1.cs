@@ -813,7 +813,7 @@ namespace VozniPark
             }
             else if (button.Name == "btnRazduzi")
             {
-                state = StateEnum.Update;
+                state = StateEnum.Razduzi;
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
@@ -830,12 +830,21 @@ namespace VozniPark
                 btnRazduzi.Text = "RAZDUZI";
                 btnRazduzi.Name = "btnRazduzi";
                 flpButon.Controls.Add(btnRazduzi);
+
+                btnRazduzi.Click += BtnRazduzi_Click;
+
+
             }
 
             else if (button.Name == "btnIstorija")
             {
                 pnlDashboard.Controls.Clear();
             }
+        }
+
+        private void BtnRazduzi_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void BtnZaduzi_Click(object sender, EventArgs e)
@@ -882,12 +891,13 @@ namespace VozniPark
                 flpButon.Width = pnlDashboard.Width;
                 pnlDashboard.Controls.Add(flpButon);
 
-                Button btnZaduzi = new Button();
-                btnZaduzi.Text = "Zaduzi";
-                btnZaduzi.Name = "btnZaduzi";
-                flpButon.Controls.Add(btnZaduzi);
+                Button btnSacuvaj = new Button();
+                btnSacuvaj.Text = "Sacuvaj";
+                btnSacuvaj.Name = "btnSacuvaj";
+                flpButon.Controls.Add(btnSacuvaj);
 
-                
+                btnSacuvaj.Click += BtnSacuvaj_Click;
+               
 
             }
             else if ((button.Name == "btnIzbrisi"))
@@ -907,6 +917,16 @@ namespace VozniPark
             }
 
 
+        }
+
+        private void BtnSacuvaj_Click(object sender, EventArgs e)
+        {
+            state = StateEnum.Update;
+            AddUpdate();
+            MessageBox.Show("Uspjesna izmjena!");
+            pnlDashboard.Controls.Clear();
+            btnZaduzenja_Click(sender, e);
+            BtnPodmeniZaduzenja_Click(sender, e);
         }
 
         #endregion
@@ -1366,6 +1386,8 @@ namespace VozniPark
                         ic.Enabled = false;
                         ic.UnosPolje = "0";
                     }
+
+
                         
                     pnlDashboard.Controls.Add(ic);
 
