@@ -14,10 +14,7 @@ namespace VozniPark.PropertiesClass
         #region Atributi
 
 
-        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        [DisplayName("VoziloID")]
-        [SqlNameAttribute("VoziloID")]
-        public int VoziloID { get; set; }
+      
         //[PrimaryKey]
         //[DisplayName("Vozilo ID")]
         //[SqlNameAttribute("VoziloID")]
@@ -28,27 +25,33 @@ namespace VozniPark.PropertiesClass
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
         [LookupValue]
+        [ForeignField]
         public int ModelID { get; set; }
 
 
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
+        [ForeignField]
         public int GodinaProizvodnje { get; set; }
 
         [DisplayName("Kilometraza")]
         [SqlNameAttribute("Kilometraza")]
+        [ForeignField]
         public int Kilometraza { get; set; }
 
         [DisplayName("Boja")]
         [SqlNameAttribute("Boja")]
+        [ForeignField]
         public string Boja { get; set; }
 
         [DisplayName("Broj vrata")]
         [SqlNameAttribute("BrojVrata")]
+        [ForeignField]
         public int BrojVrata { get; set; }
 
         [DisplayName("Dostupnost")]
         [SqlNameAttribute("Dostupnost")]
+        [ForeignField]
         public bool Dostupnost { get; set; }
 
         [PrimaryKey]
@@ -80,6 +83,12 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("Cijena")]
         public double Cijena { get; set; }
 
+
+
+        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        [DisplayName("VoziloID")]
+        [SqlNameAttribute("VoziloID")]
+        public int VoziloID { get; set; }
         //[ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
         //[DisplayName("VoziloID")]
         //[SqlNameAttribute("VoziloID")]
@@ -91,7 +100,7 @@ namespace VozniPark.PropertiesClass
         #region query
         public string GetSelectQuery()
         {
-            return @"SELECT v.VoziloID,
+            return @"SELECT 
                     v.ModelID,
                     v.GodinaProizvodnje,
                     v.Kilometraza,
@@ -102,7 +111,8 @@ namespace VozniPark.PropertiesClass
                     r.RegistracijskiBroj,
                     r.DatumRegistracije,
                     r.DatumIstekaRegistracije,
-                    r.Cijena
+                    r.Cijena,
+                    v.VoziloID
                     FROM Vozila v
                     left JOIN Registracija r
                     ON v.VoziloID=r.VoziloID

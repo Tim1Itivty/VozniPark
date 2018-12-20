@@ -292,7 +292,42 @@ namespace VozniPark
 
         private void BtnDodajRegistraciju_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            state = StateEnum.Add;
+            AddUpdate();
+            MessageBox.Show("Registracije je uradjena!!!");
+            pnlDashboard.Controls.Clear();
+            DataGridView dtg = new DataGridView();
+            pnlDashboard.Controls.Add(dtg);
+            myProperty = new PropertyClassRegistracija();
+
+            //refresujGrid();
+
+            dgvDimeznije(dtg);
+            pnlDashboard.Controls.Add(dtg);
+            Panel panel = new Panel();
+            Button Registruj = new Button();
+            Registruj.Click += Registruj_Click;
+
+
+
+            Registruj.Text = "Registruj";
+
+
+            Registruj.Location = new Point(310, 10);
+
+
+
+
+            panel.Height = 100;
+            panel.Width = 470;
+
+
+            panel.Location = new Point(250, 150);
+            panel.Controls.Add(Registruj);
+
+            pnlDashboard.Controls.Add(panel);
+            PopulateGrid();
+
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -1265,7 +1300,15 @@ namespace VozniPark
                     
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
-                    
+
+                    if (state == StateEnum.Update && lookup.Name=="Model ID")
+                    {
+                        lookup.Enabled = false;
+                    }
+                    else if (item.GetCustomAttribute<ForeignField>() != null)
+                    {
+                        continue;
+                    }
                     pnlDashboard.Controls.Add(lookup);
                    
                 }
@@ -1309,6 +1352,13 @@ namespace VozniPark
                     {
                         ic.UnosPolje = item.GetValue(myProperty).ToString();
                     }
+
+
+                    if (state == StateEnum.Update && (ic.Naziv=="Godina proizvodnje"||ic.Naziv=="Kilometraza"||ic.Naziv=="Boja"||ic.Naziv=="Broj vrata"||ic.Naziv=="Dostupnost"))
+                    {
+                        ic.Enabled = false;
+                    }
+
                     if (ic.Naziv == "Predjena kilometraza" && state == StateEnum.Add)
                     {
                         ic.Enabled = false;
@@ -1458,7 +1508,7 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if (grid.Columns[i].HeaderText == "RegistracijaID" || (grid.Columns[i].HeaderText == "Registarski broj"&& grid.SelectedRows[0].Cells[8].Value.ToString() == "") || (grid.Columns[i].HeaderText == "Cijena" && grid.SelectedRows[0].Cells[11].Value.ToString() == ""))
+                    else if (grid.Columns[i].HeaderText == "RegistracijaID" || (grid.Columns[i].HeaderText == "Registarski broj"&& grid.SelectedRows[0].Cells[7].Value.ToString() == "") || (grid.Columns[i].HeaderText == "Cijena" && grid.SelectedRows[0].Cells[10].Value.ToString() == ""))
                     {
                         string value = "0";
 
