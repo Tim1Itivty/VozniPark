@@ -1409,7 +1409,7 @@ namespace VozniPark
                     string value = input.UnosPolje;
 
                     PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    if(property!=null)property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
                 else if (item.GetType() == typeof(DateTimeControl))
                 {

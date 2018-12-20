@@ -126,7 +126,7 @@ namespace VozniPark.PropertiesClass
 
         public string GetUpdateQuery()
         {
-            return @"Update  dbo.Registracija SET RegistarskiBroj=@RegistarskiBroj ,
+            return @"Update  dbo.Registracija SET RegistracijskiBroj=@RegistracijskiBroj ,
                            DatumRegistracije=@DatumRegistracije,
                             DatumIstekaRegistracije=@DatumIstekaRegistracije,
                             Cijena=@Cijena, 
