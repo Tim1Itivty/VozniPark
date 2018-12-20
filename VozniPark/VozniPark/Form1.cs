@@ -183,22 +183,16 @@ namespace VozniPark
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 Panel panel = new Panel();
-                Button Add = new Button();
-                Add.Click += Add_Click;
+                Button Registruj = new Button();
+                Registruj.Click += Registruj_Click;
 
-                Button Update = new Button();
-                Update.Click += Update_Click;
+                
 
-                Button Delete = new Button();
-                Delete.Click += Delete_Click;
+                Registruj.Text = "Registruj";
+               
 
-                Add.Text = "ADD";
-                Delete.Text = "DELETE";
-                Update.Text = "UPDATE";
-
-                Add.Location = new Point(10, 10);
-                Update.Location = new Point(95, 10);
-                Delete.Location = new Point(180, 10);
+               Registruj.Location = new Point(310, 10);
+           
 
 
 
@@ -207,15 +201,95 @@ namespace VozniPark
 
 
                 panel.Location = new Point(250, 150);
-                panel.Controls.Add(Add);
-                panel.Controls.Add(Delete);
-                panel.Controls.Add(Update);
+                panel.Controls.Add(Registruj);
+             
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
 
 
             }
 
+        }
+
+        private void Registruj_Click(object sender, EventArgs e)
+        {
+            state = StateEnum.Add;
+            pnlDashboard.Controls.Clear();
+            myProperty = new PropertyClassRegistracija();
+          
+            PopulateControls();
+
+            Panel panel = new Panel();
+            Button btnDodajRegistraciju = new Button();
+            Button btnOtkazi2 = new Button();
+
+
+
+            btnDodajRegistraciju.Location = new Point(10, 10);
+            btnDodajRegistraciju.Text = "Registruj";
+
+            btnOtkazi2.Location = new Point(100, 10);
+            btnOtkazi2.Text = "Ocisti polja";
+
+            btnDodajRegistraciju.Click += BtnDodajRegistraciju_Click;
+            btnOtkazi2.Click += BtnOtkazi2_Click;
+
+
+
+            
+
+            panel.Height = 100;
+            panel.Width = 470;
+
+
+            panel.Location = new Point(70, 470);
+
+            panel.Controls.Add(btnOtkazi2);
+            panel.Controls.Add(btnDodajRegistraciju);
+
+
+            pnlDashboard.Controls.Add(panel);
+        }
+
+        private void BtnOtkazi2_Click(object sender, EventArgs e)
+        {
+            pnlDashboard.Controls.Clear();
+            DataGridView dtg = new DataGridView();
+            pnlDashboard.Controls.Add(dtg);
+            myProperty = new PropertyClassRegistracija();
+
+            //refresujGrid();
+
+            dgvDimeznije(dtg);
+            pnlDashboard.Controls.Add(dtg);
+            Panel panel = new Panel();
+            Button Registruj = new Button();
+            Registruj.Click += Registruj_Click;
+
+
+
+            Registruj.Text = "Registruj";
+
+
+            Registruj.Location = new Point(310, 10);
+
+
+
+
+            panel.Height = 100;
+            panel.Width = 470;
+
+
+            panel.Location = new Point(250, 150);
+            panel.Controls.Add(Registruj);
+
+            pnlDashboard.Controls.Add(panel);
+            PopulateGrid();
+        }
+
+        private void BtnDodajRegistraciju_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Delete_Click(object sender, EventArgs e)

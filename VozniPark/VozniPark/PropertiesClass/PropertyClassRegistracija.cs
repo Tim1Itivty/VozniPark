@@ -12,6 +12,45 @@ namespace VozniPark.PropertiesClass
   public  class PropertyClassRegistracija:PropertyInterface
     {
         #region Atributi
+
+
+        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        [DisplayName("VoziloID")]
+        [SqlNameAttribute("VoziloID")]
+        public int VoziloID { get; set; }
+        //[PrimaryKey]
+        //[DisplayName("Vozilo ID")]
+        //[SqlNameAttribute("VoziloID")]
+        //[LookupKey]
+        //public int VoziloID { get; set; }
+
+        [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertiesClass.PropertyClassModel")]
+        [DisplayName("Model ID")]
+        [SqlNameAttribute("ModelID")]
+        [LookupValue]
+        public int ModelID { get; set; }
+
+
+        [DisplayName("Godina proizvodnje")]
+        [SqlNameAttribute("GodinaProizvodnje")]
+        public int GodinaProizvodnje { get; set; }
+
+        [DisplayName("Kilometraza")]
+        [SqlNameAttribute("Kilometraza")]
+        public int Kilometraza { get; set; }
+
+        [DisplayName("Boja")]
+        [SqlNameAttribute("Boja")]
+        public string Boja { get; set; }
+
+        [DisplayName("Broj vrata")]
+        [SqlNameAttribute("BrojVrata")]
+        public int BrojVrata { get; set; }
+
+        [DisplayName("Dostupnost")]
+        [SqlNameAttribute("Dostupnost")]
+        public bool Dostupnost { get; set; }
+
         [PrimaryKey]
         [DisplayName("RegistracijaID")]
         [SqlNameAttribute("RegistracijaID")]
@@ -39,10 +78,10 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("Cijena")]
         public double Cijena { get; set; }
 
-        [ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        [DisplayName("VoziloID")]
-        [SqlNameAttribute("VoziloID")]
-        public int VoziloID { get; set; }
+        //[ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        //[DisplayName("VoziloID")]
+        //[SqlNameAttribute("VoziloID")]
+        //public int VoziloID { get; set; }
 
         #endregion
 
@@ -50,8 +89,22 @@ namespace VozniPark.PropertiesClass
         #region query
         public string GetSelectQuery()
         {
-            return @"select RegistracijaID,RegistracijskiBroj,DatumRegistracije,DatumIstekaRegistracije,Cijena,VoziloID
-                    from dbo.Registracija";
+            return @"SELECT v.VoziloID,
+                    v.ModelID,
+                    v.GodinaProizvodnje,
+                    v.Kilometraza,
+                    v.Boja,
+                    v.BrojVrata
+                    ,v.Dostupnost,
+                    r.RegistracijaID,
+                    r.RegistracijskiBroj,
+                    r.DatumRegistracije,
+                    r.DatumIstekaRegistracije,
+                    r.Cijena
+                    FROM Vozila v
+                    left JOIN Registracija r
+                    ON v.VoziloID=r.VoziloID
+                    WHERE r.DatumIstekaRegistracije<GETDATE() OR r.RegistracijaID is NULL";
         }
 
         public string GetInsertQuery()
