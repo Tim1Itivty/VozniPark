@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,8 @@ namespace VozniPark.PropertiesClass
         [ForeignKey("dbo.Zaposleni", "ZaposleniID", "VozniPark.PropertiesClass.PropertyClassZaposleni")]
         public int ZaposleniID { get; set; }
 
+
+        [Required(AllowEmptyStrings = true)]
         [DisplayName("Predjena kilometraza")]
         [SqlName("PredjenaKilometraza")]
         public int PredjenaKilometraza { get; set; }
@@ -38,6 +41,7 @@ namespace VozniPark.PropertiesClass
         [DateTime]
         public DateTime DatumZaduzenja { get; set; }
 
+        [Required(AllowEmptyStrings = true)]
         [DisplayName("Datum razduzenja")]
         [SqlName("DatumRazduzenja")]
         [DateTime]
