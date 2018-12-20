@@ -1205,21 +1205,26 @@ namespace VozniPark
                 }
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
                 {
-                    DateTimeControl dateTime = new DateTimeControl();
-                    dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
-                    pnlDashboard.Controls.Add(dateTime);
+                    if(state == StateEnum.Update && item.GetCustomAttribute<DisplayNameAttribute>().DisplayName == "Datum razduzenja")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        DateTimeControl dateTime = new DateTimeControl();
+                        dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
+                        pnlDashboard.Controls.Add(dateTime);
 
-                    if (state == StateEnum.Add && dateTime.Naziv == "Datum razduzenja")  
-                        dateTime.Enabled = false;
-
+                        if (state == StateEnum.Add && dateTime.Naziv == "Datum razduzenja")
+                            dateTime.Enabled = false;
+                    }
                     
-
                 }
                 else if (item.GetCustomAttribute<ForeignField>() != null)
                 {
                     continue;
                 }
-               else if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
+                else if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
                 {
                     continue;
                 }
@@ -1228,9 +1233,7 @@ namespace VozniPark
                     InputControl ic = new InputControl();
 
                     ic.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
-
-                   
-
+                    
                     if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
                     {
                         ic.Enabled = false;
@@ -1241,8 +1244,11 @@ namespace VozniPark
                         ic.UnosPolje = item.GetValue(myProperty).ToString();
                     }
                     if (ic.Naziv == "Predjena kilometraza" && state == StateEnum.Add)
+                    {
                         ic.Enabled = false;
-                    ic.UnosPolje = "0";
+                        ic.UnosPolje = "0";
+                    }
+                        
                     pnlDashboard.Controls.Add(ic);
 
                    
@@ -1341,16 +1347,44 @@ namespace VozniPark
             int i = 0;
 
             
-                    foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
+            foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
+            {
+                if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassZaduzenja))
+                {
+                    if (grid.Columns[i].HeaderText == "Datum razduzenja")
+                    {
+                        string value = DateTime.Now.ToString();
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+                    else if(grid.Columns[i].HeaderText == "Predjena kilometraza")
+                    {
+                        string value = "0";
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+                    else
                     {
                         string value = cell.Value.ToString();
 
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-
-                        i++;
-
                     }
+
+                }
+                else
+                {
+                    string value = cell.Value.ToString();
+
+                    PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+
+                i++;
+
+            }
                 
             
             pnlDashboard.Controls.Clear();
