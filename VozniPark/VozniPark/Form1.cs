@@ -214,10 +214,13 @@ namespace VozniPark
         private void Registruj_Click(object sender, EventArgs e)
         {
             state = StateEnum.Update;
-            pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassRegistracija();
-          
-            PopulateControls();
+            DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
+
+
+
+
+            ucitajVrijednostiUPolja();
 
             Panel panel = new Panel();
             Button btnDodajRegistraciju = new Button();
@@ -1455,7 +1458,7 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if (grid.Columns[i].HeaderText == "Kilometraza" || grid.Columns[i].HeaderText == "RegistracijaID" || grid.Columns[i].HeaderText == "Registarski broj" || grid.Columns[i].HeaderText == "Cijena")
+                    else if (grid.Columns[i].HeaderText == "RegistracijaID" || (grid.Columns[i].HeaderText == "Registarski broj"&& grid.SelectedRows[0].Cells[8].Value.ToString() == "") || (grid.Columns[i].HeaderText == "Cijena" && grid.SelectedRows[0].Cells[11].Value.ToString() == ""))
                     {
                         string value = "0";
 

@@ -64,10 +64,12 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Datum registracije")]
         [SqlNameAttribute("DatumRegistracije")]
+        [DateTime]
         public DateTime DatumRegistracije { get; set; }
 
         [DisplayName("Datum isteka registracije")]
         [SqlNameAttribute("DatumIstekaRegistracije")]
+        [DateTime]
         public DateTime DatumIstekaRegistracije { get; set; }
 
 
