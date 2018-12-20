@@ -247,10 +247,106 @@ namespace VozniPark
             Form DetaljanPregledVozilaForm = new Form();
             DetaljanPregledVozilaForm.Show();
             DetaljanPregledVozilaForm.Size = new Size(630, 540);
-            Panel panelLijevi = new Panel();
-            panelLijevi.Dock = DockStyle.Left;
-            panelLijevi.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            DetaljanPregledVozilaForm.Controls.Add(panelLijevi);
+
+           
+
+             DataGridView a = pnlDashboard.Controls[0] as DataGridView;
+             SqlConnection sqlConnection = new SqlConnection(SqlHelper.GetConnectionString());
+
+            //Pristup podacima Lijevi panel
+            FlowLayoutPanel pnlLijevi = new FlowLayoutPanel();
+            pnlLijevi.Dock = DockStyle.Left;
+            pnlLijevi.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            DetaljanPregledVozilaForm.Controls.Add(pnlLijevi);
+            pnlLijevi.FlowDirection = FlowDirection.TopDown;
+
+            string QueryDetaljiVozila = "Exec dbo.spDetaljaPregledVozila  @VoziloID";           
+            SqlCommand cmdDetaljiVozila = new SqlCommand(QueryDetaljiVozila, sqlConnection);
+           
+
+            cmdDetaljiVozila.Parameters.Add(new SqlParameter("@VoziloID", SqlDbType.Int));
+            cmdDetaljiVozila.Parameters["@VoziloID"].Value = Convert.ToInt32(a.SelectedRows[0].Cells[0].Value.ToString());
+            DataTable detaljiDT = new DataTable();
+
+            SqlDataAdapter da = new SqlDataAdapter(cmdDetaljiVozila);
+            da.Fill(detaljiDT);
+
+            // Kontrole za ispis podataka
+            
+            Label lblVozilo = new Label();
+            Label lblGodina = new Label();
+            Label lblVrata = new Label();
+            Label lblBoja = new Label();
+            Label lblKilometraza = new Label();
+            Label lblDostupnost = new Label();
+
+            
+            lblVozilo.Text = "Vozilo: \n";
+            lblVozilo.Text += detaljiDT.Rows[0].ItemArray[1].ToString();
+            lblVozilo.Text += " " + detaljiDT.Rows[0].ItemArray[2].ToString() + "\n \n";
+
+            lblGodina.Text = "Godina proizvodnje: \n";
+            lblGodina.Text += detaljiDT.Rows[0].ItemArray[3].ToString() + ". \n \n";
+
+            lblVrata.Text = "Broj vrata: \n";
+            lblVrata.Text += detaljiDT.Rows[0].ItemArray[4].ToString() + " \n \n";
+
+            lblBoja.Text = "Boja: \n";
+            lblBoja.Text += detaljiDT.Rows[0].ItemArray[5].ToString() + " \n \n";
+
+            lblKilometraza.Text = "Kilometraza: \n";
+            lblKilometraza.Text += detaljiDT.Rows[0].ItemArray[6].ToString() + " \n \n";
+
+            if(detaljiDT.Rows[0].ItemArray[7].ToString() == "False")
+            {
+                lblDostupnost.Text = "Zaduzeno kod: \n ";
+                lblDostupnost.ForeColor = Color.IndianRed;
+            }
+            else 
+            {
+                lblDostupnost.Text = "Slobodno";
+                lblDostupnost.ForeColor = Color.ForestGreen;
+            }
+
+            pnlLijevi.Controls.Add(lblVozilo);
+            pnlLijevi.Controls.Add(lblGodina);
+            pnlLijevi.Controls.Add(lblVrata);
+            pnlLijevi.Controls.Add(lblBoja);
+            pnlLijevi.Controls.Add(lblKilometraza);
+            pnlLijevi.Controls.Add(lblDostupnost);
+
+            foreach (var item in pnlLijevi.Controls)
+	        {
+                if(item.GetType() == typeof(Label))
+                {
+                    Label j  = item as Label;
+                    j.AutoSize = true;
+                    j.Font = new Font(j.Font.FontFamily, 11);
+                   
+                }
+
+	        }
+
+            FlowLayoutPanel pnlDesni = new FlowLayoutPanel();
+            pnlDesni.Dock = DockStyle.Right;
+            pnlDesni.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            pnlDesni.Width = DetaljanPregledVozilaForm.Width - pnlLijevi.Width;
+            DetaljanPregledVozilaForm.Controls.Add(pnlDesni);
+            string QueryServisiVozila = "Exec [dbo].[DetaljanPrikazServisa]  @VoziloID";
+            SqlCommand cmdServisVozila = new SqlCommand(QueryServisiVozila, sqlConnection);
+            
+
+            cmdServisVozila.Parameters.Add(new SqlParameter("@VoziloID", SqlDbType.Int));
+            cmdServisVozila.Parameters["@VoziloID"].Value = Convert.ToInt32(a.SelectedRows[0].Cells[0].Value.ToString());
+            DataTable detaljiServisDT = new DataTable();
+            da = new SqlDataAdapter(cmdServisVozila);
+            da.Fill(detaljiServisDT);
+            
+            DataGridView dgvServisi = new DataGridView();
+            dgvServisi.DataSource = detaljiServisDT;
+
+            pnlDesni.Controls.Add(dgvServisi);
+
 
         }
 
