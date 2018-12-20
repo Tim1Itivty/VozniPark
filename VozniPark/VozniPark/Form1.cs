@@ -897,7 +897,9 @@ namespace VozniPark
                 flpButon.Controls.Add(btnSacuvaj);
 
                 btnSacuvaj.Click += BtnSacuvaj_Click;
-               
+
+                
+
 
             }
             else if ((button.Name == "btnIzbrisi"))
@@ -925,8 +927,11 @@ namespace VozniPark
             AddUpdate();
             MessageBox.Show("Uspjesna izmjena!");
             pnlDashboard.Controls.Clear();
+
             btnZaduzenja_Click(sender, e);
-            BtnPodmeniZaduzenja_Click(sender, e);
+            Button podmeniTrenutna = sender as Button;
+            podmeniTrenutna.Name = "btnPregled";
+            BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
         }
 
         #endregion
