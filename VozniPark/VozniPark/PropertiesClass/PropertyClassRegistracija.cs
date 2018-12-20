@@ -9,17 +9,17 @@ using VozniPark.AttributesClass;
 
 namespace VozniPark.PropertiesClass
 {
-  public  class PropertyClassRegistracija
+  public  class PropertyClassRegistracija:PropertyInterface
     {
         #region Atributi
         [PrimaryKey]
-        [DisplayName("Registracija ID")]
+        [DisplayName("RegistracijaID")]
         [SqlNameAttribute("RegistracijaID")]
         public int RegistracijaID { get; set; }
 
         
         [DisplayName("Registarski broj")]
-        [SqlNameAttribute("RegistarskiBroj")]
+        [SqlNameAttribute("RegistracijskiBroj")]
         public string RegistarskiBroj { get; set; }
 
 
@@ -40,7 +40,7 @@ namespace VozniPark.PropertiesClass
         public double Cijena { get; set; }
 
         [ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        [DisplayName("Vozilo id")]
+        [DisplayName("VoziloID")]
         [SqlNameAttribute("VoziloID")]
         public int VoziloID { get; set; }
 
