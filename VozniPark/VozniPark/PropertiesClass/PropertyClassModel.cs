@@ -18,22 +18,23 @@ namespace VozniPark.PropertiesClass
         [LookupKey]
         public int ModelID { get; set; }
 
+        [DisplayName("Proizvodjac")]
+        [SqlName("Proizvodjac")]
+        [ForeignField]
+        [LookupValue]
+        public int Proizvodjac { get; set; }
+
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
         [LookupValue]
         public string Naziv { get; set; }
-
 
         [DisplayName("Proizvodjac ID")]
         [SqlName("ProizvodjacID")]
         [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertiesClass.PropertyClassProizvodjac")]
         public int ProizvodjacID { get; set; }
 
-        [DisplayName("Proizvodjac")]
-        [SqlName("Proizvodjac")]
-        [ForeignField]
-        [LookupValue]
-        public int Proizvodjac { get; set; }
+        
         #endregion
 
         #region parameters
@@ -117,8 +118,9 @@ namespace VozniPark.PropertiesClass
         {
             return @"SELECT 
                      ModelID, 
-                     m.Naziv, 
-                     p.Naziv as Proizvodjac
+                     p.Naziv as Proizvodjac,
+                     m.Naziv
+                     
                      FROM dbo.Model as m
                      JOIN dbo.Proizvodjac as p
                      on m.ProizvodjacID = p.ProizvodjacID";

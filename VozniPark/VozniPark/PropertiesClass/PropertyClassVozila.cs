@@ -26,6 +26,7 @@ namespace VozniPark.PropertiesClass
         
         [DisplayName("Model")]
         [SqlNameAttribute("Model")]
+        [ForeignField]
         [LookupValue]
         public int Model { get; set; }
 

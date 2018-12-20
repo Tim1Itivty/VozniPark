@@ -1287,7 +1287,7 @@ namespace VozniPark
                     if (!input.Enabled) continue;
                     string value = input.UnosPolje;
 
-                    PropertyInfo property = properties.Where(x => input.Naziv == x.Name).FirstOrDefault();
+                    PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
                 else if (item.GetType() == typeof(DateTimeControl))
