@@ -1374,10 +1374,10 @@ namespace VozniPark
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
             }
-            if(state == StateEnum.Add)
-            SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                  myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
-            else if(state == StateEnum.Update)
+            if (state == StateEnum.Add)
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                      myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+            else if (state == StateEnum.Update)
                 SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                  myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
         }
@@ -1445,6 +1445,40 @@ namespace VozniPark
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
 
+                }
+              if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassRegistracija))
+                {
+                    if ( grid.Columns[i].HeaderText == "Datum isteka registracije" || grid.Columns[i].HeaderText == "Datum registracije")
+                    {
+                        string value = DateTime.Now.ToString();
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+                    else if (grid.Columns[i].HeaderText == "Kilometraza" || grid.Columns[i].HeaderText == "RegistracijaID" || grid.Columns[i].HeaderText == "Registarski broj" || grid.Columns[i].HeaderText == "Cijena")
+                    {
+                        string value = "0";
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+                    else
+                    {
+                        string value = cell.Value.ToString();
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+
+                }
+                else
+                {
+                    string value = cell.Value.ToString();
+
+                    PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+
                 i++;
 
             }
@@ -1452,7 +1486,7 @@ namespace VozniPark
             
             pnlDashboard.Controls.Clear();
             PopulateControls();
-            
+
 
             foreach (var item in pnlDashboard.Controls)
             {
@@ -1461,9 +1495,9 @@ namespace VozniPark
                     InputControl control = item as InputControl;
 
                     PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    if (property != null)control.UnosPolje = property.GetValue(myProperty).ToString();
+                    if (property != null) control.UnosPolje = property.GetValue(myProperty).ToString();
                 }
-                else if(item.GetType() == typeof(DateTimeControl))
+                else if (item.GetType() == typeof(DateTimeControl))
                 {
                     DateTimeControl control = item as DateTimeControl;
                     PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
