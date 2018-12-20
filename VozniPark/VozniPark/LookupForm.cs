@@ -33,7 +33,7 @@ namespace VozniPark
 
             
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text,
-                myProperty.GetSelectQuery());
+                myProperty.GetLookupQuery());
 
             dt.Load(reader);
             reader.Close();
@@ -62,10 +62,23 @@ namespace VozniPark
 
             Key = row.Cells[columnName].Value.ToString();
 
-            columnName = properties.Where(x => x.GetCustomAttribute<LookupValue>() != null)
-                .FirstOrDefault().GetCustomAttribute<SqlNameAttribute>().Name;
+            List<string> columnNames = new List<string>();
+            foreach(var item in properties)
+            {
+                if(item.GetCustomAttribute<LookupValue>() != null)
+                {
+                    columnNames.Add(item.GetCustomAttribute<SqlNameAttribute>().Name);
+                }
+            }
+            
 
-            Value = row.Cells[columnName].Value.ToString();
+            foreach(var item in columnNames)
+            {
+                 Value += row.Cells[item].Value.ToString() + " ";
+            }
+            
+            
+            
 
             DialogResult = DialogResult.OK;
         }

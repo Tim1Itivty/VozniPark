@@ -295,19 +295,8 @@ namespace VozniPark
 
         private void BtnDodajVozilo_Click(object sender, EventArgs e)
         {
-            int brojac = 0;
-            //for (int i = 0; i < pnlDashboard.Controls.Count; i++)
-            //{
-            //    if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
-            //    {
-            //        MessageBox.Show("Popuni sve podatke");
-            //        brojac += 1;
-            //        break;
-            //    }
-            //}
-           
             
-                AddUpdate();
+            AddUpdate();
 
             if (state == StateEnum.Add)
             {
@@ -1196,10 +1185,10 @@ namespace VozniPark
                         CreateInstance(item.GetCustomAttribute<ForeignKeyAttribute>().referencedClass) as PropertyInterface;
 
                     LookupControl lookup = new LookupControl(foreignInterface);
+                    
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
-
-                 
+                    
                     pnlDashboard.Controls.Add(lookup);
                    
                 }
@@ -1410,7 +1399,12 @@ namespace VozniPark
                 {
                     LookupControl control = item as LookupControl;
                     PropertyInfo property = properties.Where(x => control.getLabel() == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    if (property != null) control.Key = property.GetValue(myProperty).ToString(); 
+                    if (property != null) control.Key = property.GetValue(myProperty).ToString();
+                    
+                        
+                    PropertyInfo property2 = properties.Where(x => x.GetCustomAttribute<ForeignField>() != null && control.getLabel() == x.GetCustomAttribute<ForeignField>().tableKey).FirstOrDefault();
+                    if (property2 != null) control.Value = property2.GetValue(myProperty).ToString();
+                        
                 }
             }
         }

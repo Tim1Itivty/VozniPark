@@ -21,9 +21,13 @@ namespace VozniPark.PropertiesClass
         [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertiesClass.PropertyClassModel")]
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
-        [LookupValue]
         public int ModelID { get; set; }
 
+        
+        [DisplayName("Model")]
+        [SqlNameAttribute("Model")]
+        [LookupValue]
+        public int Model { get; set; }
 
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
@@ -45,10 +49,7 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("Dostupnost")]
         public bool Dostupnost { get; set; }
 
-        //[ForeignKeyAttribute("dbo.Registracija","RegistracijaID")]
-        //[DisplayName("Registracija ID")]
-        //[SqlNameAttribute("RegistracijaID")]
-        //public int RegistracijaID { get; set; }
+        
 
         #endregion
 
@@ -89,6 +90,14 @@ namespace VozniPark.PropertiesClass
             return @" DELETE FROM dbo.Vozila WHERE VoziloID=@VoziloID";
         }
 
+        public string GetLookupQuery()
+        {
+            return @"select VoziloID, p.Naziv + ' ' + m.Naziv as Model, GodinaProizvodnje, Boja
+                    from dbo.Vozila as v
+                    join dbo.Model as m on v.ModelId = m.ModelID
+                    join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
+                    where v.Dostupnost = 1";
+        }
         #endregion
 
 
@@ -195,7 +204,9 @@ namespace VozniPark.PropertiesClass
             return list;
         }
 
+        
+
         #endregion
-       
+
     }
 }

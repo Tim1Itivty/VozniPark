@@ -8,6 +8,15 @@ namespace VozniPark.AttributesClass
 {
     class ForeignField : Attribute
     {
+        public string tableKey { get; set; }
 
+        public ForeignField()
+        {
+
+        }
+        public ForeignField(string key)
+        {
+            tableKey = key;
+        }
     }
 }

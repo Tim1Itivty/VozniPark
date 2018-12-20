@@ -90,6 +90,11 @@ namespace VozniPark.PropertiesClass
         {
             return @"DELETE FROM dbo.Servis WHERE ServisID = @ServisID";
         }
+
+        public string GetLookupQuery()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

@@ -28,6 +28,12 @@ namespace VozniPark.PropertiesClass
         [SqlName("ProizvodjacID")]
         [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertiesClass.PropertyClassProizvodjac")]
         public int ProizvodjacID { get; set; }
+
+        [DisplayName("Proizvodjac")]
+        [SqlName("Proizvodjac")]
+        [ForeignField]
+        [LookupValue]
+        public int Proizvodjac { get; set; }
         #endregion
 
         #region parameters
@@ -106,6 +112,18 @@ namespace VozniPark.PropertiesClass
         {
             return @"DELETE FROM dbo.Model WHERE ModelID = @ModelID";
         }
+
+        public string GetLookupQuery()
+        {
+            return @"SELECT 
+                     ModelID, 
+                     m.Naziv, 
+                     p.Naziv as Proizvodjac
+                     FROM dbo.Model as m
+                     JOIN dbo.Proizvodjac as p
+                     on m.ProizvodjacID = p.ProizvodjacID";
+        }
+
         #endregion
 
     }

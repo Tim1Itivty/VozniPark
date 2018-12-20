@@ -170,6 +170,11 @@ namespace VozniPark.PropertiesClass
             return list;
         }
 
+        public string GetLookupQuery()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

@@ -91,6 +91,11 @@ namespace VozniPark.PropertiesClass
         {
             return @"DELETE FROM dbo.Proizvodjac WHERE ProizvodjacID = @ProizvodjacID";
         }
+
+        public string GetLookupQuery()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

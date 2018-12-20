@@ -20,9 +20,9 @@ namespace VozniPark.PropertiesClass
         [PrimaryKey]
         public int ZaduzenjaID { get; set; }
 
-        [DisplayName("Vozila ID")]
+        [DisplayName("Vozilo ID")]
         [SqlName("VozilaID")]
-        [ForeignKey("dbo.Vozila", "VozilaID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
         public int VozilaID { get; set; }
 
         [DisplayName("Zaposleni ID")]
@@ -46,6 +46,7 @@ namespace VozniPark.PropertiesClass
         [SqlName("DatumRazduzenja")]
         [DateTime]
         public DateTime DatumRazduzenja { get; set; }
+
         [DisplayName("Planirano razduzenje")]
         [SqlName("PlaniranoRazduzenje")]
         [DateTime]
@@ -53,17 +54,17 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("ModelID")]
         [SqlName("ModelID")]
-        [ForeignField]
+        [ForeignField("")]
         public int ModelID { get; set; }
 
         [DisplayName("Model")]
         [SqlName("Naziv")]
-        [ForeignField]
+        [ForeignField("Vozilo ID")]
         public string Model { get; set; }
 
         [DisplayName("Zaposleni")]
         [SqlName("ImeIPrezime")]
-        [ForeignField]
+        [ForeignField("Zaposleni ID")]
         public string ImeZaposlenog { get; set; }
 
         #endregion
@@ -85,6 +86,7 @@ namespace VozniPark.PropertiesClass
         {
             return @"select 
                      ZaduzenjaID,
+                     VozilaID,
                      m.ModelID,
                      p.Naziv + ' ' + m.Naziv as Naziv,
                      zap.ZaposleniID,
@@ -193,7 +195,12 @@ namespace VozniPark.PropertiesClass
             return list;
         }
 
-        
+        public string GetLookupQuery()
+        {
+            throw new NotImplementedException();
+        }
+
+
         #endregion
     }
 }

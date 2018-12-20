@@ -14,7 +14,7 @@ namespace VozniPark.PropertiesClass
 
         #region Atributi
 
-        [DisplayName("ZaposleniID")]
+        [DisplayName("Zaposleni ID")]
         [SqlName("ZaposleniID")]
         [PrimaryKey]
         [LookupKey]
@@ -27,6 +27,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Prezime")]
         [SqlName("Prezime")]
+        [LookupValue]
         public string Prezime { get; set; }
 
         [DisplayName("Radno mjesto")]
@@ -60,6 +61,12 @@ namespace VozniPark.PropertiesClass
             return @"UPDATE dbo.Zaposleni
                      SET Ime = @Ime, Prezime = @Prezime, RadnoMjesto = @RadnoMjesto
                      WHERE = ZaposleniID = @ZaposleniID";
+        }
+
+        public string GetLookupQuery()
+        {
+            return @"SELECT ZaposleniID, Ime, Prezime, RadnoMjesto
+                     FROM dbo.Zaposleni";
         }
         #endregion
         #region parameters
@@ -120,6 +127,8 @@ namespace VozniPark.PropertiesClass
             }
             return parameters;
         }
+
+        
 
         #endregion
     }

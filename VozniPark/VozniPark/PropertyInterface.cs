@@ -17,6 +17,8 @@ namespace VozniPark
 
         string GetDeleteQuery();
 
+        string GetLookupQuery();
+
         List<SqlParameter> GetInsertParameters();
 
         List<SqlParameter> GetUpdateParameters();
