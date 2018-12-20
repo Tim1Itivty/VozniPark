@@ -121,19 +121,21 @@ namespace VozniPark.PropertiesClass
 
         public string GetInsertQuery()
         {
-            return @"Insert Into dbo.Vozila (RegistracijskiBroj,DatumRegistracije,DatumIstekaRegistracije,Cijena,VoziloID)values(@RegistracijskiBroj,@DatumRegistracije,@DatumIstekaRegistracije,@Cijena,@VoziloID)";
+            return @"Insert Into 
+                    dbo.Registracija 
+                    (RegistracijskiBroj,DatumRegistracije,DatumIstekaRegistracije,Cijena,VoziloID)
+                    values(@RegistracijskiBroj,@DatumRegistracije,@DatumIstekaRegistracije,@Cijena,@VoziloID)";
         }
 
         public string GetUpdateQuery()
         {
-            return @"Update  dbo.Registracija SET RegistracijskiBroj=@RegistracijskiBroj ,
-                           DatumRegistracije=@DatumRegistracije,
+            return @"Update dbo.Registracija SET 
+                            RegistracijskiBroj = @RegistracijskiBroj,
+                            DatumRegistracije=@DatumRegistracije,
                             DatumIstekaRegistracije=@DatumIstekaRegistracije,
                             Cijena=@Cijena, 
+                            VoziloID = @VoziloID
                            
-                            VoziloID=@VoziloID
-
-                                
                         where RegistracijaID=@RegistracijaID";
         }
 

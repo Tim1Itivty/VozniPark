@@ -1490,16 +1490,8 @@ namespace VozniPark
                     }
 
                 }
-                else
-                {
-                    string value = cell.Value.ToString();
-
-                    PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                }
-
-                }
-              if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassRegistracija))
+                
+              else if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassRegistracija))
                 {
                     if ( grid.Columns[i].HeaderText == "Datum isteka registracije" || grid.Columns[i].HeaderText == "Datum registracije")
                     {
