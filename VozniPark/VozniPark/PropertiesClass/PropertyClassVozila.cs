@@ -23,12 +23,26 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("ModelID")]
         public int ModelID { get; set; }
 
-        
-        [DisplayName("Model")]
-        [SqlNameAttribute("Model")]
+        [DisplayName("Proizvodjac")]
+        [SqlName("NazivProizvodjaca")]
         [ForeignField]
-        [LookupValue]
-        public int Model { get; set; }
+        public string NazivProizvodjaca { get; set; }
+
+        [DisplayName("Model")]
+        [SqlName("NazivModela")]
+        [ForeignField]
+        public string Naziv { get; set; }
+
+        
+
+        //[DisplayName("Model")]
+        //[SqlNameAttribute("Model")]
+        //[ForeignField]
+        //[LookupValue]
+        //public int Model { get; set; }
+
+
+
 
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
@@ -50,7 +64,11 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("Dostupnost")]
         public bool Dostupnost { get; set; }
 
-        
+        [DisplayName("Registarski broj")]
+        [SqlNameAttribute("RegistracijskiBroj")]
+        [ForeignField]
+        public string RegistarskiBroj { get; set; }
+
 
         #endregion
 
@@ -58,8 +76,15 @@ namespace VozniPark.PropertiesClass
         #region query
         public string GetSelectQuery()
         {
-            return @"select VoziloID,ModelID,GodinaProizvodnje,Kilometraza,Boja,BrojVrata,Dostupnost
-                    from dbo.Vozila";
+            return @"SELECT v.VoziloID,v.ModelID,p.Naziv as NazivProizvodjaca,m.Naziv AS NazivModela,v.Kilometraza,
+                        v.GodinaProizvodnje,v.Boja,v.BrojVrata,v.Dostupnost,r.RegistracijskiBroj
+                        FROM Vozila v
+                        LEFT JOIN Model m 
+                        ON v.ModelID=m.ModelID
+                        LEFT JOIN Proizvodjac p 
+                        on m.ProizvodjacID=p.ProizvodjacID
+                        LEFT JOIN Registracija r 
+                        ON r.VoziloID=v.VoziloID";
         }
 
         public string GetInsertQuery()

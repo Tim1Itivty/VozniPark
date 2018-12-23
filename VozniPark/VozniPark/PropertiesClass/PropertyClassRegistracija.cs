@@ -29,6 +29,16 @@ namespace VozniPark.PropertiesClass
         public int ModelID { get; set; }
 
 
+        [DisplayName("Proizvodjac")]
+        [SqlName("NazivProizvodjaca")]
+        [ForeignField]
+        public string NazivProizvodjaca { get; set; }
+
+        [DisplayName("Model")]
+        [SqlName("NazivModela")]
+        [ForeignField]
+        public string NazivModela { get; set; }
+
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
         [ForeignField]
@@ -102,6 +112,8 @@ namespace VozniPark.PropertiesClass
         {
             return @"SELECT 
                     v.ModelID,
+					p.Naziv AS NazivProizvodjaca,
+					m.Naziv AS NazivModela,
                     v.GodinaProizvodnje,
                     v.Kilometraza,
                     v.Boja,
@@ -116,6 +128,10 @@ namespace VozniPark.PropertiesClass
                     FROM Vozila v
                     left JOIN Registracija r
                     ON v.VoziloID=r.VoziloID
+					LEFT JOIN Model m 
+					ON v.ModelID=m.ModelID
+					LEFT JOIN Proizvodjac p 
+					on m.ProizvodjacID=p.ProizvodjacID
                     WHERE r.DatumIstekaRegistracije<GETDATE() OR r.RegistracijaID is NULL";
         }
 
