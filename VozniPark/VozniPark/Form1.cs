@@ -246,12 +246,10 @@ namespace VozniPark
         {
             Form DetaljanPregledVozilaForm = new Form();
             DetaljanPregledVozilaForm.Show();
-            DetaljanPregledVozilaForm.Size = new Size(630, 540);
+            DetaljanPregledVozilaForm.Size = new Size(860, 700);
 
-           
-
-             DataGridView a = pnlDashboard.Controls[0] as DataGridView;
-             SqlConnection sqlConnection = new SqlConnection(SqlHelper.GetConnectionString());
+            DataGridView a = pnlDashboard.Controls[0] as DataGridView;
+            SqlConnection sqlConnection = new SqlConnection(SqlHelper.GetConnectionString());
 
             //Pristup podacima Lijevi panel
             FlowLayoutPanel pnlLijevi = new FlowLayoutPanel();
@@ -262,7 +260,6 @@ namespace VozniPark
 
             string QueryDetaljiVozila = "Exec dbo.spDetaljaPregledVozila  @VoziloID";           
             SqlCommand cmdDetaljiVozila = new SqlCommand(QueryDetaljiVozila, sqlConnection);
-           
 
             cmdDetaljiVozila.Parameters.Add(new SqlParameter("@VoziloID", SqlDbType.Int));
             cmdDetaljiVozila.Parameters["@VoziloID"].Value = Convert.ToInt32(a.SelectedRows[0].Cells[0].Value.ToString());
@@ -299,7 +296,7 @@ namespace VozniPark
 
             if(detaljiDT.Rows[0].ItemArray[7].ToString() == "False")
             {
-                lblDostupnost.Text = "Zaduzeno kod: \n ";
+                lblDostupnost.Text = "Zauzeto \n ";
                 lblDostupnost.ForeColor = Color.IndianRed;
             }
             else 
@@ -330,23 +327,100 @@ namespace VozniPark
             FlowLayoutPanel pnlDesni = new FlowLayoutPanel();
             pnlDesni.Dock = DockStyle.Right;
             pnlDesni.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            pnlDesni.Width = DetaljanPregledVozilaForm.Width - pnlLijevi.Width;
+            pnlDesni.Size = new Size (640, DetaljanPregledVozilaForm.Height);
+            pnlDesni.Padding = new Padding(20, 10, 10, 20);
             DetaljanPregledVozilaForm.Controls.Add(pnlDesni);
+
+            // DGV SERVISI SELEKTOVANOG VOZILA
             string QueryServisiVozila = "Exec [dbo].[DetaljanPrikazServisa]  @VoziloID";
             SqlCommand cmdServisVozila = new SqlCommand(QueryServisiVozila, sqlConnection);
-            
-
             cmdServisVozila.Parameters.Add(new SqlParameter("@VoziloID", SqlDbType.Int));
             cmdServisVozila.Parameters["@VoziloID"].Value = Convert.ToInt32(a.SelectedRows[0].Cells[0].Value.ToString());
             DataTable detaljiServisDT = new DataTable();
             da = new SqlDataAdapter(cmdServisVozila);
             da.Fill(detaljiServisDT);
-            
             DataGridView dgvServisi = new DataGridView();
             dgvServisi.DataSource = detaljiServisDT;
 
+            dgvServisi.BackgroundColor = Color.White;
+            dgvServisi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvServisi.Width = 304;
+            dgvServisi.RowHeadersVisible = false;
+
+            dgvServisi.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dgvServisi.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            dgvServisi.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvServisi.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dgvServisi.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            dgvServisi.BackgroundColor = Color.White;
+
+            dgvServisi.EnableHeadersVisualStyles = false;
+            dgvServisi.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvServisi.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+            dgvServisi.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+           
             pnlDesni.Controls.Add(dgvServisi);
 
+
+            // DGV REGISTRACIJE SELEKTOVANOG VOZILA
+            string QueryRegistracijeVozila = "Exec [dbo].[SveRegistracijeZaVozilo]  @VoziloID";
+            SqlCommand cmdRegistracijeVozila = new SqlCommand(QueryRegistracijeVozila, sqlConnection);
+            cmdRegistracijeVozila.Parameters.Add(new SqlParameter("@VoziloID", SqlDbType.Int));
+            cmdRegistracijeVozila.Parameters["@VoziloID"].Value = Convert.ToInt32(a.SelectedRows[0].Cells[0].Value.ToString());
+            DataTable detaljiRegistracijaDT = new DataTable();
+            da = new SqlDataAdapter(cmdRegistracijeVozila);
+            da.Fill(detaljiRegistracijaDT);
+            DataGridView dgvRegistracije = new DataGridView();
+            dgvRegistracije.DataSource = detaljiRegistracijaDT;
+
+            dgvRegistracije.BackgroundColor = Color.White;
+            dgvRegistracije.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRegistracije.Width = 403;
+            dgvRegistracije.RowHeadersVisible = false;
+
+            dgvRegistracije.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dgvRegistracije.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            dgvRegistracije.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvRegistracije.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dgvRegistracije.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            dgvRegistracije.BackgroundColor = Color.White;
+            dgvRegistracije.EnableHeadersVisualStyles = false;
+            dgvRegistracije.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvRegistracije.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+            dgvRegistracije.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
+            pnlDesni.Controls.Add(dgvRegistracije);
+
+            // DGV ZADUZENJA SELEKTOVANOG VOZILA
+            string QueryZaduzenjaVozila = "Exec [dbo].[VoziloDetaljanPregledZaduzenja]  @VoziloID";
+            SqlCommand cmdZaduzenjaVozila = new SqlCommand(QueryZaduzenjaVozila, sqlConnection);
+            cmdZaduzenjaVozila.Parameters.Add(new SqlParameter("@VoziloID", SqlDbType.Int));
+            cmdZaduzenjaVozila.Parameters["@VoziloID"].Value = Convert.ToInt32(a.SelectedRows[0].Cells[0].Value.ToString());
+            DataTable detaljiZaduzenjaDT = new DataTable();
+            da = new SqlDataAdapter(cmdZaduzenjaVozila);
+            da.Fill(detaljiZaduzenjaDT);
+            DataGridView dgvZaduzenja = new DataGridView();
+            dgvZaduzenja.DataSource = detaljiZaduzenjaDT;
+
+            dgvZaduzenja.BackgroundColor = Color.White;
+            dgvZaduzenja.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvZaduzenja.Width = 535;
+            dgvZaduzenja.RowHeadersVisible = false;
+            dgvZaduzenja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+
+            dgvZaduzenja.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dgvZaduzenja.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            dgvZaduzenja.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvZaduzenja.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dgvZaduzenja.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            dgvZaduzenja.BackgroundColor = Color.White;
+            dgvZaduzenja.EnableHeadersVisualStyles = false;
+            dgvZaduzenja.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvZaduzenja.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+            dgvZaduzenja.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
+
+            pnlDesni.Controls.Add(dgvZaduzenja);
 
         }
 
@@ -1119,6 +1193,18 @@ namespace VozniPark
             {
                 grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
+
+            grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            grid.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            grid.BackgroundColor = Color.White;
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
         }
 
         public void PopulateControls()
@@ -1406,6 +1492,7 @@ namespace VozniPark
             dtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;
+            dtg.RowHeadersVisible = false;
 
         }
 
