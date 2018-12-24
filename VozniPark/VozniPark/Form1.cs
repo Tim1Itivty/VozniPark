@@ -787,7 +787,22 @@ namespace VozniPark
 
         private void BtnRazduzi_Click(object sender, EventArgs e)
         {
-            
+            state = StateEnum.Razduzi;
+            myProperty = new PropertyClassZaduzenja();
+
+            ucitajVrijednostiUPolja();
+            FlowLayoutPanel flpButon = new FlowLayoutPanel();
+            flpButon.FlowDirection = FlowDirection.LeftToRight;
+            flpButon.Width = pnlDashboard.Width;
+            pnlDashboard.Controls.Add(flpButon);
+
+            Button btnSacuvaj = new Button();
+            btnSacuvaj.Text = "Sacuvaj";
+            btnSacuvaj.Name = "btnSacuvaj";
+            flpButon.Controls.Add(btnSacuvaj);
+
+            btnSacuvaj.Click += BtnSacuvaj_Click;
+           
         }
 
         private void BtnZaduzi_Click(object sender, EventArgs e)
@@ -858,7 +873,7 @@ namespace VozniPark
 
         private void BtnSacuvaj_Click(object sender, EventArgs e)
         {
-            state = StateEnum.Update;
+           // state = StateEnum.Update;
             AddUpdate();
             MessageBox.Show("Uspjesna izmjena!");
             pnlDashboard.Controls.Clear();
@@ -1192,24 +1207,24 @@ namespace VozniPark
                         continue;
                     }
                     pnlDashboard.Controls.Add(lookup);
-                   
+
+                    if (state == StateEnum.Razduzi)
+                    {
+                        lookup.Enabled = false;
+                    }
                 }
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
                 {
-                    if(state == StateEnum.Update && item.GetCustomAttribute<DisplayNameAttribute>().DisplayName == "Datum razduzenja")
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        DateTimeControl dateTime = new DateTimeControl();
-                        dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
-                        pnlDashboard.Controls.Add(dateTime);
+                    DateTimeControl dateTime = new DateTimeControl();
+                    dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
+                    pnlDashboard.Controls.Add(dateTime);
 
-                        if (state == StateEnum.Add && dateTime.Naziv == "Datum razduzenja")
-                            dateTime.Enabled = false;
-                    }
-                    
+                    if (state == StateEnum.Add && dateTime.Naziv == "Datum razduzenja")
+                        dateTime.Enabled = false;
+                    if (state == StateEnum.Razduzi && dateTime.Naziv != "Datum razduzenja")   
+                        dateTime.Enabled = false;
+                    if (state == StateEnum.Update && dateTime.Naziv == "Datum razduzenja")
+                        dateTime.Enabled = false;
                 }
                 else if (item.GetCustomAttribute<ForeignField>() != null)
                 {
@@ -1305,7 +1320,6 @@ namespace VozniPark
                 {
                     DateTimeControl date = item as DateTimeControl;
                     DateTime value = date.Unos;
-
                     PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
@@ -1316,7 +1330,12 @@ namespace VozniPark
             else if (state == StateEnum.Update)
                 SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                  myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
-            
+            else if (state == StateEnum.Razduzi)
+            {
+                PropertyClassZaduzenja property = myProperty as PropertyClassZaduzenja;
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                 property.RazduziQuery(), myProperty.GetUpdateParameters().ToArray());
+            }
         }
 
         public void delete(DataGridView dg)
@@ -1356,7 +1375,7 @@ namespace VozniPark
             
             foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
             {
-                if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassZaduzenja))
+                if (state == StateEnum.Update || state == StateEnum.Razduzi && myProperty.GetType() == typeof(PropertyClassZaduzenja))
                 {
                     if (grid.Columns[i].HeaderText == "Datum razduzenja")
                     {
@@ -1398,6 +1417,7 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
+                   
                     else
                     {
                         string value = cell.Value.ToString();
