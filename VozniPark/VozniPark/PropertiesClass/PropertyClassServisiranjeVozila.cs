@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,27 +18,31 @@ namespace VozniPark.PropertiesClass
         [PrimaryKey]
         public int ServisiranjeId { get; set; }
 
-        [DisplayName("Servis ID")]  
-        [SqlName("ServisID")]   
-        [ForeignKey("dbo.Servis","ServisID", "VozniPark.PropertiesClass.PropertyClassServis")]
-        public int ServisId { get; set; }
+        [DisplayName("Vozilo ID")]
+        [SqlName("VoziloID")]
+        [ForeignKey("dbo.Vozilo", "VoziloID", "PropertiesClass.VozniPark.PropertyClassVozila")]
+        public int VoziloId { get; set; }
+
+
+        //[DisplayName("Servis ID")]  
+        //[SqlName("ServisID")]   
+        //[ForeignKey("dbo.Servis","ServisID", "VozniPark.PropertiesClass.PropertyClassServis")]
+        //public int ServisId { get; set; }
 
         [DisplayName("Datum servisiranja")]
         [SqlName("DatumServisiranja")]
         public DateTime DatumServisiranja { get; set; }
 
-        [DisplayName("Kolicina natocenog goriva")]
-        [SqlName("KolicinaNatocenogGoriva")]
-        public decimal KolicinaNatocenogGoriva { get; set; }
+        //[DisplayName("Kolicina natocenog goriva")]
+        //[SqlName("KolicinaNatocenogGoriva")]
+        //public decimal KolicinaNatocenogGoriva { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite cijenu servisa!")]
         [DisplayName("Cijena servisa")]
         [SqlName("CijenaServisa")]
         public decimal CijenaServisa { get; set; }
 
-        [DisplayName("Vozilo ID")]
-        [SqlName("VoziloID")]
-        [ForeignKey("dbo.Vozilo", "VoziloID", "PropertiesClass.VozniPark.PropertyClassVozila")]
-        public int VoziloId { get; set; }
+       
 
         #endregion
 
@@ -45,7 +50,7 @@ namespace VozniPark.PropertiesClass
         #region queries
         public string GetSelectQuery()
         {
-            return @"SELECT ServisiranjeID, ServisID, DatumServisiranja, KolicinaNatocenogGoriva, CijenaServisa, VoziloID FROM dbo.ServisiranjeVozila";
+            return @"SELECT ServisiranjeID, VoziloID, DatumServisiranja, CijenaServisa FROM dbo.ServisiranjeVozila";
         }
 
         public string GetInsertQuery()
@@ -82,26 +87,8 @@ namespace VozniPark.PropertiesClass
             List<SqlParameter> list = new List<SqlParameter>();
         
             {
-                SqlParameter parameter = new SqlParameter("@ServisID", System.Data.SqlDbType.Int);
-                parameter.Value = ServisId;
-                list.Add(parameter);
-            }
-
-            {
-                SqlParameter parameter = new SqlParameter("@DatumServisiranja", System.Data.SqlDbType.Date);
-                parameter.Value = DatumServisiranja;
-                list.Add(parameter);
-            }
-
-            {
-                SqlParameter parameter = new SqlParameter("@KolicinaNatocenogGoriva", System.Data.SqlDbType.Decimal);
-                parameter.Value = KolicinaNatocenogGoriva;
-                list.Add(parameter);
-            }
-
-            {
-                SqlParameter parameter = new SqlParameter("@CijenaServisa", System.Data.SqlDbType.Decimal);
-                parameter.Value = CijenaServisa;
+                SqlParameter parameter = new SqlParameter("@ServisiranjeID", System.Data.SqlDbType.Int);
+                parameter.Value = ServisiranjeId;
                 list.Add(parameter);
             }
 
@@ -110,6 +97,25 @@ namespace VozniPark.PropertiesClass
                 parameter.Value = VoziloId;
                 list.Add(parameter);
             }
+            {
+                SqlParameter parameter = new SqlParameter("@DatumServisiranja", System.Data.SqlDbType.Date);
+                parameter.Value = DatumServisiranja;
+                list.Add(parameter);
+            }
+
+            //{
+            //    SqlParameter parameter = new SqlParameter("@KolicinaNatocenogGoriva", System.Data.SqlDbType.Decimal);
+            //    parameter.Value = KolicinaNatocenogGoriva;
+            //    list.Add(parameter);
+            //}
+
+            {
+                SqlParameter parameter = new SqlParameter("@CijenaServisa", System.Data.SqlDbType.Decimal);
+                parameter.Value = CijenaServisa;
+                list.Add(parameter);
+            }
+
+            
 
             return list;
 
@@ -126,8 +132,8 @@ namespace VozniPark.PropertiesClass
                 list.Add(parameter);
             }
             {
-                SqlParameter parameter = new SqlParameter("@ServisID", System.Data.SqlDbType.Int);
-                parameter.Value = ServisId;
+                SqlParameter parameter = new SqlParameter("@ServisiranjeID", System.Data.SqlDbType.Int);
+                parameter.Value = ServisiranjeId;
                 list.Add(parameter);
             }
 
@@ -137,11 +143,11 @@ namespace VozniPark.PropertiesClass
                 list.Add(parameter);
             }
 
-            {
-                SqlParameter parameter = new SqlParameter("@KolicinaNatocenogGoriva", System.Data.SqlDbType.Decimal);
-                parameter.Value = KolicinaNatocenogGoriva;
-                list.Add(parameter);
-            }
+            //{
+            //    SqlParameter parameter = new SqlParameter("@KolicinaNatocenogGoriva", System.Data.SqlDbType.Decimal);
+            //    parameter.Value = KolicinaNatocenogGoriva;
+            //    list.Add(parameter);
+            //}
 
             {
                 SqlParameter parameter = new SqlParameter("@CijenaServisa", System.Data.SqlDbType.Decimal);

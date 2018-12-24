@@ -98,6 +98,7 @@
       <DependentUpon>LookupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="PropertiesClass\PropertyClassGorivo.cs" />
     <Compile Include="PropertiesClass\PropertyClassZaduzenja.cs" />
     <Compile Include="PropertiesClass\PropertyClassZaposleni.cs" />
     <Compile Include="PropertiesClass\PropertyClassServisiranjeVozila.cs" />

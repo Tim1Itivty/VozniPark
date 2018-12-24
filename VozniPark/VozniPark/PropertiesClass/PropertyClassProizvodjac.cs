@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using VozniPark.AttributesClass;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace VozniPark.PropertiesClass
 {
@@ -18,7 +19,7 @@ namespace VozniPark.PropertiesClass
         [LookupKey]
         public int ProizvodjacID { get; set; }
 
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite naziv!")]
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
         [LookupValue]
