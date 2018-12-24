@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,23 +18,29 @@ namespace VozniPark.PropertiesClass
         [PrimaryKey]
         public int ServisiranjeId { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID servisa!")]
         [DisplayName("Servis ID")]  
         [SqlName("ServisID")]   
         [ForeignKey("dbo.Servis","ServisID", "VozniPark.PropertiesClass.PropertyClassServis")]
         public int ServisId { get; set; }
 
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum servisiranja!")]
         [DisplayName("Datum servisiranja")]
         [SqlName("DatumServisiranja")]
         public DateTime DatumServisiranja { get; set; }
 
+        
         [DisplayName("Kolicina natocenog goriva")]
         [SqlName("KolicinaNatocenogGoriva")]
         public decimal KolicinaNatocenogGoriva { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite cijenu servisa!")]
         [DisplayName("Cijena servisa")]
         [SqlName("CijenaServisa")]
         public decimal CijenaServisa { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID vozila!")]
         [DisplayName("Vozilo ID")]
         [SqlName("VoziloID")]
         [ForeignKey("dbo.Vozilo", "VoziloID", "PropertiesClass.VozniPark.PropertyClassVozila")]

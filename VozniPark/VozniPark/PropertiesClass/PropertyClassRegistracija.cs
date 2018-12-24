@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,28 +18,30 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("RegistracijaID")]
         public int RegistracijaID { get; set; }
 
-        
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite registarski broj!")]
         [DisplayName("Registarski broj")]
         [SqlNameAttribute("RegistarskiBroj")]
         public string RegistarskiBroj { get; set; }
 
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum registracije!")]
         [DisplayName("Datum registracije")]
         [SqlNameAttribute("DatumRegistracije")]
         public DateTime DatumRegistracije { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum isteka registracije!")]
         [DisplayName("Datum isteka registracije")]
         [SqlNameAttribute("DatumIstekaRegistracije")]
         public DateTime DatumIstekaRegistracije { get; set; }
 
 
-        
 
-       
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite cijenu!")]
         [DisplayName("Cijena")]
         [SqlNameAttribute("Cijena")]
         public double Cijena { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID vozila!")]
         [ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
         [DisplayName("Vozilo id")]
         [SqlNameAttribute("VoziloID")]
