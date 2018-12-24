@@ -745,7 +745,7 @@ namespace VozniPark
             pnlSelected3.Visible = false;
             pnlSelected4.Visible = true;
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Button btnPodmeniServis = new Button();
                 buttonDesign(btnPodmeniServis);
@@ -758,6 +758,11 @@ namespace VozniPark
                 {
                     btnPodmeniServis.Text = "Unesi podatke o servisu";
                     btnPodmeniServis.Name = "btnServis";
+                }
+                if (i == 2)
+                {
+                    btnPodmeniServis.Text = "Tocenje goriva";
+                    btnPodmeniServis.Name = "btnGorivo";
                 }
                 btnPodmeniServis.Click += BtnPodmeniServis_Click;
                 flpPodmeni.Controls.Add(btnPodmeniServis);
@@ -773,29 +778,29 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
-                myProperty = new PropertyClassServis();
+                myProperty = new PropertyClassServisiranjeVozila();
 
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button Add1 = new Button();
-                Add1.Click += Add1_Click;
+                Button AddServis = new Button();
+                AddServis.Click += AddServis_Click;
 
-                Button Update1 = new Button();
-                Update1.Click += Update1_Click;
+                Button UpdateServis = new Button();
+                UpdateServis.Click += UpdateServis_Click;
 
-                Button Delete1 = new Button();
-                Delete1.Click += Delete1_Click;
+                Button DeleteServis = new Button();
+                DeleteServis.Click += DeleteServis_Click;
 
-                Add1.Text = "ADD";
-                Delete1.Text = "DELETE";
-                Update1.Text = "UPDATE";
+                AddServis.Text = "ADD";
+                DeleteServis.Text = "DELETE";
+                UpdateServis.Text = "UPDATE";
 
                 panel.Height = 100;
                 panel.Width = 470;
-                panel.Controls.Add(Add1);
-                panel.Controls.Add(Delete1);
-                panel.Controls.Add(Update1);
+                panel.Controls.Add(AddServis);
+                panel.Controls.Add(DeleteServis);
+                panel.Controls.Add(UpdateServis);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
             }
@@ -803,7 +808,7 @@ namespace VozniPark
             {
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassServis();
+                myProperty = new PropertyClassServisiranjeVozila();
 
                 PopulateControls();
 
@@ -823,6 +828,35 @@ namespace VozniPark
                 panel.Controls.Add(btnOtkazi1);
                 pnlDashboard.Controls.Add(panel);
             }
+            else if (button.Name == "btnGorivo")
+            {
+                state = StateEnum.Add;
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassGorivo();
+
+                PopulateControls();
+
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                Button btnGorivo = new Button();
+                Button btnOtkazi1 = new Button();
+               btnGorivo.Text = "Uspi gorivo";
+                btnOtkazi1.Text = "Ocisti polja";
+
+                btnGorivo.Click += BtnGorivo_Click;
+                btnOtkazi1.Click += BtnOtkazi1_Click;
+                btnOtkazi1.Visible = true;
+
+                panel.Height = 100;
+                panel.Width = 470;
+                panel.Controls.Add(btnGorivo);
+                panel.Controls.Add(btnOtkazi1);
+                pnlDashboard.Controls.Add(panel);
+            }
+        }
+
+        private void BtnGorivo_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void BtnOtkazi1_Click(object sender, EventArgs e)
@@ -830,7 +864,7 @@ namespace VozniPark
             if (state == StateEnum.Add)
             {
                 pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassServis();
+                myProperty = new PropertyClassServisiranjeVozila();
 
                 PopulateControls();
                 FlowLayoutPanel panel = new FlowLayoutPanel();
@@ -868,7 +902,7 @@ namespace VozniPark
                     MessageBox.Show("Unesen servis");
 
                     pnlDashboard.Controls.Clear();
-                    myProperty = new PropertyClassServis();
+                    myProperty = new PropertyClassServisiranjeVozila();
 
                     PopulateControls();
                 
@@ -902,7 +936,7 @@ namespace VozniPark
                 }
         }
 
-        private void Delete1_Click(object sender, EventArgs e)
+        private void DeleteServis_Click(object sender, EventArgs e)
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
             delete(dtg);
@@ -914,10 +948,10 @@ namespace VozniPark
             BtnPodmeniServis_Click(button, e);
         }
 
-        private void Update1_Click(object sender, EventArgs e)
+        private void UpdateServis_Click(object sender, EventArgs e)
         {
             state = StateEnum.Update;
-            myProperty = new PropertyClassServis();
+            myProperty = new PropertyClassServisiranjeVozila();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
 
             ucitajVrijednostiUPolja();
@@ -939,7 +973,7 @@ namespace VozniPark
             pnlDashboard.Controls.Add(panel);
         }
 
-        private void Add1_Click(object sender, EventArgs e)
+        private void AddServis_Click(object sender, EventArgs e)
         {
             state = StateEnum.Add;
             pnlDashboard.Controls.Clear();

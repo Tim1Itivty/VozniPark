@@ -132,7 +132,11 @@ namespace VozniPark.PropertiesClass
 					ON v.ModelID=m.ModelID
 					LEFT JOIN Proizvodjac p 
 					on m.ProizvodjacID=p.ProizvodjacID
-                    WHERE r.DatumIstekaRegistracije<GETDATE() OR r.RegistracijaID is NULL";
+                    WHERE r.DatumIstekaRegistracije<GETDATE() AND r.DatumIstekaRegistracije IN (SELECT Max(r.DatumRegistracije)
+					FROM Registracija r
+					JOIN dbo.Vozila v 
+					ON v.VoziloID=r.VoziloID
+					GROUP BY r.VoziloID) OR r.RegistracijaID is NULL";
         }
 
         public string GetInsertQuery()
