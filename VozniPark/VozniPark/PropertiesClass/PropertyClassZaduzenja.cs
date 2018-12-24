@@ -25,6 +25,7 @@ namespace VozniPark.PropertiesClass
         [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
         public int VozilaID { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID zaposlenog!")]
         [DisplayName("Zaposleni ID")]
         [SqlName("ZaposleniID")]
         [ForeignKey("dbo.Zaposleni", "ZaposleniID", "VozniPark.PropertiesClass.PropertyClassZaposleni")]
@@ -36,6 +37,7 @@ namespace VozniPark.PropertiesClass
         [SqlName("PredjenaKilometraza")]
         public int PredjenaKilometraza { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum zaduzenja!")]
         [DisplayName("Datum zaduzenja")]
         [SqlName("DatumZaduzenja")]
         [DateTime]
@@ -74,12 +76,19 @@ namespace VozniPark.PropertiesClass
 
         public string GetDeleteQuery()
         {
-            return "delete from dbo.Zaduzenja where ZaduzenjaID = @ZaduzenjaID";
+            return @"delete from dbo.Zaduzenja where ZaduzenjaID = @ZaduzenjaID
+                     UPDATE dbo.Vozila
+                     SET Dostupnost = 'True'
+                     where VoziloID = @VozilaID"; 
         }
 
         public string GetInsertQuery()
         {
-            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,DatumZaduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@DatumZaduzenja,@PlaniranoRazduzenje)";
+            return @"insert into dbo.Zaduzenja (VozilaID,ZaposleniID,DatumZaduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@DatumZaduzenja,@PlaniranoRazduzenje)
+                    
+                     UPDATE dbo.Vozila
+                     SET Dostupnost = 'False'
+                     where VoziloID = @VozilaID";
         }
 
         public string GetSelectQuery()
@@ -116,6 +125,11 @@ namespace VozniPark.PropertiesClass
             {
                 SqlParameter parameter = new SqlParameter("ZaduzenjaID", System.Data.SqlDbType.Int);
                 parameter.Value = ZaduzenjaID;
+                list.Add(parameter);
+            }
+            {
+                SqlParameter parameter = new SqlParameter("VozilaID", System.Data.SqlDbType.Int);
+                parameter.Value = VozilaID;
                 list.Add(parameter);
             }
             return list;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace VozniPark.PropertiesClass
         [LookupValue]
         public int Proizvodjac { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite naziv!")]
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
         [LookupValue]

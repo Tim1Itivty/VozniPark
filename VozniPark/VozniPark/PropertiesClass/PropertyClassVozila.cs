@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace VozniPark.PropertiesClass
         [LookupKey]
         public int VoziloID { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID modela!")]
         [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertiesClass.PropertyClassModel")]
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
@@ -29,37 +31,32 @@ namespace VozniPark.PropertiesClass
         public string NazivProizvodjaca { get; set; }
 
         [DisplayName("Model")]
-        [SqlName("NazivModela")]
+        [SqlNameAttribute("Model")]
         [ForeignField]
-        public string Naziv { get; set; }
+        [LookupValue]
+        public int Model { get; set; }
 
-        
-
-        //[DisplayName("Model")]
-        //[SqlNameAttribute("Model")]
-        //[ForeignField]
-        //[LookupValue]
-        //public int Model { get; set; }
-
-
-
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite godinu proizvodnje!")]
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
         public int GodinaProizvodnje { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite predjenu kilometrazu!")]
         [DisplayName("Kilometraza")]
         [SqlNameAttribute("Kilometraza")]
         public int Kilometraza { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite boju!")]
         [DisplayName("Boja")]
         [SqlNameAttribute("Boja")]
         public string Boja { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite boju!")]
         [DisplayName("Broj vrata")]
         [SqlNameAttribute("BrojVrata")]
         public int BrojVrata { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite dostupnost!")]
         [DisplayName("Dostupnost")]
         [SqlNameAttribute("Dostupnost")]
         public bool Dostupnost { get; set; }
@@ -76,12 +73,12 @@ namespace VozniPark.PropertiesClass
         #region query
         public string GetSelectQuery()
         {
-            return @"SELECT v.VoziloID,v.ModelID,p.Naziv as NazivProizvodjaca,m.Naziv AS NazivModela,v.Kilometraza,
+            return @"SELECT distinct v.VoziloID,v.ModelID,p.Naziv as NazivProizvodjaca,m.Naziv AS Model,v.Kilometraza,
                         v.GodinaProizvodnje,v.Boja,v.BrojVrata,v.Dostupnost,r.RegistracijskiBroj
                         FROM Vozila v
-                        LEFT JOIN Model m 
+                        JOIN Model m 
                         ON v.ModelID=m.ModelID
-                        LEFT JOIN Proizvodjac p 
+                        JOIN Proizvodjac p 
                         on m.ProizvodjacID=p.ProizvodjacID
                         LEFT JOIN Registracija r 
                         ON r.VoziloID=v.VoziloID";
@@ -122,7 +119,7 @@ namespace VozniPark.PropertiesClass
                     from dbo.Vozila as v
                     join dbo.Model as m on v.ModelId = m.ModelID
                     join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
-                    where v.Dostupnost = 1";
+                    where v.Dostupnost = 'True'";
         }
         #endregion
 

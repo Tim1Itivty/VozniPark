@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,7 @@ namespace VozniPark.PropertiesClass
         //[SqlName("KolicinaNatocenogGoriva")]
         //public decimal KolicinaNatocenogGoriva { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite cijenu servisa!")]
         [DisplayName("Cijena servisa")]
         [SqlName("CijenaServisa")]
         public decimal CijenaServisa { get; set; }
