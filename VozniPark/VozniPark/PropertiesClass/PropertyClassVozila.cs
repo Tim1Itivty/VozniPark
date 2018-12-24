@@ -25,16 +25,11 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("ModelID")]
         public int ModelID { get; set; }
 
-        [DisplayName("Proizvodjac")]
-        [SqlName("NazivProizvodjaca")]
-        [ForeignField]
-        public string NazivProizvodjaca { get; set; }
-
         [DisplayName("Model")]
         [SqlNameAttribute("Model")]
-        [ForeignField]
+        [ForeignField("Model ID")]
         [LookupValue]
-        public int Model { get; set; }
+        public string Model { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite godinu proizvodnje!")]
         [DisplayName("Godina proizvodnje")]
@@ -73,7 +68,7 @@ namespace VozniPark.PropertiesClass
         #region query
         public string GetSelectQuery()
         {
-            return @"SELECT distinct v.VoziloID,v.ModelID,p.Naziv as NazivProizvodjaca,m.Naziv AS Model,v.Kilometraza,
+            return @"SELECT distinct v.VoziloID,v.ModelID,p.Naziv + ' ' + m.Naziv AS Model,v.Kilometraza,
                         v.GodinaProizvodnje,v.Boja,v.BrojVrata,v.Dostupnost,r.RegistracijskiBroj
                         FROM Vozila v
                         JOIN Model m 

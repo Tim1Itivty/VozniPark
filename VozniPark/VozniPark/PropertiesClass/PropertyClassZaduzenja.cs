@@ -171,7 +171,6 @@ namespace VozniPark.PropertiesClass
                 parameter.Value = DatumZaduzenja;
                 list.Add(parameter);
             }
-           
             {
                 SqlParameter parameter = new SqlParameter("PlaniranoRazduzenje", System.Data.SqlDbType.DateTime);
                 parameter.Value = PlaniranoRazduzenje;

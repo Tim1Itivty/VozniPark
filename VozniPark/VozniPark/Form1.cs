@@ -1456,10 +1456,13 @@ namespace VozniPark
 
                     if (state == StateEnum.Update)
                     {
-                        ic.UnosPolje = item.GetValue(myProperty).ToString();
+                        if (item.GetValue(myProperty) != null)
+                            ic.UnosPolje = item.GetValue(myProperty).ToString();
+                        else
+                            ic.UnosPolje = "";
                     }
 
-                    if (state == StateEnum.Update && (ic.Naziv=="Godina proizvodnje"||ic.Naziv=="Kilometraza"||ic.Naziv=="Boja"||ic.Naziv=="Broj vrata"||ic.Naziv=="Dostupnost"))
+                    if (ic.Naziv=="Dostupnost")
                     {
                         ic.Enabled = false;
                     }
@@ -1584,7 +1587,7 @@ namespace VozniPark
             
             foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
             {
-                if (state == StateEnum.Update || state == StateEnum.Razduzi && myProperty.GetType() == typeof(PropertyClassZaduzenja))
+                if ((state == StateEnum.Update || state == StateEnum.Razduzi) && myProperty.GetType() == typeof(PropertyClassZaduzenja))
                 {
                     if (grid.Columns[i].HeaderText == "Datum razduzenja")
                     {
@@ -1621,10 +1624,7 @@ namespace VozniPark
                     }
                     else if (grid.Columns[i].HeaderText == "RegistracijaID" || (grid.Columns[i].HeaderText == "Registarski broj"&& grid.SelectedRows[0].Cells[7].Value.ToString() == "") || (grid.Columns[i].HeaderText == "Cijena" && grid.SelectedRows[0].Cells[10].Value.ToString() == ""))
                     {
-                        string value = "0";
-
-                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                        continue;
                     }
                    
                     else
@@ -1655,13 +1655,16 @@ namespace VozniPark
                     InputControl control = item as InputControl;
 
                     PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    if (property != null) control.UnosPolje = property.GetValue(myProperty).ToString();
+                    if (property.GetValue(myProperty) != null) control.UnosPolje = property.GetValue(myProperty).ToString();
                 }
                 else if (item.GetType() == typeof(DateTimeControl))
                 {
                     DateTimeControl control = item as DateTimeControl;
                     PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    if (property != null) control.Unos = (DateTime)property.GetValue(myProperty);
+                    if(myProperty.GetType() == typeof(PropertyClassRegistracija))
+                        if (property.GetValue(myProperty) != null) control.Unos =  DateTime.Now;
+                    else if (myProperty.GetType() == typeof(PropertyClassRegistracija))
+                        if (property.GetValue(myProperty) != null) control.Unos = (DateTime)property.GetValue(myProperty);
                 }
                 else if (item.GetType() == typeof(LookupControl))
                 {

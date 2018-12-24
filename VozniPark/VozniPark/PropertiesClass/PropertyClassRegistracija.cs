@@ -14,30 +14,22 @@ namespace VozniPark.PropertiesClass
     {
         #region Atributi
 
-
-      
-        //[PrimaryKey]
-        //[DisplayName("Vozilo ID")]
-        //[SqlNameAttribute("VoziloID")]
-        //[LookupKey]
-        //public int VoziloID { get; set; }
+        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        [DisplayName("VoziloID")]
+        [SqlNameAttribute("VoziloID")]
+        [LookupKey]
+        [ForeignField("")]
+        public int VoziloID { get; set; }
 
         [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertiesClass.PropertyClassModel")]
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
-        [LookupValue]
-        [ForeignField]
         public int ModelID { get; set; }
-
-
-        [DisplayName("Proizvodjac")]
-        [SqlName("NazivProizvodjaca")]
-        [ForeignField]
-        public string NazivProizvodjaca { get; set; }
-
+        
         [DisplayName("Model")]
         [SqlName("NazivModela")]
-        [ForeignField]
+        [ForeignField("Model ID")]
+        [LookupValue]
         public string NazivModela { get; set; }
 
         [DisplayName("Godina proizvodnje")]
@@ -87,24 +79,11 @@ namespace VozniPark.PropertiesClass
         [DateTime]
         public DateTime DatumIstekaRegistracije { get; set; }
 
-
-
-
         [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite cijenu!")]
         [DisplayName("Cijena")]
         [SqlNameAttribute("Cijena")]
         public double Cijena { get; set; }
-
-
-
-        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        [DisplayName("VoziloID")]
-        [SqlNameAttribute("VoziloID")]
-        public int VoziloID { get; set; }
-        //[ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        //[DisplayName("VoziloID")]
-        //[SqlNameAttribute("VoziloID")]
-        //public int VoziloID { get; set; }
+        
 
         #endregion
 
@@ -114,8 +93,7 @@ namespace VozniPark.PropertiesClass
         {
             return @"SELECT 
                     v.ModelID,
-					p.Naziv AS NazivProizvodjaca,
-					m.Naziv AS NazivModela,
+					p.Naziv + ' ' + m.Naziv AS NazivModela,
                     v.GodinaProizvodnje,
                     v.Kilometraza,
                     v.Boja,
