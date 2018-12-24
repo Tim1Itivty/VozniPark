@@ -29,20 +29,10 @@ namespace VozniPark.PropertiesClass
         public string NazivProizvodjaca { get; set; }
 
         [DisplayName("Model")]
-        [SqlName("NazivModela")]
+        [SqlNameAttribute("Model")]
         [ForeignField]
-        public string Naziv { get; set; }
-
-        
-
-        //[DisplayName("Model")]
-        //[SqlNameAttribute("Model")]
-        //[ForeignField]
-        //[LookupValue]
-        //public int Model { get; set; }
-
-
-
+        [LookupValue]
+        public int Model { get; set; }
 
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
@@ -76,12 +66,12 @@ namespace VozniPark.PropertiesClass
         #region query
         public string GetSelectQuery()
         {
-            return @"SELECT v.VoziloID,v.ModelID,p.Naziv as NazivProizvodjaca,m.Naziv AS NazivModela,v.Kilometraza,
+            return @"SELECT distinct v.VoziloID,v.ModelID,p.Naziv as NazivProizvodjaca,m.Naziv AS Model,v.Kilometraza,
                         v.GodinaProizvodnje,v.Boja,v.BrojVrata,v.Dostupnost,r.RegistracijskiBroj
                         FROM Vozila v
-                        LEFT JOIN Model m 
+                        JOIN Model m 
                         ON v.ModelID=m.ModelID
-                        LEFT JOIN Proizvodjac p 
+                        JOIN Proizvodjac p 
                         on m.ProizvodjacID=p.ProizvodjacID
                         LEFT JOIN Registracija r 
                         ON r.VoziloID=v.VoziloID";
@@ -122,7 +112,7 @@ namespace VozniPark.PropertiesClass
                     from dbo.Vozila as v
                     join dbo.Model as m on v.ModelId = m.ModelID
                     join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
-                    where v.Dostupnost = 1";
+                    where v.Dostupnost = 'True'";
         }
         #endregion
 

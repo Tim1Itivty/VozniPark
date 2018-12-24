@@ -1159,7 +1159,15 @@ namespace VozniPark
 
                     item.SetValue(myProperty, Convert.ChangeType(value, item.PropertyType));
                 }
+                if (item.GetCustomAttribute<SqlNameAttribute>().Name == "VozilaID")
+                {
+                    string value = row.Cells[item.GetCustomAttribute<SqlNameAttribute>().Name]
+                        .Value.ToString();
+
+                    item.SetValue(myProperty, Convert.ChangeType(value, item.PropertyType));
+                }
             }
+            
 
             SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetDeleteQuery(), myProperty.GetDeleteParameters().ToArray());
