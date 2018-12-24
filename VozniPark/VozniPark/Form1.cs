@@ -22,6 +22,7 @@ namespace VozniPark
 
         public PropertyInterface myProperty;
         public StateEnum state;
+        int brojac = 0;
         public Form1()
         {
             InitializeComponent();
@@ -42,28 +43,12 @@ namespace VozniPark
             for (int i = 0; i < 3; i++)
             {
                 Button btnPodmeni = new Button();
-                btnPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-                btnPodmeni.FlatAppearance.BorderSize = 0;
-                btnPodmeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                btnPodmeni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                btnPodmeni.ForeColor = System.Drawing.Color.Linen;
-                btnPodmeni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-                btnPodmeni.TabIndex = 0;
-                btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                btnPodmeni.UseVisualStyleBackColor = false;
-                btnPodmeni.FlatStyle = FlatStyle.Flat;
-                btnPodmeni.Width = flpPodmeni.Width;
-                btnPodmeni.Height = 55;                
-
-                //btnPodmeni.Click += new System.EventHandler(this.btnVozila_Click);
-
-
+                buttonDesign(btnPodmeni);
                 if (i == 0)
                 {
                     btnPodmeni.Text = "Pregled svih vozila";
                     btnPodmeni.Name = "btnPregled";
-
-
+                    
                 }
                 if (i == 1)
                 {
@@ -83,8 +68,6 @@ namespace VozniPark
 
         private void BtnPodmeni_Click(object sender, EventArgs e)
         {
-
-
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
@@ -92,12 +75,9 @@ namespace VozniPark
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassVozila();
-
-                //refresujGrid();
-
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
-                Panel panel = new Panel();
+                FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button Add = new Button();
                 Add.Click += Add_Click;
 
@@ -110,26 +90,15 @@ namespace VozniPark
                 Add.Text = "ADD";
                 Delete.Text = "DELETE";
                 Update.Text = "UPDATE";
-
-                Add.Location = new Point(10, 10);
-                Update.Location = new Point(95, 10);
-                Delete.Location = new Point(180, 10);
-
-
-
+                
                 panel.Height = 100;
                 panel.Width = 470;
-
-
-                panel.Location = new Point(250, 150);
+                
                 panel.Controls.Add(Add);
                 panel.Controls.Add(Delete);
                 panel.Controls.Add(Update);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
-
-                
-
             }
             else if (button.Name == "btnDodajVozilo")
             {
@@ -139,35 +108,24 @@ namespace VozniPark
 
                 PopulateControls();
 
-                Panel panel = new Panel();
+                FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajVozilo = new Button();
                 Button btnOtkazi = new Button();
-
-             
-
-                btnDodajVozilo.Location = new Point(10, 10);
+                
                 btnDodajVozilo.Text = "Dodaj vozilo";
-
-                btnOtkazi.Location = new Point(100, 10);
+                
                 btnOtkazi.Text = "Ocisti polja";
 
                 btnDodajVozilo.Click += BtnDodajVozilo_Click;
                 btnOtkazi.Click += BtnOtkazi_Click;
-               
-
-
                 btnOtkazi.Visible = true;
 
                 panel.Height = 100;
                 panel.Width = 470;
-
-
-                panel.Location = new Point(70, 470);
-
+                
                 panel.Controls.Add(btnDodajVozilo);
-               panel.Controls.Add(btnOtkazi);
-
-
+                panel.Controls.Add(btnOtkazi);
+                
                 pnlDashboard.Controls.Add(panel);
 
             }
@@ -177,38 +135,22 @@ namespace VozniPark
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassRegistracija();
-
-                //refresujGrid();
-
+                
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
-                Panel panel = new Panel();
+                FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button Registruj = new Button();
                 Registruj.Click += Registruj_Click;
-
-                
-
                 Registruj.Text = "Registruj";
                
-
-               Registruj.Location = new Point(310, 10);
-           
-
-
-
                 panel.Height = 100;
                 panel.Width = 470;
-
-
-                panel.Location = new Point(250, 150);
                 panel.Controls.Add(Registruj);
              
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
-
-
+                
             }
-
         }
 
         private void Registruj_Click(object sender, EventArgs e)
@@ -217,75 +159,44 @@ namespace VozniPark
             myProperty = new PropertyClassRegistracija();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
 
-
-
-
             ucitajVrijednostiUPolja();
 
-            Panel panel = new Panel();
+            FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajRegistraciju = new Button();
             Button btnOtkazi2 = new Button();
-
-
-
-            btnDodajRegistraciju.Location = new Point(10, 10);
+            
             btnDodajRegistraciju.Text = "Registruj";
-
-            btnOtkazi2.Location = new Point(100, 10);
+            
             btnOtkazi2.Text = "Ocisti polja";
 
             btnDodajRegistraciju.Click += BtnDodajRegistraciju_Click;
             btnOtkazi2.Click += BtnOtkazi2_Click;
-
-
-
-            
-
             panel.Height = 100;
             panel.Width = 470;
-
-
-            panel.Location = new Point(70, 470);
-
+            
             panel.Controls.Add(btnOtkazi2);
             panel.Controls.Add(btnDodajRegistraciju);
-
-
+            
             pnlDashboard.Controls.Add(panel);
         }
-
-       
-
+        
         private void BtnOtkazi2_Click(object sender, EventArgs e)
         {
             pnlDashboard.Controls.Clear();
             DataGridView dtg = new DataGridView();
             pnlDashboard.Controls.Add(dtg);
             myProperty = new PropertyClassRegistracija();
-
-            //refresujGrid();
-
             dgvDimeznije(dtg);
             pnlDashboard.Controls.Add(dtg);
             Panel panel = new Panel();
             Button Registruj = new Button();
             Registruj.Click += Registruj_Click;
-
-
-
+            
             Registruj.Text = "Registruj";
-
-
-            Registruj.Location = new Point(310, 10);
-
-
-
-
+            
             panel.Height = 100;
             panel.Width = 470;
-
-
-            panel.Location = new Point(250, 150);
+            
             panel.Controls.Add(Registruj);
 
             pnlDashboard.Controls.Add(panel);
@@ -301,35 +212,20 @@ namespace VozniPark
             DataGridView dtg = new DataGridView();
             pnlDashboard.Controls.Add(dtg);
             myProperty = new PropertyClassRegistracija();
-
-            //refresujGrid();
-
             dgvDimeznije(dtg);
             pnlDashboard.Controls.Add(dtg);
-            Panel panel = new Panel();
+            FlowLayoutPanel panel = new FlowLayoutPanel();
             Button Registruj = new Button();
             Registruj.Click += Registruj_Click;
-
-
-
             Registruj.Text = "Registruj";
-
-
-            Registruj.Location = new Point(310, 10);
-
-
-
 
             panel.Height = 100;
             panel.Width = 470;
-
-
-            panel.Location = new Point(250, 150);
+            
             panel.Controls.Add(Registruj);
 
             pnlDashboard.Controls.Add(panel);
             PopulateGrid();
-
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -351,44 +247,23 @@ namespace VozniPark
             state = StateEnum.Update;
             myProperty = new PropertyClassVozila();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
-           
-           
-
-           
             ucitajVrijednostiUPolja();
             Panel panel = new Panel();
             Button btnDodajVozilo = new Button();
             Button btnOtkazi = new Button();
-
-
-
-            btnDodajVozilo.Location = new Point(10, 10);
+            
             btnDodajVozilo.Text = "Dodaj vozilo";
-
-            btnOtkazi.Location = new Point(100, 10);
             btnOtkazi.Text = "Ocisti polja";
 
             btnDodajVozilo.Click += BtnDodajVozilo_Click;
             btnOtkazi.Click += BtnOtkazi_Click;
-
-
-
-            
-
             panel.Height = 100;
             panel.Width = 470;
-
-
-            panel.Location = new Point(70, 470);
-
+            
             panel.Controls.Add(btnDodajVozilo);
             panel.Controls.Add(btnOtkazi);
 
-
             pnlDashboard.Controls.Add(panel);
-
-
-
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -409,7 +284,6 @@ namespace VozniPark
 
         private void BtnDodajVozilo_Click(object sender, EventArgs e)
         {
-            
             AddUpdate();
 
             if (state == StateEnum.Add)
@@ -421,36 +295,21 @@ namespace VozniPark
 
                     PopulateControls();
 
-
                     Panel panel = new Panel();
                     Button btnDodajVozilo = new Button();
                     Button btnOtkazi = new Button();
-
-
-
-                    btnDodajVozilo.Location = new Point(10, 10);
                     btnDodajVozilo.Text = "Dodaj vozilo";
-
-                    btnOtkazi.Location = new Point(100, 10);
                     btnOtkazi.Text = "Ocisti polja";
 
                     btnDodajVozilo.Click += BtnDodajVozilo_Click;
                     btnOtkazi.Click += BtnOtkazi_Click;
-
-
-
                     btnOtkazi.Visible = true;
 
                     panel.Height = 100;
                     panel.Width = 470;
-
-
-                    panel.Location = new Point(70, 470);
-
+                
                     panel.Controls.Add(btnDodajVozilo);
                     panel.Controls.Add(btnOtkazi);
-
-
                     pnlDashboard.Controls.Add(panel);
             }
             else if (state == StateEnum.Update)
@@ -461,9 +320,7 @@ namespace VozniPark
                 button.Name = "btnPregled";
                 BtnPodmeni_Click(button, e);
             }
-
-
-
+            
         }
 
         private void BtnOtkazi_Click(object sender, EventArgs e)
@@ -477,31 +334,17 @@ namespace VozniPark
                 Panel panel = new Panel();
                 Button btnDodajVozilo = new Button();
                 Button btnOtkazi = new Button();
-
-
-
-                btnDodajVozilo.Location = new Point(10, 10);
                 btnDodajVozilo.Text = "Dodaj vozilo";
-
-                btnOtkazi.Location = new Point(100, 10);
                 btnOtkazi.Text = "Ocisti polja";
 
                 btnDodajVozilo.Click += BtnDodajVozilo_Click;
                 btnOtkazi.Click += BtnOtkazi_Click;
-
-
-
-
+                
                 panel.Height = 100;
                 panel.Width = 470;
-
-
-                panel.Location = new Point(70, 470);
-
                 panel.Controls.Add(btnDodajVozilo);
                 panel.Controls.Add(btnOtkazi);
-
-
+                
                 pnlDashboard.Controls.Add(panel);
             }
             else if (state == StateEnum.Update)
@@ -527,20 +370,7 @@ namespace VozniPark
             for (int i = 0; i < 2; i++)
             {
                 Button btnPodmeniZaposleni = new Button();
-                btnPodmeniZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-                btnPodmeniZaposleni.FlatAppearance.BorderSize = 0;
-                btnPodmeniZaposleni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                btnPodmeniZaposleni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                btnPodmeniZaposleni.ForeColor = System.Drawing.Color.Linen;
-                btnPodmeniZaposleni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-                btnPodmeniZaposleni.TabIndex = 0;
-                btnPodmeniZaposleni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                btnPodmeniZaposleni.UseVisualStyleBackColor = false;
-                //btnPodmeniZaposleni.Click += new System.EventHandler(this.btnVozila_Click);
-
-                btnPodmeniZaposleni.Width = flpPodmeni.Width;
-                btnPodmeniZaposleni.Height = 55;
-                btnPodmeniZaposleni.FlatStyle = FlatStyle.Flat;
+                buttonDesign(btnPodmeniZaposleni);
 
                 if (i == 0)
                 {
@@ -569,12 +399,10 @@ namespace VozniPark
                 myProperty = new PropertyClassZaposleni();
 
                 dgvDimeznije(dtg);
-
-
+                
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
                 flp.Width = pnlDashboard.Width;
-                flp.Location = new Point(10, 170);
                 pnlDashboard.Controls.Add(dtg);
                 pnlDashboard.Controls.Add(flp);
                 for (int i = 0; i < 4; i++)
@@ -585,8 +413,6 @@ namespace VozniPark
                         state = StateEnum.Add;
                         btn.Name = "btnDodaj";
                         btn.Text = "Dodaj";
-                        
-
 
                     }
                     if (i == 1)
@@ -705,21 +531,7 @@ namespace VozniPark
             for (int i = 0; i < 4; i++)
             {
                 Button btnPodmeniZaduzenja = new Button();
-                btnPodmeniZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-                btnPodmeniZaduzenja.FlatAppearance.BorderSize = 0;
-                btnPodmeniZaduzenja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                btnPodmeniZaduzenja.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                btnPodmeniZaduzenja.ForeColor = System.Drawing.Color.Linen;
-                btnPodmeniZaduzenja.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-                btnPodmeniZaduzenja.TabIndex = 0;
-                btnPodmeniZaduzenja.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                btnPodmeniZaduzenja.UseVisualStyleBackColor = false;
-                //btnPodmeniZaduzenja.Click += new System.EventHandler(this.btnVozila_Click);
-
-                btnPodmeniZaduzenja.Width = flpPodmeni.Width;
-                btnPodmeniZaduzenja.Height = 55;
-
-                btnPodmeniZaduzenja.FlatStyle = FlatStyle.Flat;
+                buttonDesign(btnPodmeniZaduzenja);
                 if (i == 0)
                 {
                     btnPodmeniZaduzenja.Text = "Pregled trenutnih zaduzenja";
@@ -755,8 +567,6 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
-
-                //refresujGrid();
                 dgvDimeznije(dtg);
 
                 FlowLayoutPanel flpButoni = new FlowLayoutPanel();
@@ -808,12 +618,10 @@ namespace VozniPark
                 flpButon.Controls.Add(btnZaduzi);
 
                 btnZaduzi.Click += BtnZaduzi_Click;
-
-
             }
             else if (button.Name == "btnRazduzi")
             {
-                state = StateEnum.Update;
+                state = StateEnum.Razduzi;
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
@@ -830,12 +638,19 @@ namespace VozniPark
                 btnRazduzi.Text = "RAZDUZI";
                 btnRazduzi.Name = "btnRazduzi";
                 flpButon.Controls.Add(btnRazduzi);
+
+                btnRazduzi.Click += BtnRazduzi_Click;
             }
 
             else if (button.Name == "btnIstorija")
             {
                 pnlDashboard.Controls.Clear();
             }
+        }
+
+        private void BtnRazduzi_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void BtnZaduzi_Click(object sender, EventArgs e)
@@ -882,13 +697,12 @@ namespace VozniPark
                 flpButon.Width = pnlDashboard.Width;
                 pnlDashboard.Controls.Add(flpButon);
 
-                Button btnZaduzi = new Button();
-                btnZaduzi.Text = "Zaduzi";
-                btnZaduzi.Name = "btnZaduzi";
-                flpButon.Controls.Add(btnZaduzi);
+                Button btnSacuvaj = new Button();
+                btnSacuvaj.Text = "Sacuvaj";
+                btnSacuvaj.Name = "btnSacuvaj";
+                flpButon.Controls.Add(btnSacuvaj);
 
-                
-
+                btnSacuvaj.Click += BtnSacuvaj_Click;
             }
             else if ((button.Name == "btnIzbrisi"))
             {
@@ -896,17 +710,26 @@ namespace VozniPark
                 delete(dtg);
                 Button btnPregled = sender as Button;
                 btnPregled.Name = "btnPregled";
-
-                //BtnPodmeniZaduzenja_Click(button, e);
-
+                
                 MessageBox.Show("Zaduzenje je izbrisano!");
 
                 btnZaduzenja_Click(sender, e);
                 BtnPodmeniZaduzenja_Click(sender, e);
 
             }
+        }
 
+        private void BtnSacuvaj_Click(object sender, EventArgs e)
+        {
+            state = StateEnum.Update;
+            AddUpdate();
+            MessageBox.Show("Uspjesna izmjena!");
+            pnlDashboard.Controls.Clear();
 
+            btnZaduzenja_Click(sender, e);
+            Button podmeniTrenutna = sender as Button;
+            podmeniTrenutna.Name = "btnPregled";
+            BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
         }
 
         #endregion
@@ -925,21 +748,7 @@ namespace VozniPark
             for (int i = 0; i < 2; i++)
             {
                 Button btnPodmeniServis = new Button();
-                btnPodmeniServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
-                btnPodmeniServis.FlatAppearance.BorderSize = 0;
-                btnPodmeniServis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                btnPodmeniServis.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                btnPodmeniServis.ForeColor = System.Drawing.Color.Linen;
-                btnPodmeniServis.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-                btnPodmeniServis.TabIndex = 0;
-                btnPodmeniServis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                btnPodmeniServis.UseVisualStyleBackColor = false;
-                //btnPodmeniServis.Click += new System.EventHandler(this.btnVozila_Click);
-
-                btnPodmeniServis.Width = flpPodmeni.Width;
-                btnPodmeniServis.Height = 55;
-
-                btnPodmeniServis.FlatStyle = FlatStyle.Flat;
+                buttonDesign(btnPodmeniServis);
                 if (i == 0)
                 {
                     btnPodmeniServis.Text = "Pregled svih servisa";
@@ -966,11 +775,9 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServis();
 
-                //refresujGrid();
-
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
-                Panel panel = new Panel();
+                FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button Add1 = new Button();
                 Add1.Click += Add1_Click;
 
@@ -984,17 +791,8 @@ namespace VozniPark
                 Delete1.Text = "DELETE";
                 Update1.Text = "UPDATE";
 
-                Add1.Location = new Point(10, 10);
-                Update1.Location = new Point(95, 10);
-                Delete1.Location = new Point(180, 10);
-
-
-
                 panel.Height = 100;
                 panel.Width = 470;
-
-
-                panel.Location = new Point(250, 150);
                 panel.Controls.Add(Add1);
                 panel.Controls.Add(Delete1);
                 panel.Controls.Add(Update1);
@@ -1009,35 +807,20 @@ namespace VozniPark
 
                 PopulateControls();
 
-                Panel panel = new Panel();
+                FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajServis = new Button();
                 Button btnOtkazi1 = new Button();
-
-
-
-                btnDodajServis.Location = new Point(10, 10);
                 btnDodajServis.Text = "Dodaj servis";
-
-                btnOtkazi1.Location = new Point(100, 10);
                 btnOtkazi1.Text = "Ocisti polja";
 
                 btnDodajServis.Click += BtnDodajServis_Click;
                 btnOtkazi1.Click += BtnOtkazi1_Click;
-
-
-
                 btnOtkazi1.Visible = true;
 
                 panel.Height = 100;
                 panel.Width = 470;
-
-
-                panel.Location = new Point(70, 470);
-
                 panel.Controls.Add(btnDodajServis);
                 panel.Controls.Add(btnOtkazi1);
-
-
                 pnlDashboard.Controls.Add(panel);
             }
         }
@@ -1050,34 +833,22 @@ namespace VozniPark
                 myProperty = new PropertyClassServis();
 
                 PopulateControls();
-                Panel panel = new Panel();
+                FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajServis = new Button();
                 Button btnOtkazi1 = new Button();
-
-
-
-                btnDodajServis.Location = new Point(10, 10);
+                
                 btnDodajServis.Text = "Dodaj servis";
-
-                btnOtkazi1.Location = new Point(100, 10);
+                
                 btnOtkazi1.Text = "Ocisti polja";
 
                 btnDodajServis.Click += BtnDodajServis_Click;
                 btnOtkazi1.Click += BtnOtkazi1_Click;
-
-
-
-
                 panel.Height = 100;
                 panel.Width = 470;
 
-
-                panel.Location = new Point(70, 470);
-
                 panel.Controls.Add(btnDodajServis);
                 panel.Controls.Add(btnOtkazi1);
-
-
+                
                 pnlDashboard.Controls.Add(panel);
             }
             else if (state == StateEnum.Update)
@@ -1090,17 +861,6 @@ namespace VozniPark
 
         private void BtnDodajServis_Click(object sender, EventArgs e)
         {
-            
-            //for (int i = 0; i < pnlDashboard.Controls.Count; i++)
-            //{
-            //    if (pnlDashboard.Controls[i].Text == "" || pnlDashboard.Controls[i].Text == null)
-            //    {
-            //        MessageBox.Show("Popuni sve podatke");
-            //        brojac += 1;
-            //        break;
-            //    }
-            //}
-            
                 AddUpdate();
 
                 if (state == StateEnum.Add)
@@ -1111,37 +871,25 @@ namespace VozniPark
                     myProperty = new PropertyClassServis();
 
                     PopulateControls();
-
-
-                    Panel panel = new Panel();
+                
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajServis = new Button();
                     Button btnOtkazi1 = new Button();
-
-
-
-                    btnDodajServis.Location = new Point(10, 10);
                     btnDodajServis.Text = "Dodaj servis";
-
-                    btnOtkazi1.Location = new Point(100, 10);
+                
                     btnOtkazi1.Text = "Ocisti polja";
 
                     btnDodajServis.Click += BtnDodajServis_Click;
                     btnOtkazi1.Click += BtnOtkazi1_Click;
-
-
 
                     btnOtkazi1.Visible = true;
 
                     panel.Height = 100;
                     panel.Width = 470;
 
-
-                    panel.Location = new Point(70, 470);
-
                     panel.Controls.Add(btnDodajServis);
                     panel.Controls.Add(btnOtkazi1);
-
-
+                
                     pnlDashboard.Controls.Add(panel);
                 }
                 else if (state == StateEnum.Update)
@@ -1152,7 +900,6 @@ namespace VozniPark
                     button.Name = "btnServis";
                     BtnPodmeniServis_Click(button, e);
                 }
-            
         }
 
         private void Delete1_Click(object sender, EventArgs e)
@@ -1173,39 +920,22 @@ namespace VozniPark
             myProperty = new PropertyClassServis();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
 
-
-
-
             ucitajVrijednostiUPolja();
-            Panel panel = new Panel();
+            FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
-
-
-
-            btnDodajServis.Location = new Point(10, 10);
             btnDodajServis.Text = "Dodaj servis";
-
-            btnOtkazi1.Location = new Point(100, 10);
+            
             btnOtkazi1.Text = "Ocisti polja";
 
             btnDodajServis.Click += BtnDodajServis_Click;
             btnOtkazi1.Click += BtnOtkazi1_Click;
 
-
-
-
-
             panel.Height = 100;
             panel.Width = 470;
 
-
-            panel.Location = new Point(70, 470);
-
             panel.Controls.Add(btnDodajServis);
             panel.Controls.Add(btnOtkazi1);
-
-
             pnlDashboard.Controls.Add(panel);
         }
 
@@ -1220,41 +950,26 @@ namespace VozniPark
             btnServis_Click(sender, e);
             Button btn = sender as Button;
             btn.Name = "btnPregled";
-            Panel panel = new Panel();
+            FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
-
-
-
-            btnDodajServis.Location = new Point(10, 10);
             btnDodajServis.Text = "Dodaj servis";
-
-            btnOtkazi1.Location = new Point(100, 10);
             btnOtkazi1.Text = "Ocisti polja";
 
             btnDodajServis.Click += BtnDodajServis_Click;
             btnOtkazi1.Click += BtnOtkazi1_Click;
 
-
-
-
-
             panel.Height = 100;
             panel.Width = 470;
 
-
-            panel.Location = new Point(70, 470);
-
             panel.Controls.Add(btnDodajServis);
             panel.Controls.Add(btnOtkazi1);
-
-
+            
             pnlDashboard.Controls.Add(panel);
 
         }
 
         #endregion
-
 
         #region ostaleMetode
         private void PopulateGrid()
@@ -1269,8 +984,6 @@ namespace VozniPark
             reader.Close();
 
             grid.DataSource = dt;
-
-
             var type = myProperty.GetType();
             var properties = type.GetProperties();
 
@@ -1279,14 +992,10 @@ namespace VozniPark
                     item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
                                           ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
                 }
-
-            
             for (int i = 0; i < grid.Columns.Count; i++)
             {
                 grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-
-
         }
 
         public void PopulateControls()
@@ -1355,7 +1064,6 @@ namespace VozniPark
                         ic.UnosPolje = item.GetValue(myProperty).ToString();
                     }
 
-
                     if (state == StateEnum.Update && (ic.Naziv=="Godina proizvodnje"||ic.Naziv=="Kilometraza"||ic.Naziv=="Boja"||ic.Naziv=="Broj vrata"||ic.Naziv=="Dostupnost"))
                     {
                         ic.Enabled = false;
@@ -1366,11 +1074,7 @@ namespace VozniPark
                         ic.Enabled = false;
                         ic.UnosPolje = "0";
                     }
-                        
                     pnlDashboard.Controls.Add(ic);
-
-                   
-
                 }
             }
         }
@@ -1378,15 +1082,20 @@ namespace VozniPark
         private void Form1_Activated(object sender, EventArgs e)
         {
             btnVozila_Click(sender, e);
-            BtnPodmeni_Click(sender, e);
+            if(brojac == 0)
+            {
+                BtnPodmeni_Click(startButtonClick(), e);
+                brojac++;
+            }
+            
         }
-
-        private void btnOtkazi_Click(object sender, EventArgs e)
+        private Button startButtonClick()
         {
-
+            Button btn = new Button();
+            btn.Name = "btnPregled";
+            return btn;
         }
-
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
@@ -1422,7 +1131,6 @@ namespace VozniPark
                 else if (item.GetType() == typeof(DateTimeControl))
                 {
                     DateTimeControl date = item as DateTimeControl;
-                    //if (!date.Enabled) continue;
                     DateTime value = date.Unos;
 
                     PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
@@ -1463,7 +1171,6 @@ namespace VozniPark
             var type = myProperty.GetType();
             var properties = type.GetProperties();
             int i = 0;
-
             
             foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
             {
@@ -1516,7 +1223,6 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-
                 }
                 else
                 {
@@ -1525,16 +1231,12 @@ namespace VozniPark
                     PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
-
                 i++;
-
-            }
-                
+            } 
             
             pnlDashboard.Controls.Clear();
             PopulateControls();
-
-
+            
             foreach (var item in pnlDashboard.Controls)
             {
                 if (item.GetType() == typeof(InputControl))
@@ -1572,7 +1274,22 @@ namespace VozniPark
             dtg.Width = pnlDashboard.Width - 50;
             dtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-           
+        }
+
+        private void buttonDesign(Button btnPodmeni)
+        {
+            btnPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            btnPodmeni.FlatAppearance.BorderSize = 0;
+            btnPodmeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnPodmeni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            btnPodmeni.ForeColor = System.Drawing.Color.Linen;
+            btnPodmeni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            btnPodmeni.TabIndex = 0;
+            btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnPodmeni.UseVisualStyleBackColor = false;
+            btnPodmeni.FlatStyle = FlatStyle.Flat;
+            btnPodmeni.Width = flpPodmeni.Width;
+            btnPodmeni.Height = 55;
         }
 
         #endregion

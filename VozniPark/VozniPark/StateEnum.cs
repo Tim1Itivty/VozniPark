@@ -10,6 +10,8 @@ namespace VozniPark
     {
         Add,
         Update,
-        Lookup
+        Lookup,
+        Razduzi
+
     }
 }
