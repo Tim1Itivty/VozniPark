@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace VozniPark.PropertiesClass
         [LookupKey]
         public int VoziloID { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID modela!")]
         [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertiesClass.PropertyClassModel")]
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
@@ -34,22 +36,27 @@ namespace VozniPark.PropertiesClass
         [LookupValue]
         public int Model { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite godinu proizvodnje!")]
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
         public int GodinaProizvodnje { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite predjenu kilometrazu!")]
         [DisplayName("Kilometraza")]
         [SqlNameAttribute("Kilometraza")]
         public int Kilometraza { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite boju!")]
         [DisplayName("Boja")]
         [SqlNameAttribute("Boja")]
         public string Boja { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite boju!")]
         [DisplayName("Broj vrata")]
         [SqlNameAttribute("BrojVrata")]
         public int BrojVrata { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite dostupnost!")]
         [DisplayName("Dostupnost")]
         [SqlNameAttribute("Dostupnost")]
         public bool Dostupnost { get; set; }
