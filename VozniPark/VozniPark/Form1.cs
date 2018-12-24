@@ -22,6 +22,7 @@ namespace VozniPark
 
         public PropertyInterface myProperty;
         public StateEnum state;
+        int brojac = 0;
         public Form1()
         {
             InitializeComponent();
@@ -160,7 +161,7 @@ namespace VozniPark
 
             ucitajVrijednostiUPolja();
 
-            Panel panel = new Panel();
+            FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajRegistraciju = new Button();
             Button btnOtkazi2 = new Button();
             
@@ -832,7 +833,7 @@ namespace VozniPark
                 myProperty = new PropertyClassServis();
 
                 PopulateControls();
-                Panel panel = new Panel();
+                FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajServis = new Button();
                 Button btnOtkazi1 = new Button();
                 
@@ -871,7 +872,7 @@ namespace VozniPark
 
                     PopulateControls();
                 
-                    Panel panel = new Panel();
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajServis = new Button();
                     Button btnOtkazi1 = new Button();
                     btnDodajServis.Text = "Dodaj servis";
@@ -920,7 +921,7 @@ namespace VozniPark
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
 
             ucitajVrijednostiUPolja();
-            Panel panel = new Panel();
+            FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
             btnDodajServis.Text = "Dodaj servis";
@@ -949,7 +950,7 @@ namespace VozniPark
             btnServis_Click(sender, e);
             Button btn = sender as Button;
             btn.Name = "btnPregled";
-            Panel panel = new Panel();
+            FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
             btnDodajServis.Text = "Dodaj servis";
@@ -1081,7 +1082,12 @@ namespace VozniPark
         private void Form1_Activated(object sender, EventArgs e)
         {
             btnVozila_Click(sender, e);
-            BtnPodmeni_Click(startButtonClick(), e);
+            if(brojac == 0)
+            {
+                BtnPodmeni_Click(startButtonClick(), e);
+                brojac++;
+            }
+            
         }
         private Button startButtonClick()
         {
