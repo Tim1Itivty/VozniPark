@@ -167,7 +167,7 @@ namespace VozniPark
 
         private void Registruj_Click(object sender, EventArgs e)
         {
-            state = StateEnum.Update;
+            state = StateEnum.Add;
             myProperty = new PropertyClassRegistracija();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
 
@@ -427,8 +427,9 @@ namespace VozniPark
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
 
-            delete(dtg);
-            MessageBox.Show("Vozilo je obrisano");
+            string provjera = delete(dtg);
+            if(provjera != "Greska")
+                MessageBox.Show("Vozilo je obrisano");
 
             Button button = sender as Button;
             button.Name = "btnPregled";
@@ -1547,7 +1548,7 @@ namespace VozniPark
             }
         }
 
-        public void delete(DataGridView dg)
+        public string delete(DataGridView dg)
         {
             DataGridViewRow row = dg.SelectedRows[0];
             var properties = myProperty.GetType().GetProperties();
@@ -1578,8 +1579,9 @@ namespace VozniPark
             catch(Exception e)
             {
                 MessageBox.Show("Vozilo je zaduzeno", "Greska");
+                return "Greska";
             }
-            
+            return "Uspijeh";
         }
 
         private void ucitajVrijednostiUPolja()
@@ -1617,18 +1619,25 @@ namespace VozniPark
 
                 }
                 
-              else if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassRegistracija))
+              else if (state == StateEnum.Add && myProperty.GetType() == typeof(PropertyClassRegistracija))
                 {
-                    if ( grid.Columns[i].HeaderText == "Datum isteka registracije" || grid.Columns[i].HeaderText == "Datum registracije")
+                    if ( grid.Columns[i].HeaderText == "Datum registracije" || grid.Columns[i].HeaderText == "Datum isteka registracije")
                     {
                         string value = DateTime.Now.ToString();
 
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if (grid.Columns[i].HeaderText == "RegistracijaID" || (grid.Columns[i].HeaderText == "Registarski broj"&& grid.SelectedRows[0].Cells[7].Value.ToString() == "") || (grid.Columns[i].HeaderText == "Cijena" && grid.SelectedRows[0].Cells[10].Value.ToString() == ""))
+                    else if(grid.Columns[i].HeaderText == "Registarski broj")
                     {
-                        continue;
+                        string value = cell.Value.ToString();
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+                    else if (grid.Columns[i].Name == "RegistracijaID" || (grid.Columns[i].Name == "Cijena"))
+                    {
+                        
                     }
                    
                     else
@@ -1665,9 +1674,7 @@ namespace VozniPark
                 {
                     DateTimeControl control = item as DateTimeControl;
                     PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    if(myProperty.GetType() == typeof(PropertyClassRegistracija))
-                        if (property.GetValue(myProperty) != null) control.Unos =  DateTime.Now;
-                    else if (myProperty.GetType() == typeof(PropertyClassRegistracija))
+                   
                         if (property.GetValue(myProperty) != null) control.Unos = (DateTime)property.GetValue(myProperty);
                 }
                 else if (item.GetType() == typeof(LookupControl))
