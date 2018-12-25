@@ -1474,8 +1474,7 @@ namespace VozniPark
         }
 
         private void BtnDodajServis_Click(object sender, EventArgs e)
-        {
-            myProperty = new PropertyClassServisiranjeVozila();
+        {       
             AddUpdate();
 
                 if (state == StateEnum.Add)
