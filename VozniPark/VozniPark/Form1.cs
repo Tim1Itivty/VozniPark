@@ -75,7 +75,6 @@ namespace VozniPark
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassVozila();
-                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button Add = new Button();
@@ -112,6 +111,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(panel);
 
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
             else if (button.Name == "btnDodajVozilo")
             {
@@ -149,7 +149,6 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassRegistracija();
                 
-                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button Registruj = new Button();
@@ -162,7 +161,7 @@ namespace VozniPark
              
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
-                
+                dgvDimeznije(dtg);
             }
         }
 
@@ -594,8 +593,6 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaposleni();
-
-                dgvDimeznije(dtg);
                 
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
@@ -633,7 +630,7 @@ namespace VozniPark
                    btn.Click += Btn_Click;
                 }
                 PopulateGrid();
-
+                dgvDimeznije(dtg);
 
             }
             else if (button.Name == "btnDodajZaposlenog")
@@ -901,7 +898,6 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
-                dgvDimeznije(dtg);
 
                 FlowLayoutPanel flpButoni = new FlowLayoutPanel();
                 flpButoni.FlowDirection = FlowDirection.LeftToRight;
@@ -933,6 +929,7 @@ namespace VozniPark
                 }
 
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
             else if (button.Name == "btnZaduzi")
             {
@@ -1572,10 +1569,17 @@ namespace VozniPark
                     item.SetValue(myProperty, Convert.ChangeType(value, item.PropertyType));
                 }
             }
-            
 
-            SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+            try
+            {
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetDeleteQuery(), myProperty.GetDeleteParameters().ToArray());
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Vozilo je zaduzeno", "Greska");
+            }
+            
         }
 
         private void ucitajVrijednostiUPolja()
@@ -1690,6 +1694,13 @@ namespace VozniPark
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;
             dtg.RowHeadersVisible = false;
+
+            foreach (DataGridViewColumn item in dtg.Columns)
+            {
+                if (item.Name.Contains("ID"))
+                    item.Visible = false;
+            }
+
 
         }
 
