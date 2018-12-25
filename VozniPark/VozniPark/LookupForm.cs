@@ -24,13 +24,26 @@ namespace VozniPark
             myProperty = mp;
 
             PopulateGrid();
+
+
+            for (int i = 0; i < lookupGrid.Columns.Count; i++)
+            {
+                if (i == 0)
+                {
+                    lookupGrid.Columns[0].Width = 40;
+                }
+                else
+                lookupGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                
+            }
+
+            lookupGrid.CellDoubleClick += btnReturn_Click;
         }
 
         private void PopulateGrid()
         {
            
             DataTable dt = new DataTable();
-
             
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text,
                 myProperty.GetLookupQuery());
@@ -69,7 +82,6 @@ namespace VozniPark
                     columnNames.Add(item.GetCustomAttribute<SqlNameAttribute>().Name);
                 }
             }
-            
 
             foreach(var item in columnNames)
             {
@@ -78,5 +90,6 @@ namespace VozniPark
             
             DialogResult = DialogResult.OK;
         }
+
     }
 }

@@ -1602,11 +1602,27 @@ namespace VozniPark
                     item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
                                           ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
                 }
+
+
             for (int i = 0; i < grid.Columns.Count; i++)
             {
-                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                if (grid.Columns[i].Name == "Boja" || grid.Columns[i].Name == "BrojVrata" || grid.Columns[i].Name == "Dostupnost" || grid.Columns[i].Name == "GodinaProizvodnje")
+                {
+                    grid.Columns[i].Width = 100;
+                }
+
+                else if (grid.Columns[i].Name == "Kilometraza")
+                    grid.Columns[i].DefaultCellStyle.Format = "#,0.###";
+
+                else
+                    grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                
+
             }
 
+            
+            grid.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
             grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;

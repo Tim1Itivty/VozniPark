@@ -40,7 +40,9 @@
             this.pnlSelected1 = new System.Windows.Forms.Panel();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlMeni.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnVozila
@@ -132,6 +134,7 @@
             // 
             this.pnlMeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlMeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.pnlMeni.Controls.Add(this.pictureBox1);
             this.pnlMeni.Controls.Add(this.pnlSelected4);
             this.pnlMeni.Controls.Add(this.pnlSelected2);
             this.pnlMeni.Controls.Add(this.pnlSelected3);
@@ -197,25 +200,38 @@
             this.pnlDashboard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
             this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(901, 613);
+            this.pnlDashboard.Size = new System.Drawing.Size(903, 613);
             this.pnlDashboard.TabIndex = 6;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 514);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(202, 99);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1351, 673);
+            this.ClientSize = new System.Drawing.Size(1362, 673);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.flpPodmeni);
             this.Controls.Add(this.pnlMeni);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(0, 60, 21, 0);
             this.Resizable = false;
             this.Text = "Vozni park";
+            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlMeni.ResumeLayout(false);
             this.pnlMeni.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -233,6 +249,7 @@
         private System.Windows.Forms.Panel pnlSelected2;
         private System.Windows.Forms.Panel pnlSelected3;
         private System.Windows.Forms.FlowLayoutPanel pnlDashboard;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
