@@ -20,12 +20,17 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Vozilo ID")]
         [SqlName("VoziloID")]
-        [ForeignKey("dbo.Vozilo", "VoziloID", "PropertiesClass.VozniPark.PropertyClassVozila")]
+        [ForeignKey("dbo.Vozilo", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
         [LookupValue]
         public int VoziloId { get; set; }
 
-        [DisplayName("Kolicina natocenog goriva")]
-        [SqlName("KolicinaNatocenogGoriva")]
+        [DisplayName("Naziv")]
+        [SqlName("Naziv")]
+        [ForeignField("Vozilo ID")]
+        public string Model { get; set; }
+
+        [DisplayName("Kolicina  goriva")]
+        [SqlName("KolicinaGoriva")]
         public decimal KolicinaNatocenogGoriva { get; set; }
 
         [DisplayName("Cijena ")]
@@ -122,7 +127,14 @@ namespace VozniPark.PropertiesClass
         public string GetSelectQuery()
         {
 
-            return @"SELECT * FROM dbo.TocenjeGoriva";
+            return @"SELECT g.TocenjeGorivaID,g.VoziloID,p.naziv+' '+m.Naziv AS Naziv,g.KolicinaGoriva,g.Cijena,g.DatumTocenja
+                                            FROM TocenjeGoriva g 
+                                            join Vozila v 
+                                            on g.voziloID=v.VoziloID
+                                            join Model m 
+                                            on m.ModelID=v.ModelID
+                                            join Proizvodjac p
+                                            on p.ProizvodjacID=m.ProizvodjacID";
         }
 
         public string GetInsertQuery()
