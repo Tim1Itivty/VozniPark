@@ -699,6 +699,9 @@ namespace VozniPark
                 btnIzmjeni.Name = "btnIzmjeni";
                 flpButton.Controls.Add(btnIzmjeni);
                 btnIzmjeni.Click += BtnIzmjeni_Click;
+
+               
+
             }
             else if (btn.Name == "btnObrisi")
             {         
@@ -952,8 +955,15 @@ namespace VozniPark
                 flpButon.Controls.Add(btnZaduzi);
 
                 btnZaduzi.Click += BtnZaduzi_Click;
+
+                Button btnOtkazi = new Button();
+                btnOtkazi.Name = "btnOtkazi";
+                btnOtkazi.Text = "Otkazi";
+                flpButon.Controls.Add(btnOtkazi);
+
+                btnOtkazi.Click += BtnOtkazi_Click2;
             }
-            else if (button.Name == "btnRazduzi")
+            else if (button.Name == "btnRazduzi" || button.Name == "btnOtkaziRazduzenje") 
             {
                 state = StateEnum.Razduzi;
                 pnlDashboard.Controls.Clear();
@@ -974,11 +984,20 @@ namespace VozniPark
                 flpButon.Controls.Add(btnRazduzi);
 
                 btnRazduzi.Click += BtnRazduzi_Click;
-            }
 
+               
+            }
+            //ISTORIJA ZADUZIVANJA
             else if (button.Name == "btnIstorija")
             {
                 pnlDashboard.Controls.Clear();
+                DataGridView dtg = new DataGridView();
+                pnlDashboard.Controls.Add(dtg);
+                myProperty = new PropertyClassIstorijaZaduzenja();
+                dgvDimeznije(dtg);
+                pnlDashboard.Controls.Add(dtg);
+
+                PopulateGrid();
             }
         }
 
@@ -999,7 +1018,13 @@ namespace VozniPark
             flpButon.Controls.Add(btnSacuvaj);
 
             btnSacuvaj.Click += BtnSacuvaj_Click;
-           
+
+            Button btnOtkaziRazduzenje = new Button();
+            btnOtkaziRazduzenje.Name = "btnOtkaziRazduzenje";
+            btnOtkaziRazduzenje.Text = "Otkazi";
+            flpButon.Controls.Add(btnOtkaziRazduzenje);
+
+            btnOtkaziRazduzenje.Click += BtnPodmeniZaduzenja_Click;          
         }
 
         private void BtnZaduzi_Click(object sender, EventArgs e)
@@ -1033,7 +1058,6 @@ namespace VozniPark
                 flpButon.Controls.Add(btnZaduzi);
                 btnZaduzi.Click += BtnZaduzi_Click;
 
-
             }
             else if (button.Name == "btnIzmijeni")
             {
@@ -1041,17 +1065,25 @@ namespace VozniPark
                 myProperty = new PropertyClassZaduzenja();
 
                 ucitajVrijednostiUPolja();
-                FlowLayoutPanel flpButon = new FlowLayoutPanel();
-                flpButon.FlowDirection = FlowDirection.LeftToRight;
-                flpButon.Width = pnlDashboard.Width;
-                pnlDashboard.Controls.Add(flpButon);
+                FlowLayoutPanel flpButton = new FlowLayoutPanel();
+                flpButton.FlowDirection = FlowDirection.LeftToRight;
+                flpButton.Width = pnlDashboard.Width;
+                pnlDashboard.Controls.Add(flpButton);
 
                 Button btnSacuvaj = new Button();
                 btnSacuvaj.Text = "Sacuvaj";
                 btnSacuvaj.Name = "btnSacuvaj";
-                flpButon.Controls.Add(btnSacuvaj);
+                flpButton.Controls.Add(btnSacuvaj);
 
                 btnSacuvaj.Click += BtnSacuvaj_Click;
+
+                Button btnOtkazi = new Button();
+                btnOtkazi.Name = "btnOtkazi";
+                btnOtkazi.Text = "Otkazi";
+                flpButton.Controls.Add(btnOtkazi);
+
+                btnOtkazi.Click += BtnOtkazi_Click2;
+            
             }
             else if ((button.Name == "btnIzbrisi"))
             {
@@ -1068,9 +1100,17 @@ namespace VozniPark
             }
         }
 
+        private void BtnOtkazi_Click2(object sender, EventArgs e)
+        {
+            btnZaduzenja_Click(sender, e);
+            Button podmeniTrenutna = sender as Button;
+            podmeniTrenutna.Name = "btnPregled";
+            BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
+        }
+
         private void BtnSacuvaj_Click(object sender, EventArgs e)
         {
-           // state = StateEnum.Update;
+           //state = StateEnum.Update;
             AddUpdate();
             MessageBox.Show("Uspjesna izmjena!");
             pnlDashboard.Controls.Clear();
@@ -1467,7 +1507,7 @@ namespace VozniPark
                         ic.Enabled = false;
                     }
 
-                    if (ic.Naziv == "Predjena kilometraza" && state == StateEnum.Add)
+                    if (ic.Naziv == "Predjena kilometraza" && (state == StateEnum.Add || state == StateEnum.Update))
                     {
                         ic.Enabled = false;
                         ic.UnosPolje = "0";
@@ -1544,9 +1584,9 @@ namespace VozniPark
                  myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
             else if (state == StateEnum.Razduzi)
             {
-                PropertyClassZaduzenja property = myProperty as PropertyClassZaduzenja;
+                PropertyClassZaduzenja property = myProperty as PropertyClassZaduzenja; //razduzi nije dio interfejsa pa kastujem myProperty u zaduzenja da bih vidjela razduziQuery
                 SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                 property.RazduziQuery(), myProperty.GetUpdateParameters().ToArray());
+                 property.RazduziQuery(), property.GetRazduziParameters().ToArray());
             }
         }
 
