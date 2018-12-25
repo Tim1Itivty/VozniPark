@@ -20,9 +20,16 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Vozilo ID")]
         [SqlName("VoziloID")]
-        [ForeignKey("dbo.Vozilo", "VoziloID", "PropertiesClass.VozniPark.PropertyClassVozila")]
+        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        [LookupKey]
+        
         public int VoziloId { get; set; }
 
+
+        [DisplayName("Naziv")]
+        [SqlName("Naziv")]
+        [ForeignField("Vozilo ID")]
+        public string Model { get; set; }
 
         //[DisplayName("Servis ID")]  
         //[SqlName("ServisID")]   
@@ -31,6 +38,7 @@ namespace VozniPark.PropertiesClass
 
         [DisplayName("Datum servisiranja")]
         [SqlName("DatumServisiranja")]
+        [DateTime]
         public DateTime DatumServisiranja { get; set; }
 
         //[DisplayName("Kolicina natocenog goriva")]
@@ -50,21 +58,28 @@ namespace VozniPark.PropertiesClass
         #region queries
         public string GetSelectQuery()
         {
-            return @"SELECT ServisiranjeID, VoziloID, DatumServisiranja, CijenaServisa FROM dbo.ServisiranjeVozila";
+            return @"SELECT s.ServisiranjeID,s.VoziloID,p.naziv+' '+m.Naziv AS Naziv,s.DatumServisiranja,s.CijenaServisa
+                                FROM ServisiranjeVozila s
+                                join Vozila v 
+                                on s.voziloID=v.VoziloID
+                                join Model m 
+                                on m.ModelID=v.ModelID
+                                join Proizvodjac p
+                                on p.ProizvodjacID=m.ProizvodjacID";
         }
 
         public string GetInsertQuery()
 
         {
-            return @"INSERT INTO dbo.ServisiranjeVozila(ServisID, DatumServisiranja, KolicinaNatocenogGoriva, CijenaServisa, VoziloID)
-            VALUES(@ServisID, @DatumServisiranja, @KolicinaNatocenogGoriva, @CijenaServisa, @VoziloID)";
+            return @"INSERT INTO dbo.ServisiranjeVozila( VoziloID, DatumServisiranja,  CijenaServisa)
+            VALUES( @VoziloID, @DatumServisiranja,  @CijenaServisa)";
         }
 
         public string GetUpdateQuery()
         {
-            return @"UPDATE dbo.ServisiranjeVozila SET ServisID = @ServisID,
+            return @"UPDATE dbo.ServisiranjeVozila SET 
                                                        DatumServisiranja = @DatumServisiranja,
-                                                       KolicinaNatocenogGoriva = @KolicinaNatocenogGoriva,
+                                                      
                                                        CijenaServisa = @CijenaServisa, 
                                                        VoziloID = @VoziloID
                     WHERE ServisiranjeID = @ServisiranjeID";
@@ -75,7 +90,10 @@ namespace VozniPark.PropertiesClass
             return @"DELETE FROM dbo.ServisiranjeVozila WHERE ServisiranjeID = @ServisiranjeID";
         }
 
-
+        public string GetLookupQuery()
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 
@@ -131,11 +149,11 @@ namespace VozniPark.PropertiesClass
                 parameter.Value = ServisiranjeId;
                 list.Add(parameter);
             }
-            {
-                SqlParameter parameter = new SqlParameter("@ServisiranjeID", System.Data.SqlDbType.Int);
-                parameter.Value = ServisiranjeId;
-                list.Add(parameter);
-            }
+            //{
+            //    SqlParameter parameter = new SqlParameter("@ServisiranjeID", System.Data.SqlDbType.Int);
+            //    parameter.Value = ServisiranjeId;
+            //    list.Add(parameter);
+            //}
 
             {
                 SqlParameter parameter = new SqlParameter("@DatumServisiranja", System.Data.SqlDbType.Date);
@@ -176,10 +194,7 @@ namespace VozniPark.PropertiesClass
             return list;
         }
 
-        public string GetLookupQuery()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         #endregion
     }
