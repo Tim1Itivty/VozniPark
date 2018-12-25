@@ -68,7 +68,7 @@ namespace VozniPark
         {
             Button button = sender as Button;
             if (button.Name == "btnPregled")
-            {
+            {                
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
@@ -1604,7 +1604,7 @@ namespace VozniPark
                 }
             for (int i = 0; i < grid.Columns.Count; i++)
             {
-                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
 
             grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1617,6 +1617,12 @@ namespace VozniPark
             grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToResizeColumns = false;
+            grid.AllowUserToResizeRows = false;
+            grid.ReadOnly = true;
+            grid.ColumnHeadersHeight = 45;
+            grid.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
 
         }
 
@@ -1905,7 +1911,7 @@ namespace VozniPark
             dtg.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dtg.Location = new Point(50, 0);
             dtg.Height = 250;
-            dtg.Width = pnlDashboard.Width - 50;
+            dtg.Width = pnlDashboard.Width - 30;
             dtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;

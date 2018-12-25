@@ -1,4 +1,7 @@
-﻿namespace VozniPark
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace VozniPark
 {
     partial class LookupForm
     {
@@ -41,6 +44,27 @@
             this.lookupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.lookupGrid.Size = new System.Drawing.Size(338, 260);
             this.lookupGrid.TabIndex = 0;
+            this.lookupGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lookupGrid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            this.lookupGrid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            this.lookupGrid.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            this.lookupGrid.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            this.lookupGrid.BackgroundColor = Color.White;
+            this.lookupGrid.EnableHeadersVisualStyles = false;
+            this.lookupGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.lookupGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+            this.lookupGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.lookupGrid.AllowUserToAddRows = false;
+            this.lookupGrid.AllowUserToResizeColumns = false;
+            this.lookupGrid.AllowUserToResizeRows = false;
+            this.lookupGrid.ReadOnly = true;
+            this.lookupGrid.ColumnHeadersHeight = 45;
+            this.lookupGrid.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
+            this.lookupGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.lookupGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            this.lookupGrid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            this.lookupGrid.BackgroundColor = Color.White;
+            this.lookupGrid.RowHeadersVisible = false;
             // 
             // btnReturn
             // 

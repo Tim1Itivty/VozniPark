@@ -197,7 +197,7 @@
             this.pnlDashboard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
             this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(813, 613);
+            this.pnlDashboard.Size = new System.Drawing.Size(901, 613);
             this.pnlDashboard.TabIndex = 6;
             // 
             // Form1
