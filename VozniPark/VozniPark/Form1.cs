@@ -26,7 +26,6 @@ namespace VozniPark
         public Form1()
         {
             InitializeComponent();
-
         }
 
 
@@ -1636,20 +1635,14 @@ namespace VozniPark
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
 
-                    if (state == StateEnum.Update && lookup.Name=="Model ID")
-                    {
-                        lookup.Enabled = false;
-                    }
-                    else if (item.GetCustomAttribute<ForeignField>() != null)
-                    {
-                        continue;
-                    }
+                    if (state == StateEnum.Update && lookup.Name=="Model ID") lookup.Enabled = false;
+                    
+                    else if (item.GetCustomAttribute<ForeignField>() != null) continue;
+                    
                     pnlDashboard.Controls.Add(lookup);
 
-                    if (state == StateEnum.Razduzi)
-                    {
-                        lookup.Enabled = false;
-                    }
+                    if (state == StateEnum.Razduzi) lookup.Enabled = false;
+                    
                 }
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
                 {
@@ -1664,14 +1657,10 @@ namespace VozniPark
                     if (state == StateEnum.Update && dateTime.Naziv == "Datum razduzenja")
                         dateTime.Enabled = false;
                 }
-                else if (item.GetCustomAttribute<ForeignField>() != null)
-                {
-                    continue;
-                }
-                else if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
-                {
-                    continue;
-                }
+                else if (item.GetCustomAttribute<ForeignField>() != null) continue;
+                
+                else if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null) continue;
+                
                 else
                 {
                     InputControl ic = new InputControl();
@@ -1853,25 +1842,22 @@ namespace VozniPark
                 
               else if (state == StateEnum.Add && myProperty.GetType() == typeof(PropertyClassRegistracija))
                 {
-                    if ( grid.Columns[i].HeaderText == "Datum registracije" || grid.Columns[i].HeaderText == "Datum isteka registracije")
+                    if (grid.Columns[i].HeaderText == "Datum registracije" || grid.Columns[i].HeaderText == "Datum isteka registracije")
                     {
                         string value = DateTime.Now.ToString();
 
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if(grid.Columns[i].HeaderText == "Registarski broj")
+                    else if (grid.Columns[i].HeaderText == "Registarski broj")
                     {
                         string value = cell.Value.ToString();
 
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if (grid.Columns[i].Name == "RegistracijaID" || (grid.Columns[i].Name == "Cijena"))
-                    {
-                        
-                    }
-                   
+                    else if (grid.Columns[i].Name == "RegistracijaID" || (grid.Columns[i].Name == "Cijena")) { }
+
                     else
                     {
                         string value = cell.Value.ToString();
@@ -1939,8 +1925,6 @@ namespace VozniPark
                 if (item.Name.Contains("ID"))
                     item.Visible = false;
             }
-
-
         }
 
         private void buttonDesign(Button btnPodmeni)
