@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace VozniPark
 {
-    public partial class LookupForm : Form
+    public partial class LookupForm : MetroFramework.Forms.MetroForm
     {
         public PropertyInterface myProperty;
         public string Key;
@@ -40,7 +40,6 @@ namespace VozniPark
 
             lookupGrid.DataSource = dt;
       
-
             var type = myProperty.GetType();
             var properties = type.GetProperties();
 
@@ -77,9 +76,6 @@ namespace VozniPark
                  Value += row.Cells[item].Value.ToString() + " ";
             }
             
-            
-            
-
             DialogResult = DialogResult.OK;
         }
     }

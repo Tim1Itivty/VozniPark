@@ -32,19 +32,19 @@
             this.btnReturn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lookupGrid)).BeginInit();
             this.SuspendLayout();
-            this.lookupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
             // lookupGrid
             // 
             this.lookupGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.lookupGrid.Location = new System.Drawing.Point(13, 13);
+            this.lookupGrid.Location = new System.Drawing.Point(13, 54);
             this.lookupGrid.Name = "lookupGrid";
+            this.lookupGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.lookupGrid.Size = new System.Drawing.Size(338, 260);
             this.lookupGrid.TabIndex = 0;
             // 
             // btnReturn
             // 
-            this.btnReturn.Location = new System.Drawing.Point(132, 322);
+            this.btnReturn.Location = new System.Drawing.Point(132, 330);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(75, 23);
             this.btnReturn.TabIndex = 1;
