@@ -692,13 +692,15 @@ namespace VozniPark
                 flpButton.Width = pnlDashboard.Width;
                 pnlDashboard.Controls.Add(flpButton);
                 Button btnIzmjeni = new Button();
-                btnIzmjeni.Text = "Izmijeni";
+                Button btnOtkazi = new Button();
+                btnIzmjeni.Text = "Izmjeni";
                 btnIzmjeni.Name = "btnIzmjeni";
+                btnOtkazi.Name = "btnOtkazi";
+                btnOtkazi.Text = "Otkazi";                
                 flpButton.Controls.Add(btnIzmjeni);
+                flpButton.Controls.Add(btnOtkazi);
                 btnIzmjeni.Click += BtnIzmjeni_Click;
-
-               
-
+                btnOtkazi.Click += BtnOtkazi_Click1;
             }
             else if (btn.Name == "btnObrisi")
             {         
@@ -739,6 +741,25 @@ namespace VozniPark
                 btnDodaj.Click += BtnDodaj_Click;
                 btnOtkazi.Name = "btnOtkazi";
                 btnOtkazi.Text = "Otkazi";
+                flp.Controls.Add(btnOtkazi);
+                btnOtkazi.Click += BtnOtkazi_Click1;
+            }
+            else if(state == StateEnum.Update)
+            {
+                pnlDashboard.Controls.Clear();
+                myProperty = new PropertyClassZaposleni();
+                PopulateControls();
+                FlowLayoutPanel flp = new FlowLayoutPanel();
+                flp.FlowDirection = FlowDirection.LeftToRight;
+                pnlDashboard.Controls.Add(flp);
+
+                Button btnIzmjeni = new Button();
+                Button btnOtkazi = new Button();
+                btnIzmjeni.Text = "Izmjeni";
+                btnIzmjeni.Name = "btnIzmjeni";
+                btnOtkazi.Name = "btnOtkazi";
+                btnOtkazi.Text = "Otkazi";
+                flp.Controls.Add(btnIzmjeni);
                 flp.Controls.Add(btnOtkazi);
                 btnOtkazi.Click += BtnOtkazi_Click1;
             }
@@ -821,7 +842,7 @@ namespace VozniPark
             zaduzenjaGrid.DataSource = table;
             zaduzenjaGrid.BackgroundColor = Color.White;
             zaduzenjaGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
+            
             zaduzenjaGrid.RowHeadersVisible = false;
             flpZaduzenja.Controls.Add(zaduzenjaGrid);
         }
@@ -1107,7 +1128,7 @@ namespace VozniPark
 
         private void BtnSacuvaj_Click(object sender, EventArgs e)
         {
-           //state = StateEnum.Update;
+            state = StateEnum.Razduzi;
             AddUpdate();
             MessageBox.Show("Uspjesna izmjena!");
             pnlDashboard.Controls.Clear();
