@@ -87,7 +87,7 @@ namespace VozniPark.PropertiesClass
                                              Boja,
                                              BrojVrata,
                                              Dostupnost)
-                    values(@ModelID, @GodinaProizvodnje, @Kilometraza, @Boja, @BrojVrata, @Dostupnost)";
+                    values(@ModelID, @GodinaProizvodnje, @Kilometraza, @Boja, @BrojVrata, 'True')";
         }
 
         public string GetUpdateQuery()
@@ -164,11 +164,6 @@ namespace VozniPark.PropertiesClass
             {
                 SqlParameter parameter = new SqlParameter("@BrojVrata", System.Data.SqlDbType.SmallInt);
                 parameter.Value = BrojVrata;
-                list.Add(parameter);
-            }
-            {
-                SqlParameter parameter = new SqlParameter("@Dostupnost", System.Data.SqlDbType.Bit);
-                parameter.Value = Dostupnost;
                 list.Add(parameter);
             }
             

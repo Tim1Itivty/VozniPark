@@ -1693,7 +1693,8 @@ namespace VozniPark
 
                     if (ic.Naziv=="Dostupnost")
                     {
-                        ic.Enabled = false;
+                        ic.Visible = false;
+                        ic.UnosPolje = "True";
                     }
 
                     if (ic.Naziv == "Predjena kilometraza" && (state == StateEnum.Add || state == StateEnum.Update))
