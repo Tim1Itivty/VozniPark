@@ -22,7 +22,6 @@ namespace VozniPark
 
         public PropertyInterface myProperty;
         public StateEnum state;
-        int brojac = 0;
         public Form1()
         {
             InitializeComponent();
@@ -95,9 +94,9 @@ namespace VozniPark
 
 
 
-                Add.Text = "ADD";
-                Delete.Text = "DELETE";
-                Update.Text = "UPDATE";
+                Add.Text = "DODAJ";
+                Delete.Text = "OBRISI";
+                Update.Text = "IZMIJENI";
                 
                 panel.Height = 100;
                 panel.Width = 970;
@@ -124,9 +123,9 @@ namespace VozniPark
                 Button btnDodajVozilo = new Button();
                 Button btnOtkazi = new Button();
                 
-                btnDodajVozilo.Text = "Dodaj vozilo";
+                btnDodajVozilo.Text = "DODAJ VOZILO";
                 
-                btnOtkazi.Text = "Ocisti polja";
+                btnOtkazi.Text = "OTKAZI";
 
                 btnDodajVozilo.Click += BtnDodajVozilo_Click;
                 btnOtkazi.Click += BtnOtkazi_Click;
@@ -152,7 +151,7 @@ namespace VozniPark
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button Registruj = new Button();
                 Registruj.Click += Registruj_Click;
-                Registruj.Text = "Registruj";
+                Registruj.Text = "REGISTRUJ VOZILO";
                
                 panel.Height = 100;
                 panel.Width = 470;
@@ -176,9 +175,9 @@ namespace VozniPark
             Button btnDodajRegistraciju = new Button();
             Button btnOtkazi2 = new Button();
             
-            btnDodajRegistraciju.Text = "Registruj";
+            btnDodajRegistraciju.Text = "SACUVAJ";
             
-            btnOtkazi2.Text = "Ocisti polja";
+            btnOtkazi2.Text = "OTKAZI";
 
             btnDodajRegistraciju.Click += BtnDodajRegistraciju_Click;
             btnOtkazi2.Click += BtnOtkazi2_Click;
@@ -203,7 +202,7 @@ namespace VozniPark
             Button Registruj = new Button();
             Registruj.Click += Registruj_Click;
             
-            Registruj.Text = "Registruj";
+            Registruj.Text = "REGISTRUJ VOZILO";
             
             panel.Height = 100;
             panel.Width = 470;
@@ -218,7 +217,7 @@ namespace VozniPark
         {
             state = StateEnum.Add;
             AddUpdate();
-            MessageBox.Show("Registracije je uradjena!!!");
+            MessageBox.Show("Registracija je sacuvana!!!");
             pnlDashboard.Controls.Clear();
             DataGridView dtg = new DataGridView();
             pnlDashboard.Controls.Add(dtg);
@@ -228,7 +227,7 @@ namespace VozniPark
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button Registruj = new Button();
             Registruj.Click += Registruj_Click;
-            Registruj.Text = "Registruj";
+            Registruj.Text = "REGISTRUJ VOZILO";
 
             panel.Height = 100;
             panel.Width = 470;
@@ -428,7 +427,7 @@ namespace VozniPark
 
             string provjera = delete(dtg);
             if(provjera != "Greska")
-                MessageBox.Show("Vozilo je obrisano");
+                MessageBox.Show("Vozilo je obrisano!");
 
             Button button = sender as Button;
             button.Name = "btnPregled";
@@ -448,8 +447,8 @@ namespace VozniPark
             Button btnDodajVozilo = new Button();
             Button btnOtkazi = new Button();
             
-            btnDodajVozilo.Text = "Sacuvaj";
-            btnOtkazi.Text = "Ocisti polja";
+            btnDodajVozilo.Text = "SACUVAJ";
+            btnOtkazi.Text = "OTKAZI";
 
             btnDodajVozilo.Click += BtnDodajVozilo_Click;
             btnOtkazi.Click += BtnOtkazi_Click;
@@ -484,7 +483,7 @@ namespace VozniPark
 
             if (state == StateEnum.Add)
             {
-                MessageBox.Show("Uneseno vozilo");
+                MessageBox.Show("Vozilo je sacuvano!");
 
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassVozila();
@@ -494,8 +493,8 @@ namespace VozniPark
                     Panel panel = new Panel();
                     Button btnDodajVozilo = new Button();
                     Button btnOtkazi = new Button();
-                    btnDodajVozilo.Text = "Dodaj vozilo";
-                    btnOtkazi.Text = "Ocisti polja";
+                    btnDodajVozilo.Text = "DODAJ VOZILO";
+                    btnOtkazi.Text = "OTKAZI";
 
                     btnDodajVozilo.Click += BtnDodajVozilo_Click;
                     btnOtkazi.Click += BtnOtkazi_Click;
@@ -510,7 +509,7 @@ namespace VozniPark
             }
             else if (state == StateEnum.Update)
             {
-                MessageBox.Show("Vozilo je izmijenjeno");
+                MessageBox.Show("Vozilo je izmijenjeno!");
 
                 Button button = sender as Button;
                 button.Name = "btnPregled";
@@ -614,7 +613,7 @@ namespace VozniPark
                     {
                         state = StateEnum.Update;
                         btn.Name = "btnIzmjeni";
-                        btn.Text = "Izmjeni";
+                        btn.Text = "Izmijeni";
                     }
                     if (i == 2)
                     {
@@ -693,7 +692,7 @@ namespace VozniPark
                 flpButton.Width = pnlDashboard.Width;
                 pnlDashboard.Controls.Add(flpButton);
                 Button btnIzmjeni = new Button();
-                btnIzmjeni.Text = "Izmjeni";
+                btnIzmjeni.Text = "Izmijeni";
                 btnIzmjeni.Name = "btnIzmjeni";
                 flpButton.Controls.Add(btnIzmjeni);
                 btnIzmjeni.Click += BtnIzmjeni_Click;
@@ -705,7 +704,7 @@ namespace VozniPark
             {         
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 delete(dtg);
-                MessageBox.Show("Zaposleni je obrisan");
+                MessageBox.Show("Zaposleni je obrisan!");
                 pnlDashboard.Controls.Clear();
                 btnZaposleni_Click(sender, e);
                 Button btnPregled = sender as Button;
@@ -1695,17 +1694,7 @@ namespace VozniPark
                 }
             }
         }
-
-        private void Form1_Activated(object sender, EventArgs e)
-        {
-            btnVozila_Click(sender, e);
-            if(brojac == 0)
-            {
-                BtnPodmeni_Click(startButtonClick(), e);
-                brojac++;
-            }
-            
-        }
+        
         private Button startButtonClick()
         {
             Button btn = new Button();
@@ -1720,6 +1709,8 @@ namespace VozniPark
             pnlSelected2.Visible = false;
             pnlSelected3.Visible = false;
             pnlSelected4.Visible = false;
+            btnVozila_Click(sender, e);
+            BtnPodmeni_Click(startButtonClick(), e);
         }
 
         public void AddUpdate()

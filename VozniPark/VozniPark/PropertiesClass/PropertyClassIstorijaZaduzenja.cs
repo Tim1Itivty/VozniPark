@@ -17,13 +17,14 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("IstorijaZaduzenjaID")]
         public int IstorijaZaduzenjaID { get; set; }
 
-        [DisplayName("Zaposleni ID")]
-        [SqlNameAttribute("ZaposleniID")]
-        public int ZaposleniID { get; set; }
 
         [DisplayName("Zaposleni")]
         [SqlName("Zaposleni")]   
         public string Zaposleni { get; set; }
+
+        [DisplayName("Model")]
+        [SqlName("Model")]
+        public string Model { get; set; }
 
         [DisplayName("Datum zaduzenja")]
         [SqlName("DatumZaduzenja")]
@@ -32,6 +33,7 @@ namespace VozniPark.PropertiesClass
         [DisplayName("Datum razduzenja")]
         [SqlName("DatumRazduzenja")]
         public DateTime DatumRazduzenja { get; set; }
+
 
         public List<SqlParameter> GetDeleteParameters()
         {
@@ -65,14 +67,21 @@ namespace VozniPark.PropertiesClass
 
         public string GetSelectQuery()
         {
-            return @"SELECT iz.IstorijaZaduzenjaID, 
-                            iz.ZaposleniID,
-                            z.Ime+ ' '+  z.Prezime AS [Zaposleni],
+            return @"SELECT					
+                            iz.IstorijaZaduzenjaID, 
+                            z.Ime+ ' '+  z.Prezime AS [Zaposleni],							
+                            p.Naziv + ' ' + mdel.Naziv AS [Model] ,
                             iz.DatumZaduzenja, 
                             iz.DatumRazduzenja
                             FROM dbo.IstorijaZaduzenja iz
-	                        JOIN dbo.Zaposleni z
-	                        ON z.ZaposleniID = iz.ZaposleniID";
+                            JOIN dbo.Zaposleni z
+                            ON z.ZaposleniID = iz.ZaposleniID
+                            left JOIN dbo.Vozila v
+                            ON v.VoziloID = iz.VoziloID
+                            left JOIN dbo.Model mdel
+                            ON mdel.ModelID = v.ModelID
+                            LEFT JOIN dbo.Proizvodjac p
+                            ON p.ProizvodjacID = mdel.ProizvodjacID";
 
              /*return @"SELECT IstorijaZaduzenjaID,ZaposleniID, DatumZaduzenja, DatumRazduzenja FROM IstorijaZaduzenja";*/
         }

@@ -213,7 +213,6 @@
             this.Padding = new System.Windows.Forms.Padding(0, 60, 21, 0);
             this.Resizable = false;
             this.Text = "Vozni park";
-            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlMeni.ResumeLayout(false);
             this.pnlMeni.PerformLayout();
