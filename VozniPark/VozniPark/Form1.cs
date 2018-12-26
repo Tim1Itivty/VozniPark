@@ -490,7 +490,7 @@ namespace VozniPark
 
                     PopulateControls();
 
-                    Panel panel = new Panel();
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajVozilo = new Button();
                     Button btnOtkazi = new Button();
                     btnDodajVozilo.Text = "DODAJ VOZILO";
