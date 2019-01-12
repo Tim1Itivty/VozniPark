@@ -1182,11 +1182,24 @@ namespace VozniPark
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
+
+
+
+
+
+
+                //pnlDashboard.Controls.Clear();
+                
+
                 pnlDashboard.Controls.Clear();
+
+               
                 DataGridView dtg = new DataGridView();
+
+               
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-
+                PropertyInterface pi;
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
@@ -1209,6 +1222,23 @@ namespace VozniPark
                 panel.Controls.Add(DeleteServis);
                 panel.Controls.Add(UpdateServis);
                 pnlDashboard.Controls.Add(panel);
+                pi =new  PropertyClassVozila();
+
+
+                FlowLayoutPanel nov = new FlowLayoutPanel();
+                LookupControl nova = new LookupControl(pi);
+
+
+             
+            
+
+               
+
+                nov.Height = 100;
+                nov.Width = 470;
+                nov.Controls.Add(nova);
+               
+                pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
             }
             else if (button.Name == "btnServis")
@@ -1267,6 +1297,8 @@ namespace VozniPark
                 PopulateGrid();
             }
         }
+
+       
 
         private void DeleteGorivo_Click(object sender, EventArgs e)
         {

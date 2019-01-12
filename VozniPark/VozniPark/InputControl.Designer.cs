@@ -45,7 +45,7 @@
             // 
             // 
             this.txtInput.CustomButton.Image = null;
-            this.txtInput.CustomButton.Location = new System.Drawing.Point(225, 1);
+            this.txtInput.CustomButton.Location = new System.Drawing.Point(202, 1);
             this.txtInput.CustomButton.Name = "";
             this.txtInput.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtInput.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
