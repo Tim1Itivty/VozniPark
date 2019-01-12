@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VozniPark.AttributesClass;
 using System.Reflection;
+using VozniPark.PropertiesClass;
 
 namespace VozniPark
 {
@@ -22,6 +23,19 @@ namespace VozniPark
         {
             InitializeComponent();
             myProperty = mp;
+
+            if(mp.GetType() == typeof(PropertyClassZaposleni))
+            {
+                this.Text = "Zaposleni";
+            }
+            else if (mp.GetType() == typeof(PropertyClassModel))
+            {
+                this.Text = "Model";
+            }
+            else if (mp.GetType() == typeof(PropertyClassVozila))
+            {
+                this.Text = "Vozila";
+            }
 
             PopulateGrid();
 
@@ -66,6 +80,7 @@ namespace VozniPark
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
+            btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(209)))), ((int)(((byte)(249)))));
             DataGridViewRow row = lookupGrid.SelectedRows[0];
             var properties = myProperty.GetType().GetProperties();
 

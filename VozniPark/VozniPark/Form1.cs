@@ -1625,16 +1625,16 @@ namespace VozniPark
 
             dt.Load(reader);
             reader.Close();
-
+           
             grid.DataSource = dt;
             var type = myProperty.GetType();
             var properties = type.GetProperties();
-
-                foreach (DataGridViewColumn item in grid.Columns)
-                {
-                    item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
-                                          ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
-                }
+            
+            foreach (DataGridViewColumn item in grid.Columns)
+            {
+                item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
+                                        ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
+            }
 
 
             for (int i = 0; i < grid.Columns.Count; i++)
@@ -1642,6 +1642,7 @@ namespace VozniPark
                 if (grid.Columns[i].Name == "Boja" || grid.Columns[i].Name == "BrojVrata" || grid.Columns[i].Name == "Dostupnost" || grid.Columns[i].Name == "GodinaProizvodnje")
                 {
                     grid.Columns[i].Width = 100;
+                    
                 }
 
                 else if (grid.Columns[i].Name == "Kilometraza")
@@ -1649,12 +1650,19 @@ namespace VozniPark
 
                 else
                     grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-                
-
+            }
+            
+            if(type.GetType() == typeof(PropertyClassVozila))
+            {
+                for (int i = 0; i < grid.Rows.Count; i++)
+                {
+                    if(grid.Rows[i].Cells[5].Value.ToString() == "Dostupno")
+                    {
+                        grid.Rows[i].Cells[7].Style.ForeColor = Color.GreenYellow;
+                    }
+                }
             }
 
-            
             grid.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
@@ -1672,7 +1680,7 @@ namespace VozniPark
             grid.ReadOnly = true;
             grid.ColumnHeadersHeight = 45;
             grid.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
-
+            
         }
 
         public void PopulateControls()
@@ -1965,12 +1973,15 @@ namespace VozniPark
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;
             dtg.RowHeadersVisible = false;
+            dtg.Rows[0].Selected = true;
 
             foreach (DataGridViewColumn item in dtg.Columns)
             {
                 if (item.Name.Contains("ID"))
                     item.Visible = false;
+                
             }
+            
         }
 
         private void buttonDesign(Button btnPodmeni)
