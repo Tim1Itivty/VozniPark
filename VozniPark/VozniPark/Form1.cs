@@ -12,7 +12,8 @@ using VozniPark.AttributesClass;
 using System.Reflection;
 using VozniPark.PropertiesClass;
 using System.Windows.Forms.VisualStyles;
-
+using MetroFramework;
+using MetroFramework.Forms;
 
 namespace VozniPark
 {
@@ -89,14 +90,14 @@ namespace VozniPark
                 btnDetalji.Width = 110;
                 btnDetalji.Height = 40;
                 panel.Controls.Add(btnDetalji);
-                btnDetalji.Location = new Point(655, 10);
                 btnDetalji.Click += Detalji_Click;
 
-
-
-                Add.Text = "DODAJ";
-                Delete.Text = "OBRISI";
-                Update.Text = "IZMIJENI";
+                Add.Name = "btnDodaj";
+                crudButtonDesign(Add);
+                Delete.Name = "btnIzbrisi";
+                crudButtonDesign(Delete);
+                Update.Name = "btnIzmijeni";
+                crudButtonDesign(Update);
                 
                 panel.Height = 100;
                 panel.Width = 970;
@@ -217,12 +218,11 @@ namespace VozniPark
         {
             state = StateEnum.Add;
             AddUpdate();
-            MessageBox.Show("Registracija je sacuvana!!!");
+            MetroMessageBox.Show(this, "Registracija je sačuvana!", "Obaviještenje", MessageBoxButtons.OK, MessageBoxIcon.Information, 90);
             pnlDashboard.Controls.Clear();
             DataGridView dtg = new DataGridView();
             pnlDashboard.Controls.Add(dtg);
             myProperty = new PropertyClassRegistracija();
-            dgvDimeznije(dtg);
             pnlDashboard.Controls.Add(dtg);
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button Registruj = new Button();
@@ -236,6 +236,7 @@ namespace VozniPark
 
             pnlDashboard.Controls.Add(panel);
             PopulateGrid();
+            dgvDimeznije(dtg);
         }
 
 
@@ -754,11 +755,13 @@ namespace VozniPark
 
         private void BtnDetaljno_Click()
         {
-            Form DetaljanPregledZaposlenog = new Form();
+            MetroForm DetaljanPregledZaposlenog = new MetroForm();
+            DetaljanPregledZaposlenog.Text = "Informacije o zaduzivanju zaposlenog";
             DetaljanPregledZaposlenog.Show();
             DetaljanPregledZaposlenog.Size = new Size(630, 540);
 
             FlowLayoutPanel flpZaposleniDetaljno = new FlowLayoutPanel();
+            flpZaposleniDetaljno.BackColor = Color.FromArgb(66, 194, 244);
             flpZaposleniDetaljno.Dock = DockStyle.Left;
             flpZaposleniDetaljno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             DetaljanPregledZaposlenog.Controls.Add(flpZaposleniDetaljno);
@@ -829,6 +832,7 @@ namespace VozniPark
             zaduzenjaGrid.DataSource = table;
             zaduzenjaGrid.BackgroundColor = Color.White;
             zaduzenjaGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDimeznije(zaduzenjaGrid);
             
             zaduzenjaGrid.RowHeadersVisible = false;
             flpZaduzenja.Controls.Add(zaduzenjaGrid);
@@ -1614,9 +1618,11 @@ namespace VozniPark
 
         #endregion
 
+
         #region ostaleMetode
         private void PopulateGrid()
         {
+            pnlDashboard.Padding = new Padding(0, 0, 0, 0);
             DataTable dt = new DataTable();
 
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
@@ -1651,17 +1657,6 @@ namespace VozniPark
                 else
                     grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-            
-            if(type.GetType() == typeof(PropertyClassVozila))
-            {
-                for (int i = 0; i < grid.Rows.Count; i++)
-                {
-                    if(grid.Rows[i].Cells[5].Value.ToString() == "Dostupno")
-                    {
-                        grid.Rows[i].Cells[7].Style.ForeColor = Color.GreenYellow;
-                    }
-                }
-            }
 
             grid.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1685,6 +1680,7 @@ namespace VozniPark
 
         public void PopulateControls()
         {
+            pnlDashboard.Padding = new Padding(100, 0, 0, 0);
             foreach (PropertyInfo item in myProperty.GetType().GetProperties())
             {
                 if (item.GetCustomAttribute<ForeignKeyAttribute>() != null)
@@ -1696,6 +1692,7 @@ namespace VozniPark
                     
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
+                    
 
                     if (state == StateEnum.Update && lookup.Name=="Model ID") lookup.Enabled = false;
                     
@@ -1853,7 +1850,7 @@ namespace VozniPark
             }
             catch(Exception e)
             {
-                MessageBox.Show("Vozilo je zaduzeno", "Greska");
+                MetroMessageBox.Show(this, "Vozilo je zaduzeno", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error, 90);
                 return "Greska";
             }
             return "Uspijeh";
@@ -1973,13 +1970,27 @@ namespace VozniPark
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;
             dtg.RowHeadersVisible = false;
-            dtg.Rows[0].Selected = true;
+            if(dtg.Rows.Count > 0) dtg.Rows[0].Selected = true;
 
             foreach (DataGridViewColumn item in dtg.Columns)
             {
                 if (item.Name.Contains("ID"))
                     item.Visible = false;
                 
+            }
+            if(myProperty.GetType() == typeof(PropertyClassVozila))
+            {
+                foreach (DataGridViewRow item in dtg.Rows)
+	            {
+                    if(item.Cells[7].Value.ToString() == "Dostupno")
+                    {
+                        item.Cells[7].Style.ForeColor = Color.LimeGreen;
+                    }
+                    else if(item.Cells[7].Value.ToString() == "Nije dostupno")
+                    {
+                        item.Cells[7].Style.ForeColor = Color.Red;
+                    }
+	            }
             }
             
         }
@@ -1998,6 +2009,24 @@ namespace VozniPark
             btnPodmeni.FlatStyle = FlatStyle.Flat;
             btnPodmeni.Width = flpPodmeni.Width;
             btnPodmeni.Height = 55;
+        }
+
+
+        private void crudButtonDesign(Button btn)
+        {
+            btn.Size = new Size(75, 75);
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            if (btn.Name.Contains("Dodaj"))
+            {
+                btn.Image = imageList1.Images[0];
+                btn.BackColor = Color.FromArgb(66, 244, 128);
+            }
+            else if (btn.Name.Contains("Izmijeni"))
+            {
+                //btn.Image = imageList1.Images[0];
+                btn.BackColor = Color.FromArgb(244, 173, 66);
+            }
         }
 
         #endregion
