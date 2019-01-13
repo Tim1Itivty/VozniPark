@@ -757,20 +757,29 @@ namespace VozniPark
         {
             MetroForm DetaljanPregledZaposlenog = new MetroForm();
             DetaljanPregledZaposlenog.Text = "Informacije o zaduzivanju zaposlenog";
+            DetaljanPregledZaposlenog.StartPosition = FormStartPosition.Manual;
+            DetaljanPregledZaposlenog.Location = new Point(this.Location.X + 175, this.Location.Y + 150);
+            DetaljanPregledZaposlenog.Resizable = false;
+            DetaljanPregledZaposlenog.Movable = false;
+            DetaljanPregledZaposlenog.MaximizeBox = false;
+            DetaljanPregledZaposlenog.MinimizeBox = false;
             DetaljanPregledZaposlenog.Show();
-            DetaljanPregledZaposlenog.Size = new Size(630, 540);
+            DetaljanPregledZaposlenog.Size = new Size(1020, 350);
 
             FlowLayoutPanel flpZaposleniDetaljno = new FlowLayoutPanel();
-            flpZaposleniDetaljno.BackColor = Color.FromArgb(66, 194, 244);
+            flpZaposleniDetaljno.BackColor = Color.FromArgb(29, 140, 196);
             flpZaposleniDetaljno.Dock = DockStyle.Left;
             flpZaposleniDetaljno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             DetaljanPregledZaposlenog.Controls.Add(flpZaposleniDetaljno);
             flpZaposleniDetaljno.FlowDirection = FlowDirection.TopDown;
+            flpZaposleniDetaljno.BorderStyle = System.Windows.Forms.BorderStyle.None;
 
             FlowLayoutPanel flpZaduzenja = new FlowLayoutPanel();
             flpZaduzenja.Dock = DockStyle.Right;
             flpZaduzenja.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            flpZaduzenja.Width = DetaljanPregledZaposlenog.Width - flpZaposleniDetaljno.Width;
+            flpZaduzenja.Padding = new Padding(10, 0, 0, 0);
+            flpZaduzenja.Width = DetaljanPregledZaposlenog.Width - flpZaposleniDetaljno.Width - 40;
+            flpZaduzenja.BorderStyle = System.Windows.Forms.BorderStyle.None;
             DetaljanPregledZaposlenog.Controls.Add(flpZaduzenja);
 
 
@@ -793,16 +802,16 @@ namespace VozniPark
             Label lblPrezime = new Label();
             Label lblRadnoMjesto = new Label();
 
-            lblZaposleniID.Text = "ZaposleniID:\n";
+            lblZaposleniID.Text = "ID\n";
             lblZaposleniID.Text += dt.Rows[0].ItemArray[0].ToString() + "\n";
 
-            lblIme.Text = "Ime:\n";
+            lblIme.Text = "Ime\n";
             lblIme.Text += dt.Rows[0].ItemArray[1].ToString() + "\n";
 
-            lblPrezime.Text = "Prezime:\n";
+            lblPrezime.Text = "Prezime\n";
             lblPrezime.Text += dt.Rows[0].ItemArray[2].ToString() + "\n";
 
-            lblRadnoMjesto.Text = "Radno mjesto:\n";
+            lblRadnoMjesto.Text = "Radno mjesto\n";
             lblRadnoMjesto.Text += dt.Rows[0].ItemArray[3].ToString()+ "\n";
 
             flpZaposleniDetaljno.Controls.Add(lblZaposleniID);
@@ -816,7 +825,9 @@ namespace VozniPark
                 {
                     Label lbl = item as Label;
                     lbl.AutoSize = true;
-                    lbl.Font = new Font(lbl.Font.FontFamily, 11);
+                    lbl.Font = new Font("Segoe UI", 12);
+                    lbl.ForeColor = Color.White;
+                    lbl.Margin = new Padding(15, 5, 0, 5);
                 }
             }
 
@@ -830,12 +841,15 @@ namespace VozniPark
             sqlDataAdapter.Fill(table);
             DataGridView zaduzenjaGrid = new DataGridView();
             zaduzenjaGrid.DataSource = table;
-            zaduzenjaGrid.BackgroundColor = Color.White;
-            zaduzenjaGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDimeznije(zaduzenjaGrid);
-            
-            zaduzenjaGrid.RowHeadersVisible = false;
             flpZaduzenja.Controls.Add(zaduzenjaGrid);
+            dgvDimeznije(zaduzenjaGrid);
+            zaduzenjaGrid.Width = flpZaduzenja.Width - 20;
+
+            foreach (DataGridViewColumn item in zaduzenjaGrid.Columns)
+            {
+                item.Width += 25;
+            }
+            
         }
 
         private void BtnIzmjeni_Click(object sender, EventArgs e)
@@ -1658,23 +1672,7 @@ namespace VozniPark
                     grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
 
-            grid.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
-            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            grid.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            grid.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
-            grid.BackgroundColor = Color.White;
-            grid.EnableHeadersVisualStyles = false;
-            grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.AllowUserToAddRows = false;
-            grid.AllowUserToResizeColumns = false;
-            grid.AllowUserToResizeRows = false;
-            grid.ReadOnly = true;
-            grid.ColumnHeadersHeight = 45;
-            grid.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
+            
             
         }
 
@@ -1970,7 +1968,26 @@ namespace VozniPark
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;
             dtg.RowHeadersVisible = false;
-            if(dtg.Rows.Count > 0) dtg.Rows[0].Selected = true;
+
+            dtg.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dtg.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dtg.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            dtg.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dtg.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dtg.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            dtg.BackgroundColor = Color.White;
+            dtg.EnableHeadersVisualStyles = false;
+            dtg.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dtg.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+            dtg.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dtg.AllowUserToAddRows = false;
+            dtg.AllowUserToResizeColumns = false;
+            dtg.AllowUserToResizeRows = false;
+            dtg.ReadOnly = true;
+            dtg.ColumnHeadersHeight = 45;
+            dtg.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
+
+            if (dtg.Rows.Count > 0) dtg.Rows[0].Selected = true;
 
             foreach (DataGridViewColumn item in dtg.Columns)
             {
@@ -2014,19 +2031,19 @@ namespace VozniPark
 
         private void crudButtonDesign(Button btn)
         {
-            btn.Size = new Size(75, 75);
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            if (btn.Name.Contains("Dodaj"))
-            {
-                btn.Image = imageList1.Images[0];
-                btn.BackColor = Color.FromArgb(66, 244, 128);
-            }
-            else if (btn.Name.Contains("Izmijeni"))
-            {
-                //btn.Image = imageList1.Images[0];
-                btn.BackColor = Color.FromArgb(244, 173, 66);
-            }
+            //btn.Size = new Size(75, 75);
+            //btn.FlatStyle = FlatStyle.Flat;
+            //btn.FlatAppearance.BorderSize = 0;
+            //if (btn.Name.Contains("Dodaj"))
+            //{
+            //    btn.Image = imageList1.Images[0];
+            //    btn.BackColor = Color.FromArgb(66, 244, 128);
+            //}
+            //else if (btn.Name.Contains("Izmijeni"))
+            //{
+            //    //btn.Image = imageList1.Images[0];
+            //    btn.BackColor = Color.FromArgb(244, 173, 66);
+            //}
         }
 
         #endregion
