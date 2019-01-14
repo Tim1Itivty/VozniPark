@@ -2041,6 +2041,7 @@ namespace VozniPark
         {
             btn.Size = new Size(95, 95);
             btn.UseCustomBackColor = true;
+            btn.BackColor = Color.CornflowerBlue;
             btn.UseTileImage = true;
             btn.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             btn.TileTextFontSize = MetroTileTextSize.Small;
@@ -2050,35 +2051,33 @@ namespace VozniPark
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_user_male_50;
                 else if(btn.Name.Contains("Vozilo"))
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_traffic_jam_50;
-                btn.BackColor = Color.FromArgb(65, 216, 34);
+                //btn.BackColor = Color.FromArgb(65, 216, 34);
             }
             else if (btn.Text.Contains("OBRISI"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_close_window_50;
-                btn.BackColor = Color.FromArgb(242, 53, 53);
+                //btn.BackColor = Color.FromArgb(242, 53, 53);
             }
             else if (btn.Text.Contains("IZMIJENI"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_edit_file_50;
-                btn.BackColor = Color.FromArgb(21, 54, 107);
+                //btn.BackColor = Color.FromArgb(21, 54, 107);
             }
             else if (btn.Text.Contains("DETALJNO"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_more_filled_50;
-                btn.BackColor = Color.FromArgb(64, 208, 237);
+                //btn.BackColor = Color.FromArgb(64, 208, 237);
             }
             else if (btn.Text.Contains("ZADUZI"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
-                btn.BackColor = Color.FromArgb(65, 216, 34);
-            }
-            else
-            {
-                btn.BackColor = Color.CornflowerBlue;
+                //btn.BackColor = Color.FromArgb(65, 216, 34);
             }
         }
 
         #endregion
+
+
     }
 }
 

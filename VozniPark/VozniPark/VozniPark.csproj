@@ -171,5 +171,8 @@
   <ItemGroup>
     <None Include="Resources\icons8-lease-filled-50.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="napomena.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
