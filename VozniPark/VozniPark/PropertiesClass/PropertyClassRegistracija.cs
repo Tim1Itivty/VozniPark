@@ -97,8 +97,11 @@ namespace VozniPark.PropertiesClass
                     v.GodinaProizvodnje,
                     v.Kilometraza,
                     v.Boja,
-                    v.BrojVrata
-                    ,v.Dostupnost,
+                    v.BrojVrata,
+                    case
+                    when v.Dostupnost = 1 then 'Dostupno'
+                    when v.Dostupnost = 0 then 'Nije dostupno'
+                    end as Dostupnost,
                     r.RegistracijaID,
                     r.RegistracijskiBroj,
                     r.DatumRegistracije,
