@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VozniPark.PropertiesClass;
 using VozniPark.AttributesClass;
+using MetroFramework.Forms;
+using MetroFramework;
 
 namespace VozniPark
 {
-    public partial class DodajModelForm : Form
+    public partial class DodajModelForm : MetroForm
     {
         public PropertyInterface myProperty;
 
@@ -27,6 +29,11 @@ namespace VozniPark
             btnDodajModel.Text = "DODAJ";
             btnDodajModel.Name = "btnDodajModel";
             btnDodajModel.Visible = true;
+            btnDodajModel.FlatStyle = FlatStyle.Flat;
+            btnDodajModel.BackColor = Color.FromArgb(23, 165, 232);
+            btnDodajModel.ForeColor = Color.White;
+            btnDodajModel.Size = new Size(120, 34);
+            btnDodajModel.Margin = new Padding(135, 10, 3, 3);
 
             flpModel.Controls.Add(btnDodajModel);
 
@@ -37,7 +44,7 @@ namespace VozniPark
         {
             Add();
             DialogResult = DialogResult.OK;
-            MessageBox.Show("Dodan je novi model vozila!");
+            MetroMessageBox.Show(this, "Dodan je novi model vozila!", "Dodan novi model", MessageBoxButtons.OK,  MessageBoxIcon.Information, 90);
         }
 
         public void PopulateControls()

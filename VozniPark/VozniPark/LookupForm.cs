@@ -130,5 +130,17 @@ namespace VozniPark
 
             }
         }
+
+        private void btnNoviModel_MouseHover(object sender, EventArgs e)
+        {
+            btnNoviModel.BackColor = Color.FromArgb(23, 165, 232);
+            btnNoviModel.ForeColor = Color.White;
+        }
+
+        private void btnNoviModel_MouseLeave(object sender, EventArgs e)
+        {
+            btnNoviModel.BackColor = Color.White;
+            btnNoviModel.ForeColor = Color.FromArgb(23, 165, 232);
+        }
     }
 }

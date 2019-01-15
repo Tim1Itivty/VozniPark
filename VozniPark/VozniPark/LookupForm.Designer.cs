@@ -95,11 +95,12 @@ namespace VozniPark
             // 
             // btnNoviModel
             // 
-            this.btnNoviModel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(165)))), ((int)(((byte)(232)))));
-            this.btnNoviModel.FlatAppearance.BorderSize = 0;
+            this.btnNoviModel.BackColor = System.Drawing.Color.White;
+            this.btnNoviModel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(165)))), ((int)(((byte)(232)))));
+            this.btnNoviModel.FlatAppearance.BorderSize = 2;
             this.btnNoviModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNoviModel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNoviModel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnNoviModel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.btnNoviModel.Location = new System.Drawing.Point(330, 336);
             this.btnNoviModel.Name = "btnNoviModel";
             this.btnNoviModel.Size = new System.Drawing.Size(120, 34);
@@ -108,6 +109,8 @@ namespace VozniPark
             this.btnNoviModel.UseVisualStyleBackColor = false;
             this.btnNoviModel.Visible = false;
             this.btnNoviModel.Click += new System.EventHandler(this.btnNoviModel_Click);
+            this.btnNoviModel.MouseLeave += new System.EventHandler(this.btnNoviModel_MouseLeave);
+            this.btnNoviModel.MouseHover += new System.EventHandler(this.btnNoviModel_MouseHover);
             // 
             // LookupForm
             // 
