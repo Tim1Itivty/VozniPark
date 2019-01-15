@@ -1261,17 +1261,20 @@ namespace VozniPark
                 Button Pretraga = new Button();
                 Pretraga.Click += Pretraga_Click;
 
+               
+
                 AddServis.Text = "DODAJ";
                 DeleteServis.Text = "IZBRISI";
                 UpdateServis.Text = "IZMIJENI";
                 Pretraga.Text = "Pretraga servisa";
 
                 panel.Height = 100;
-                panel.Width = 470;
+                panel.Width = 770;
                 panel.Controls.Add(AddServis);
                 panel.Controls.Add(DeleteServis);
                 panel.Controls.Add(UpdateServis);
                 panel.Controls.Add(Pretraga);
+               
                 pnlDashboard.Controls.Add(panel);
                
 
@@ -1356,161 +1359,130 @@ namespace VozniPark
                 pnlDashboard.Controls.RemoveAt(2);
             }
             
-            FlowLayoutPanel novi = new FlowLayoutPanel();
-
-           
-
-
-
-
-
-            novi.Height = 100;
-            novi.Width = 470;
+            FlowLayoutPanel panel = sender as FlowLayoutPanel;
 
             DateTimePicker prvi = new DateTimePicker();
             DateTimePicker drugi = new DateTimePicker();
-           
-            prvi.MinDate = new DateTime(2000,01,01);
+
+            prvi.MinDate = new DateTime(2000, 01, 01);
             prvi.Value = prvi.MinDate;
 
-            drugi.MaxDate =  DateTime.Now;
+            drugi.MaxDate = DateTime.Now;
             drugi.Value = drugi.MaxDate;
+
+
+
+
+
+           
+
+
+
+
+
+            //prvi.ValueChanged += Prvi_ValueChanged;
+            //drugi.ValueChanged += Drugi_ValueChanged;
+
+           
+            panel.Controls.Add(drugi);
+
+
           
-            prvi.ValueChanged += Prvi_ValueChanged;
-            drugi.ValueChanged += Drugi_ValueChanged;
-
-            novi.Controls.Add(prvi);
-            novi.Controls.Add(drugi);
-           
-            
-            pnlDashboard.Controls.Add(novi);
 
 
 
            
         }
 
-        private void Drugi_ValueChanged(object sender, EventArgs e)
-        {
-            pnlDashboard.Controls.Clear();
+        //private void Drugi_ValueChanged(object sender, EventArgs e)
+        //{
+        //    pnlDashboard.Controls.Clear();
 
 
-            DataGridView dtg = new DataGridView();
+        //    DataGridView dtg = new DataGridView();
 
 
-            pnlDashboard.Controls.Add(dtg);
-            myProperty = new PropertyClassServisiranjeVozila();
-            PropertyInterface pi;
-            dgvDimeznije(dtg);
-            pnlDashboard.Controls.Add(dtg);
-            FlowLayoutPanel panel = new FlowLayoutPanel();
-            Button AddServis = new Button();
-            AddServis.Click += AddServis_Click;
+        //    pnlDashboard.Controls.Add(dtg);
+        //    myProperty = new PropertyClassServisiranjeVozila();
+        //    PropertyInterface pi;
+        //    dgvDimeznije(dtg);
+        //    pnlDashboard.Controls.Add(dtg);
+        //    FlowLayoutPanel panel = new FlowLayoutPanel();
+        //    Button AddServis = new Button();
+        //    AddServis.Click += AddServis_Click;
 
-            Button UpdateServis = new Button();
-            UpdateServis.Click += UpdateServis_Click;
+        //    Button UpdateServis = new Button();
+        //    UpdateServis.Click += UpdateServis_Click;
 
-            Button DeleteServis = new Button();
-            DeleteServis.Click += DeleteServis_Click;
+        //    Button DeleteServis = new Button();
+        //    DeleteServis.Click += DeleteServis_Click;
 
-            Button Pretraga = new Button();
-            Pretraga.Click += Pretraga_Click;
+        //    Button Pretraga = new Button();
+        //    Pretraga.Click += Pretraga_Click;
 
-            AddServis.Text = "DODAJ";
-            DeleteServis.Text = "IZBRISI";
-            UpdateServis.Text = "IZMIJENI";
-            Pretraga.Text = "Pretraga servisa";
+        //    AddServis.Text = "DODAJ";
+        //    DeleteServis.Text = "IZBRISI";
+        //    UpdateServis.Text = "IZMIJENI";
+        //    Pretraga.Text = "Pretraga servisa";
 
-            panel.Height = 100;
-            panel.Width = 470;
-            panel.Controls.Add(AddServis);
-            panel.Controls.Add(DeleteServis);
-            panel.Controls.Add(UpdateServis);
-            panel.Controls.Add(Pretraga);
-            pnlDashboard.Controls.Add(panel);
-
-
-
-            FlowLayoutPanel nov = new FlowLayoutPanel();
+        //    panel.Height = 100;
+        //    panel.Width = 470;
+        //    panel.Controls.Add(AddServis);
+        //    panel.Controls.Add(DeleteServis);
+        //    panel.Controls.Add(UpdateServis);
+        //    panel.Controls.Add(Pretraga);
+        //    pnlDashboard.Controls.Add(panel);
 
 
 
+        //    FlowLayoutPanel nov = new FlowLayoutPanel();
 
 
 
 
 
-            nov.Height = 100;
-            nov.Width = 470;
 
 
-            pnlDashboard.Controls.Add(nov);
-        }
 
-        private void Prvi_ValueChanged(object sender, EventArgs e)
-        {
-            pnlDashboard.Controls.Clear();
+        //    nov.Height = 100;
+        //    nov.Width = 470;
 
-            DateTimePicker prvi = sender as DateTimePicker;
-            DateTimePicker drugi = sender as DateTimePicker;
 
+        //    pnlDashboard.Controls.Add(nov);
+        //}
+
+        //private void Prvi_ValueChanged(object sender, EventArgs e)
+        //{
+        //    pnlDashboard.Controls.Clear();
+
+           
            
 
 
             
-            myProperty = new PropertyClassServisiranjeVozila();
-            PropertyInterface pi;
+        //    myProperty = new PropertyClassServisiranjeVozila();
+        //    PropertyInterface pi;
             
            
-            FlowLayoutPanel panel = new FlowLayoutPanel();
-            string PretragaServisa = "SELECT * FROM dbo.pretraga(@datum1,@datum2)";
+        //    FlowLayoutPanel panel = new FlowLayoutPanel();
+        //    string PretragaServisa = "SELECT * FROM dbo.pretraga(@datum1,@datum2)";
 
-            SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
-            SqlCommand sqlcom = new SqlCommand(PretragaServisa, konekcija);
-
-
-            SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
-            SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
+        //    SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
+        //    SqlCommand sqlcom = new SqlCommand(PretragaServisa, konekcija);
 
 
-
-            sqlcom.Parameters.Add(parametar);
-            sqlcom.Parameters.Add(parametar2);
-
-            parametar.Value = prvi.Value;
-            parametar2.Value = drugi.Value;
-
-            //FlowLayoutPanel nov = new FlowLayoutPanel();
+        //    SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
+        //    SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
 
 
 
+        //    sqlcom.Parameters.Add(parametar);
+        //    sqlcom.Parameters.Add(parametar2);
 
+        //    //parametar.Value = prvi.Value;
+        //    //parametar2.Value = drugi.Value;
 
-
-
-
-            //nov.Height = 100;
-            //nov.Width = 470;
-
-
-            //pnlDashboard.Controls.Add(nov);
-
-            DataTable dt = new DataTable();
-
-            SqlDataAdapter adapter = new SqlDataAdapter(sqlcom);
-            adapter.Fill(dt);
-
-
-            DataGridView grid = new DataGridView();
-            grid.DataSource = dt;
-            var type = myProperty.GetType();
-            var properties = type.GetProperties();
-
-            foreach (DataGridViewColumn item in grid.Columns)
-            {
-                item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
-                                      ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
-            }
+        //    //FlowLayoutPanel nov = new FlowLayoutPanel();
 
 
 
@@ -1519,55 +1491,85 @@ namespace VozniPark
 
 
 
+        //    //nov.Height = 100;
+        //    //nov.Width = 470;
 
 
-            grid.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
-            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            grid.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            grid.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
-            grid.BackgroundColor = Color.White;
-            grid.EnableHeadersVisualStyles = false;
-            grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.AllowUserToAddRows = false;
-            grid.AllowUserToResizeColumns = false;
-            grid.AllowUserToResizeRows = false;
-            grid.ReadOnly = true;
-            grid.ColumnHeadersHeight = 45;
-            grid.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
-            pnlDashboard.Controls.Add(grid);
+        //    //pnlDashboard.Controls.Add(nov);
 
-            Button AddServis = new Button();
-            AddServis.Click += AddServis_Click;
+        //    DataTable dt = new DataTable();
 
-            Button UpdateServis = new Button();
-            UpdateServis.Click += UpdateServis_Click;
+        //    SqlDataAdapter adapter = new SqlDataAdapter(sqlcom);
+        //    adapter.Fill(dt);
 
-            Button DeleteServis = new Button();
-            DeleteServis.Click += DeleteServis_Click;
 
-            Button Pretraga = new Button();
-            Pretraga.Click += Pretraga_Click;
+        //    DataGridView grid = new DataGridView();
+        //    grid.DataSource = dt;
+        //    var type = myProperty.GetType();
+        //    var properties = type.GetProperties();
 
-            AddServis.Text = "DODAJ";
-            DeleteServis.Text = "IZBRISI";
-            UpdateServis.Text = "IZMIJENI";
-            Pretraga.Text = "Pretraga servisa";
+        //    foreach (DataGridViewColumn item in grid.Columns)
+        //    {
+        //        item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
+        //                              ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
+        //    }
 
-            panel.Height = 100;
-            panel.Width = 470;
-            panel.Controls.Add(AddServis);
-            panel.Controls.Add(DeleteServis);
-            panel.Controls.Add(UpdateServis);
-            panel.Controls.Add(Pretraga);
-            pnlDashboard.Controls.Add(panel);
+
+
+
+
+
+
+
+
+
+        //    grid.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        //    grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+        //    grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+        //    grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+        //    grid.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+        //    grid.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+        //    grid.BackgroundColor = Color.White;
+        //    grid.EnableHeadersVisualStyles = false;
+        //    grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+        //    grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+        //    grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+        //    grid.AllowUserToAddRows = false;
+        //    grid.AllowUserToResizeColumns = false;
+        //    grid.AllowUserToResizeRows = false;
+        //    grid.ReadOnly = true;
+        //    grid.ColumnHeadersHeight = 45;
+        //    grid.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
+        //    pnlDashboard.Controls.Add(grid);
+
+        //    Button AddServis = new Button();
+        //    AddServis.Click += AddServis_Click;
+
+        //    Button UpdateServis = new Button();
+        //    UpdateServis.Click += UpdateServis_Click;
+
+        //    Button DeleteServis = new Button();
+        //    DeleteServis.Click += DeleteServis_Click;
+
+        //    Button Pretraga = new Button();
+        //    Pretraga.Click += Pretraga_Click;
+
+        //    AddServis.Text = "DODAJ";
+        //    DeleteServis.Text = "IZBRISI";
+        //    UpdateServis.Text = "IZMIJENI";
+        //    Pretraga.Text = "Pretraga servisa";
+
+        //    panel.Height = 100;
+        //    panel.Width = 470;
+        //    panel.Controls.Add(AddServis);
+        //    panel.Controls.Add(DeleteServis);
+        //    panel.Controls.Add(UpdateServis);
+        //    panel.Controls.Add(Pretraga);
+        //    pnlDashboard.Controls.Add(panel);
 
             
 
-        }
+        //}
 
         private void DeleteGorivo_Click(object sender, EventArgs e)
         {
