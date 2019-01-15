@@ -31,25 +31,23 @@ namespace VozniPark
             else if (mp.GetType() == typeof(PropertyClassModel))
             {
                 this.Text = "Model";
+                btnNoviModel.Visible = true;
+              
             }
             else if (mp.GetType() == typeof(PropertyClassVozila))
             {
                 this.Text = "Vozila";
             }
+            else if (mp.GetType() == typeof(PropertyClassProizvodjac))
+            {
+                this.Text = "Proizvodjaci";
+            }
 
             PopulateGrid();
 
+            formatiranejGrida();
 
-            for (int i = 0; i < lookupGrid.Columns.Count; i++)
-            {
-                if (i == 0)
-                {
-                    lookupGrid.Columns[0].Width = 40;
-                }
-                else
-                lookupGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                
-            }
+
 
             lookupGrid.CellDoubleClick += btnReturn_Click;
         }
@@ -106,5 +104,31 @@ namespace VozniPark
             DialogResult = DialogResult.OK;
         }
 
+        private void btnNoviModel_Click(object sender, EventArgs e)
+        {
+            DodajModelForm dodajModelF = new DodajModelForm();
+            dodajModelF.ShowDialog();
+            if (dodajModelF.DialogResult == DialogResult.OK)
+            {
+                lookupGrid.DataSource = null;
+                PopulateGrid();
+            }
+            formatiranejGrida();
+        }
+
+
+        public void formatiranejGrida()
+        {
+            for (int i = 0; i < lookupGrid.Columns.Count; i++)
+            {
+                if (i == 0)
+                {
+                    lookupGrid.Columns[0].Width = 40;
+                }
+                else
+                    lookupGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            }
+        }
     }
 }

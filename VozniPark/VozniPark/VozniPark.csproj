@@ -70,6 +70,12 @@
     <Compile Include="DateTimeControl.Designer.cs">
       <DependentUpon>DateTimeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="DodajModelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DodajModelForm.Designer.cs">
+      <DependentUpon>DodajModelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     <Compile Include="StateEnum.cs" />
     <EmbeddedResource Include="DateTimeControl.resx">
       <DependentUpon>DateTimeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DodajModelForm.resx">
+      <DependentUpon>DodajModelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
