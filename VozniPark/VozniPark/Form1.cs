@@ -769,7 +769,8 @@ namespace VozniPark
             DetaljanPregledZaposlenog.MaximizeBox = false;
             DetaljanPregledZaposlenog.MinimizeBox = false;
             DetaljanPregledZaposlenog.Show();
-            DetaljanPregledZaposlenog.Size = new Size(1020, 350);
+
+            detaljnoFormaLoad(DetaljanPregledZaposlenog, 1020, 350);
 
             FlowLayoutPanel flpZaposleniDetaljno = new FlowLayoutPanel();
             flpZaposleniDetaljno.BackColor = Color.FromArgb(29, 140, 196);
@@ -848,11 +849,11 @@ namespace VozniPark
             zaduzenjaGrid.DataSource = table;
             flpZaduzenja.Controls.Add(zaduzenjaGrid);
             dgvDimeznije(zaduzenjaGrid);
-            zaduzenjaGrid.Width = flpZaduzenja.Width - 20;
+            zaduzenjaGrid.Width = flpZaduzenja.Width;
 
             foreach (DataGridViewColumn item in zaduzenjaGrid.Columns)
             {
-                item.Width += 25;
+                item.Width += 70;
             }
             
         }
@@ -2016,6 +2017,20 @@ namespace VozniPark
                     }
 	            }
             }
+            else if(myProperty.GetType() == typeof(PropertyClassRegistracija))
+            {
+                foreach (DataGridViewRow item in dtg.Rows)
+                {
+                    if (item.Cells[6].Value.ToString() == "Dostupno")
+                    {
+                        item.Cells[6].Style.ForeColor = Color.LimeGreen;
+                    }
+                    else if (item.Cells[6].Value.ToString() == "Nije dostupno")
+                    {
+                        item.Cells[6].Style.ForeColor = Color.Red;
+                    }
+                }
+            }
             
         }
 
@@ -2051,28 +2066,40 @@ namespace VozniPark
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_user_male_50;
                 else if(btn.Name.Contains("Vozilo"))
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_traffic_jam_50;
-                //btn.BackColor = Color.FromArgb(65, 216, 34);
             }
             else if (btn.Text.Contains("OBRISI"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_close_window_50;
-                //btn.BackColor = Color.FromArgb(242, 53, 53);
             }
             else if (btn.Text.Contains("IZMIJENI"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_edit_file_50;
-                //btn.BackColor = Color.FromArgb(21, 54, 107);
             }
             else if (btn.Text.Contains("DETALJNO"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_more_filled_50;
-                //btn.BackColor = Color.FromArgb(64, 208, 237);
             }
             else if (btn.Text.Contains("ZADUZI"))
             {
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
-                //btn.BackColor = Color.FromArgb(65, 216, 34);
+                
             }
+        }
+
+        private void detaljnoFormaLoad(MetroForm forma, int x, int y)
+        {
+            forma.Location = new Point(681, 366);
+            for (int i = 0, j = 0; i < x; i += 102)
+            {
+                if(forma.Location.X > 340)
+                    forma.Location = new Point(1362 - i, 673 - j);
+
+                forma.Size = new Size(i, j);
+
+                if (j < y)
+                    j += 35;
+            }
+
         }
 
         #endregion
