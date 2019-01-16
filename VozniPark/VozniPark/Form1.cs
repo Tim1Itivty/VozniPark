@@ -244,19 +244,25 @@ namespace VozniPark
 
         private void Detalji_Click(object sender, EventArgs e)
         {
-            Form DetaljanPregledVozilaForm = new Form();
+            MetroForm DetaljanPregledVozilaForm = new MetroForm();
             DetaljanPregledVozilaForm.Show();
-            DetaljanPregledVozilaForm.Size = new Size(860, 420);
-
+            detaljnoFormaLoad(DetaljanPregledVozilaForm, 860, 420);
+            /DetaljanPregledVozilaForm.Size = new Size(860, 420);
+            DetaljanPregledVozilaForm.Text = "Informacije o vozilu";
             DataGridView a = pnlDashboard.Controls[0] as DataGridView;
             SqlConnection sqlConnection = new SqlConnection(SqlHelper.GetConnectionString());
 
             //Pristup podacima Lijevi panel
             FlowLayoutPanel pnlLijevi = new FlowLayoutPanel();
             pnlLijevi.Dock = DockStyle.Left;
-            pnlLijevi.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            pnlLijevi.Padding = new Padding(5);
+            pnlLijevi.Font = new Font("Segoe UI", 12);
+            pnlLijevi.ForeColor = Color.White;
             DetaljanPregledVozilaForm.Controls.Add(pnlLijevi);
             pnlLijevi.FlowDirection = FlowDirection.TopDown;
+            pnlLijevi.BackColor = Color.FromArgb(29, 140, 196);
+            pnlLijevi.FlowDirection = FlowDirection.TopDown;
+            pnlLijevi.BorderStyle = System.Windows.Forms.BorderStyle.None;
 
             string QueryDetaljiVozila = "Exec dbo.spDetaljaPregledVozila  @VoziloID";           
             SqlCommand cmdDetaljiVozila = new SqlCommand(QueryDetaljiVozila, sqlConnection);
@@ -279,31 +285,31 @@ namespace VozniPark
             Label lblDostupnost = new Label();
 
             
-            lblVozilo.Text = "Vozilo: \n";
+            lblVozilo.Text = "Vozilo \n";
             lblVozilo.Text += detaljiDT.Rows[0].ItemArray[1].ToString();
             lblVozilo.Text += " " + detaljiDT.Rows[0].ItemArray[2].ToString() + "\n \n";
 
-            lblGodina.Text = "Godina proizvodnje: \n";
+            lblGodina.Text = "Godina proizvodnje \n";
             lblGodina.Text += detaljiDT.Rows[0].ItemArray[3].ToString() + ". \n \n";
 
-            lblVrata.Text = "Broj vrata: \n";
+            lblVrata.Text = "Broj vrata \n";
             lblVrata.Text += detaljiDT.Rows[0].ItemArray[4].ToString() + " \n \n";
 
-            lblBoja.Text = "Boja: \n";
+            lblBoja.Text = "Boja \n";
             lblBoja.Text += detaljiDT.Rows[0].ItemArray[5].ToString() + " \n \n";
 
-            lblKilometraza.Text = "Kilometraza: \n";
+            lblKilometraza.Text = "Kilometraza \n";
             lblKilometraza.Text += detaljiDT.Rows[0].ItemArray[6].ToString() + " \n \n";
 
-            if(detaljiDT.Rows[0].ItemArray[7].ToString() == "False")
+            if (detaljiDT.Rows[0].ItemArray[7].ToString() == "False")
             {
                 lblDostupnost.Text = "Zauzeto \n ";
                 lblDostupnost.ForeColor = Color.IndianRed;
             }
-            else 
+            else
             {
                 lblDostupnost.Text = "Slobodno";
-                lblDostupnost.ForeColor = Color.ForestGreen;
+                lblDostupnost.ForeColor = Color.LimeGreen;
             }
 
             pnlLijevi.Controls.Add(lblVozilo);
@@ -327,9 +333,9 @@ namespace VozniPark
 
             FlowLayoutPanel pnlDesni = new FlowLayoutPanel();
             pnlDesni.Dock = DockStyle.Right;
-            pnlDesni.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pnlDesni.Size = new Size (640, DetaljanPregledVozilaForm.Height);
             pnlDesni.Padding = new Padding(20, 10, 10, 20);
+            pnlDesni.BorderStyle = System.Windows.Forms.BorderStyle.None;
             DetaljanPregledVozilaForm.Controls.Add(pnlDesni);
 
             // DGV SERVISI SELEKTOVANOG VOZILA
@@ -714,9 +720,9 @@ namespace VozniPark
 
         private void Btn_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
+            MetroTile btn = sender as MetroTile;
             DataGridView dgv = sender as DataGridView;
-            if (btn.Name == "btnDodaj")
+            if (btn.Name == "btnDodajZaposlenog")
             {
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
@@ -900,13 +906,13 @@ namespace VozniPark
 
         private void BtnDodaj_Click(object sender, EventArgs e)
         {           
-                AddUpdate();
-                pnlDashboard.Controls.Clear();
-                MessageBox.Show("Dodan novi zaposleni!");
-                btnZaposleni_Click(sender, e);
-                Button btn = sender as Button;
-                btn.Name = "btnDodajZaposlenog";
-                BtnPodmeniZaposleni_Click(btn, e);           
+            AddUpdate();
+            pnlDashboard.Controls.Clear();
+            MessageBox.Show("Dodan novi zaposleni!");
+            btnZaposleni_Click(sender, e);
+            Button btn = sender as Button;
+            btn.Name = "btnDodajZaposlenog";
+            BtnPodmeniZaposleni_Click(btn, e);           
         }
 
         #endregion
@@ -1055,9 +1061,10 @@ namespace VozniPark
                 FlowLayoutPanel flpanel = new FlowLayoutPanel();
                 flpanel.Height = 100;
                 flpanel.Width = 470;
-                Button btnPretraga = new Button();
+                MetroTile btnPretraga = new MetroTile();
                 btnPretraga.Name = "btnPretraga";
-                btnPretraga.Text = "Pretraga";
+                btnPretraga.Text = "PRETRAGA";
+                crudButtonDesign(btnPretraga);
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 flpanel.Controls.Add(btnPretraga);
@@ -1070,22 +1077,23 @@ namespace VozniPark
         private void BtnPretraga_Click(object sender, EventArgs e)
         {
             
-            Button btnPretraga = sender as  Button;
+            MetroTile btnPretraga = sender as MetroTile;
             
             FlowLayoutPanel flpanel = btnPretraga.Parent as FlowLayoutPanel;
            
-            if (btnPretraga.Text == "Pretraga")
+            if (btnPretraga.Text == "PRETRAGA")
             {
-                btnPretraga.Text = "Pretrazi";
+                btnPretraga.Text = "PRETRAZI";
 
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                DateTimePicker dateTimePicker1 = new DateTimePicker();
+                panel.Size = new Size(219, 100);
+                MetroDateTime dateTimePicker1 = new MetroDateTime();
                 dateTimePicker1.Format = DateTimePickerFormat.Custom;
                 dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
                 dateTimePicker1.MinDate = new DateTime(2018, 1, 1);
                 dateTimePicker1.MaxDate = DateTime.Today;
 
-                DateTimePicker dateTimePicker2 = new DateTimePicker();
+                MetroDateTime dateTimePicker2 = new MetroDateTime();
                 dateTimePicker2.Format = DateTimePickerFormat.Custom;
                 dateTimePicker2.CustomFormat = "MM/dd/yyyy hh:mm:ss";
                 dateTimePicker2.MaxDate = DateTime.Today;
@@ -1101,7 +1109,7 @@ namespace VozniPark
                 flpanel.Controls.Add(panel);
             }
 
-            else if (btnPretraga.Text == "Pretrazi")
+            else if (btnPretraga.Text == "PRETRAZI")
             {
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 FlowLayoutPanel panel = pnlDashboard.Controls[1].Controls[1] as FlowLayoutPanel;
@@ -1131,7 +1139,7 @@ namespace VozniPark
 
                
                 flpanel.Controls.RemoveAt(1);
-                btnPretraga.Text = "Pretraga";
+                btnPretraga.Text = "PRETRAGA";
             }
 
 
@@ -2317,8 +2325,22 @@ namespace VozniPark
                 {
                     string value = cell.Value.ToString();
 
-                    PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    if(value == "Dostupno")
+                    {
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(true, property.PropertyType));
+                    }
+                    else if(value == "Nije dostupno")
+                    {
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(false, property.PropertyType));
+                    }
+                    else
+                    {
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+                    
                 }
                 i++;
             } 
@@ -2455,13 +2477,13 @@ namespace VozniPark
             btn.TileTextFontSize = MetroTileTextSize.Small;
             if (btn.Text.Contains("DODAJ"))
             {
-                if(btn.Name.Contains("Zaposlenog"))
+                if (btn.Name.Contains("Zaposlenog"))
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_user_male_50;
-                else if(btn.Name.Contains("Vozilo"))
+                else if (btn.Name.Contains("Vozilo"))
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_traffic_jam_50;
                 else
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_property_50;
-                
+
             }
             else if (btn.Text.Contains("OBRISI"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_close_window_50;
@@ -2471,13 +2493,15 @@ namespace VozniPark
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_more_filled_50;
             else if (btn.Text.Contains("ZADUZI"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
+            else if (btn.Text.Contains("PRETRA"))
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
             
         }
 
         private void detaljnoFormaLoad(MetroForm forma, int x, int y)
         {
             forma.StartPosition = FormStartPosition.CenterScreen;
-            for (int i = 0, j = 0; i < x; i += 102)
+            for (int i = 0, j = 0; i < x; i += (int)x/10)
             {
                 if (forma.Location.X > 340)
                     forma.Location = new Point(1362 - i, 673 - j);
@@ -2485,7 +2509,7 @@ namespace VozniPark
                 forma.Size = new Size(i, j);
 
                 if (j < y)
-                    j += 35;
+                    j += (int)y/10;
             }
 
         }
