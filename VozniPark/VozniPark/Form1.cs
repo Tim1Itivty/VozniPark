@@ -720,46 +720,11 @@ namespace VozniPark
         }
 
         private void BtnOtkazi_Click1(object sender, EventArgs e)
-        {
-            if(state == StateEnum.Add)
-            {
-                pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassZaposleni();
-                PopulateControls();
-                FlowLayoutPanel flp = new FlowLayoutPanel();
-                flp.FlowDirection = FlowDirection.LeftToRight;
-                pnlDashboard.Controls.Add(flp);
-
-                Button btnDodaj = new Button();
-                Button btnOtkazi = new Button();
-                btnDodaj.Text = "DODAJ";
-                btnDodaj.Name = "btnDodaj";
-                flp.Controls.Add(btnDodaj);
-                btnDodaj.Click += BtnDodaj_Click;
-                btnOtkazi.Name = "btnOtkazi";
-                btnOtkazi.Text = "OTKAZI";
-                flp.Controls.Add(btnOtkazi);
-                btnOtkazi.Click += BtnOtkazi_Click1;
-            }
-            else if(state == StateEnum.Update)
-            {
-                pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassZaposleni();
-                PopulateControls();
-                FlowLayoutPanel flp = new FlowLayoutPanel();
-                flp.FlowDirection = FlowDirection.LeftToRight;
-                pnlDashboard.Controls.Add(flp);
-
-                Button btnIzmjeni = new Button();
-                Button btnOtkazi = new Button();
-                btnIzmjeni.Text = "IZMIJENI";
-                btnIzmjeni.Name = "btnIzmjeni";
-                btnOtkazi.Name = "btnOtkazi";
-                btnOtkazi.Text = "OTKAZI";
-                flp.Controls.Add(btnIzmjeni);
-                flp.Controls.Add(btnOtkazi);
-                btnOtkazi.Click += BtnOtkazi_Click1;
-            }
+        {         
+                btnZaposleni_Click(sender, e);
+                Button podmeniZaposleni = sender as Button;
+                podmeniZaposleni.Name = "btnPregled";
+                BtnPodmeniZaposleni_Click(podmeniZaposleni, e);         
         }
 
         private void BtnDetaljno_Click()
@@ -1024,15 +989,122 @@ namespace VozniPark
             else if (button.Name == "btnIstorija")
             {
                 pnlDashboard.Controls.Clear();
-                DataGridView dtg = new DataGridView();
-                pnlDashboard.Controls.Add(dtg);
+                DataGridView dtg = new DataGridView();                
                 myProperty = new PropertyClassIstorijaZaduzenja();
+                FlowLayoutPanel flpanel = new FlowLayoutPanel();
+                flpanel.Height = 100;
+                flpanel.Width = 470;
+                Button btnPretraga = new Button();
+                btnPretraga.Name = "btnPretraga";
+                btnPretraga.Text = "Pretraga";
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
-
+                flpanel.Controls.Add(btnPretraga);
+                pnlDashboard.Controls.Add(flpanel);
+                btnPretraga.Click += BtnPretraga_Click;                
                 PopulateGrid();
             }
         }
+
+        private void BtnPretraga_Click(object sender, EventArgs e)
+        {
+            
+            Button btnPretraga = sender as  Button;
+            
+            FlowLayoutPanel flpanel = btnPretraga.Parent as FlowLayoutPanel;
+           
+            if (btnPretraga.Text == "Pretraga")
+            {
+                btnPretraga.Text = "Pretrazi";
+
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                DateTimePicker dateTimePicker1 = new DateTimePicker();
+                dateTimePicker1.Format = DateTimePickerFormat.Custom;
+                dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+                dateTimePicker1.MinDate = new DateTime(2018, 1, 1);
+                dateTimePicker1.MaxDate = DateTime.Today;
+
+                DateTimePicker dateTimePicker2 = new DateTimePicker();
+                dateTimePicker2.Format = DateTimePickerFormat.Custom;
+                dateTimePicker2.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+                dateTimePicker2.MaxDate = DateTime.Today;
+               
+                dateTimePicker1.Value = dateTimePicker1.MinDate;
+                dateTimePicker2.Value = dateTimePicker2.MaxDate;
+                 
+
+
+                panel.Controls.Add(dateTimePicker1);
+                panel.Controls.Add(dateTimePicker2);
+
+                flpanel.Controls.Add(panel);
+            }
+
+            else if (btnPretraga.Text == "Pretrazi")
+            {
+                DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+                FlowLayoutPanel panel = pnlDashboard.Controls[1].Controls[1] as FlowLayoutPanel;
+
+                DateTimePicker dateTimePicker1 = pnlDashboard.Controls[1].Controls[1].Controls[0] as DateTimePicker;
+                DateTimePicker dateTimePicker2 = pnlDashboard.Controls[1].Controls[1].Controls[1] as DateTimePicker;
+                string QueryIstorijaZaduzenja = "Select * from dbo.IstorijaZaduzenjaPretraga(@datum1,@datum2)";
+                SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
+                SqlCommand sqlCommand = new SqlCommand(QueryIstorijaZaduzenja, konekcija);
+
+
+                SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
+                SqlParameter parameter2 = new SqlParameter("@datum2", SqlDbType.Date);
+
+
+                sqlCommand.Parameters.Add(parametar);
+                sqlCommand.Parameters.Add(parameter2);
+                parametar.Value = dateTimePicker1.Value;
+                parameter2.Value = dateTimePicker2.Value;
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                adapter.Fill(dt);
+                dtg.DataSource = dt;
+               // pnlDashboard.Controls.SetChildIndex(dtg, 0);
+
+
+
+               
+                flpanel.Controls.RemoveAt(1);
+                btnPretraga.Text = "Pretraga";
+            }
+
+
+        }
+
+        private void BtnPretrazi_Click(object sender, EventArgs e)
+        {
+            DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+
+            DateTimePicker dateTimePicker1 = pnlDashboard.Controls[1].Controls[1] as DateTimePicker;
+            DateTimePicker dateTimePicker2 = pnlDashboard.Controls[1].Controls[2] as DateTimePicker;
+            string QueryIstorijaZaduzenja = "Select * from dbo.IstorijaZaduzenjaPretraga(@datum1,@datum2)";
+            SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
+            SqlCommand sqlCommand = new SqlCommand(QueryIstorijaZaduzenja, konekcija);
+
+
+            SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
+            SqlParameter parameter2 = new SqlParameter("@datum2", SqlDbType.Date);
+
+
+            sqlCommand.Parameters.Add(parametar);
+            sqlCommand.Parameters.Add(parameter2);
+            parametar.Value = dateTimePicker1.Value;
+            parameter2.Value = dateTimePicker2.Value;
+            DataTable dt = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            adapter.Fill(dt);
+            dtg.DataSource = dt;
+            pnlDashboard.Controls.SetChildIndex(dtg, 0);
+        }
+
+
+       
+       
 
         private void BtnRazduzi_Click(object sender, EventArgs e)
         {
@@ -1147,7 +1219,6 @@ namespace VozniPark
             AddUpdate();
             MessageBox.Show("Uspjesna izmjena!");
             pnlDashboard.Controls.Clear();
-
             btnZaduzenja_Click(sender, e);
             Button podmeniTrenutna = sender as Button;
             podmeniTrenutna.Name = "btnPregled";
