@@ -30,12 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.btnVozila = new System.Windows.Forms.Button();
-            this.btnZaduzenja = new System.Windows.Forms.Button();
-            this.btnZaposleni = new System.Windows.Forms.Button();
-            this.btnServis = new System.Windows.Forms.Button();
             this.pnlMeni = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlSelected4 = new System.Windows.Forms.Panel();
             this.pnlSelected2 = new System.Windows.Forms.Panel();
             this.pnlSelected3 = new System.Windows.Forms.Panel();
@@ -43,94 +38,14 @@
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnServis = new System.Windows.Forms.Button();
+            this.btnZaposleni = new System.Windows.Forms.Button();
+            this.btnZaduzenja = new System.Windows.Forms.Button();
+            this.btnVozila = new System.Windows.Forms.Button();
             this.pnlMeni.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnVozila
-            // 
-            this.btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            this.btnVozila.FlatAppearance.BorderSize = 0;
-            this.btnVozila.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVozila.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVozila.ForeColor = System.Drawing.Color.Linen;
-            this.btnVozila.Image = ((System.Drawing.Image)(resources.GetObject("btnVozila.Image")));
-            this.btnVozila.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVozila.Location = new System.Drawing.Point(0, 0);
-            this.btnVozila.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnVozila.Name = "btnVozila";
-            this.btnVozila.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnVozila.Size = new System.Drawing.Size(202, 54);
-            this.btnVozila.TabIndex = 0;
-            this.btnVozila.Text = "    Vozila";
-            this.btnVozila.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnVozila.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnVozila.UseVisualStyleBackColor = false;
-            this.btnVozila.Click += new System.EventHandler(this.btnVozila_Click);
-            // 
-            // btnZaduzenja
-            // 
-            this.btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            this.btnZaduzenja.FlatAppearance.BorderSize = 0;
-            this.btnZaduzenja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZaduzenja.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnZaduzenja.ForeColor = System.Drawing.Color.Linen;
-            this.btnZaduzenja.Image = ((System.Drawing.Image)(resources.GetObject("btnZaduzenja.Image")));
-            this.btnZaduzenja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnZaduzenja.Location = new System.Drawing.Point(0, 110);
-            this.btnZaduzenja.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnZaduzenja.Name = "btnZaduzenja";
-            this.btnZaduzenja.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnZaduzenja.Size = new System.Drawing.Size(202, 54);
-            this.btnZaduzenja.TabIndex = 0;
-            this.btnZaduzenja.Text = "    Zaduzenja";
-            this.btnZaduzenja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnZaduzenja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnZaduzenja.UseVisualStyleBackColor = false;
-            this.btnZaduzenja.Click += new System.EventHandler(this.btnZaduzenja_Click);
-            // 
-            // btnZaposleni
-            // 
-            this.btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            this.btnZaposleni.FlatAppearance.BorderSize = 0;
-            this.btnZaposleni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZaposleni.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnZaposleni.ForeColor = System.Drawing.Color.Linen;
-            this.btnZaposleni.Image = ((System.Drawing.Image)(resources.GetObject("btnZaposleni.Image")));
-            this.btnZaposleni.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnZaposleni.Location = new System.Drawing.Point(0, 55);
-            this.btnZaposleni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnZaposleni.Name = "btnZaposleni";
-            this.btnZaposleni.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnZaposleni.Size = new System.Drawing.Size(202, 54);
-            this.btnZaposleni.TabIndex = 0;
-            this.btnZaposleni.Text = "    Zaposleni";
-            this.btnZaposleni.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnZaposleni.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnZaposleni.UseVisualStyleBackColor = false;
-            this.btnZaposleni.Click += new System.EventHandler(this.btnZaposleni_Click);
-            // 
-            // btnServis
-            // 
-            this.btnServis.AutoSize = true;
-            this.btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
-            this.btnServis.FlatAppearance.BorderSize = 0;
-            this.btnServis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnServis.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnServis.ForeColor = System.Drawing.Color.Linen;
-            this.btnServis.Image = ((System.Drawing.Image)(resources.GetObject("btnServis.Image")));
-            this.btnServis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnServis.Location = new System.Drawing.Point(0, 165);
-            this.btnServis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnServis.Name = "btnServis";
-            this.btnServis.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnServis.Size = new System.Drawing.Size(202, 54);
-            this.btnServis.TabIndex = 0;
-            this.btnServis.Text = "    Servis";
-            this.btnServis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnServis.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnServis.UseVisualStyleBackColor = false;
-            this.btnServis.Click += new System.EventHandler(this.btnServis_Click);
             // 
             // pnlMeni
             // 
@@ -151,16 +66,6 @@
             this.pnlMeni.Name = "pnlMeni";
             this.pnlMeni.Size = new System.Drawing.Size(202, 613);
             this.pnlMeni.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 514);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(202, 99);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
             // 
             // pnlSelected4
             // 
@@ -220,6 +125,101 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "addZaposleni");
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 514);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(202, 99);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnServis
+            // 
+            this.btnServis.AutoSize = true;
+            this.btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnServis.FlatAppearance.BorderSize = 0;
+            this.btnServis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnServis.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnServis.ForeColor = System.Drawing.Color.Linen;
+            this.btnServis.Image = ((System.Drawing.Image)(resources.GetObject("btnServis.Image")));
+            this.btnServis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnServis.Location = new System.Drawing.Point(0, 165);
+            this.btnServis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnServis.Name = "btnServis";
+            this.btnServis.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnServis.Size = new System.Drawing.Size(202, 54);
+            this.btnServis.TabIndex = 0;
+            this.btnServis.Text = "    Servis";
+            this.btnServis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnServis.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnServis.UseVisualStyleBackColor = false;
+            this.btnServis.Click += new System.EventHandler(this.btnServis_Click);
+            // 
+            // btnZaposleni
+            // 
+            this.btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnZaposleni.FlatAppearance.BorderSize = 0;
+            this.btnZaposleni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZaposleni.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnZaposleni.ForeColor = System.Drawing.Color.Linen;
+            this.btnZaposleni.Image = ((System.Drawing.Image)(resources.GetObject("btnZaposleni.Image")));
+            this.btnZaposleni.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnZaposleni.Location = new System.Drawing.Point(0, 55);
+            this.btnZaposleni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnZaposleni.Name = "btnZaposleni";
+            this.btnZaposleni.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnZaposleni.Size = new System.Drawing.Size(202, 54);
+            this.btnZaposleni.TabIndex = 0;
+            this.btnZaposleni.Text = "    Zaposleni";
+            this.btnZaposleni.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnZaposleni.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnZaposleni.UseVisualStyleBackColor = false;
+            this.btnZaposleni.Click += new System.EventHandler(this.btnZaposleni_Click);
+            // 
+            // btnZaduzenja
+            // 
+            this.btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnZaduzenja.FlatAppearance.BorderSize = 0;
+            this.btnZaduzenja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZaduzenja.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnZaduzenja.ForeColor = System.Drawing.Color.Linen;
+            this.btnZaduzenja.Image = ((System.Drawing.Image)(resources.GetObject("btnZaduzenja.Image")));
+            this.btnZaduzenja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnZaduzenja.Location = new System.Drawing.Point(0, 110);
+            this.btnZaduzenja.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnZaduzenja.Name = "btnZaduzenja";
+            this.btnZaduzenja.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnZaduzenja.Size = new System.Drawing.Size(202, 54);
+            this.btnZaduzenja.TabIndex = 0;
+            this.btnZaduzenja.Text = "    Zaduzenja";
+            this.btnZaduzenja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnZaduzenja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnZaduzenja.UseVisualStyleBackColor = false;
+            this.btnZaduzenja.Click += new System.EventHandler(this.btnZaduzenja_Click);
+            // 
+            // btnVozila
+            // 
+            this.btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnVozila.FlatAppearance.BorderSize = 0;
+            this.btnVozila.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVozila.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVozila.ForeColor = System.Drawing.Color.Linen;
+            this.btnVozila.Image = ((System.Drawing.Image)(resources.GetObject("btnVozila.Image")));
+            this.btnVozila.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVozila.Location = new System.Drawing.Point(0, 0);
+            this.btnVozila.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnVozila.Name = "btnVozila";
+            this.btnVozila.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnVozila.Size = new System.Drawing.Size(202, 54);
+            this.btnVozila.TabIndex = 0;
+            this.btnVozila.Text = "    Vozila";
+            this.btnVozila.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVozila.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVozila.UseVisualStyleBackColor = false;
+            this.btnVozila.Click += new System.EventHandler(this.btnVozila_Click);
             // 
             // Form1
             // 

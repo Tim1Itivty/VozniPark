@@ -2070,32 +2070,27 @@ namespace VozniPark
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_user_male_50;
                 else if(btn.Name.Contains("Vozilo"))
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_traffic_jam_50;
-            }
-            else if (btn.Text.Contains("OBRISI"))
-            {
-                btn.TileImage = global::VozniPark.Properties.Resources.icons8_close_window_50;
-            }
-            else if (btn.Text.Contains("IZMIJENI"))
-            {
-                btn.TileImage = global::VozniPark.Properties.Resources.icons8_edit_file_50;
-            }
-            else if (btn.Text.Contains("DETALJNO"))
-            {
-                btn.TileImage = global::VozniPark.Properties.Resources.icons8_more_filled_50;
-            }
-            else if (btn.Text.Contains("ZADUZI"))
-            {
-                btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
+                else
+                    btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_property_50;
                 
             }
+            else if (btn.Text.Contains("OBRISI"))
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_close_window_50;
+            else if (btn.Text.Contains("IZMIJENI"))
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_edit_file_50;
+            else if (btn.Text.Contains("DETALJNO"))
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_more_filled_50;
+            else if (btn.Text.Contains("ZADUZI"))
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
+            
         }
 
         private void detaljnoFormaLoad(MetroForm forma, int x, int y)
         {
-            forma.Location = new Point(681, 366);
+            forma.StartPosition = FormStartPosition.CenterScreen;
             for (int i = 0, j = 0; i < x; i += 102)
             {
-                if(forma.Location.X > 340)
+                if (forma.Location.X > 340)
                     forma.Location = new Point(1362 - i, 673 - j);
 
                 forma.Size = new Size(i, j);
