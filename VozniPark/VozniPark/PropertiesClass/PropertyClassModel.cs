@@ -25,16 +25,18 @@ namespace VozniPark.PropertiesClass
         [LookupValue]
         public int Proizvodjac { get; set; }
 
+        [DisplayName("Proizvodjac ID")]
+        [SqlName("ProizvodjacID")]
+        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertiesClass.PropertyClassProizvodjac")]
+        public int ProizvodjacID { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite naziv!")]
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
         [LookupValue]
         public string Naziv { get; set; }
 
-        [DisplayName("Proizvodjac ID")]
-        [SqlName("ProizvodjacID")]
-        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertiesClass.PropertyClassProizvodjac")]
-        public int ProizvodjacID { get; set; }
+        
 
         
         #endregion

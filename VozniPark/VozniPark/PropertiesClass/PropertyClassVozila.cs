@@ -69,7 +69,11 @@ namespace VozniPark.PropertiesClass
         public string GetSelectQuery()
         {
             return @"SELECT distinct v.VoziloID,v.ModelID,p.Naziv + ' ' + m.Naziv AS Model,v.Kilometraza,
-                        v.GodinaProizvodnje,v.Boja,v.BrojVrata,v.Dostupnost,r.RegistracijskiBroj
+                        v.GodinaProizvodnje,v.Boja,v.BrojVrata,
+                        case
+                        when v.Dostupnost = 1 then 'Dostupno'
+                        when v.Dostupnost = 0 then 'Nije dostupno'
+                        end as Dostupnost,r.RegistracijskiBroj
                         FROM Vozila v
                         JOIN Model m 
                         ON v.ModelID=m.ModelID

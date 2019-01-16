@@ -95,7 +95,7 @@ namespace VozniPark.PropertiesClass
 
         public string GetLookupQuery()
         {
-            throw new NotImplementedException();
+            return @"SELECT ProizvodjacID, Naziv FROM dbo.Proizvodjac";
         }
         #endregion
     }

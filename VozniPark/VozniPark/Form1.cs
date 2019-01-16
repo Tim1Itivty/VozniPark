@@ -12,7 +12,9 @@ using VozniPark.AttributesClass;
 using System.Reflection;
 using VozniPark.PropertiesClass;
 using System.Windows.Forms.VisualStyles;
-
+using MetroFramework;
+using MetroFramework.Forms;
+using MetroFramework.Controls;
 
 namespace VozniPark
 {
@@ -75,37 +77,38 @@ namespace VozniPark
                 myProperty = new PropertyClassVozila();
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button Add = new Button();
+                MetroTile Add = new MetroTile();
                 Add.Click += Add_Click;
 
-                Button Update = new Button();
+                MetroTile Update = new MetroTile();
                 Update.Click += Update_Click;
 
-                Button Delete = new Button();
+                MetroTile Delete = new MetroTile();
                 Delete.Click += Delete_Click;
 
-                Button btnDetalji = new Button();
-                btnDetalji.Text = "Detaljan pregled vozila";
+                MetroTile btnDetalji = new MetroTile();
+                btnDetalji.Text = "DETALJNO";
                 btnDetalji.Width = 110;
                 btnDetalji.Height = 40;
-                panel.Controls.Add(btnDetalji);
-                btnDetalji.Location = new Point(655, 10);
+                
                 btnDetalji.Click += Detalji_Click;
-
-
+                crudButtonDesign(btnDetalji);
 
                 Add.Text = "DODAJ";
+                Add.Name = "btnDodajVozilo";
+                crudButtonDesign(Add);
                 Delete.Text = "OBRISI";
+                crudButtonDesign(Delete);
                 Update.Text = "IZMIJENI";
+                crudButtonDesign(Update);
                 
                 panel.Height = 100;
                 panel.Width = 970;
-
-
-                panel.Location = new Point(250, 150);
+                panel.Padding = new Padding(50, 0, 0, 0);
                 panel.Controls.Add(Add);
-                panel.Controls.Add(Delete);
                 panel.Controls.Add(Update);
+                panel.Controls.Add(Delete);
+                panel.Controls.Add(btnDetalji);
                 pnlDashboard.Controls.Add(panel);
 
                 PopulateGrid();
@@ -217,12 +220,11 @@ namespace VozniPark
         {
             state = StateEnum.Add;
             AddUpdate();
-            MessageBox.Show("Registracija je sacuvana!!!");
+            MetroMessageBox.Show(this, "Registracija je sačuvana!", "Obaviještenje", MessageBoxButtons.OK, MessageBoxIcon.Information, 90);
             pnlDashboard.Controls.Clear();
             DataGridView dtg = new DataGridView();
             pnlDashboard.Controls.Add(dtg);
             myProperty = new PropertyClassRegistracija();
-            dgvDimeznije(dtg);
             pnlDashboard.Controls.Add(dtg);
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button Registruj = new Button();
@@ -236,6 +238,7 @@ namespace VozniPark
 
             pnlDashboard.Controls.Add(panel);
             PopulateGrid();
+            dgvDimeznije(dtg);
         }
 
 
@@ -584,33 +587,36 @@ namespace VozniPark
                 
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
+                flp.Padding = new Padding(50, 0, 0, 0);
                 flp.Width = pnlDashboard.Width;
                 pnlDashboard.Controls.Add(dtg);
                 pnlDashboard.Controls.Add(flp);
                 for (int i = 0; i < 4; i++)
                 {
-                    Button btn = new Button();
+                    MetroTile btn = new MetroTile();
                     if (i == 0)
                     {
-                        state = StateEnum.Add;
-                        btn.Name = "btnDodaj";
+                        btn.Name = "btnDodajZaposlenog";
                         btn.Text = "DODAJ";
+                        crudButtonDesign(btn);
                     }
                     if (i == 1)
                     {
-                        state = StateEnum.Update;
                         btn.Name = "btnIzmjeni";
                         btn.Text = "IZMIJENI";
+                        crudButtonDesign(btn);
                     }
                     if (i == 2)
                     {
                         btn.Name = "btnObrisi";
                         btn.Text = "OBRISI";
+                        crudButtonDesign(btn);
                     }
                     if (i == 3)
                     {
                         btn.Name = "btnDetaljno";
                         btn.Text = "DETALJNO";
+                        crudButtonDesign(btn);
                     }
                     flp.Controls.Add(btn);
                    
@@ -719,20 +725,31 @@ namespace VozniPark
 
         private void BtnDetaljno_Click()
         {
-            Form DetaljanPregledZaposlenog = new Form();
+            MetroForm DetaljanPregledZaposlenog = new MetroForm();
+            DetaljanPregledZaposlenog.Text = "Informacije o zaduzivanju zaposlenog";
+            DetaljanPregledZaposlenog.StartPosition = FormStartPosition.Manual;
+            DetaljanPregledZaposlenog.Location = new Point(this.Location.X + 175, this.Location.Y + 150);
+            DetaljanPregledZaposlenog.Resizable = false;
+            DetaljanPregledZaposlenog.Movable = false;
+            DetaljanPregledZaposlenog.MaximizeBox = false;
+            DetaljanPregledZaposlenog.MinimizeBox = false;
             DetaljanPregledZaposlenog.Show();
-            DetaljanPregledZaposlenog.Size = new Size(630, 540);
+            DetaljanPregledZaposlenog.Size = new Size(1020, 350);
 
             FlowLayoutPanel flpZaposleniDetaljno = new FlowLayoutPanel();
+            flpZaposleniDetaljno.BackColor = Color.FromArgb(29, 140, 196);
             flpZaposleniDetaljno.Dock = DockStyle.Left;
             flpZaposleniDetaljno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             DetaljanPregledZaposlenog.Controls.Add(flpZaposleniDetaljno);
             flpZaposleniDetaljno.FlowDirection = FlowDirection.TopDown;
+            flpZaposleniDetaljno.BorderStyle = System.Windows.Forms.BorderStyle.None;
 
             FlowLayoutPanel flpZaduzenja = new FlowLayoutPanel();
             flpZaduzenja.Dock = DockStyle.Right;
             flpZaduzenja.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            flpZaduzenja.Width = DetaljanPregledZaposlenog.Width - flpZaposleniDetaljno.Width;
+            flpZaduzenja.Padding = new Padding(10, 0, 0, 0);
+            flpZaduzenja.Width = DetaljanPregledZaposlenog.Width - flpZaposleniDetaljno.Width - 40;
+            flpZaduzenja.BorderStyle = System.Windows.Forms.BorderStyle.None;
             DetaljanPregledZaposlenog.Controls.Add(flpZaduzenja);
 
 
@@ -755,16 +772,16 @@ namespace VozniPark
             Label lblPrezime = new Label();
             Label lblRadnoMjesto = new Label();
 
-            lblZaposleniID.Text = "ZaposleniID:\n";
+            lblZaposleniID.Text = "ID\n";
             lblZaposleniID.Text += dt.Rows[0].ItemArray[0].ToString() + "\n";
 
-            lblIme.Text = "Ime:\n";
+            lblIme.Text = "Ime\n";
             lblIme.Text += dt.Rows[0].ItemArray[1].ToString() + "\n";
 
-            lblPrezime.Text = "Prezime:\n";
+            lblPrezime.Text = "Prezime\n";
             lblPrezime.Text += dt.Rows[0].ItemArray[2].ToString() + "\n";
 
-            lblRadnoMjesto.Text = "Radno mjesto:\n";
+            lblRadnoMjesto.Text = "Radno mjesto\n";
             lblRadnoMjesto.Text += dt.Rows[0].ItemArray[3].ToString()+ "\n";
 
             flpZaposleniDetaljno.Controls.Add(lblZaposleniID);
@@ -778,7 +795,9 @@ namespace VozniPark
                 {
                     Label lbl = item as Label;
                     lbl.AutoSize = true;
-                    lbl.Font = new Font(lbl.Font.FontFamily, 11);
+                    lbl.Font = new Font("Segoe UI", 12);
+                    lbl.ForeColor = Color.White;
+                    lbl.Margin = new Padding(15, 5, 0, 5);
                 }
             }
 
@@ -792,11 +811,15 @@ namespace VozniPark
             sqlDataAdapter.Fill(table);
             DataGridView zaduzenjaGrid = new DataGridView();
             zaduzenjaGrid.DataSource = table;
-            zaduzenjaGrid.BackgroundColor = Color.White;
-            zaduzenjaGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            
-            zaduzenjaGrid.RowHeadersVisible = false;
             flpZaduzenja.Controls.Add(zaduzenjaGrid);
+            dgvDimeznije(zaduzenjaGrid);
+            zaduzenjaGrid.Width = flpZaduzenja.Width - 20;
+
+            foreach (DataGridViewColumn item in zaduzenjaGrid.Columns)
+            {
+                item.Width += 25;
+            }
+            
         }
 
         private void BtnIzmjeni_Click(object sender, EventArgs e)
@@ -875,6 +898,7 @@ namespace VozniPark
 
                 FlowLayoutPanel flpButoni = new FlowLayoutPanel();
                 flpButoni.FlowDirection = FlowDirection.LeftToRight;
+                flpButoni.Padding = new Padding(50, 0, 0, 0);
                 flpButoni.Width = pnlDashboard.Width;
 
                 pnlDashboard.Controls.Add(dtg);
@@ -882,10 +906,10 @@ namespace VozniPark
 
                 for (int i = 0; i < 3; i++)
                 {
-                    Button btnCrud = new Button();
+                    MetroTile btnCrud = new MetroTile();
                     if (i == 0)
                     {
-                        btnCrud.Text = "DODAJ";
+                        btnCrud.Text = "ZADUZI";
                         btnCrud.Name = "btnDodaj";
                     }
                     if (i == 1)
@@ -895,9 +919,10 @@ namespace VozniPark
                     }
                     if (i == 2)
                     {
-                        btnCrud.Text = "IZBRISI";
+                        btnCrud.Text = "OBRISI";
                         btnCrud.Name = "btnIzbrisi";
                     }
+                    crudButtonDesign(btnCrud);
                     flpButoni.Controls.Add(btnCrud);
                     btnCrud.Click += BtnCrud_Click;
                 }
@@ -1238,45 +1263,38 @@ namespace VozniPark
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
-
-
-
-
-
-
-                //pnlDashboard.Controls.Clear();
                 
-
                 pnlDashboard.Controls.Clear();
-
-               
                 DataGridView dtg = new DataGridView();
-
-               
+                
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
                 PropertyInterface pi;
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button AddServis = new Button();
+                panel.Padding = new Padding(50, 0, 0, 0);
+                MetroTile AddServis = new MetroTile();
                 AddServis.Click += AddServis_Click;
 
-                Button UpdateServis = new Button();
+                MetroTile UpdateServis = new MetroTile();
                 UpdateServis.Click += UpdateServis_Click;
 
-                Button DeleteServis = new Button();
+                MetroTile DeleteServis = new MetroTile();
                 DeleteServis.Click += DeleteServis_Click;
 
                 AddServis.Text = "DODAJ";
-                DeleteServis.Text = "IZBRISI";
+                crudButtonDesign(AddServis);
+                DeleteServis.Text = "OBRISI";
+                crudButtonDesign(DeleteServis);
                 UpdateServis.Text = "IZMIJENI";
+                crudButtonDesign(UpdateServis);
 
                 panel.Height = 100;
                 panel.Width = 470;
                 panel.Controls.Add(AddServis);
-                panel.Controls.Add(DeleteServis);
                 panel.Controls.Add(UpdateServis);
+                panel.Controls.Add(DeleteServis);
                 pnlDashboard.Controls.Add(panel);
                 pi =new  PropertyClassVozila();
 
@@ -1331,24 +1349,28 @@ namespace VozniPark
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button AddGorivo = new Button();
+                panel.Padding = new Padding(50, 0, 0, 0);
+                MetroTile AddGorivo = new MetroTile();
                 AddGorivo.Click += AddGorivo_Click;
 
-                Button UpdateGorivo = new Button();
+                MetroTile UpdateGorivo = new MetroTile();
                 UpdateGorivo.Click += UpdateGorivo_Click;
 
-                Button DeleteGorivo = new Button();
+                MetroTile DeleteGorivo = new MetroTile();
                 DeleteGorivo.Click += DeleteGorivo_Click;
 
                 AddGorivo.Text = "DODAJ";
-                DeleteGorivo.Text = "IZBRISI";
+                crudButtonDesign(AddGorivo);
+                DeleteGorivo.Text = "OBRISI";
+                crudButtonDesign(DeleteGorivo);
                 UpdateGorivo.Text = "IZMIJENI";
+                crudButtonDesign(UpdateGorivo);
 
                 panel.Height = 100;
                 panel.Width = 470;
                 panel.Controls.Add(AddGorivo);
-                panel.Controls.Add(DeleteGorivo);
                 panel.Controls.Add(UpdateGorivo);
+                panel.Controls.Add(DeleteGorivo);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
             }
@@ -1685,9 +1707,11 @@ namespace VozniPark
 
         #endregion
 
+
         #region ostaleMetode
         private void PopulateGrid()
         {
+            pnlDashboard.Padding = new Padding(0, 0, 0, 0);
             DataTable dt = new DataTable();
 
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
@@ -1696,16 +1720,16 @@ namespace VozniPark
 
             dt.Load(reader);
             reader.Close();
-
+           
             grid.DataSource = dt;
             var type = myProperty.GetType();
             var properties = type.GetProperties();
-
-                foreach (DataGridViewColumn item in grid.Columns)
-                {
-                    item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
-                                          ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
-                }
+            
+            foreach (DataGridViewColumn item in grid.Columns)
+            {
+                item.HeaderText = properties.Where(x => x.GetCustomAttributes<SqlNameAttribute>().FirstOrDefault().Name == item.HeaderText
+                                        ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
+            }
 
 
             for (int i = 0; i < grid.Columns.Count; i++)
@@ -1713,6 +1737,7 @@ namespace VozniPark
                 if (grid.Columns[i].Name == "Boja" || grid.Columns[i].Name == "BrojVrata" || grid.Columns[i].Name == "Dostupnost" || grid.Columns[i].Name == "GodinaProizvodnje")
                 {
                     grid.Columns[i].Width = 100;
+                    
                 }
 
                 else if (grid.Columns[i].Name == "Kilometraza")
@@ -1720,34 +1745,15 @@ namespace VozniPark
 
                 else
                     grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-                
-
             }
 
             
-            grid.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
-            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            grid.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
-            grid.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
-            grid.BackgroundColor = Color.White;
-            grid.EnableHeadersVisualStyles = false;
-            grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.AllowUserToAddRows = false;
-            grid.AllowUserToResizeColumns = false;
-            grid.AllowUserToResizeRows = false;
-            grid.ReadOnly = true;
-            grid.ColumnHeadersHeight = 45;
-            grid.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
-
+            
         }
 
         public void PopulateControls()
         {
+            pnlDashboard.Padding = new Padding(100, 0, 0, 0);
             foreach (PropertyInfo item in myProperty.GetType().GetProperties())
             {
                 if (item.GetCustomAttribute<ForeignKeyAttribute>() != null)
@@ -1759,6 +1765,7 @@ namespace VozniPark
                     
                     lookup.Name = item.Name;
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
+                    
 
                     if (state == StateEnum.Update && lookup.Name=="Model ID") lookup.Enabled = false;
                     
@@ -1916,7 +1923,7 @@ namespace VozniPark
             }
             catch(Exception e)
             {
-                MessageBox.Show("Vozilo je zaduzeno", "Greska");
+                MetroMessageBox.Show(this, "Vozilo je zaduzeno", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error, 90);
                 return "Greska";
             }
             return "Uspijeh";
@@ -2030,18 +2037,57 @@ namespace VozniPark
         {
             dtg.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dtg.Location = new Point(50, 0);
-            dtg.Height = 250;
+            dtg.Height = 500;
             dtg.Width = pnlDashboard.Width - 30;
             dtg.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;
             dtg.RowHeadersVisible = false;
 
+            dtg.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dtg.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dtg.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
+            dtg.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dtg.DefaultCellStyle.SelectionBackColor = Color.FromArgb(126, 180, 247);
+            dtg.DefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            dtg.BackgroundColor = Color.White;
+            dtg.EnableHeadersVisualStyles = false;
+            dtg.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dtg.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(20, 25, 72);
+            dtg.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dtg.ColumnHeadersDefaultCellStyle.Padding = new Padding(5, 0, 0, 0);
+            dtg.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", (float)10.25);
+            dtg.AllowUserToAddRows = false;
+            dtg.AllowUserToResizeColumns = false;
+            dtg.AllowUserToResizeRows = false;
+            dtg.ReadOnly = true;
+            dtg.ColumnHeadersHeight = 45;
+            dtg.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", (float)8.75);
+            dtg.DefaultCellStyle.Padding = new Padding(3, 0, 0, 0);
+
+            if (dtg.Rows.Count > 0) dtg.Rows[0].Selected = true;
+
             foreach (DataGridViewColumn item in dtg.Columns)
             {
                 if (item.Name.Contains("ID"))
                     item.Visible = false;
+                
             }
+            if(myProperty.GetType() == typeof(PropertyClassVozila))
+            {
+                foreach (DataGridViewRow item in dtg.Rows)
+	            {
+                    if(item.Cells[7].Value.ToString() == "Dostupno")
+                    {
+                        item.Cells[7].Style.ForeColor = Color.LimeGreen;
+                    }
+                    else if(item.Cells[7].Value.ToString() == "Nije dostupno")
+                    {
+                        item.Cells[7].Style.ForeColor = Color.Red;
+                    }
+	            }
+            }
+            
         }
 
         private void buttonDesign(Button btnPodmeni)
@@ -2052,6 +2098,7 @@ namespace VozniPark
             btnPodmeni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btnPodmeni.ForeColor = System.Drawing.Color.Linen;
             btnPodmeni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            btnPodmeni.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
             btnPodmeni.TabIndex = 0;
             btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnPodmeni.UseVisualStyleBackColor = false;
@@ -2060,7 +2107,48 @@ namespace VozniPark
             btnPodmeni.Height = 55;
         }
 
+
+        private void crudButtonDesign(MetroTile btn)
+        {
+            btn.Size = new Size(95, 95);
+            btn.UseCustomBackColor = true;
+            btn.BackColor = Color.CornflowerBlue;
+            btn.UseTileImage = true;
+            btn.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            btn.TileTextFontSize = MetroTileTextSize.Small;
+            if (btn.Text.Contains("DODAJ"))
+            {
+                if(btn.Name.Contains("Zaposlenog"))
+                    btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_user_male_50;
+                else if(btn.Name.Contains("Vozilo"))
+                    btn.TileImage = global::VozniPark.Properties.Resources.icons8_traffic_jam_50;
+                //btn.BackColor = Color.FromArgb(65, 216, 34);
+            }
+            else if (btn.Text.Contains("OBRISI"))
+            {
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_close_window_50;
+                //btn.BackColor = Color.FromArgb(242, 53, 53);
+            }
+            else if (btn.Text.Contains("IZMIJENI"))
+            {
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_edit_file_50;
+                //btn.BackColor = Color.FromArgb(21, 54, 107);
+            }
+            else if (btn.Text.Contains("DETALJNO"))
+            {
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_more_filled_50;
+                //btn.BackColor = Color.FromArgb(64, 208, 237);
+            }
+            else if (btn.Text.Contains("ZADUZI"))
+            {
+                btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
+                //btn.BackColor = Color.FromArgb(65, 216, 34);
+            }
+        }
+
         #endregion
+
+
     }
 }
 
