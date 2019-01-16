@@ -247,7 +247,7 @@ namespace VozniPark
             MetroForm DetaljanPregledVozilaForm = new MetroForm();
             DetaljanPregledVozilaForm.Show();
             detaljnoFormaLoad(DetaljanPregledVozilaForm, 860, 420);
-            /DetaljanPregledVozilaForm.Size = new Size(860, 420);
+            DetaljanPregledVozilaForm.Size = new Size(860, 420);
             DetaljanPregledVozilaForm.Text = "Informacije o vozilu";
             DataGridView a = pnlDashboard.Controls[0] as DataGridView;
             SqlConnection sqlConnection = new SqlConnection(SqlHelper.GetConnectionString());
@@ -2451,7 +2451,7 @@ namespace VozniPark
 
         private void buttonDesign(Button btnPodmeni)
         {
-            btnPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            btnPodmeni.BackColor = System.Drawing.Color.FromArgb(43, 181, 105);
             btnPodmeni.FlatAppearance.BorderSize = 0;
             btnPodmeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnPodmeni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2471,7 +2471,7 @@ namespace VozniPark
         {
             btn.Size = new Size(95, 95);
             btn.UseCustomBackColor = true;
-            btn.BackColor = Color.CornflowerBlue;
+            btn.BackColor = Color.FromArgb(5, 56, 107);
             btn.UseTileImage = true;
             btn.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             btn.TileTextFontSize = MetroTileTextSize.Small;

@@ -50,7 +50,7 @@
             // pnlMeni
             // 
             this.pnlMeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlMeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.pnlMeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.pnlMeni.Controls.Add(this.pictureBox1);
             this.pnlMeni.Controls.Add(this.pnlSelected4);
             this.pnlMeni.Controls.Add(this.pnlSelected2);
@@ -79,7 +79,7 @@
             // 
             // pnlSelected4
             // 
-            this.pnlSelected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
             this.pnlSelected4.Location = new System.Drawing.Point(0, 165);
             this.pnlSelected4.Name = "pnlSelected4";
             this.pnlSelected4.Size = new System.Drawing.Size(10, 54);
@@ -87,7 +87,7 @@
             // 
             // pnlSelected2
             // 
-            this.pnlSelected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
             this.pnlSelected2.Location = new System.Drawing.Point(0, 55);
             this.pnlSelected2.Name = "pnlSelected2";
             this.pnlSelected2.Size = new System.Drawing.Size(10, 54);
@@ -95,7 +95,7 @@
             // 
             // pnlSelected3
             // 
-            this.pnlSelected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
             this.pnlSelected3.Location = new System.Drawing.Point(0, 110);
             this.pnlSelected3.Name = "pnlSelected3";
             this.pnlSelected3.Size = new System.Drawing.Size(10, 54);
@@ -103,7 +103,7 @@
             // 
             // pnlSelected1
             // 
-            this.pnlSelected1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(168)))), ((int)(((byte)(150)))));
+            this.pnlSelected1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
             this.pnlSelected1.Location = new System.Drawing.Point(0, 0);
             this.pnlSelected1.Name = "pnlSelected1";
             this.pnlSelected1.Size = new System.Drawing.Size(10, 54);
@@ -112,7 +112,7 @@
             // btnServis
             // 
             this.btnServis.AutoSize = true;
-            this.btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnServis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnServis.FlatAppearance.BorderSize = 0;
             this.btnServis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnServis.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -133,7 +133,7 @@
             // 
             // btnZaposleni
             // 
-            this.btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnZaposleni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnZaposleni.FlatAppearance.BorderSize = 0;
             this.btnZaposleni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZaposleni.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -154,7 +154,7 @@
             // 
             // btnZaduzenja
             // 
-            this.btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnZaduzenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnZaduzenja.FlatAppearance.BorderSize = 0;
             this.btnZaduzenja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZaduzenja.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -175,7 +175,7 @@
             // 
             // btnVozila
             // 
-            this.btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(102)))), ((int)(((byte)(141)))));
+            this.btnVozila.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnVozila.FlatAppearance.BorderSize = 0;
             this.btnVozila.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVozila.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -197,7 +197,7 @@
             // flpPodmeni
             // 
             this.flpPodmeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(128)))), ((int)(((byte)(144)))));
+            this.flpPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
             this.flpPodmeni.Dock = System.Windows.Forms.DockStyle.Left;
             this.flpPodmeni.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpPodmeni.Location = new System.Drawing.Point(202, 60);
