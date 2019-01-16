@@ -11,7 +11,8 @@ namespace VozniPark
         Add,
         Update,
         Lookup,
-        Razduzi
+        Razduzi,
+        Poruka
 
     }
 }
