@@ -263,6 +263,7 @@ namespace VozniPark
 
             cmdDetaljiVozila.Parameters.Add(new SqlParameter("@VoziloID", SqlDbType.Int));
             cmdDetaljiVozila.Parameters["@VoziloID"].Value = Convert.ToInt32(a.SelectedRows[0].Cells[0].Value.ToString());
+
             DataTable detaljiDT = new DataTable();
 
             SqlDataAdapter da = new SqlDataAdapter(cmdDetaljiVozila);
@@ -521,30 +522,90 @@ namespace VozniPark
             if (state == StateEnum.Add)
             {
                 pnlDashboard.Controls.Clear();
+                DataGridView dtg = new DataGridView();
+                pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassVozila();
-
-                PopulateControls();
+                pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button btnDodajVozilo = new Button();
-                Button btnOtkazi = new Button();
-                btnDodajVozilo.Text = "DODAJ VOZILO";
-                btnOtkazi.Text = "OTKAZI";
+                Button Add = new Button();
+                Add.Click += Add_Click;
 
-                btnDodajVozilo.Click += BtnDodajVozilo_Click;
-                btnOtkazi.Click += BtnOtkazi_Click;
-                
+                Button Update = new Button();
+                Update.Click += Update_Click;
+
+                Button Delete = new Button();
+                Delete.Click += Delete_Click;
+
+                Button btnDetalji = new Button();
+                btnDetalji.Text = "Detaljan pregled vozila";
+                btnDetalji.Width = 110;
+                btnDetalji.Height = 40;
+                panel.Controls.Add(btnDetalji);
+                btnDetalji.Location = new Point(655, 10);
+                btnDetalji.Click += Detalji_Click;
+
+
+
+                Add.Text = "DODAJ";
+                Delete.Text = "OBRISI";
+                Update.Text = "IZMIJENI";
+
                 panel.Height = 100;
-                panel.Width = 470;
-                panel.Controls.Add(btnDodajVozilo);
-                panel.Controls.Add(btnOtkazi);
-                
+                panel.Width = 970;
+
+
+                panel.Location = new Point(250, 150);
+                panel.Controls.Add(Add);
+                panel.Controls.Add(Delete);
+                panel.Controls.Add(Update);
                 pnlDashboard.Controls.Add(panel);
+
+                PopulateGrid();
+                dgvDimeznije(dtg);
             }
             else if (state == StateEnum.Update)
             {
-                Button button = sender as Button;
-                button.Name = "btnPregled";
-                BtnPodmeni_Click(button, e);
+                pnlDashboard.Controls.Clear();
+                DataGridView dtg = new DataGridView();
+                pnlDashboard.Controls.Add(dtg);
+                myProperty = new PropertyClassVozila();
+                pnlDashboard.Controls.Add(dtg);
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                Button Add = new Button();
+                Add.Click += Add_Click;
+
+                Button Update = new Button();
+                Update.Click += Update_Click;
+
+                Button Delete = new Button();
+                Delete.Click += Delete_Click;
+
+                Button btnDetalji = new Button();
+                btnDetalji.Text = "Detaljan pregled vozila";
+                btnDetalji.Width = 110;
+                btnDetalji.Height = 40;
+                panel.Controls.Add(btnDetalji);
+                btnDetalji.Location = new Point(655, 10);
+                btnDetalji.Click += Detalji_Click;
+
+
+
+                Add.Text = "DODAJ";
+                Delete.Text = "OBRISI";
+                Update.Text = "IZMIJENI";
+
+                panel.Height = 100;
+                panel.Width = 970;
+
+
+                panel.Location = new Point(250, 150);
+                panel.Controls.Add(Add);
+                panel.Controls.Add(Delete);
+                panel.Controls.Add(Update);
+                pnlDashboard.Controls.Add(panel);
+
+                PopulateGrid();
+                dgvDimeznije(dtg);
             }
         }
 
@@ -1288,24 +1349,32 @@ namespace VozniPark
                 MetroTile DeleteServis = new MetroTile();
                 DeleteServis.Click += DeleteServis_Click;
 
+                Button Pretraga = new Button();
+                Pretraga.Click += Pretraga_Click;
+
+               
+
                 AddServis.Text = "DODAJ";
                 crudButtonDesign(AddServis);
                 DeleteServis.Text = "OBRISI";
                 crudButtonDesign(DeleteServis);
                 UpdateServis.Text = "IZMIJENI";
                 crudButtonDesign(UpdateServis);
+                Pretraga.Text = "Pretraga servisa";
 
                 panel.Height = 100;
-                panel.Width = 470;
+                panel.Width = 770;
                 panel.Controls.Add(AddServis);
                 panel.Controls.Add(UpdateServis);
                 panel.Controls.Add(DeleteServis);
+                panel.Controls.Add(Pretraga);
+               
                 pnlDashboard.Controls.Add(panel);
-                pi =new  PropertyClassVozila();
+               
 
 
                 FlowLayoutPanel nov = new FlowLayoutPanel();
-                LookupControl nova = new LookupControl(pi);
+             
 
 
              
@@ -1315,7 +1384,7 @@ namespace VozniPark
 
                 nov.Height = 100;
                 nov.Width = 470;
-                nov.Controls.Add(nova);
+              
                
                 pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
@@ -1364,24 +1433,191 @@ namespace VozniPark
                 MetroTile DeleteGorivo = new MetroTile();
                 DeleteGorivo.Click += DeleteGorivo_Click;
 
+                Button PretragaGorivo = new Button();
+                PretragaGorivo.Click += PretragaGorivo_Click;
+
                 AddGorivo.Text = "DODAJ";
                 crudButtonDesign(AddGorivo);
                 DeleteGorivo.Text = "OBRISI";
                 crudButtonDesign(DeleteGorivo);
                 UpdateGorivo.Text = "IZMIJENI";
                 crudButtonDesign(UpdateGorivo);
+                PretragaGorivo.Text = "Pretraga";
 
                 panel.Height = 100;
-                panel.Width = 470;
+                panel.Width = 670;
                 panel.Controls.Add(AddGorivo);
                 panel.Controls.Add(UpdateGorivo);
                 panel.Controls.Add(DeleteGorivo);
+                panel.Controls.Add(PretragaGorivo);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
             }
         }
 
-       
+        private void PretragaGorivo_Click(object sender, EventArgs e)
+        {
+            Button PretragaGorivo = sender as Button;
+            if (PretragaGorivo.Text == "Pretraga")
+            {
+                FlowLayoutPanel panel = PretragaGorivo.Parent as FlowLayoutPanel;
+                FlowLayoutPanel noviPanel = new FlowLayoutPanel();
+
+                DateTimePicker prvi = new DateTimePicker();
+                DateTimePicker drugi = new DateTimePicker();
+
+                prvi.MinDate = new DateTime(2018, 01, 01);
+                prvi.MaxDate = DateTime.Now;
+                prvi.Value = prvi.MinDate;
+
+                drugi.MaxDate = DateTime.Now;
+                drugi.Value = drugi.MaxDate;
+
+                noviPanel.Controls.Add(prvi);
+                noviPanel.Controls.Add(drugi);
+                panel.Controls.Add(noviPanel);
+
+
+                PretragaGorivo.Text = "Pretrazi";
+
+            }
+            else
+            {
+
+
+
+                DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+                FlowLayoutPanel panel = pnlDashboard.Controls[1] as FlowLayoutPanel;
+                FlowLayoutPanel noviPanel = pnlDashboard.Controls[1].Controls[1] as FlowLayoutPanel;
+
+
+                DateTimePicker prvi = pnlDashboard.Controls[1].Controls[4].Controls[0] as DateTimePicker;
+                DateTimePicker drugi = pnlDashboard.Controls[1].Controls[4].Controls[1] as DateTimePicker;
+
+
+
+
+                myProperty = new PropertyClassGorivo();
+                PropertyInterface pi;
+
+
+
+                string PretragaServis = "SELECT * FROM dbo.pretragaGorivo(@datum1,@datum2)";
+
+                SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
+                SqlCommand sqlcom = new SqlCommand(PretragaServis, konekcija);
+
+
+                SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
+                SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
+
+
+
+                sqlcom.Parameters.Add(parametar);
+                sqlcom.Parameters.Add(parametar2);
+
+                parametar.Value = prvi.Value;
+                parametar2.Value = drugi.Value;
+
+                DataTable dt = new DataTable();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlcom);
+                adapter.Fill(dt);
+
+                dtg.DataSource = dt;
+
+                PretragaGorivo.Text = "Pretraga";
+
+                panel.Controls.RemoveAt(4);
+
+
+            }
+        }
+
+        private void Pretraga_Click(object sender, EventArgs e)
+        {
+           
+            Button Pretraga = sender as Button;
+            if (Pretraga.Text == "Pretraga servisa")
+            {
+                FlowLayoutPanel panel = Pretraga.Parent as FlowLayoutPanel;
+                FlowLayoutPanel noviPanel = new FlowLayoutPanel();
+
+                DateTimePicker prvi = new DateTimePicker();
+                DateTimePicker drugi = new DateTimePicker();
+
+                prvi.MinDate = new DateTime(2018, 01, 01);
+                prvi.MaxDate = DateTime.Now;
+                prvi.Value = prvi.MinDate;
+
+                drugi.MaxDate = DateTime.Now;
+                drugi.Value = drugi.MaxDate;
+
+                noviPanel.Controls.Add(prvi);
+                noviPanel.Controls.Add(drugi);
+                panel.Controls.Add(noviPanel);
+               
+
+                Pretraga.Text = "Pretrazi";
+
+            }
+            else {
+
+
+
+                DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+                FlowLayoutPanel panel = pnlDashboard.Controls[1] as FlowLayoutPanel;
+                FlowLayoutPanel noviPanel = pnlDashboard.Controls[1].Controls[4] as FlowLayoutPanel;
+
+
+                DateTimePicker prvi = pnlDashboard.Controls[1].Controls[4].Controls[0] as DateTimePicker;
+                DateTimePicker drugi = pnlDashboard.Controls[1].Controls[4].Controls[1] as DateTimePicker;
+               
+
+
+
+                myProperty = new PropertyClassServisiranjeVozila();
+                PropertyInterface pi;
+
+
+               
+                string PretragaServisa = "SELECT * FROM dbo.pretraga(@datum1,@datum2)";
+
+                SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
+                SqlCommand sqlcom = new SqlCommand(PretragaServisa, konekcija);
+
+
+                SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
+                SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
+
+
+
+                sqlcom.Parameters.Add(parametar);
+                sqlcom.Parameters.Add(parametar2);
+
+                parametar.Value = prvi.Value;
+                parametar2.Value = drugi.Value;
+
+                DataTable dt = new DataTable();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlcom);
+                adapter.Fill(dt);
+              
+                dtg.DataSource = dt;
+
+                Pretraga.Text = "Pretraga servisa";
+             
+                panel.Controls.RemoveAt(4);
+
+
+            }
+
+
+
+            
+        }
+
+        
 
         private void DeleteGorivo_Click(object sender, EventArgs e)
         {
@@ -1447,24 +1683,33 @@ namespace VozniPark
             if (state == StateEnum.Add)
             {
                 pnlDashboard.Controls.Clear();
+                DataGridView dtg = new DataGridView();
+                pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassGorivo();
 
-                PopulateControls();
+                dgvDimeznije(dtg);
+                pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button btnDodajGorivo = new Button();
-                Button btnOtkaziGorivo = new Button();
-                btnDodajGorivo.Text = "SACUVAJ";
-                btnOtkaziGorivo.Text = "OTKAZI";
+                Button AddGorivo = new Button();
+                AddGorivo.Click += AddGorivo_Click;
 
-                btnDodajGorivo.Click += BtnDodajGorivo_Click;
-                btnOtkaziGorivo.Click += BtnOtkaziGorivo_Click;
+                Button UpdateGorivo = new Button();
+                UpdateGorivo.Click += UpdateGorivo_Click;
 
+                Button DeleteGorivo = new Button();
+                DeleteGorivo.Click += DeleteGorivo_Click;
+
+                AddGorivo.Text = "DODAJ";
+                DeleteGorivo.Text = "IZBRISI";
+                UpdateGorivo.Text = "IZMIJENI";
 
                 panel.Height = 100;
                 panel.Width = 470;
-                panel.Controls.Add(btnDodajGorivo);
-                panel.Controls.Add(btnOtkaziGorivo);
+                panel.Controls.Add(AddGorivo);
+                panel.Controls.Add(DeleteGorivo);
+                panel.Controls.Add(UpdateGorivo);
                 pnlDashboard.Controls.Add(panel);
+                PopulateGrid();
             }
             else if (state == StateEnum.Update)
             {
@@ -1505,7 +1750,7 @@ namespace VozniPark
 
             if (state == StateEnum.Add)
             {
-                MessageBox.Show("Uspjeno uneseni podaci o sipanju goriva!");
+                MessageBox.Show("Uspjesno uneseni podaci o sipanju goriva!");
 
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassGorivo();
@@ -1573,33 +1818,106 @@ namespace VozniPark
             if (state == StateEnum.Add)
             {
                 pnlDashboard.Controls.Clear();
+
+
+                DataGridView dtg = new DataGridView();
+
+
+                pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-
-                PopulateControls();
+                PropertyInterface pi;
+                dgvDimeznije(dtg);
+                pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button btnDodajServis = new Button();
-                Button btnOtkazi1 = new Button();
-                
-                btnDodajServis.Text = "DODAJ SERVIS";
-                
-                btnOtkazi1.Text = "OTKAZI";
+                Button AddServis = new Button();
+                AddServis.Click += AddServis_Click;
 
-                btnDodajServis.Click += BtnDodajServis_Click;
-                btnOtkazi1.Click += BtnOtkazi1_Click;
+                Button UpdateServis = new Button();
+                UpdateServis.Click += UpdateServis_Click;
+
+                Button DeleteServis = new Button();
+                DeleteServis.Click += DeleteServis_Click;
+
+                AddServis.Text = "DODAJ";
+                DeleteServis.Text = "IZBRISI";
+                UpdateServis.Text = "IZMIJENI";
+
                 panel.Height = 100;
                 panel.Width = 470;
-
-                panel.Controls.Add(btnDodajServis);
-                panel.Controls.Add(btnOtkazi1);
-                
+                panel.Controls.Add(AddServis);
+                panel.Controls.Add(DeleteServis);
+                panel.Controls.Add(UpdateServis);
                 pnlDashboard.Controls.Add(panel);
+
+
+
+                FlowLayoutPanel nov = new FlowLayoutPanel();
+
+
+
+
+
+
+
+
+                nov.Height = 100;
+                nov.Width = 470;
+
+
+                pnlDashboard.Controls.Add(nov);
+                PopulateGrid();
             }
             else if (state == StateEnum.Update)
             {
+                pnlDashboard.Controls.Clear();
+
+
+                DataGridView dtg = new DataGridView();
+
+
+                pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-                Button button = sender as Button;
-                button.Name = "btnPregled";
-                BtnPodmeniServis_Click(button, e);
+                PropertyInterface pi;
+                dgvDimeznije(dtg);
+                pnlDashboard.Controls.Add(dtg);
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                Button AddServis = new Button();
+                AddServis.Click += AddServis_Click;
+
+                Button UpdateServis = new Button();
+                UpdateServis.Click += UpdateServis_Click;
+
+                Button DeleteServis = new Button();
+                DeleteServis.Click += DeleteServis_Click;
+
+                AddServis.Text = "DODAJ";
+                DeleteServis.Text = "IZBRISI";
+                UpdateServis.Text = "IZMIJENI";
+
+                panel.Height = 100;
+                panel.Width = 470;
+                panel.Controls.Add(AddServis);
+                panel.Controls.Add(DeleteServis);
+                panel.Controls.Add(UpdateServis);
+                pnlDashboard.Controls.Add(panel);
+
+
+
+                FlowLayoutPanel nov = new FlowLayoutPanel();
+
+
+
+
+
+
+
+
+                nov.Height = 100;
+                nov.Width = 470;
+
+
+                pnlDashboard.Controls.Add(nov);
+                PopulateGrid();
             }
         }
 
