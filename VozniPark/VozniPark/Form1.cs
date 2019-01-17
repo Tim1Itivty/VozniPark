@@ -2452,17 +2452,26 @@ namespace VozniPark
                 }
             }
 
-            try
+
+            if (myProperty.GetType() == typeof(PropertyClassVozila) || myProperty.GetType() == typeof(PropertyClassRegistracija))
             {
-                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                if (row.Cells["Dostupnost"].Value.ToString() == "Dostupno")
+                {
+                    SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                   myProperty.GetDeleteQuery(), myProperty.GetDeleteParameters().ToArray());
+                    return "Uspijeh";
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Vozilo je zaduzeno", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error, 90);
+                    return "Greska";
+                }
+
             }
-            catch(Exception e)
-            {
-                MetroMessageBox.Show(this, "Vozilo je zaduzeno", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error, 90);
-                return "Greska";
-            }
-            return "Uspijeh";
+            else
+                return "Uspijeh";
+
+
         }
 
         private void ucitajVrijednostiUPolja()
@@ -2502,6 +2511,7 @@ namespace VozniPark
                 
               else if (state == StateEnum.Add && myProperty.GetType() == typeof(PropertyClassRegistracija))
                 {
+                    
                     if (grid.Columns[i].HeaderText == "Datum registracije" || grid.Columns[i].HeaderText == "Datum isteka registracije")
                     {
                         string value = DateTime.Now.ToString();
@@ -2520,10 +2530,23 @@ namespace VozniPark
 
                     else
                     {
+                        
                         string value = cell.Value.ToString();
-
-                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                        if (value == "Dostupno")
+                        {
+                            PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                            property.SetValue(myProperty, Convert.ChangeType(true, property.PropertyType));
+                        }
+                        else if (value == "Nije dostupno")
+                        {
+                            PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                            property.SetValue(myProperty, Convert.ChangeType(false, property.PropertyType));
+                        }
+                        else
+                        {
+                            PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                            property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                        }
                     }
                 }
                 else

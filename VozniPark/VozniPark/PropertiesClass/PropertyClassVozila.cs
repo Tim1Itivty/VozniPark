@@ -80,7 +80,8 @@ namespace VozniPark.PropertiesClass
                         JOIN Proizvodjac p 
                         on m.ProizvodjacID=p.ProizvodjacID
                         LEFT JOIN Registracija r 
-                        ON r.VoziloID=v.VoziloID";
+                        ON r.VoziloID=v.VoziloID
+                        where v.Obrisano = 0";
         }
 
         public string GetInsertQuery()
@@ -101,15 +102,14 @@ namespace VozniPark.PropertiesClass
                             Kilometraza=@Kilometraza,
                             Boja=@Boja, 
                             BrojVrata=@BrojVrata,
-                            Dostupnost=@Dostupnost
-
-                                
+                            Dostupnost=@Dostupnost                               
                         where VoziloID=@VoziloID";
         }
 
         public string GetDeleteQuery()
         {
-            return @" DELETE FROM dbo.Vozila WHERE VoziloID=@VoziloID";
+            return @" UPDATE dbo.Vozila SET Obrisano = 1 WHERE VoziloID=@VoziloID
+                      UPDATE dbo.Registracija SET Obrisano = 1 WHERE  VoziloID=@VoziloID";
         }
 
         public string GetLookupQuery()
@@ -118,7 +118,7 @@ namespace VozniPark.PropertiesClass
                     from dbo.Vozila as v
                     join dbo.Model as m on v.ModelId = m.ModelID
                     join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
-                    where v.Dostupnost = 'True'";
+                    where v.Dostupnost = 'True' AND VoziloID in (SELECT r.VoziloID FROM dbo.Registracija as r WHERE r.DatumIstekaRegistracije > GETDATE()) ";
         }
         #endregion
 
