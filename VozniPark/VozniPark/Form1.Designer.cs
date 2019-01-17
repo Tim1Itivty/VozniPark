@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnlMeni = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlSelected4 = new System.Windows.Forms.Panel();
             this.pnlSelected2 = new System.Windows.Forms.Panel();
             this.pnlSelected3 = new System.Windows.Forms.Panel();
@@ -44,14 +43,12 @@
             this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.pnlMeni.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMeni
             // 
             this.pnlMeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlMeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
-            this.pnlMeni.Controls.Add(this.pictureBox1);
             this.pnlMeni.Controls.Add(this.pnlSelected4);
             this.pnlMeni.Controls.Add(this.pnlSelected2);
             this.pnlMeni.Controls.Add(this.pnlSelected3);
@@ -67,19 +64,9 @@
             this.pnlMeni.Size = new System.Drawing.Size(202, 613);
             this.pnlMeni.TabIndex = 1;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 514);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(202, 99);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            // 
             // pnlSelected4
             // 
-            this.pnlSelected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
+            this.pnlSelected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
             this.pnlSelected4.Location = new System.Drawing.Point(0, 165);
             this.pnlSelected4.Name = "pnlSelected4";
             this.pnlSelected4.Size = new System.Drawing.Size(10, 54);
@@ -87,7 +74,7 @@
             // 
             // pnlSelected2
             // 
-            this.pnlSelected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
+            this.pnlSelected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
             this.pnlSelected2.Location = new System.Drawing.Point(0, 55);
             this.pnlSelected2.Name = "pnlSelected2";
             this.pnlSelected2.Size = new System.Drawing.Size(10, 54);
@@ -95,7 +82,7 @@
             // 
             // pnlSelected3
             // 
-            this.pnlSelected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
+            this.pnlSelected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
             this.pnlSelected3.Location = new System.Drawing.Point(0, 110);
             this.pnlSelected3.Name = "pnlSelected3";
             this.pnlSelected3.Size = new System.Drawing.Size(10, 54);
@@ -103,7 +90,7 @@
             // 
             // pnlSelected1
             // 
-            this.pnlSelected1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
+            this.pnlSelected1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
             this.pnlSelected1.Location = new System.Drawing.Point(0, 0);
             this.pnlSelected1.Name = "pnlSelected1";
             this.pnlSelected1.Size = new System.Drawing.Size(10, 54);
@@ -197,12 +184,13 @@
             // flpPodmeni
             // 
             this.flpPodmeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(181)))), ((int)(((byte)(105)))));
+            this.flpPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
             this.flpPodmeni.Dock = System.Windows.Forms.DockStyle.Left;
             this.flpPodmeni.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpPodmeni.Location = new System.Drawing.Point(202, 60);
             this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flpPodmeni.Name = "flpPodmeni";
+            this.flpPodmeni.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
             this.flpPodmeni.Size = new System.Drawing.Size(233, 613);
             this.flpPodmeni.TabIndex = 5;
             // 
@@ -230,18 +218,16 @@
             this.Controls.Add(this.pnlMeni);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(0, 60, 21, 0);
             this.Resizable = false;
-            this.Style = MetroFramework.MetroColorStyle.Teal;
+            this.Style = MetroFramework.MetroColorStyle.White;
             this.Text = "Vozni park";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlMeni.ResumeLayout(false);
             this.pnlMeni.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -259,7 +245,6 @@
         private System.Windows.Forms.Panel pnlSelected2;
         private System.Windows.Forms.Panel pnlSelected3;
         private System.Windows.Forms.FlowLayoutPanel pnlDashboard;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ImageList imageList1;
     }
 }

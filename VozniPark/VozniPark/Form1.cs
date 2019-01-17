@@ -2451,21 +2451,36 @@ namespace VozniPark
 
         private void buttonDesign(Button btnPodmeni)
         {
-            btnPodmeni.BackColor = System.Drawing.Color.FromArgb(43, 181, 105);
+            btnPodmeni.BackColor = System.Drawing.Color.FromArgb(203, 214, 216);
             btnPodmeni.FlatAppearance.BorderSize = 0;
             btnPodmeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnPodmeni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            btnPodmeni.ForeColor = System.Drawing.Color.Linen;
+            btnPodmeni.ForeColor = System.Drawing.Color.FromArgb(5, 56, 107);
             btnPodmeni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
             btnPodmeni.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
             btnPodmeni.TabIndex = 0;
             btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnPodmeni.UseVisualStyleBackColor = false;
             btnPodmeni.FlatStyle = FlatStyle.Flat;
-            btnPodmeni.Width = flpPodmeni.Width;
+            btnPodmeni.Width = flpPodmeni.Width - 6;
             btnPodmeni.Height = 55;
+            btnPodmeni.MouseEnter += BtnPodmeni_MouseEnter;
+            btnPodmeni.MouseLeave += BtnPodmeni_MouseLeave;
         }
 
+        private void BtnPodmeni_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.BackColor = System.Drawing.Color.FromArgb(203, 214, 216);
+            btn.ForeColor = Color.FromArgb(5, 56, 107);
+        }
+
+        private void BtnPodmeni_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.BackColor = Color.FromArgb(5, 56, 107);
+            btn.ForeColor = Color.Linen;
+        }
 
         private void crudButtonDesign(MetroTile btn)
         {
