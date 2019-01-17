@@ -119,7 +119,7 @@ namespace VozniPark.PropertiesClass
 					FROM Registracija r
 					JOIN dbo.Vozila v 
 					ON v.VoziloID=r.VoziloID
-					GROUP BY r.VoziloID) OR r.RegistracijaID is NULL";
+					GROUP BY r.VoziloID) OR r.RegistracijaID is NULL or (DATEDIFF(day,getdate(),cast(r.DatumIstekaRegistracije as date))<=7)";
         }
 
         public string GetInsertQuery()

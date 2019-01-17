@@ -120,7 +120,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassVozila();
 
-                PopulateControls();
+                PopulateControls("Dodajte novo vozilo");
 
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajVozilo = new Button();
@@ -477,7 +477,7 @@ namespace VozniPark
             state = StateEnum.Add;
             pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassVozila();
-            PopulateControls();
+            PopulateControls("Dodajte novo vozilo");
             btnVozila_Click(sender, e);
             Button btn = sender as Button;
             btn.Name = "btnDodajVozilo";
@@ -495,7 +495,7 @@ namespace VozniPark
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassVozila();
 
-                    PopulateControls();
+                    PopulateControls("Dodajte novo vozilo");
 
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajVozilo = new Button();
@@ -702,7 +702,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
-                PopulateControls();
+                PopulateControls("Dodajte novog zaposlenog");
                 Button btnDodaj = new Button();
                 btnDodaj.Text = "DODAJ";
                 Button btnOtkazi = new Button();
@@ -727,7 +727,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
-                PopulateControls();
+                PopulateControls("Dodajte novog zaposlenog");
 
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
@@ -1007,7 +1007,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
-                PopulateControls();
+                PopulateControls("Dodajte novo zaduzenje");
 
                 FlowLayoutPanel flpButon = new FlowLayoutPanel();
                 flpButon.FlowDirection = FlowDirection.LeftToRight;
@@ -1219,7 +1219,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
-                PopulateControls();
+                PopulateControls("Dodajte novo zaduzenje");
 
                 FlowLayoutPanel flpButon = new FlowLayoutPanel();
                 flpButon.FlowDirection = FlowDirection.LeftToRight;
@@ -1403,7 +1403,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassServisiranjeVozila();
 
-                PopulateControls();
+                PopulateControls("Unesite podatke o servisu");
 
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajServis = new Button();
@@ -1667,7 +1667,7 @@ namespace VozniPark
             pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassGorivo();
 
-            PopulateControls();
+            PopulateControls("Unesite podatke o tocenju goriva");
 
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajGorivo = new Button();
@@ -1763,7 +1763,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassGorivo();
 
-                PopulateControls();
+                PopulateControls("Unesite podatke o tocenju goriva");
 
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajGorivo = new Button();
@@ -1940,7 +1940,7 @@ namespace VozniPark
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassServisiranjeVozila();
 
-                    PopulateControls();
+                    PopulateControls("Unesite podatke o servisiranju");
                 
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajServis = new Button();
@@ -2016,7 +2016,7 @@ namespace VozniPark
             pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassServisiranjeVozila();
 
-            PopulateControls();
+            PopulateControls("Unesite podatke o servisiranju");
 
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
@@ -2082,9 +2082,17 @@ namespace VozniPark
             
         }
 
-        public void PopulateControls()
+        public void PopulateControls(string naslov)
         {
+           
             pnlDashboard.Padding = new Padding(100, 0, 0, 0);
+            Label lblNaslov = new Label();
+            lblNaslov.Name = "lblNaslov";
+            lblNaslov.Text = naslov;
+            lblNaslov.AutoSize = true;
+           
+            pnlDashboard.Controls.Add(lblNaslov);
+
             foreach (PropertyInfo item in myProperty.GetType().GetProperties())
             {
                 if (item.GetCustomAttribute<ForeignKeyAttribute>() != null)
@@ -2154,6 +2162,7 @@ namespace VozniPark
                         ic.Enabled = false;
                         ic.UnosPolje = "0";
                     }
+                    
                     pnlDashboard.Controls.Add(ic);
                 }
             }
@@ -2346,7 +2355,7 @@ namespace VozniPark
             } 
             
             pnlDashboard.Controls.Clear();
-            PopulateControls();
+            PopulateControls("Izvrsite izmjenu");
             
             foreach (var item in pnlDashboard.Controls)
             {
