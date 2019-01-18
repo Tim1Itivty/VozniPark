@@ -433,6 +433,7 @@ namespace VozniPark
             dtg.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", (float)10.25);
             dtg.AllowUserToAddRows = false;
             dtg.AllowUserToResizeColumns = false;
+            dtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dtg.AllowUserToResizeRows = false;
             dtg.ReadOnly = true;
             dtg.ColumnHeadersHeight = 45;
@@ -2659,6 +2660,8 @@ namespace VozniPark
             dtg.BackgroundColor = Color.White;
             dtg.RowHeadersVisible = false;
 
+            dtg.MultiSelect = false;
+            dtg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dtg.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dtg.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(238, 239, 249);
