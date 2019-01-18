@@ -169,7 +169,7 @@ namespace VozniPark
 
         private void Registruj_Click(object sender, EventArgs e)
         {
-            state = StateEnum.Update;
+            state = StateEnum.Add;
             myProperty = new PropertyClassRegistracija();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
 
@@ -922,7 +922,7 @@ namespace VozniPark
         private void BtnDodaj_Click(object sender, EventArgs e)
         {
             AddUpdate();
-           
+            pnlDashboard.Controls.Clear();
 
             if (tacno == false)
             {
@@ -1309,6 +1309,7 @@ namespace VozniPark
 
         private void BtnSacuvaj_Click(object sender, EventArgs e)
         {
+            state = StateEnum.Razduzi;
             AddUpdate();
             if (tacno == false)
             {
@@ -1372,7 +1373,7 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-              
+                PropertyInterface pi;
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
@@ -1398,7 +1399,6 @@ namespace VozniPark
                 UpdateServis.Text = "IZMIJENI";
                 crudButtonDesign(UpdateServis);
                 Pretraga.Text = "Pretraga servisa";
-                crudButtonDesign(Pretraga);
 
                 panel.Height = 100;
                 panel.Width = 770;
@@ -1481,7 +1481,6 @@ namespace VozniPark
                 UpdateGorivo.Text = "IZMIJENI";
                 crudButtonDesign(UpdateGorivo);
                 PretragaGorivo.Text = "Pretraga";
-                crudButtonDesign(PretragaGorivo);
 
                 panel.Height = 100;
                 panel.Width = 670;
@@ -1502,20 +1501,15 @@ namespace VozniPark
                 FlowLayoutPanel panel = PretragaGorivo.Parent as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = new FlowLayoutPanel();
 
-               
-              
-                MetroDateTime prvi = new MetroDateTime();
-                prvi.Format = DateTimePickerFormat.Custom;
-                prvi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-              prvi.MinDate = new DateTime(2018, 1, 1);
-               prvi.MaxDate = DateTime.Today;
+                DateTimePicker prvi = new DateTimePicker();
+                DateTimePicker drugi = new DateTimePicker();
 
-                MetroDateTime drugi = new MetroDateTime();
-                drugi.Format = DateTimePickerFormat.Custom;
-                drugi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-                drugi.MaxDate = DateTime.Today;
+                prvi.MinDate = new DateTime(2018, 01, 01);
+                prvi.MaxDate = DateTime.Now;
+                prvi.Value = prvi.MinDate;
 
-         
+                drugi.MaxDate = DateTime.Now;
+                drugi.Value = drugi.MaxDate;
 
                 noviPanel.Controls.Add(prvi);
                 noviPanel.Controls.Add(drugi);
@@ -1542,7 +1536,7 @@ namespace VozniPark
 
 
                 myProperty = new PropertyClassGorivo();
-               
+                PropertyInterface pi;
 
 
 
@@ -1587,18 +1581,15 @@ namespace VozniPark
                 FlowLayoutPanel panel = Pretraga.Parent as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = new FlowLayoutPanel();
 
-                
-                MetroDateTime prvi = new MetroDateTime();
-                prvi.Format = DateTimePickerFormat.Custom;
-                prvi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-                prvi.MinDate = new DateTime(2018, 1, 1);
-                prvi.MaxDate = DateTime.Today;
+                DateTimePicker prvi = new DateTimePicker();
+                DateTimePicker drugi = new DateTimePicker();
 
-                MetroDateTime drugi = new MetroDateTime();
-                drugi.Format = DateTimePickerFormat.Custom;
-                drugi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-                drugi.MaxDate = DateTime.Today;
+                prvi.MinDate = new DateTime(2018, 01, 01);
+                prvi.MaxDate = DateTime.Now;
+                prvi.Value = prvi.MinDate;
 
+                drugi.MaxDate = DateTime.Now;
+                drugi.Value = drugi.MaxDate;
 
                 noviPanel.Controls.Add(prvi);
                 noviPanel.Controls.Add(drugi);
@@ -1624,7 +1615,8 @@ namespace VozniPark
 
 
                 myProperty = new PropertyClassServisiranjeVozila();
-               
+                PropertyInterface pi;
+
 
 
                 string PretragaServisa = "SELECT * FROM dbo.pretraga(@datum1,@datum2)";
@@ -1757,7 +1749,6 @@ namespace VozniPark
                 UpdateGorivo.Text = "IZMIJENI";
                 crudButtonDesign(UpdateGorivo);
                 PretragaGorivo.Text = "Pretraga";
-                crudButtonDesign(PretragaGorivo);
 
                 panel.Height = 100;
                 panel.Width = 670;
@@ -1799,7 +1790,6 @@ namespace VozniPark
                 UpdateGorivo.Text = "IZMIJENI";
                 crudButtonDesign(UpdateGorivo);
                 PretragaGorivo.Text = "Pretraga";
-                crudButtonDesign(PretragaGorivo);
 
                 panel.Height = 100;
                 panel.Width = 670;
@@ -1815,9 +1805,6 @@ namespace VozniPark
         private void BtnDodajGorivo_Click(object sender, EventArgs e)
         {
             AddUpdate();
-           
-            
-
 
             if (state == StateEnum.Add)
             {
@@ -1903,7 +1890,7 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-               
+                PropertyInterface pi;
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
@@ -1929,7 +1916,6 @@ namespace VozniPark
                 UpdateServis.Text = "IZMIJENI";
                 crudButtonDesign(UpdateServis);
                 Pretraga.Text = "Pretraga servisa";
-                crudButtonDesign(Pretraga);
 
                 panel.Height = 100;
                 panel.Width = 770;
@@ -1965,7 +1951,7 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-               
+                PropertyInterface pi;
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
@@ -1991,7 +1977,6 @@ namespace VozniPark
                 UpdateServis.Text = "IZMIJENI";
                 crudButtonDesign(UpdateServis);
                 Pretraga.Text = "Pretraga servisa";
-                crudButtonDesign(Pretraga);
 
                 panel.Height = 100;
                 panel.Width = 770;
@@ -2025,7 +2010,7 @@ namespace VozniPark
         private void BtnDodajServis_Click(object sender, EventArgs e)
         {
             AddUpdate();
-          
+
             if (state == StateEnum.Add)
             {
 
@@ -2097,7 +2082,7 @@ namespace VozniPark
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
-            btnDodajServis.Text = "SACUVAJ";
+            btnDodajServis.Text = "DODAJ SERVIS";
 
             btnOtkazi1.Text = "OTKAZI";
 
@@ -2227,8 +2212,6 @@ namespace VozniPark
                         dateTime.Enabled = false;
                     if (state == StateEnum.Razduzi && dateTime.Naziv != "Datum razduzenja")
                         dateTime.Enabled = false;
-                    if (state == StateEnum.Razduzi && dateTime.Naziv == "Planirano razduzenje")
-                        dateTime.Enabled = false;
                     if (state == StateEnum.Update && dateTime.Naziv == "Datum razduzenja")
                         dateTime.Enabled = false;
                 }
@@ -2294,176 +2277,156 @@ namespace VozniPark
         {
             var properties = myProperty.GetType().GetProperties();
             int brojac = 0;
-            bool ponovo = false;
+        
             
 
             string poruka = "";
-            if (ponovo == false)
+
+            foreach (var item in pnlDashboard.Controls)
             {
-                foreach (var item in pnlDashboard.Controls)
+                if (item.GetType() == typeof(LookupControl))
                 {
-                    if (item.GetType() == typeof(LookupControl))
-                    {
-                        LookupControl input = item as LookupControl;
-                        string value = input.Key;
+                    LookupControl input = item as LookupControl;
+                    string value = input.Key;
 
-                        if (value == null || value == "")
-                        {
-                            brojac += 1;
-                            if (poruka == "")
-                                poruka += "Nisu sva polja popunjena.";
-                        }
-                        else
-                        {
-                            PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
-                            property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                        }
+                    if (value == null || value == "")
+                    {
+                        brojac += 1;
+                        if(poruka=="")
+                        poruka += "Nisu sva polja popunjena.";
                     }
-                    else if (item.GetType() == typeof(InputControl))
+                    else
                     {
-                        InputControl input = item as InputControl;
-                        if (!input.Enabled) continue;
-                        string value = input.UnosPolje;
-
-
-
-
-
-                        if ((value == null || value == ""))
-                        {
-                            brojac += 1;
-                            if (poruka == "")
-                                poruka += "Nisu sva polja popunjena.";
-                        }
-                        else if (input.Naziv == "Kilometraza" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Kilometraza ne smije sadrzavati slova";
-
-                        }
-                        else if (input.Naziv == "Boja" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Boja ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Ime" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Ime ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Prezime" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Prezime ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Radno mjesto" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Radno mjesto ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Broj vrata" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Broj vrata ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Cijena servisa" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Cijena servisa ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Kolicina  goriva" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Kolicina goriva ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Cijena" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-
-                            brojac += 1;
-                            poruka += "Cijena goriva ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Godina proizvodnje" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Godina proizvodnje ne smije sadrzavati slova.";
-
-                        }
-
-                        else
-                        {
-                            PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                            property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                        }
-
-                    }
-                    else if (item.GetType() == typeof(DateTimeControl))
-                    {
-                        DateTimeControl date = item as DateTimeControl;
-                        DateTime value = date.Unos;
-                        PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
+                        PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
                 }
-                if (state == StateEnum.Add && brojac == 0)
-                    SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                          myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
-                else if (state == StateEnum.Update && brojac == 0)
-                    SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                     myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
-                else if (state == StateEnum.Razduzi)
+                else if (item.GetType() == typeof(InputControl))
                 {
-                    PropertyClassZaduzenja property = myProperty as PropertyClassZaduzenja; //razduzi nije dio interfejsa pa kastujem myProperty u zaduzenja da bih vidjela razduziQuery
-                    SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                     property.RazduziQuery(), property.GetRazduziParameters().ToArray());
+                    InputControl input = item as InputControl;
+                    if (!input.Enabled) continue;
+                    string value = input.UnosPolje;
+
+
+                   
+
+
+                    if ((value == null || value == "") )
+                    {
+                       brojac += 1;
+                        if(poruka=="")
+                        poruka += "Nisu sva polja popunjena.";
+                    }
+                    else if (input.Naziv == "Kilometraza" && Regex.IsMatch(value, @"[a-zA-Z]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Kilometraza ne smije sadrzavati slova";
+
+                    }
+                    else if (input.Naziv == "Boja" && Regex.IsMatch(value, @"[0-9]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Boja ne smije sadrzavati brojeve.";
+
+                    }
+                    else if (input.Naziv == "Ime" && Regex.IsMatch(value, @"[0-9]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Ime ne smije sadrzavati brojeve.";
+
+                    }
+                    else if (input.Naziv == "Prezime" && Regex.IsMatch(value, @"[0-9]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Prezime ne smije sadrzavati brojeve.";
+
+                    }
+                    else if (input.Naziv == "Radno mjesto" && Regex.IsMatch(value, @"[0-9]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Radno mjesto ne smije sadrzavati brojeve.";
+
+                    }
+                    else if (input.Naziv == "Broj vrata" && Regex.IsMatch(value, @"[a-zA-Z]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Broj vrata ne smije sadrzavati slova.";
+
+                    }
+                    else if (input.Naziv == "Cijena servisa" && Regex.IsMatch(value, @"[a-zA-Z]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Cijena servisa ne smije sadrzavati slova.";
+
+                    }
+                    else if (input.Naziv == "Kolicina  goriva" && Regex.IsMatch(value, @"[a-zA-Z]"))
+                    {
+                        
+                        brojac += 1;
+                        poruka += "Kolicina goriva ne smije sadrzavati slova.";
+                     
+                    }
+                    else if (input.Naziv == "Cijena" && Regex.IsMatch(value, @"[a-zA-Z]"))
+                    {
+                        
+
+                        brojac += 1;
+                        poruka += "Cijena goriva ne smije sadrzavati slova.";
+
+                    }
+                    else if (input.Naziv == "Godina proizvodnje" && Regex.IsMatch(value, @"[a-zA-Z]"))
+                    {
+
+                        brojac += 1;
+                        poruka += "Godina proizvodnje ne smije sadrzavati slova.";
+
+                    }
+                    else
+                    {
+                        PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+
                 }
-                else if (brojac > 0)
+                else if (item.GetType() == typeof(DateTimeControl))
                 {
-                    MessageBox.Show(poruka);
-                    tacno = true;
-                    ponovo = true;
-
-
+                    DateTimeControl date = item as DateTimeControl;
+                    DateTime value = date.Unos;
+                    PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
-                else if (brojac == 0)
-                {
+            }
+            if (state == StateEnum.Add &&brojac ==0)
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                      myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+            else if (state == StateEnum.Update &&  brojac == 0  )
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                 myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
+            else if (state == StateEnum.Razduzi)
+            {
+                PropertyClassZaduzenja property = myProperty as PropertyClassZaduzenja; //razduzi nije dio interfejsa pa kastujem myProperty u zaduzenja da bih vidjela razduziQuery
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                 property.RazduziQuery(), property.GetRazduziParameters().ToArray());
+            }     
+            else if (brojac>0 )
+            {
+                MessageBox.Show(poruka);
+                tacno = true;
 
-                    tacno = false;
-
-                }
-                else if (ponovo == true)
-                {
-
-
-                    brojac = 0;
-                    poruka = "";
-
-                }
-
-
+            }          
+            else if (  brojac == 0 )
+            {
+                
+                tacno = false;
 
             }
-
-            
-            
-           
         }
 
         public string delete(DataGridView dg)
@@ -2537,7 +2500,7 @@ namespace VozniPark
 
                 }
                 
-              else if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassRegistracija))
+              else if (state == StateEnum.Add && myProperty.GetType() == typeof(PropertyClassRegistracija))
                 {
                     if (grid.Columns[i].HeaderText == "Datum registracije" || grid.Columns[i].HeaderText == "Datum isteka registracije")
                     {
@@ -2558,33 +2521,21 @@ namespace VozniPark
                     else
                     {
                         string value = cell.Value.ToString();
-                        if (value == "Dostupno")
-                        {
-                            PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                            property.SetValue(myProperty, Convert.ChangeType(true, property.PropertyType));
-                        }
-                        else if (value == "Nije dostupno")
-                        {
-                            PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                            property.SetValue(myProperty, Convert.ChangeType(false, property.PropertyType));
-                        }
-                        else
-                        {
-                            PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                            property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                        }
+
+                        PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
                 }
                 else
                 {
                     string value = cell.Value.ToString();
 
-                    if (value == "Dostupno")
+                    if(value == "Dostupno")
                     {
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(true, property.PropertyType));
                     }
-                    else if (value == "Nije dostupno")
+                    else if(value == "Nije dostupno")
                     {
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(false, property.PropertyType));
@@ -2594,6 +2545,7 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
+                    
                 }
                 i++;
             } 
@@ -2763,13 +2715,7 @@ namespace VozniPark
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
             else if (btn.Text.Contains("PRETRA"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
-            else if (btn.Text.Contains("Pretrazi"))
-                btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
-            else if (btn.Text.Contains("Pretraga"))
-                btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
-            else if (btn.Text.Contains("Pretraga servisa"))
-                btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
-
+            
         }
 
         private void detaljnoFormaLoad(MetroForm forma, int x, int y)
