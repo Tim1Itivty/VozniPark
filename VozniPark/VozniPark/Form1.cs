@@ -16,6 +16,7 @@ using MetroFramework;
 using MetroFramework.Forms;
 using MetroFramework.Controls;
 using System.Text.RegularExpressions;
+using VozniPark.Properties;
 
 namespace VozniPark
 {
@@ -961,7 +962,7 @@ namespace VozniPark
                 buttonDesign(btnPodmeniZaduzenja);
                 if (i == 0)
                 {
-                    btnPodmeniZaduzenja.Text = "Pregled trenutnih zaduzenja";
+                    btnPodmeniZaduzenja.Text = "Pregled trenutnih \nzaduzenja";
                     btnPodmeniZaduzenja.Name = "btnPregled";
                 }
                 if (i == 1)
@@ -1354,7 +1355,7 @@ namespace VozniPark
                 }
                 if (i == 1)
                 {
-                    btnPodmeniServis.Text = "Unesi podatke o servisu";
+                    btnPodmeniServis.Text = "Unesi podatke \no servisu";
                     btnPodmeniServis.Name = "btnServis";
                 }
                 if (i == 2)
@@ -2730,7 +2731,7 @@ namespace VozniPark
             btnPodmeni.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btnPodmeni.ForeColor = System.Drawing.Color.FromArgb(5, 56, 107);
             btnPodmeni.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            btnPodmeni.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            btnPodmeni.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
             btnPodmeni.TabIndex = 0;
             btnPodmeni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnPodmeni.UseVisualStyleBackColor = false;
@@ -2757,7 +2758,7 @@ namespace VozniPark
             }
 
             Button btn = sender as Button;
-            btn.Image = global::VozniPark.Properties.Resources.oie_transparent__1_;
+            btn.Image = global::VozniPark.Properties.Resources.New_Project;
             btn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
         }
 
