@@ -47,7 +47,7 @@ namespace VozniPark.PropertiesClass
         public string GetDeleteQuery()
         {
             return @"DELETE FROM dbo.Zaposleni
-                     WHERE ZaposleniID = @ZaposleniID";
+                     WHERE ZaposleniID = @ZaposleniID ";
         }
 
         public string GetSelectQuery()
