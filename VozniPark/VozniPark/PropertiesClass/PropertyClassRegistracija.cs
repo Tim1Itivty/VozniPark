@@ -115,8 +115,8 @@ namespace VozniPark.PropertiesClass
 					ON v.ModelID=m.ModelID
 					LEFT JOIN Proizvodjac p 
 					on m.ProizvodjacID=p.ProizvodjacID
-                    WHERE r.DatumIstekaRegistracije<GETDATE() AND r.DatumIstekaRegistracije IN (SELECT Max(r.DatumRegistracije)
-					FROM Registracija r
+                    WHERE r.DatumIstekaRegistracije<GETDATE() AND r.DatumIstekaRegistracije IN (SELECT Max(r.DatumRegistracije) 
+					FROM Registracija r 
 					JOIN dbo.Vozila v 
 					ON v.VoziloID=r.VoziloID
 					GROUP BY r.VoziloID) OR r.RegistracijaID is NULL or (DATEDIFF(day,getdate(),cast(r.DatumIstekaRegistracije as date))<=7) and r.Obrisano = 0";

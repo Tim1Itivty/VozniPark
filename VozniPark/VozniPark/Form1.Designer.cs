@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnlMeni = new System.Windows.Forms.Panel();
             this.pnlSelected4 = new System.Windows.Forms.Panel();
@@ -37,11 +36,12 @@
             this.pnlSelected1 = new System.Windows.Forms.Panel();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btnServis = new System.Windows.Forms.Button();
             this.btnZaposleni = new System.Windows.Forms.Button();
             this.btnZaduzenja = new System.Windows.Forms.Button();
             this.btnVozila = new System.Windows.Forms.Button();
+            this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlMeni.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,12 +117,6 @@
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(903, 613);
             this.pnlDashboard.TabIndex = 6;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "addZaposleni");
             // 
             // btnServis
             // 
@@ -209,6 +203,28 @@
             this.btnVozila.UseVisualStyleBackColor = false;
             this.btnVozila.Click += new System.EventHandler(this.btnVozila_Click);
             // 
+            // flpPodmeni
+            // 
+            this.flpPodmeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flpPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
+            this.flpPodmeni.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpPodmeni.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpPodmeni.Location = new System.Drawing.Point(202, 60);
+            this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.flpPodmeni.Name = "flpPodmeni";
+            this.flpPodmeni.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.flpPodmeni.Size = new System.Drawing.Size(233, 613);
+            this.flpPodmeni.TabIndex = 5;
+            // 
+            // pnlDashboard
+            // 
+            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlDashboard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
+            this.pnlDashboard.Name = "pnlDashboard";
+            this.pnlDashboard.Size = new System.Drawing.Size(903, 613);
+            this.pnlDashboard.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -245,7 +261,6 @@
         private System.Windows.Forms.Panel pnlSelected2;
         private System.Windows.Forms.Panel pnlSelected3;
         private System.Windows.Forms.FlowLayoutPanel pnlDashboard;
-        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

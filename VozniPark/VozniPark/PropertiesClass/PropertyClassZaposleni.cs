@@ -46,14 +46,15 @@ namespace VozniPark.PropertiesClass
         #region queries
         public string GetDeleteQuery()
         {
-            return @"DELETE FROM dbo.Zaposleni
+            return @"UPDATE dbo.Zaposleni SET Obrisano = 1
                      WHERE ZaposleniID = @ZaposleniID";
         }
 
         public string GetSelectQuery()
         {
             return @"SELECT ZaposleniID, Ime, Prezime, RadnoMjesto
-                     FROM dbo.Zaposleni";
+                     FROM dbo.Zaposleni
+                    WHERE Obrisano = 0";
         }
 
         public string GetInsertQuery()
