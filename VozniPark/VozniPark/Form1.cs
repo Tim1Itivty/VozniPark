@@ -58,7 +58,7 @@ namespace VozniPark
                 }
                 if (i == 2)
                 {
-                    btnPodmeni.Text = "Unesi podatke o registraciji";
+                    btnPodmeni.Text = "Unesi podatke o \nregistraciji";
                     btnPodmeni.Name = "btnUnesiReg";
                 }
 
@@ -660,7 +660,7 @@ namespace VozniPark
                 }
                 if (i == 1)
                 {
-                    btnPodmeniZaposleni.Text = "Dodaj novog zaposlenog";
+                    btnPodmeniZaposleni.Text = "Dodaj novog \nzaposlenog";
                     btnPodmeniZaposleni.Name = "btnDodajZaposlenog";
                 }
                 btnPodmeniZaposleni.Click += BtnPodmeniZaposleni_Click;
@@ -2739,6 +2739,26 @@ namespace VozniPark
             btnPodmeni.Height = 55;
             btnPodmeni.MouseEnter += BtnPodmeni_MouseEnter;
             btnPodmeni.MouseLeave += BtnPodmeni_MouseLeave;
+            btnPodmeni.MouseClick += BtnPodmeni_MouseClick;
+        }
+
+        private void BtnPodmeni_MouseClick(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < flpPodmeni.Controls.Count; i++)
+            {
+                if (flpPodmeni.Controls[i].GetType() == typeof(Button))
+                {
+                    Button button = flpPodmeni.Controls[i] as Button;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.Image = null;
+                }
+
+
+            }
+
+            Button btn = sender as Button;
+            btn.Image = global::VozniPark.Properties.Resources.oie_transparent__1_;
+            btn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
         }
 
         private void BtnPodmeni_MouseLeave(object sender, EventArgs e)
