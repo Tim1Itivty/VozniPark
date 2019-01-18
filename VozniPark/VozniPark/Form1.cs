@@ -255,6 +255,11 @@ namespace VozniPark
             detaljnoFormaLoad(DetaljanPregledVozilaForm, 860, 420);
             DetaljanPregledVozilaForm.Size = new Size(860, 420);
             DetaljanPregledVozilaForm.Text = "Informacije o vozilu";
+            DetaljanPregledVozilaForm.Resizable = false;
+            DetaljanPregledVozilaForm.Movable = false;
+            DetaljanPregledVozilaForm.MaximizeBox = false;
+            DetaljanPregledVozilaForm.MinimizeBox = false;
+            DetaljanPregledVozilaForm.FormClosed += DetaljanPregledZaposlenog_FormClosed;
             DataGridView a = pnlDashboard.Controls[0] as DataGridView;
             SqlConnection sqlConnection = new SqlConnection(SqlHelper.GetConnectionString());
 
@@ -266,7 +271,7 @@ namespace VozniPark
             pnlLijevi.ForeColor = Color.White;
             DetaljanPregledVozilaForm.Controls.Add(pnlLijevi);
             pnlLijevi.FlowDirection = FlowDirection.TopDown;
-            pnlLijevi.BackColor = Color.FromArgb(29, 140, 196);
+            pnlLijevi.BackColor = Color.FromArgb(5, 56, 107);
             pnlLijevi.FlowDirection = FlowDirection.TopDown;
             pnlLijevi.BorderStyle = System.Windows.Forms.BorderStyle.None;
 
@@ -820,11 +825,12 @@ namespace VozniPark
             DetaljanPregledZaposlenog.MaximizeBox = false;
             DetaljanPregledZaposlenog.MinimizeBox = false;
             DetaljanPregledZaposlenog.Show();
+            DetaljanPregledZaposlenog.FormClosed += DetaljanPregledZaposlenog_FormClosed;
 
             detaljnoFormaLoad(DetaljanPregledZaposlenog, 1020, 350);
 
             FlowLayoutPanel flpZaposleniDetaljno = new FlowLayoutPanel();
-            flpZaposleniDetaljno.BackColor = Color.FromArgb(29, 140, 196);
+            flpZaposleniDetaljno.BackColor = Color.FromArgb(5, 56, 107);
             flpZaposleniDetaljno.Dock = DockStyle.Left;
             flpZaposleniDetaljno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             DetaljanPregledZaposlenog.Controls.Add(flpZaposleniDetaljno);
@@ -2755,6 +2761,10 @@ namespace VozniPark
                     j += (int)y/10;
             }
 
+        }
+        private void DetaljanPregledZaposlenog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Activate();
         }
 
         #endregion
