@@ -2368,13 +2368,14 @@ namespace VozniPark
                     }
                     else if (input.Naziv == "Kolicina  goriva" && Regex.IsMatch(value, @"[a-zA-Z]"))
                     {
-
+                        
                         brojac += 1;
                         poruka += "Kolicina goriva ne smije sadrzavati slova.";
-
+                     
                     }
                     else if (input.Naziv == "Cijena" && Regex.IsMatch(value, @"[a-zA-Z]"))
                     {
+                        
 
                         brojac += 1;
                         poruka += "Cijena goriva ne smije sadrzavati slova.";

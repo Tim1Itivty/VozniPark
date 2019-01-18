@@ -33,7 +33,7 @@ namespace VozniPark.PropertiesClass
         [SqlName("KolicinaGoriva")]
         public decimal KolicinaNatocenogGoriva { get; set; }
 
-        [DisplayName("Cijena ")]
+        [DisplayName("Cijena")]
         [SqlName("Cijena")]
         public decimal Cijena { get; set; }
 
