@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pnlMeni = new System.Windows.Forms.Panel();
             this.pnlSelected4 = new System.Windows.Forms.Panel();
@@ -41,7 +40,6 @@
             this.btnVozila = new System.Windows.Forms.Button();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.pnlMeni.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -203,12 +201,6 @@
             this.pnlDashboard.Size = new System.Drawing.Size(903, 613);
             this.pnlDashboard.TabIndex = 6;
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "addZaposleni");
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -245,7 +237,6 @@
         private System.Windows.Forms.Panel pnlSelected2;
         private System.Windows.Forms.Panel pnlSelected3;
         private System.Windows.Forms.FlowLayoutPanel pnlDashboard;
-        private System.Windows.Forms.ImageList imageList1;
     }
 }
 
