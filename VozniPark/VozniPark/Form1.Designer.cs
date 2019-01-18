@@ -36,7 +36,6 @@
             this.pnlSelected1 = new System.Windows.Forms.Panel();
             this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btnServis = new System.Windows.Forms.Button();
             this.btnZaposleni = new System.Windows.Forms.Button();
             this.btnZaduzenja = new System.Windows.Forms.Button();
@@ -118,12 +117,6 @@
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(903, 613);
             this.pnlDashboard.TabIndex = 6;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "addZaposleni");
             // 
             // btnServis
             // 
