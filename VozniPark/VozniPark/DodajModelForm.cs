@@ -44,7 +44,7 @@ namespace VozniPark
         {
             Add();
             DialogResult = DialogResult.OK;
-            MetroMessageBox.Show(this, "Dodan je novi model vozila!", "Dodan novi model", MessageBoxButtons.OK,  MessageBoxIcon.Information, 90);
+            CustomMessageBox dodanModel = new CustomMessageBox("Dodan novi model", "Dodan je novi model vozila!", MessageBoxIcon.Information);
         }
 
         public void PopulateControls()
