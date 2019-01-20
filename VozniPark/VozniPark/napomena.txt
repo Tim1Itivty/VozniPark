@@ -1,6 +1,1 @@
-﻿izmjena u populate controls
-izmjena forme detaljno
-shortcuts
-doraditi buttone
-izmijeniti message boxove
-izmijeniti tabelu registracija
+﻿select registracije ne valja

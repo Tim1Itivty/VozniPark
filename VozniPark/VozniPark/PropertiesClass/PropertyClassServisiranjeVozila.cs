@@ -30,21 +30,12 @@ namespace VozniPark.PropertiesClass
         [SqlName("Naziv")]
         [ForeignField("Vozilo ID")]
         public string Model { get; set; }
-
-        //[DisplayName("Servis ID")]  
-        //[SqlName("ServisID")]   
-        //[ForeignKey("dbo.Servis","ServisID", "VozniPark.PropertiesClass.PropertyClassServis")]
-        //public int ServisId { get; set; }
-
+        
         [DisplayName("Datum servisiranja")]
         [SqlName("DatumServisiranja")]
         [DateTime]
         public DateTime DatumServisiranja { get; set; }
-
-        //[DisplayName("Kolicina natocenog goriva")]
-        //[SqlName("KolicinaNatocenogGoriva")]
-        //public decimal KolicinaNatocenogGoriva { get; set; }
-
+        
         [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite cijenu servisa!")]
         [DisplayName("Cijena servisa")]
         [SqlName("CijenaServisa")]

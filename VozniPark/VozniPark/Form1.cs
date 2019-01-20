@@ -23,7 +23,6 @@ namespace VozniPark
     // colors: #05668D , #028090 , #00A896 , #02C39A , #F0F3BD
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
-        bool tacno;
         public PropertyInterface myProperty;
         public StateEnum state;
         public Form1()
@@ -189,9 +188,9 @@ namespace VozniPark
             panel.Height = 100;
             panel.Width = 470;
 
-            panel.Controls.Add(btnOtkazi2);
+            
             panel.Controls.Add(btnDodajRegistraciju);
-
+            panel.Controls.Add(btnOtkazi2);
             pnlDashboard.Controls.Add(panel);
         }
 
@@ -201,51 +200,49 @@ namespace VozniPark
             DataGridView dtg = new DataGridView();
             pnlDashboard.Controls.Add(dtg);
             myProperty = new PropertyClassRegistracija();
-            dgvDimeznije(dtg);
             pnlDashboard.Controls.Add(dtg);
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button Registruj = new Button();
             Registruj.Click += Registruj_Click;
-
             Registruj.Text = "REGISTRUJ VOZILO";
-
             panel.Height = 100;
             panel.Width = 470;
-
             panel.Controls.Add(Registruj);
-
             pnlDashboard.Controls.Add(panel);
             PopulateGrid();
+            dgvDimeznije(dtg);
         }
 
         private void BtnDodajRegistraciju_Click(object sender, EventArgs e)
         {
+            bool poljaIspravnoPopunjena = false;
             state = StateEnum.Add;
-            AddUpdate();
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
 
-            if (tacno == false) {
-                MetroMessageBox.Show(this, "Registracija je sačuvana!", "Obaviještenje", MessageBoxButtons.OK, MessageBoxIcon.Information, 90); }
+            if (poljaIspravnoPopunjena == false)
+            {
+                MetroMessageBox.Show(this, "Registracija je sačuvana!", "Obaviještenje", MessageBoxButtons.OK, MessageBoxIcon.Information, 90);
+                pnlDashboard.Controls.Clear();
+                DataGridView dtg = new DataGridView();
+                pnlDashboard.Controls.Add(dtg);
+                myProperty = new PropertyClassRegistracija();
+                pnlDashboard.Controls.Add(dtg);
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                Button Registruj = new Button();
+                Registruj.Click += Registruj_Click;
+                Registruj.Text = "REGISTRUJ VOZILO";
 
+                panel.Height = 100;
+                panel.Width = 470;
 
+                panel.Controls.Add(Registruj);
 
-            pnlDashboard.Controls.Clear();
-            DataGridView dtg = new DataGridView();
-            pnlDashboard.Controls.Add(dtg);
-            myProperty = new PropertyClassRegistracija();
-            pnlDashboard.Controls.Add(dtg);
-            FlowLayoutPanel panel = new FlowLayoutPanel();
-            Button Registruj = new Button();
-            Registruj.Click += Registruj_Click;
-            Registruj.Text = "REGISTRUJ VOZILO";
-
-            panel.Height = 100;
-            panel.Width = 470;
-
-            panel.Controls.Add(Registruj);
-
-            pnlDashboard.Controls.Add(panel);
-            PopulateGrid();
-            dgvDimeznije(dtg);
+                pnlDashboard.Controls.Add(panel);
+                PopulateGrid();
+                dgvDimeznije(dtg);
+            }
+            
+            
         }
 
 
@@ -499,47 +496,50 @@ namespace VozniPark
 
         private void BtnDodajVozilo_Click(object sender, EventArgs e)
         {
-            AddUpdate();
+            bool poljaIspravnoPopunjena = false;
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
 
             if (state == StateEnum.Add)
             {
-                if (tacno == false)
+                if (poljaIspravnoPopunjena == false)
                 {
                     MessageBox.Show("Vozilo je sacuvano!");
-                }
-
-                pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassVozila();
+                    pnlDashboard.Controls.Clear();
+                    myProperty = new PropertyClassVozila();
 
                     PopulateControls("Dodajte novo vozilo");
 
-                FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button btnDodajVozilo = new Button();
-                Button btnOtkazi = new Button();
-                btnDodajVozilo.Text = "DODAJ VOZILO";
-                btnOtkazi.Text = "OTKAZI";
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
+                    Button btnDodajVozilo = new Button();
+                    Button btnOtkazi = new Button();
+                    btnDodajVozilo.Text = "DODAJ VOZILO";
+                    btnOtkazi.Text = "OTKAZI";
 
-                btnDodajVozilo.Click += BtnDodajVozilo_Click;
-                btnOtkazi.Click += BtnOtkazi_Click;
-                btnOtkazi.Visible = true;
+                    btnDodajVozilo.Click += BtnDodajVozilo_Click;
+                    btnOtkazi.Click += BtnOtkazi_Click;
+                    btnOtkazi.Visible = true;
 
-                panel.Height = 100;
-                panel.Width = 470;
+                    panel.Height = 100;
+                    panel.Width = 470;
 
-                panel.Controls.Add(btnDodajVozilo);
-                panel.Controls.Add(btnOtkazi);
-                pnlDashboard.Controls.Add(panel);
+                    panel.Controls.Add(btnDodajVozilo);
+                    panel.Controls.Add(btnOtkazi);
+                    pnlDashboard.Controls.Add(panel);
+                }
+
+                
             }
             else if (state == StateEnum.Update)
             {
 
-                if (tacno == false)
+                if (poljaIspravnoPopunjena == false)
                 {
                     MessageBox.Show("Vozilo je izmijenjeno!");
+                    Button button = sender as Button;
+                    button.Name = "btnPregled";
+                    BtnPodmeni_Click(button, e);
                 }
-                Button button = sender as Button;
-                button.Name = "btnPregled";
-                BtnPodmeni_Click(button, e);
+                
             }
         }
 
@@ -919,28 +919,35 @@ namespace VozniPark
 
         private void BtnIzmjeni_Click(object sender, EventArgs e)
         {
-            AddUpdate();
-            pnlDashboard.Controls.Clear();
-            btnZaposleni_Click(sender, e);
-            Button btn = sender as Button;
-            btn.Name = "btnPregled";
-            BtnPodmeniZaposleni_Click(btn, e);
+            bool poljaIspravnoPopunjena = false;
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
+            if (poljaIspravnoPopunjena == false)
+            {
+                pnlDashboard.Controls.Clear();
+                btnZaposleni_Click(sender, e);
+                Button btn = sender as Button;
+                btn.Name = "btnPregled";
+                BtnPodmeniZaposleni_Click(btn, e);
+            }
+            
         }
 
         private void BtnDodaj_Click(object sender, EventArgs e)
         {
-            AddUpdate();
+            bool poljaIspravnoPopunjena = false;
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
            
 
-            if (tacno == false)
+            if (poljaIspravnoPopunjena == false)
             {
                 MessageBox.Show("Dodan novi zaposleni!");
+                btnZaposleni_Click(sender, e);
+                Button btn = sender as Button;
+                btn.Name = "btnDodajZaposlenog";
+                BtnPodmeniZaposleni_Click(btn, e);
             }
 
-            btnZaposleni_Click(sender, e);
-            Button btn = sender as Button;
-            btn.Name = "btnDodajZaposlenog";
-            BtnPodmeniZaposleni_Click(btn, e);
+            
         }
 
         #endregion
@@ -1231,17 +1238,18 @@ namespace VozniPark
 
         private void BtnZaduzi_Click(object sender, EventArgs e)
         {
+            bool poljaIspravnoPopunjena = false;
             state = StateEnum.Add;
-            AddUpdate();
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
 
-            if (tacno == false)
+            if (poljaIspravnoPopunjena == false)
             {
                 MessageBox.Show("Dodano je novo zaduzenje!");
+                pnlDashboard.Controls.Clear();
+                btnZaduzenja_Click(sender, e);
+                BtnPodmeniZaduzenja_Click(sender, e);
             }
-
-            pnlDashboard.Controls.Clear();
-            btnZaduzenja_Click(sender, e);
-            BtnPodmeniZaduzenja_Click(sender, e);
+            
         }
 
         private void BtnCrud_Click(object sender, EventArgs e)
@@ -1317,18 +1325,20 @@ namespace VozniPark
 
         private void BtnSacuvaj_Click(object sender, EventArgs e)
         {
-            AddUpdate();
-            if (tacno == false)
+            bool poljaIspravnoPopunjena = false;
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
+            if (poljaIspravnoPopunjena == false)
             {
                 MessageBox.Show("Uspjesna izmjena!");
+                pnlDashboard.Controls.Clear();
+                btnZaduzenja_Click(sender, e);
+                Button podmeniTrenutna = sender as Button;
+                podmeniTrenutna.Name = "btnPregled";
+                BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
             }
 
 
-            pnlDashboard.Controls.Clear();
-            btnZaduzenja_Click(sender, e);
-            Button podmeniTrenutna = sender as Button;
-            podmeniTrenutna.Name = "btnPregled";
-            BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
+            
         }
 
         #endregion
@@ -1381,7 +1391,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
               
-                dgvDimeznije(dtg);
+                
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
@@ -1396,9 +1406,7 @@ namespace VozniPark
 
                 MetroTile Pretraga = new MetroTile();
                 Pretraga.Click += Pretraga_Click;
-
-
-
+                
                 AddServis.Text = "DODAJ";
                 crudButtonDesign(AddServis);
                 DeleteServis.Text = "OBRISI";
@@ -1416,24 +1424,15 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-
-
-
+                
                 FlowLayoutPanel nov = new FlowLayoutPanel();
-
-
-
-
-
-
-
-
+                
                 nov.Height = 100;
                 nov.Width = 470;
-
-
+                
                 pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
             else if (button.Name == "btnServis")
             {
@@ -1465,8 +1464,7 @@ namespace VozniPark
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassGorivo();
-
-                dgvDimeznije(dtg);
+                
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
@@ -1499,6 +1497,7 @@ namespace VozniPark
                 panel.Controls.Add(PretragaGorivo);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
         }
 
@@ -1515,8 +1514,8 @@ namespace VozniPark
                 MetroDateTime prvi = new MetroDateTime();
                 prvi.Format = DateTimePickerFormat.Custom;
                 prvi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-              prvi.MinDate = new DateTime(2018, 1, 1);
-               prvi.MaxDate = DateTime.Today;
+                prvi.MinDate = new DateTime(2018, 1, 1);
+                prvi.MaxDate = DateTime.Today;
 
                 MetroDateTime drugi = new MetroDateTime();
                 drugi.Format = DateTimePickerFormat.Custom;
@@ -1535,9 +1534,7 @@ namespace VozniPark
             }
             else
             {
-
-
-
+                
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 FlowLayoutPanel panel = pnlDashboard.Controls[1] as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = pnlDashboard.Controls[1].Controls[1] as FlowLayoutPanel;
@@ -1545,15 +1542,9 @@ namespace VozniPark
 
                 DateTimePicker prvi = pnlDashboard.Controls[1].Controls[4].Controls[0] as DateTimePicker;
                 DateTimePicker drugi = pnlDashboard.Controls[1].Controls[4].Controls[1] as DateTimePicker;
-
-
-
-
+                
                 myProperty = new PropertyClassGorivo();
                
-
-
-
                 string PretragaServis = "SELECT * FROM dbo.pretragaGorivo(@datum1,@datum2)";
 
                 SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
@@ -1562,9 +1553,7 @@ namespace VozniPark
 
                 SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
                 SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
-
-
-
+                
                 sqlcom.Parameters.Add(parametar);
                 sqlcom.Parameters.Add(parametar2);
 
@@ -1662,16 +1651,10 @@ namespace VozniPark
                 Pretraga.Text = "Pretraga servisa";
 
                 panel.Controls.RemoveAt(4);
-
-
+                
             }
-
-
-
-
+            
         }
-
-
 
         private void DeleteGorivo_Click(object sender, EventArgs e)
         {
@@ -1822,84 +1805,76 @@ namespace VozniPark
 
         private void BtnDodajGorivo_Click(object sender, EventArgs e)
         {
-            AddUpdate();
-           
-            
-
+            bool poljaIspravnoPopunjena = false;
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
 
             if (state == StateEnum.Add)
             {
 
-                if (tacno == false)
+                if (poljaIspravnoPopunjena == false)
                 {
                     MessageBox.Show("Uspjesno uneseni podaci o sipanju goriva!");
+                    pnlDashboard.Controls.Clear();
+                    myProperty = new PropertyClassGorivo();
+
+                    PopulateControls("Unesite podatke o tocenju goriva");
+
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
+                    Button btnDodajGorivo = new Button();
+                    Button btnOtkaziGorivo = new Button();
+                    btnDodajGorivo.Text = "SACUVAJ";
+                    btnOtkaziGorivo.Text = "OTKAZI";
+
+                    btnDodajGorivo.Click += BtnDodajGorivo_Click;
+                    btnOtkaziGorivo.Click += BtnOtkaziGorivo_Click;
+
+                    panel.Height = 100;
+                    panel.Width = 470;
+                    panel.Controls.Add(btnDodajGorivo);
+                    panel.Controls.Add(btnOtkaziGorivo);
+                    pnlDashboard.Controls.Add(panel);
                 }
 
 
-                pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassGorivo();
-
-                PopulateControls("Unesite podatke o tocenju goriva");
-
-                FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button btnDodajGorivo = new Button();
-                Button btnOtkaziGorivo = new Button();
-                btnDodajGorivo.Text = "SACUVAJ";
-                btnOtkaziGorivo.Text = "OTKAZI";
-
-                btnDodajGorivo.Click += BtnDodajGorivo_Click;
-                btnOtkaziGorivo.Click += BtnOtkaziGorivo_Click;
-
-                panel.Height = 100;
-                panel.Width = 470;
-                panel.Controls.Add(btnDodajGorivo);
-                panel.Controls.Add(btnOtkaziGorivo);
-                pnlDashboard.Controls.Add(panel);
+                
             }
             else if (state == StateEnum.Update)
             {
                 myProperty = new PropertyClassServisiranjeVozila();
 
-                if (tacno == false)
+                if (poljaIspravnoPopunjena == false)
                 {
                     MessageBox.Show("Izmijenjeno sipanje goriva");
+                    pnlDashboard.Controls.Clear();
+                    DataGridView dtg = new DataGridView();
+                    pnlDashboard.Controls.Add(dtg);
+                    myProperty = new PropertyClassGorivo();
+
+                    dgvDimeznije(dtg);
+                    pnlDashboard.Controls.Add(dtg);
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
+                    Button AddGorivo = new Button();
+                    AddGorivo.Click += AddGorivo_Click;
+
+                    Button UpdateGorivo = new Button();
+                    UpdateGorivo.Click += UpdateGorivo_Click;
+
+                    Button DeleteGorivo = new Button();
+                    DeleteGorivo.Click += DeleteGorivo_Click;
+
+                    AddGorivo.Text = "DODAJ";
+                    DeleteGorivo.Text = "IZBRISI";
+                    UpdateGorivo.Text = "IZMIJENI";
+
+                    panel.Height = 100;
+                    panel.Width = 470;
+                    panel.Controls.Add(AddGorivo);
+                    panel.Controls.Add(DeleteGorivo);
+                    panel.Controls.Add(UpdateGorivo);
+                    pnlDashboard.Controls.Add(panel);
+                    PopulateGrid();
                 }
-
-
-                pnlDashboard.Controls.Clear();
-                DataGridView dtg = new DataGridView();
-                pnlDashboard.Controls.Add(dtg);
-                myProperty = new PropertyClassGorivo();
-
-                dgvDimeznije(dtg);
-                pnlDashboard.Controls.Add(dtg);
-                FlowLayoutPanel panel = new FlowLayoutPanel();
-                Button AddGorivo = new Button();
-                AddGorivo.Click += AddGorivo_Click;
-
-                Button UpdateGorivo = new Button();
-                UpdateGorivo.Click += UpdateGorivo_Click;
-
-                Button DeleteGorivo = new Button();
-                DeleteGorivo.Click += DeleteGorivo_Click;
-
-                AddGorivo.Text = "DODAJ";
-                DeleteGorivo.Text = "IZBRISI";
-                UpdateGorivo.Text = "IZMIJENI";
-
-                panel.Height = 100;
-                panel.Width = 470;
-                panel.Controls.Add(AddGorivo);
-                panel.Controls.Add(DeleteGorivo);
-                panel.Controls.Add(UpdateGorivo);
-                pnlDashboard.Controls.Add(panel);
-                PopulateGrid();
             }
-        }
-
-        private void BtnGorivo_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void BtnOtkazi1_Click(object sender, EventArgs e)
@@ -1947,18 +1922,9 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-
-
-
+                
                 FlowLayoutPanel nov = new FlowLayoutPanel();
-
-
-
-
-
-
-
-
+                
                 nov.Height = 100;
                 nov.Width = 470;
 
@@ -2009,18 +1975,10 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-
-
+                
 
                 FlowLayoutPanel nov = new FlowLayoutPanel();
-
-
-
-
-
-
-
-
+                
                 nov.Height = 100;
                 nov.Width = 470;
 
@@ -2032,17 +1990,17 @@ namespace VozniPark
 
         private void BtnDodajServis_Click(object sender, EventArgs e)
         {
-            AddUpdate();
+            bool poljaIspravnoPopunjena = false;
+            poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
           
             if (state == StateEnum.Add)
             {
 
-                if (tacno == false)
+                if (poljaIspravnoPopunjena == false)
                 {
                     MessageBox.Show("Unesen servis");
-                }
-                pnlDashboard.Controls.Clear();
-                myProperty = new PropertyClassServisiranjeVozila();
+                    pnlDashboard.Controls.Clear();
+                    myProperty = new PropertyClassServisiranjeVozila();
 
                     PopulateControls("Unesite podatke o servisiranju");
                 
@@ -2053,33 +2011,33 @@ namespace VozniPark
                 
                     btnOtkazi1.Text = "OTKAZI";
 
-                btnDodajServis.Click += BtnDodajServis_Click;
-                btnOtkazi1.Click += BtnOtkazi1_Click;
+                    btnDodajServis.Click += BtnDodajServis_Click;
+                    btnOtkazi1.Click += BtnOtkazi1_Click;
 
-                btnOtkazi1.Visible = true;
+                    btnOtkazi1.Visible = true;
 
-                panel.Height = 100;
-                panel.Width = 470;
+                    panel.Height = 100;
+                    panel.Width = 470;
 
-                panel.Controls.Add(btnDodajServis);
-                panel.Controls.Add(btnOtkazi1);
+                    panel.Controls.Add(btnDodajServis);
+                    panel.Controls.Add(btnOtkazi1);
 
-                pnlDashboard.Controls.Add(panel);
+                    pnlDashboard.Controls.Add(panel);
+                }
+                
             }
             else if (state == StateEnum.Update)
             {
                 myProperty = new PropertyClassServisiranjeVozila();
 
 
-                if (tacno == false)
+                if (poljaIspravnoPopunjena == false)
                 {
                     MessageBox.Show("Podaci o servisu su izmijenjeni!");
+                    Button button = sender as Button;
+                    button.Name = "btnServis";
+                    BtnPodmeniServis_Click(button, e);
                 }
-
-
-                Button button = sender as Button;
-                button.Name = "btnServis";
-                BtnPodmeniServis_Click(button, e);
             }
         }
 
@@ -2229,6 +2187,7 @@ namespace VozniPark
                 {
                     DateTimeControl dateTime = new DateTimeControl();
                     dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
+                    dateTime.Name = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
                     pnlDashboard.Controls.Add(dateTime);
 
                     if (state == StateEnum.Add && dateTime.Naziv == "Datum razduzenja")
@@ -2248,6 +2207,7 @@ namespace VozniPark
                 {
                     InputControl ic = new InputControl();
 
+                    ic.Name = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
                     ic.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
 
                     if (item.GetCustomAttribute<PrimaryKeyAttribute>() != null)
@@ -2298,180 +2258,97 @@ namespace VozniPark
             BtnPodmeni_Click(startButtonClick(), e);
         }
 
-        public void AddUpdate()
+        public bool AddUpdate(bool poljaIspravnoPopunjena)
         {
             var properties = myProperty.GetType().GetProperties();
-            int brojac = 0;
-            bool ponovo = false;
-            
 
+            bool nepravlinoIspunjenoPolje = false;
             string poruka = "";
-            if (ponovo == false)
+
+            foreach (var item in pnlDashboard.Controls)
             {
-                foreach (var item in pnlDashboard.Controls)
+                if (item.GetType() == typeof(LookupControl))
                 {
-                    if (item.GetType() == typeof(LookupControl))
-                    {
-                        LookupControl input = item as LookupControl;
-                        string value = input.Key;
+                    LookupControl input = item as LookupControl;
+                    string value = input.Key;
 
-                        if (value == null || value == "")
-                        {
-                            brojac += 1;
-                            if (poruka == "")
-                                poruka += "Nisu sva polja popunjena.";
-                        }
-                        else
-                        {
-                            PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
-                            property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                        }
+                    if (value == null || value == "")
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        if (poruka == "")
+                            poruka += "Nisu sva polja popunjena.";
                     }
-                    else if (item.GetType() == typeof(InputControl))
+                    else
                     {
-                        InputControl input = item as InputControl;
-                        if (!input.Enabled) continue;
-                        string value = input.UnosPolje;
-
-
-
-
-
-                        if ((value == null || value == ""))
-                        {
-                            brojac += 1;
-                            if (poruka == "")
-                                poruka += "Nisu sva polja popunjena.";
-                        }
-                        else if (input.Naziv == "Kilometraza" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Kilometraza ne smije sadrzavati slova";
-
-                        }
-                        else if (input.Naziv == "Boja" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Boja ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Ime" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Ime ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Prezime" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Prezime ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Radno mjesto" && Regex.IsMatch(value, @"[0-9]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Radno mjesto ne smije sadrzavati brojeve.";
-
-                        }
-                        else if (input.Naziv == "Broj vrata" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Broj vrata ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Cijena servisa" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Cijena servisa ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Kolicina  goriva" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Kolicina goriva ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Cijena" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-
-                            brojac += 1;
-                            poruka += "Cijena goriva ne smije sadrzavati slova.";
-
-                        }
-                        else if (input.Naziv == "Godina proizvodnje" && Regex.IsMatch(value, @"[a-zA-Z]"))
-                        {
-
-                            brojac += 1;
-                            poruka += "Godina proizvodnje ne smije sadrzavati slova.";
-
-                        }
-
-                        else
-                        {
-                            PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                            property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
-                        }
-
-                    }
-                    else if (item.GetType() == typeof(DateTimeControl))
-                    {
-                        DateTimeControl date = item as DateTimeControl;
-                        DateTime value = date.Unos;
-                        PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
+                        PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
                 }
-                if (state == StateEnum.Add && brojac == 0)
+                else if (item.GetType() == typeof(InputControl))
+                {
+                    InputControl input = item as InputControl;
+                    if (!input.Enabled) continue;
+                    string value = input.UnosPolje;
+                    
+                    if ((value == null || value == ""))
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        if (poruka == "")
+                            poruka += "Morate popuniti sva polja.";
+                    }
+                    else if ((input.Naziv == "Boja" || input.Naziv == "Ime" || input.Naziv == "Prezime" || input.Naziv == "Radno mjesto") && Regex.IsMatch(value, @"[0-9]"))
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        poruka += input.Naziv + " ne smije sadrzavati brojeve.";
+
+                    }
+                    else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Kolicina  goriva" || 
+                        input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraza") && Regex.IsMatch(value, @"[a-zA-Z]"))
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        poruka += input.Naziv + " ne smije sadrzavati slova.";
+
+                    }
+                    else
+                    {
+                        PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+
+                }
+                else if (item.GetType() == typeof(DateTimeControl))
+                {
+                    DateTimeControl date = item as DateTimeControl;
+                    DateTime value = date.Unos;
+                    
+                    PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
+                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                }
+            }
+
+            if(nepravlinoIspunjenoPolje == true)
+            {
+                MessageBox.Show(poruka);
+                poljaIspravnoPopunjena = true;
+                return poljaIspravnoPopunjena;
+            }
+            else
+            {
+                if (state == StateEnum.Add)
                     SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                          myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
-                else if (state == StateEnum.Update && brojac == 0)
+                            myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+                else if (state == StateEnum.Update)
                     SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                     myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
+                        myProperty.GetUpdateQuery(), myProperty.GetUpdateParameters().ToArray());
                 else if (state == StateEnum.Razduzi)
                 {
                     PropertyClassZaduzenja property = myProperty as PropertyClassZaduzenja; //razduzi nije dio interfejsa pa kastujem myProperty u zaduzenja da bih vidjela razduziQuery
                     SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
-                     property.RazduziQuery(), property.GetRazduziParameters().ToArray());
+                        property.RazduziQuery(), property.GetRazduziParameters().ToArray());
                 }
-                else if (brojac > 0)
-                {
-                    MessageBox.Show(poruka);
-                    tacno = true;
-                    ponovo = true;
-
-
-                }
-                else if (brojac == 0)
-                {
-
-                    tacno = false;
-
-                }
-                else if (ponovo == true)
-                {
-
-
-                    brojac = 0;
-                    poruka = "";
-
-                }
-
-
-
+                poljaIspravnoPopunjena = false;
+                return poljaIspravnoPopunjena;
             }
-
-            
-            
-           
         }
 
         public string delete(DataGridView dg)
