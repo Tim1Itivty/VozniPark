@@ -63,6 +63,16 @@ namespace VozniPark.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap error_background {
+            get {
+                object obj = ResourceManager.GetObject("error_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_add_file_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8-add-file-50", resourceCulture);
@@ -96,6 +106,26 @@ namespace VozniPark.Properties {
         internal static System.Drawing.Bitmap icons8_close_window_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8-close-window-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_delete_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-delete-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_delete_filled_15 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-delete-filled-15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,6 +183,16 @@ namespace VozniPark.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap info_background {
+            get {
+                object obj = ResourceManager.GetObject("info_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap New_Project {
             get {
                 object obj = ResourceManager.GetObject("New Project", resourceCulture);
@@ -166,6 +206,16 @@ namespace VozniPark.Properties {
         internal static System.Drawing.Bitmap oie_transparent__1_ {
             get {
                 object obj = ResourceManager.GetObject("oie_transparent (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap success_background {
+            get {
+                object obj = ResourceManager.GetObject("success_background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

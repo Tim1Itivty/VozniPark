@@ -82,6 +82,12 @@
     <Compile Include="AttributesClass\LookupValue.cs" />
     <Compile Include="AttributesClass\PrimaryKey.cs" />
     <Compile Include="AttributesClass\SqlNameAttribute.cs" />
+    <Compile Include="CustomMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomMessageBox.Designer.cs">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="DateTimeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="StateEnum.cs" />
+    <EmbeddedResource Include="CustomMessageBox.resx">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DateTimeControl.resx">
       <DependentUpon>DateTimeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,6 +219,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="napomena.txt" />
+    <None Include="Resources\icons8-delete-30.png" />
+    <None Include="Resources\icons8-delete-filled-15.png" />
+    <None Include="Resources\error_background.png" />
+    <None Include="Resources\info_background.png" />
+    <None Include="Resources\success_background.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll" />
     <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />

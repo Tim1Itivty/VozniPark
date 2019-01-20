@@ -60,6 +60,7 @@
             this.txtLookupID.MaxLength = 32767;
             this.txtLookupID.Name = "txtLookupID";
             this.txtLookupID.PasswordChar = '\0';
+            this.txtLookupID.ReadOnly = true;
             this.txtLookupID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtLookupID.SelectedText = "";
             this.txtLookupID.SelectionLength = 0;
@@ -101,6 +102,7 @@
             this.txtLookupNaziv.MaxLength = 32767;
             this.txtLookupNaziv.Name = "txtLookupNaziv";
             this.txtLookupNaziv.PasswordChar = '\0';
+            this.txtLookupNaziv.ReadOnly = true;
             this.txtLookupNaziv.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtLookupNaziv.SelectedText = "";
             this.txtLookupNaziv.SelectionLength = 0;

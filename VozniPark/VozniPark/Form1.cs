@@ -221,7 +221,7 @@ namespace VozniPark
 
             if (poljaIspravnoPopunjena == false)
             {
-                MetroMessageBox.Show(this, "Registracija je sačuvana!", "Obaviještenje", MessageBoxButtons.OK, MessageBoxIcon.Information, 90);
+                CustomMessageBox dodanaRegistracija = new CustomMessageBox("Obaviještenje", "Registracija je sačuvana!", MessageBoxIcon.Information);
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
@@ -450,7 +450,9 @@ namespace VozniPark
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
             string provjera = delete(dtg);
             if (provjera != "Greska")
-                MessageBox.Show("Vozilo je obrisano!");
+            {
+                CustomMessageBox obrisanoVozilo = new CustomMessageBox("Obavijestenje", "Vozilo je obrisano", MessageBoxIcon.Information);
+            }
             Button button = sender as Button;
             button.Name = "btnPregled";
 
@@ -503,7 +505,7 @@ namespace VozniPark
             {
                 if (poljaIspravnoPopunjena == false)
                 {
-                    MessageBox.Show("Vozilo je sacuvano!");
+                    CustomMessageBox dodanoVozilo = new CustomMessageBox("Vozilo je sacuvano", "Uspijesno ste dodali novo vozilo", MessageBoxIcon.Exclamation);
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassVozila();
 
@@ -534,7 +536,7 @@ namespace VozniPark
 
                 if (poljaIspravnoPopunjena == false)
                 {
-                    MessageBox.Show("Vozilo je izmijenjeno!");
+                    CustomMessageBox voziloIzmijenjeno = new CustomMessageBox("Vozilo je izmijenjeno", "Vozilo uspiješno izmijenjeno", MessageBoxIcon.Exclamation);
                     Button button = sender as Button;
                     button.Name = "btnPregled";
                     BtnPodmeni_Click(button, e);
@@ -792,7 +794,7 @@ namespace VozniPark
             {
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 delete(dtg);
-                MessageBox.Show("Zaposleni je obrisan!");
+                CustomMessageBox zaposleniObrisano = new CustomMessageBox("Zaposleni je obrisan", "Zaposleni uspiješno obrisan", MessageBoxIcon.Error);
                 pnlDashboard.Controls.Clear();
                 btnZaposleni_Click(sender, e);
                 Button btnPregled = sender as Button;
@@ -940,7 +942,7 @@ namespace VozniPark
 
             if (poljaIspravnoPopunjena == false)
             {
-                MessageBox.Show("Dodan novi zaposleni!");
+                CustomMessageBox dodanZaposleni = new CustomMessageBox("Dodan novi zaposleni", "Uspiješno dodan novi zaposleni", MessageBoxIcon.Exclamation);
                 btnZaposleni_Click(sender, e);
                 Button btn = sender as Button;
                 btn.Name = "btnDodajZaposlenog";
@@ -1244,7 +1246,7 @@ namespace VozniPark
 
             if (poljaIspravnoPopunjena == false)
             {
-                MessageBox.Show("Dodano je novo zaduzenje!");
+                CustomMessageBox dodanoZaduzenje = new CustomMessageBox("Zaduženo vozilo", "Uspiješno dodano novo zaduženje", MessageBoxIcon.Exclamation);
                 pnlDashboard.Controls.Clear();
                 btnZaduzenja_Click(sender, e);
                 BtnPodmeniZaduzenja_Click(sender, e);
@@ -1307,7 +1309,7 @@ namespace VozniPark
                 Button btnPregled = sender as Button;
                 btnPregled.Name = "btnPregled";
 
-                MessageBox.Show("Zaduzenje je izbrisano!");
+                CustomMessageBox obrisanoZaduzenje = new CustomMessageBox("Zaduženje obrisano", "Zaduženje uspiježno obrisano", MessageBoxIcon.Error);
 
                 btnZaduzenja_Click(sender, e);
                 BtnPodmeniZaduzenja_Click(sender, e);
@@ -1329,15 +1331,13 @@ namespace VozniPark
             poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
             if (poljaIspravnoPopunjena == false)
             {
-                MessageBox.Show("Uspjesna izmjena!");
+                CustomMessageBox izmjena = new CustomMessageBox("Zaduženje izmijenjeno", "Zaduženje uspiješno izmijenjeno", MessageBoxIcon.Exclamation);
                 pnlDashboard.Controls.Clear();
                 btnZaduzenja_Click(sender, e);
                 Button podmeniTrenutna = sender as Button;
                 podmeniTrenutna.Name = "btnPregled";
                 BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
             }
-
-
             
         }
 
@@ -1660,7 +1660,7 @@ namespace VozniPark
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
             delete(dtg);
-            MessageBox.Show("Gorivo sklonjeno!!!");
+            CustomMessageBox obrisanoTocenje = new CustomMessageBox("Potvrda o brisanju", "Evidencija točenja goriva obrisana", MessageBoxIcon.Error);
 
             Button button = sender as Button;
             button.Name = "btnGorivo";
@@ -1813,7 +1813,7 @@ namespace VozniPark
 
                 if (poljaIspravnoPopunjena == false)
                 {
-                    MessageBox.Show("Uspjesno uneseni podaci o sipanju goriva!");
+                    CustomMessageBox dodanServis = new CustomMessageBox("Obaviještenje o unosu", "Uspjesno uneseni podaci o sipanju goriva", MessageBoxIcon.Exclamation);
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassGorivo();
 
@@ -1844,7 +1844,7 @@ namespace VozniPark
 
                 if (poljaIspravnoPopunjena == false)
                 {
-                    MessageBox.Show("Izmijenjeno sipanje goriva");
+                    CustomMessageBox izmijenaGoriva = new CustomMessageBox("Potvrda o izmjeni", "Izmijenjeni podaci o sipanju goriva", MessageBoxIcon.Information);
                     pnlDashboard.Controls.Clear();
                     DataGridView dtg = new DataGridView();
                     pnlDashboard.Controls.Add(dtg);
@@ -1998,7 +1998,7 @@ namespace VozniPark
 
                 if (poljaIspravnoPopunjena == false)
                 {
-                    MessageBox.Show("Unesen servis");
+                    CustomMessageBox dodanServis = new CustomMessageBox("Unesen servis", "Uspiješno dodan novi servis", MessageBoxIcon.Exclamation);
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassServisiranjeVozila();
 
@@ -2033,7 +2033,7 @@ namespace VozniPark
 
                 if (poljaIspravnoPopunjena == false)
                 {
-                    MessageBox.Show("Podaci o servisu su izmijenjeni!");
+                    CustomMessageBox izmijenaServisa = new CustomMessageBox("Potvrda o izmjeni", "Podaci o servisu su izmijenjeni", MessageBoxIcon.Information);
                     Button button = sender as Button;
                     button.Name = "btnServis";
                     BtnPodmeniServis_Click(button, e);
@@ -2045,7 +2045,7 @@ namespace VozniPark
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
             delete(dtg);
-            MessageBox.Show("Servis je obrisan!");
+            CustomMessageBox brisanjeServisa = new CustomMessageBox("Servis obrisan", "Servis uspiješno obrisan", MessageBoxIcon.Error);
 
             Button button = sender as Button;
             button.Name = "btnPregled";
@@ -2276,7 +2276,7 @@ namespace VozniPark
                     {
                         nepravlinoIspunjenoPolje = true;
                         if (poruka == "")
-                            poruka += "Nisu sva polja popunjena.";
+                            poruka += "Morate popuniti sva polja.\n";
                     }
                     else
                     {
@@ -2294,19 +2294,19 @@ namespace VozniPark
                     {
                         nepravlinoIspunjenoPolje = true;
                         if (poruka == "")
-                            poruka += "Morate popuniti sva polja.";
+                            poruka += "Morate popuniti sva polja.\n";
                     }
                     else if ((input.Naziv == "Boja" || input.Naziv == "Ime" || input.Naziv == "Prezime" || input.Naziv == "Radno mjesto") && Regex.IsMatch(value, @"[0-9]"))
                     {
                         nepravlinoIspunjenoPolje = true;
-                        poruka += input.Naziv + " ne smije sadrzavati brojeve.";
+                        poruka += input.Naziv + " ne smije sadrzavati brojeve.\n";
 
                     }
                     else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Kolicina  goriva" || 
                         input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraza") && Regex.IsMatch(value, @"[a-zA-Z]"))
                     {
                         nepravlinoIspunjenoPolje = true;
-                        poruka += input.Naziv + " ne smije sadrzavati slova.";
+                        poruka += input.Naziv + " ne smije sadrzavati slova.\n";
 
                     }
                     else
@@ -2328,7 +2328,7 @@ namespace VozniPark
 
             if(nepravlinoIspunjenoPolje == true)
             {
-                MessageBox.Show(poruka);
+                CustomMessageBox mb = new CustomMessageBox("Greska", poruka, MessageBoxIcon.Error);
                 poljaIspravnoPopunjena = true;
                 return poljaIspravnoPopunjena;
             }
@@ -2385,7 +2385,7 @@ namespace VozniPark
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "Vozilo je zaduzeno", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error, 90);
+                    CustomMessageBox greska = new CustomMessageBox("Greška", "Vozilo je zaduženo", MessageBoxIcon.Error);
                     return "Greska";
                 }
 
