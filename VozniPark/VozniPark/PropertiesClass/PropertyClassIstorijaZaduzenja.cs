@@ -31,7 +31,7 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("RegistracijskiBroj")]
         public string RegistarskiBroj { get; set; }
 
-        [DisplayName("Datum zaduzenja")]
+        
         [DisplayName("Datum zaduženja")]
         [SqlName("DatumZaduzenja")]
         public DateTime DatumZaduzenja { get; set; }
