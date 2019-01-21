@@ -26,11 +26,11 @@ namespace VozniPark.PropertiesClass
         [SqlName("Model")]
         public string Model { get; set; }
 
-        [DisplayName("Datum zaduzenja")]
+        [DisplayName("Datum zaduženja")]
         [SqlName("DatumZaduzenja")]
         public DateTime DatumZaduzenja { get; set; }
      
-        [DisplayName("Datum razduzenja")]
+        [DisplayName("Datum razduženja")]
         [SqlName("DatumRazduzenja")]
         public DateTime DatumRazduzenja { get; set; }
 

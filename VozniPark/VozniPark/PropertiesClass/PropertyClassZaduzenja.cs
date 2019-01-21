@@ -33,23 +33,23 @@ namespace VozniPark.PropertiesClass
 
 
         [Required(AllowEmptyStrings = true)]
-        [DisplayName("Predjena kilometraza")]
+        [DisplayName("Pređena kilometraža")]
         [SqlName("PredjenaKilometraza")]
         public int PredjenaKilometraza { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum zaduzenja!")]
-        [DisplayName("Datum zaduzenja")]
+        [DisplayName("Datum zaduženja")]
         [SqlName("DatumZaduzenja")]
         [DateTime]
         public DateTime DatumZaduzenja { get; set; }
 
         [Required(AllowEmptyStrings = true)]
-        [DisplayName("Datum razduzenja")]
+        [DisplayName("Datum razduženja")]
         [SqlName("DatumRazduzenja")]
         [DateTime]
         public DateTime DatumRazduzenja { get; set; }
 
-        [DisplayName("Planirano razduzenje")]
+        [DisplayName("Planirano razduženje")]
         [SqlName("PlaniranoRazduzenje")]
         [DateTime]
         public DateTime PlaniranoRazduzenje { get; set; }

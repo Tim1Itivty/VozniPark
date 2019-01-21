@@ -37,7 +37,7 @@ namespace VozniPark.PropertiesClass
         public int GodinaProizvodnje { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite predjenu kilometrazu!")]
-        [DisplayName("Kilometraza")]
+        [DisplayName("Kilometraža")]
         [SqlNameAttribute("Kilometraza")]
         public int Kilometraza { get; set; }
 
