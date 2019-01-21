@@ -12,12 +12,14 @@ using VozniPark.PropertiesClass;
 using VozniPark.AttributesClass;
 using MetroFramework.Forms;
 using MetroFramework;
+using System.Text.RegularExpressions;
 
 namespace VozniPark
 {
     public partial class DodajModelForm : MetroForm
     {
         public PropertyInterface myProperty;
+        bool poljaIspravnoPopunjena=false;
 
         public DodajModelForm()
         {
@@ -42,9 +44,15 @@ namespace VozniPark
 
         private void BtnDodajModel_Click(object sender, EventArgs e)
         {
-            Add();
-            DialogResult = DialogResult.OK;
-            CustomMessageBox dodanModel = new CustomMessageBox("Dodan novi model", "Dodan je novi model vozila!", MessageBoxIcon.Information);
+          
+           poljaIspravnoPopunjena= Add(poljaIspravnoPopunjena);
+
+
+            if (poljaIspravnoPopunjena == false)
+            {
+                DialogResult = DialogResult.OK;
+                CustomMessageBox dodanModel = new CustomMessageBox("Dodan novi model", "Dodan je novi model vozila!", MessageBoxIcon.Information);
+            }
         }
 
         public void PopulateControls()
@@ -78,13 +86,16 @@ namespace VozniPark
                     }
 
                     flpModel.Controls.Add(ic);
-                }               
+                }
             }
         }
 
-        public void Add()
+        public bool Add(bool poljaIspravnoPopunjena)
         {
             var properties = myProperty.GetType().GetProperties();
+            bool nepravlinoIspunjenoPolje = false;
+            string poruka = "";
+
 
             foreach (var item in flpModel.Controls)
             {
@@ -93,8 +104,18 @@ namespace VozniPark
                     LookupControl input = item as LookupControl;
                     string value = input.Key;
 
-                    PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    if (value == "" || value == null)
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        if (poruka == "")
+                            poruka += "Morate popuniti sva polja.\n";
+                    }
+                   
+                    else
+                    {
+                        PropertyInfo property = properties.Where(x => input.Name == x.Name).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
                 }
                 else if (item.GetType() == typeof(InputControl))
                 {
@@ -102,13 +123,47 @@ namespace VozniPark
                     if (!input.Enabled) continue;
                     string value = input.UnosPolje;
 
-                    PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                    property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+
+                    if (value == "" || value == null)
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        if (poruka == "")
+                            poruka += "Morate popuniti sva polja.\n";
+                    }
+                    else if (input.Naziv == "Naziv" && Regex.IsMatch(value, @"[0-9@#%&',.\s-+$]") )
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere .\n";
+                    }
+                    else
+                    {
+                        PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
+                        property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
+                    }
+                }
+            }
+                if (nepravlinoIspunjenoPolje == true)
+                {
+                    CustomMessageBox mb = new CustomMessageBox("Greska", poruka, MessageBoxIcon.Error);
+                    poljaIspravnoPopunjena = true;
+                return poljaIspravnoPopunjena;
+                }
+                else
+                {
 
                     SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
                       myProperty.GetInsertQuery(), myProperty.GetInsertParameters().ToArray());
+
+                    poljaIspravnoPopunjena = false;
+                return poljaIspravnoPopunjena;
                 }
-            }
+
+
+
+
+            
         }
+
     }
+    
 }

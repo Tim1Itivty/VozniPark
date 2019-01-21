@@ -440,6 +440,7 @@ namespace VozniPark
         private void Delete_Click(object sender, EventArgs e)
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
+
             string provjera = delete(dtg);
             if (provjera != "Greska")
             {
@@ -457,7 +458,23 @@ namespace VozniPark
             state = StateEnum.Update;
             myProperty = new PropertyClassVozila();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
-            ucitajVrijednostiUPolja();
+
+           
+
+            if (myProperty.GetType() == typeof(PropertyClassVozila) )
+            {
+                if (grid.SelectedRows[0].Cells["Dostupnost"].Value.ToString() == "Dostupno")
+                {
+                    ucitajVrijednostiUPolja();
+                }
+                else
+                {
+                    CustomMessageBox greska = new CustomMessageBox("Greška", "Nije moguće izmijeniti zaduženo vozilo!!!", MessageBoxIcon.Error);
+                   
+                }
+            }
+           
+           
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajVozilo = new Button();
             Button btnOtkazi = new Button();
@@ -2294,16 +2311,26 @@ namespace VozniPark
                         if (poruka == "")
                             poruka += "Morate popuniti sva polja.\n";
                     }
-                    else if ((input.Naziv == "Boja" || input.Naziv == "Ime" || input.Naziv == "Prezime" || input.Naziv == "Radno mjesto") && Regex.IsMatch(value, @"[0-9]"))
+                    else if ((input.Naziv == "Boja" || input.Naziv == "Ime" || input.Naziv == "Prezime" || input.Naziv == "Radno mjesto") && Regex.IsMatch(value, @"[0-9@#%&',.\s-+$]"))
                     {
                         nepravlinoIspunjenoPolje = true;
-                        poruka += input.Naziv + " ne smije sadrzavati brojeve.\n";
+                        poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere.\n";
                     }
                     else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Kolicina  goriva" || 
-                        input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraza") && Regex.IsMatch(value, @"[a-zA-Z]"))
+                        input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraza") && (Regex.IsMatch(value, @"[a-zA-Z]")|| Regex.IsMatch(value, @"[a-zA-Z@#%&',.\s-+$]")))
                     {
                         nepravlinoIspunjenoPolje = true;
-                        poruka += input.Naziv + " ne smije sadrzavati slova.\n";
+                        poruka += input.Naziv + " ne smije sadrzavati slova i specijalne karaktere.\n";
+                    }
+                    else if ((input.Naziv == "Broj vrata" )  &&( Regex.IsMatch(value, @"[6789]")))
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        poruka += input.Naziv + "  nije ispravan.\n";
+                    }
+                    else if ((input.Naziv == "Kilometraza") && (Regex.IsMatch(value, @"")))
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        poruka += input.Naziv + "  nije ispravan.\n";
                     }
                     else
                     {
