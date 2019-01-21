@@ -19,7 +19,7 @@ namespace VozniPark.PropertiesClass
         [LookupKey]
         public int ModelID { get; set; }
 
-        [DisplayName("Proizvodjac")]
+        [DisplayName("Proizvođač")]
         [SqlName("Proizvodjac")]
         [ForeignField]
         [LookupValue]

@@ -95,7 +95,7 @@ namespace VozniPark
                 Add.Text = "DODAJ";
                 Add.Name = "btnDodajVozilo";
                 crudButtonDesign(Add);
-                Delete.Text = "OBRISI";
+                Delete.Text = "OBRIŠI";
                 crudButtonDesign(Delete);
                 Update.Text = "IZMIJENI";
                 crudButtonDesign(Update);
@@ -118,7 +118,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassVozila();
 
-                PopulateControls("Dodajte novo vozilo");
+                PopulateControls("Dodavanje novog vozila");
 
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajVozilo = new Button();
@@ -126,7 +126,7 @@ namespace VozniPark
 
                 btnDodajVozilo.Text = "DODAJ VOZILO";
                 dodajButtonDesign(btnDodajVozilo);
-                btnOtkazi.Text = "OTKAZI";
+                btnOtkazi.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi);
                 btnDodajVozilo.Click += BtnDodajVozilo_Click;
                 btnOtkazi.Click += BtnOtkazi_Click;
@@ -176,9 +176,9 @@ namespace VozniPark
             Button btnDodajRegistraciju = new Button();
             Button btnOtkazi2 = new Button();
 
-            btnDodajRegistraciju.Text = "SACUVAJ";
+            btnDodajRegistraciju.Text = "SAČUVAJ";
             dodajButtonDesign(btnDodajRegistraciju);
-            btnOtkazi2.Text = "OTKAZI";
+            btnOtkazi2.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkazi2);
             btnDodajRegistraciju.Click += BtnDodajRegistraciju_Click;
             btnOtkazi2.Click += BtnOtkazi2_Click;
@@ -219,7 +219,7 @@ namespace VozniPark
 
             if (poljaIspravnoPopunjena == false)
             {
-                CustomMessageBox dodanaRegistracija = new CustomMessageBox("Obaviještenje", "Registracija je sačuvana!", MessageBoxIcon.Information);
+                CustomMessageBox dodanaRegistracija = new CustomMessageBox("Obavještenje", "Registracija je sačuvana!", MessageBoxIcon.Information);
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
@@ -303,7 +303,7 @@ namespace VozniPark
             lblBoja.Text = "Boja \n";
             lblBoja.Text += detaljiDT.Rows[0].ItemArray[5].ToString() + " \n";
 
-            lblKilometraza.Text = "Kilometraza \n";
+            lblKilometraza.Text = "Kilometraža \n";
             lblKilometraza.Text += detaljiDT.Rows[0].ItemArray[6].ToString() + " \n";
 
             if (detaljiDT.Rows[0].ItemArray[7].ToString() == "False")
@@ -333,7 +333,6 @@ namespace VozniPark
                     j.Font = new Font(j.Font.FontFamily, 11);
                     j.Margin = new Padding(5);
                 }
-
             }
 
             FlowLayoutPanel pnlDesni = new FlowLayoutPanel();
@@ -383,7 +382,6 @@ namespace VozniPark
             DetaljnoDgvDimenzije(dgvZaduzenja);
 
             // TAB CONTROL ZA PREGLED SVIH GRIDOVA
-
             MetroTabControl mtc = new MetroTabControl();
             mtc.TabPages.Add("Servisi");
             mtc.TabPages.Add("Registracije");
@@ -444,7 +442,7 @@ namespace VozniPark
             string provjera = delete(dtg);
             if (provjera != "Greska")
             {
-                CustomMessageBox obrisanoVozilo = new CustomMessageBox("Obavijestenje", "Vozilo je obrisano", MessageBoxIcon.Information);
+                CustomMessageBox obrisanoVozilo = new CustomMessageBox("Obavještenje", "Vozilo je obrisano", MessageBoxIcon.Information);
             }
             Button button = sender as Button;
             button.Name = "btnPregled";
@@ -463,9 +461,9 @@ namespace VozniPark
             Button btnDodajVozilo = new Button();
             Button btnOtkazi = new Button();
 
-            btnDodajVozilo.Text = "SACUVAJ";
+            btnDodajVozilo.Text = "SAČUVAJ";
             dodajButtonDesign(btnDodajVozilo);
-            btnOtkazi.Text = "OTKAZI";
+            btnOtkazi.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkazi);
             btnDodajVozilo.Click += BtnDodajVozilo_Click;
             btnOtkazi.Click += BtnOtkazi_Click;
@@ -483,7 +481,7 @@ namespace VozniPark
             state = StateEnum.Add;
             pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassVozila();
-            PopulateControls("Dodajte novo vozilo");
+            PopulateControls("Dodavanje novog vozila");
             btnVozila_Click(sender, e);
             Button btn = sender as Button;
             btn.Name = "btnDodajVozilo";
@@ -499,18 +497,18 @@ namespace VozniPark
             {
                 if (poljaIspravnoPopunjena == false)
                 {
-                    CustomMessageBox dodanoVozilo = new CustomMessageBox("Vozilo je sacuvano", "Uspijesno ste dodali novo vozilo", MessageBoxIcon.Exclamation);
+                    CustomMessageBox dodanoVozilo = new CustomMessageBox("Vozilo je sačuvano", "Uspješno ste dodali novo vozilo", MessageBoxIcon.Exclamation);
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassVozila();
 
-                    PopulateControls("Dodajte novo vozilo");
+                    PopulateControls("Dodavanje novog vozila");
 
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajVozilo = new Button();
                     Button btnOtkazi = new Button();
-                    btnDodajVozilo.Text = "SACUVAJ";
+                    btnDodajVozilo.Text = "SAČUVAJ";
                     dodajButtonDesign(btnDodajVozilo);
-                    btnOtkazi.Text = "OTKAZI";
+                    btnOtkazi.Text = "OTKAŽI";
                     otkaziButtonDesign(btnOtkazi);
                     btnDodajVozilo.Click += BtnDodajVozilo_Click;
                     btnOtkazi.Click += BtnOtkazi_Click;
@@ -522,21 +520,17 @@ namespace VozniPark
                     panel.Controls.Add(btnDodajVozilo);
                     panel.Controls.Add(btnOtkazi);
                     pnlDashboard.Controls.Add(panel);
-                }
-
-
+                }               
             }
             else if (state == StateEnum.Update)
             {
-
                 if (poljaIspravnoPopunjena == false)
                 {
-                    CustomMessageBox voziloIzmijenjeno = new CustomMessageBox("Vozilo je izmijenjeno", "Vozilo uspiješno izmijenjeno", MessageBoxIcon.Exclamation);
+                    CustomMessageBox voziloIzmijenjeno = new CustomMessageBox("Vozilo je izmijenjeno", "Vozilo uspješno izmijenjeno", MessageBoxIcon.Exclamation);
                     Button button = sender as Button;
                     button.Name = "btnPregled";
                     BtnPodmeni_Click(button, e);
-                }
-
+                }               
             }
         }
 
@@ -570,7 +564,7 @@ namespace VozniPark
                 Add.Text = "DODAJ";
                 Add.Name = "btnDodajVozilo";
                 crudButtonDesign(Add);
-                Delete.Text = "OBRISI";
+                Delete.Text = "OBRIŠI";
                 crudButtonDesign(Delete);
                 Update.Text = "IZMIJENI";
                 crudButtonDesign(Update);
@@ -615,7 +609,7 @@ namespace VozniPark
                 Add.Text = "DODAJ";
                 Add.Name = "btnDodajVozilo";
                 crudButtonDesign(Add);
-                Delete.Text = "OBRISI";
+                Delete.Text = "OBRIŠI";
                 crudButtonDesign(Delete);
                 Update.Text = "IZMIJENI";
                 crudButtonDesign(Update);
@@ -635,7 +629,6 @@ namespace VozniPark
         }
 
         #endregion
-
 
         #region meniZaposleni
         private void btnZaposleni_Click(object sender, EventArgs e)
@@ -699,7 +692,7 @@ namespace VozniPark
                     if (i == 2)
                     {
                         btn.Name = "btnObrisi";
-                        btn.Text = "OBRISI";
+                        btn.Text = "OBRIŠI";
                         crudButtonDesign(btn);
                     }
                     if (i == 3)
@@ -727,7 +720,7 @@ namespace VozniPark
                 dodajButtonDesign(btnDodaj);
                 Button btnOtkazi = new Button();
                 btnOtkazi.Name = "btnOtkazi";
-                btnOtkazi.Text = "OTKAZI";
+                btnOtkazi.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi);
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
@@ -749,7 +742,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
-                PopulateControls("Dodajte novog zaposlenog");
+                PopulateControls("Dodavanje novog zaposlenog");
 
                 FlowLayoutPanel flp = new FlowLayoutPanel();
                 flp.FlowDirection = FlowDirection.LeftToRight;
@@ -761,7 +754,7 @@ namespace VozniPark
                 btnDodaj.Name = "btnDodaj";
                 dodajButtonDesign(btnDodaj);
                 btnOtkazi.Name = "btnOtkazi";
-                btnOtkazi.Text = "OTKAZI";
+                btnOtkazi.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi);
                 flp.Controls.Add(btnDodaj);
                 flp.Controls.Add(btnOtkazi);
@@ -784,7 +777,7 @@ namespace VozniPark
                 btnIzmjeni.Name = "btnIzmjeni";
                 dodajButtonDesign(btnIzmjeni);
                 btnOtkazi.Name = "btnOtkazi";
-                btnOtkazi.Text = "OTKAZI";
+                btnOtkazi.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi);
                 flpButton.Controls.Add(btnIzmjeni);
                 flpButton.Controls.Add(btnOtkazi);
@@ -795,7 +788,7 @@ namespace VozniPark
             {
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 delete(dtg);
-                CustomMessageBox zaposleniObrisano = new CustomMessageBox("Zaposleni je obrisan", "Zaposleni uspiješno obrisan", MessageBoxIcon.Error);
+                CustomMessageBox zaposleniObrisano = new CustomMessageBox("Zaposleni je obrisan", "Zaposleni uspješno obrisan", MessageBoxIcon.Error);
                 pnlDashboard.Controls.Clear();
                 btnZaposleni_Click(sender, e);
                 Button btnPregled = sender as Button;
@@ -808,7 +801,6 @@ namespace VozniPark
                 btnDetaljno.Name = "btnDetaljno";
                 BtnDetaljno_Click();
             }
-
         }
 
         private void BtnOtkazi_Click1(object sender, EventArgs e)
@@ -822,7 +814,7 @@ namespace VozniPark
         private void BtnDetaljno_Click()
         {
             MetroForm DetaljanPregledZaposlenog = new MetroForm();
-            DetaljanPregledZaposlenog.Text = "Informacije o zaduzivanju zaposlenog";
+            DetaljanPregledZaposlenog.Text = "Informacije o zaduživanjima zaposlenog";
             DetaljanPregledZaposlenog.StartPosition = FormStartPosition.Manual;
             DetaljanPregledZaposlenog.Location = new Point(this.Location.X + 175, this.Location.Y + 150);
             DetaljanPregledZaposlenog.Resizable = false;
@@ -931,30 +923,25 @@ namespace VozniPark
                 Button btn = sender as Button;
                 btn.Name = "btnPregled";
                 BtnPodmeniZaposleni_Click(btn, e);
-            }
-
+            }           
         }
 
         private void BtnDodaj_Click(object sender, EventArgs e)
         {
             bool poljaIspravnoPopunjena = false;
             poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
-
-
+           
             if (poljaIspravnoPopunjena == false)
             {
-                CustomMessageBox dodanZaposleni = new CustomMessageBox("Dodan novi zaposleni", "Uspiješno dodan novi zaposleni", MessageBoxIcon.Exclamation);
+                CustomMessageBox dodanZaposleni = new CustomMessageBox("Dodan novi zaposleni", "Uspješno dodan novi zaposleni", MessageBoxIcon.Exclamation);
                 btnZaposleni_Click(sender, e);
                 Button btn = sender as Button;
                 btn.Name = "btnDodajZaposlenog";
                 BtnPodmeniZaposleni_Click(btn, e);
-            }
-
-
+            }           
         }
 
         #endregion
-
 
         #region meniZaduzenja
         private void btnZaduzenja_Click(object sender, EventArgs e)
@@ -972,33 +959,31 @@ namespace VozniPark
                 buttonDesign(btnPodmeniZaduzenja);
                 if (i == 0)
                 {
-                    btnPodmeniZaduzenja.Text = "Pregled trenutnih \nzaduzenja";
+                    btnPodmeniZaduzenja.Text = "Pregled trenutnih \nzaduženja";
                     btnPodmeniZaduzenja.Name = "btnPregled";
                 }
                 if (i == 1)
                 {
-                    btnPodmeniZaduzenja.Text = "Zaduzi vozilo";
+                    btnPodmeniZaduzenja.Text = "Zaduži vozilo";
                     btnPodmeniZaduzenja.Name = "btnZaduzi";
                 }
                 if (i == 2)
                 {
-                    btnPodmeniZaduzenja.Text = "Razduzi vozilo";
+                    btnPodmeniZaduzenja.Text = "Razduži vozilo";
                     btnPodmeniZaduzenja.Name = "btnRazduzi";
                 }
                 if (i == 3)
                 {
-                    btnPodmeniZaduzenja.Text = "Istorija zaduzivanja";
+                    btnPodmeniZaduzenja.Text = "Istorija zaduživanja";
                     btnPodmeniZaduzenja.Name = "btnIstorija";
                 }
                 btnPodmeniZaduzenja.Click += BtnPodmeniZaduzenja_Click;
                 flpPodmeni.Controls.Add(btnPodmeniZaduzenja);
             }
-
         }
 
         private void BtnPodmeniZaduzenja_Click(object sender, EventArgs e)
         {
-
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
@@ -1022,7 +1007,7 @@ namespace VozniPark
                     MetroTile btnCrud = new MetroTile();
                     if (i == 0)
                     {
-                        btnCrud.Text = "ZADUZI";
+                        btnCrud.Text = "ZADUŽI";
                         btnCrud.Name = "btnDodaj";
                     }
                     if (i == 1)
@@ -1032,7 +1017,7 @@ namespace VozniPark
                     }
                     if (i == 2)
                     {
-                        btnCrud.Text = "OBRISI";
+                        btnCrud.Text = "OBRIŠI";
                         btnCrud.Name = "btnIzbrisi";
                     }
                     crudButtonDesign(btnCrud);
@@ -1051,7 +1036,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
-                PopulateControls("Dodajte novo zaduzenje");
+                PopulateControls("Dodavanje novog zaduženja");
 
                 FlowLayoutPanel flpButon = new FlowLayoutPanel();
                 flpButon.FlowDirection = FlowDirection.LeftToRight;
@@ -1059,7 +1044,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(flpButon);
 
                 Button btnZaduzi = new Button();
-                btnZaduzi.Text = "ZADUZI";
+                btnZaduzi.Text = "ZADUŽI";
                 btnZaduzi.Name = "btnZaduzi";
                 dodajButtonDesign(btnZaduzi);
                 flpButon.Controls.Add(btnZaduzi);
@@ -1068,7 +1053,7 @@ namespace VozniPark
 
                 Button btnOtkazi = new Button();
                 btnOtkazi.Name = "btnOtkazi";
-                btnOtkazi.Text = "OTKAZI";
+                btnOtkazi.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi);
                 flpButon.Controls.Add(btnOtkazi);
 
@@ -1090,15 +1075,14 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(flpButon);
 
                 Button btnRazduzi = new Button();
-                btnRazduzi.Text = "RAZDUZI";
+                btnRazduzi.Text = "RAZDUŽI";
                 btnRazduzi.Name = "btnRazduzi";
                 dodajButtonDesign(btnRazduzi);
                 flpButon.Controls.Add(btnRazduzi);
 
                 btnRazduzi.Click += BtnRazduzi_Click;
-
-
             }
+
             //ISTORIJA ZADUZIVANJA
             else if (button.Name == "btnIstorija")
             {
@@ -1129,7 +1113,7 @@ namespace VozniPark
 
             if (btnPretraga.Text == "PRETRAGA")
             {
-                btnPretraga.Text = "PRETRAZI";
+                btnPretraga.Text = "PRETRAŽI";
 
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Size = new Size(219, 100);
@@ -1147,15 +1131,13 @@ namespace VozniPark
                 dateTimePicker1.Value = dateTimePicker1.MinDate;
                 dateTimePicker2.Value = dateTimePicker2.MaxDate;
 
-
-
                 panel.Controls.Add(dateTimePicker1);
                 panel.Controls.Add(dateTimePicker2);
 
                 flpanel.Controls.Add(panel);
             }
 
-            else if (btnPretraga.Text == "PRETRAZI")
+            else if (btnPretraga.Text == "PRETRAŽI")
             {
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 FlowLayoutPanel panel = pnlDashboard.Controls[1].Controls[1] as FlowLayoutPanel;
@@ -1184,8 +1166,6 @@ namespace VozniPark
                 flpanel.Controls.RemoveAt(1);
                 btnPretraga.Text = "PRETRAGA";
             }
-
-
         }
 
         private void BtnPretrazi_Click(object sender, EventArgs e)
@@ -1198,10 +1178,8 @@ namespace VozniPark
             SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
             SqlCommand sqlCommand = new SqlCommand(QueryIstorijaZaduzenja, konekcija);
 
-
             SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
             SqlParameter parameter2 = new SqlParameter("@datum2", SqlDbType.Date);
-
 
             sqlCommand.Parameters.Add(parametar);
             sqlCommand.Parameters.Add(parameter2);
@@ -1213,10 +1191,6 @@ namespace VozniPark
             dtg.DataSource = dt;
             pnlDashboard.Controls.SetChildIndex(dtg, 0);
         }
-
-
-
-
 
         private void BtnRazduzi_Click(object sender, EventArgs e)
         {
@@ -1230,7 +1204,7 @@ namespace VozniPark
             pnlDashboard.Controls.Add(flpButon);
 
             Button btnSacuvaj = new Button();
-            btnSacuvaj.Text = "SACUVAJ";
+            btnSacuvaj.Text = "SAČUVAJ";
             btnSacuvaj.Name = "btnSacuvaj";
             dodajButtonDesign(btnSacuvaj);
             flpButon.Controls.Add(btnSacuvaj);
@@ -1239,7 +1213,7 @@ namespace VozniPark
 
             Button btnOtkaziRazduzenje = new Button();
             btnOtkaziRazduzenje.Name = "btnOtkaziRazduzenje";
-            btnOtkaziRazduzenje.Text = "OTKAZI";
+            btnOtkaziRazduzenje.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkaziRazduzenje);
             flpButon.Controls.Add(btnOtkaziRazduzenje);
 
@@ -1254,12 +1228,11 @@ namespace VozniPark
 
             if (poljaIspravnoPopunjena == false)
             {
-                CustomMessageBox dodanoZaduzenje = new CustomMessageBox("Zaduženo vozilo", "Uspiješno dodano novo zaduženje", MessageBoxIcon.Exclamation);
+                CustomMessageBox dodanoZaduzenje = new CustomMessageBox("Zaduženo vozilo", "Uspješno dodano novo zaduženje", MessageBoxIcon.Exclamation);
                 pnlDashboard.Controls.Clear();
                 btnZaduzenja_Click(sender, e);
                 BtnPodmeniZaduzenja_Click(sender, e);
-            }
-
+            }          
         }
 
         private void BtnCrud_Click(object sender, EventArgs e)
@@ -1270,7 +1243,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaduzenja();
-                PopulateControls("Dodajte novo zaduzenje");
+                PopulateControls("Dodavanje novog zaduženja");
 
                 FlowLayoutPanel flpButon = new FlowLayoutPanel();
                 flpButon.FlowDirection = FlowDirection.LeftToRight;
@@ -1278,12 +1251,11 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(flpButon);
 
                 Button btnZaduzi = new Button();
-                btnZaduzi.Text = "ZADUZI";
+                btnZaduzi.Text = "ZADUŽI";
                 btnZaduzi.Name = "btnZaduzi";
                 dodajButtonDesign(btnZaduzi);
                 flpButon.Controls.Add(btnZaduzi);
                 btnZaduzi.Click += BtnZaduzi_Click;
-
             }
             else if (button.Name == "btnIzmijeni")
             {
@@ -1297,7 +1269,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(flpButton);
 
                 Button btnSacuvaj = new Button();
-                btnSacuvaj.Text = "SACUVAJ";
+                btnSacuvaj.Text = "SAČUVAJ";
                 btnSacuvaj.Name = "btnSacuvaj";
                 dodajButtonDesign(btnSacuvaj);
                 flpButton.Controls.Add(btnSacuvaj);
@@ -1306,7 +1278,7 @@ namespace VozniPark
 
                 Button btnOtkazi = new Button();
                 btnOtkazi.Name = "btnOtkazi";
-                btnOtkazi.Text = "OTKAZI";
+                btnOtkazi.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi);
                 flpButton.Controls.Add(btnOtkazi);
 
@@ -1320,11 +1292,10 @@ namespace VozniPark
                 Button btnPregled = sender as Button;
                 btnPregled.Name = "btnPregled";
 
-                CustomMessageBox obrisanoZaduzenje = new CustomMessageBox("Zaduženje obrisano", "Zaduženje uspiježno obrisano", MessageBoxIcon.Error);
+                CustomMessageBox obrisanoZaduzenje = new CustomMessageBox("Zaduženje obrisano", "Zaduženje uspješno obrisano", MessageBoxIcon.Error);
 
                 btnZaduzenja_Click(sender, e);
                 BtnPodmeniZaduzenja_Click(sender, e);
-
             }
         }
 
@@ -1342,7 +1313,7 @@ namespace VozniPark
             poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
             if (poljaIspravnoPopunjena == false)
             {
-                CustomMessageBox izmjena = new CustomMessageBox("Zaduženje izmijenjeno", "Zaduženje uspiješno izmijenjeno", MessageBoxIcon.Exclamation);
+                CustomMessageBox izmjena = new CustomMessageBox("Vozilo razduženo", "Vozilo uspješno razduženo", MessageBoxIcon.Exclamation);
                 pnlDashboard.Controls.Clear();
                 btnZaduzenja_Click(sender, e);
                 Button podmeniTrenutna = sender as Button;
@@ -1381,7 +1352,7 @@ namespace VozniPark
                 }
                 if (i == 2)
                 {
-                    btnPodmeniServis.Text = "Tocenje goriva";
+                    btnPodmeniServis.Text = "Točenje goriva";
                     btnPodmeniServis.Name = "btnGorivo";
                 }
                 btnPodmeniServis.Click += BtnPodmeniServis_Click;
@@ -1395,14 +1366,12 @@ namespace VozniPark
             Button button = sender as Button;
             if (button.Name == "btnPregled")
             {
-
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
 
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-
-
+                             
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
@@ -1420,7 +1389,7 @@ namespace VozniPark
 
                 AddServis.Text = "DODAJ";
                 crudButtonDesign(AddServis);
-                DeleteServis.Text = "OBRISI";
+                DeleteServis.Text = "OBRIŠI";
                 crudButtonDesign(DeleteServis);
                 UpdateServis.Text = "IZMIJENI";
                 crudButtonDesign(UpdateServis);
@@ -1451,14 +1420,14 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassServisiranjeVozila();
 
-                PopulateControls("Unesite podatke o servisu");
+                PopulateControls("Unos podataka o servisu");
 
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajServis = new Button();
                 Button btnOtkazi1 = new Button();
                 btnDodajServis.Text = "DODAJ SERVIS";
                 dodajButtonDesign(btnDodajServis);
-                btnOtkazi1.Text = "OTKAZI";
+                btnOtkazi1.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi1);
                 btnDodajServis.Click += BtnDodajServis_Click;
                 btnOtkazi1.Click += BtnOtkazi1_Click;
@@ -1494,7 +1463,7 @@ namespace VozniPark
 
                 AddGorivo.Text = "DODAJ";
                 crudButtonDesign(AddGorivo);
-                DeleteGorivo.Text = "OBRISI";
+                DeleteGorivo.Text = "OBRIŠI";
                 crudButtonDesign(DeleteGorivo);
                 UpdateGorivo.Text = "IZMIJENI";
                 crudButtonDesign(UpdateGorivo);
@@ -1535,13 +1504,11 @@ namespace VozniPark
                 noviPanel.Controls.Add(prvi);
                 noviPanel.Controls.Add(drugi);
                 panel.Controls.Add(noviPanel);
-
-                PretragaGorivo.Text = "Pretrazi";
-
+                
+                PretragaGorivo.Text = "Pretraži";
             }
             else
             {
-
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 FlowLayoutPanel panel = pnlDashboard.Controls[1] as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = pnlDashboard.Controls[1].Controls[1] as FlowLayoutPanel;
@@ -1576,14 +1543,12 @@ namespace VozniPark
 
                 PretragaGorivo.Text = "Pretraga";
 
-                panel.Controls.RemoveAt(4);
-
+                panel.Controls.RemoveAt(4);               
             }
         }
 
         private void Pretraga_Click(object sender, EventArgs e)
         {
-
             Button Pretraga = sender as Button;
             if (Pretraga.Text == "Pretraga servisa")
             {
@@ -1605,13 +1570,10 @@ namespace VozniPark
                 noviPanel.Controls.Add(drugi);
                 panel.Controls.Add(noviPanel);
 
-
-                Pretraga.Text = "Pretrazi";
-
+                Pretraga.Text = "Pretraži";
             }
             else
-            {
-
+            {               
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 FlowLayoutPanel panel = pnlDashboard.Controls[1] as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = pnlDashboard.Controls[1].Controls[4] as FlowLayoutPanel;
@@ -1625,7 +1587,6 @@ namespace VozniPark
 
                 SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
                 SqlCommand sqlcom = new SqlCommand(PretragaServisa, konekcija);
-
 
                 SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
                 SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
@@ -1645,10 +1606,8 @@ namespace VozniPark
 
                 Pretraga.Text = "Pretraga servisa";
 
-                panel.Controls.RemoveAt(4);
-
-            }
-
+                panel.Controls.RemoveAt(4);               
+            }          
         }
 
         private void DeleteGorivo_Click(object sender, EventArgs e)
@@ -1672,9 +1631,9 @@ namespace VozniPark
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajGorivo = new Button();
             Button btnOtkaziGorivo = new Button();
-            btnDodajGorivo.Text = "SACUVAJ";
+            btnDodajGorivo.Text = "SAČUVAJ";
             dodajButtonDesign(btnDodajGorivo);
-            btnOtkaziGorivo.Text = "OTKAZI";
+            btnOtkaziGorivo.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkaziGorivo);
             btnDodajGorivo.Click += BtnDodajGorivo_Click;
             btnOtkaziGorivo.Click += BtnOtkaziGorivo_Click;
@@ -1692,18 +1651,17 @@ namespace VozniPark
             pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassGorivo();
 
-            PopulateControls("Unesite podatke o tocenju goriva");
+            PopulateControls("Unos podataka o točenju goriva");
 
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajGorivo = new Button();
             Button btnOtkaziGorivo = new Button();
-            btnDodajGorivo.Text = "SACUVAJ";
+            btnDodajGorivo.Text = "SAČUVAJ";
             dodajButtonDesign(btnDodajGorivo);
-            btnOtkaziGorivo.Text = "OTKAZI";
+            btnOtkaziGorivo.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkaziGorivo);
             btnDodajGorivo.Click += BtnDodajGorivo_Click;
             btnOtkaziGorivo.Click += BtnOtkaziGorivo_Click;
-
 
             panel.Height = 100;
             panel.Width = 470;
@@ -1740,7 +1698,7 @@ namespace VozniPark
 
                 AddGorivo.Text = "DODAJ";
                 crudButtonDesign(AddGorivo);
-                DeleteGorivo.Text = "OBRISI";
+                DeleteGorivo.Text = "OBRIŠI";
                 crudButtonDesign(DeleteGorivo);
                 UpdateGorivo.Text = "IZMIJENI";
                 crudButtonDesign(UpdateGorivo);
@@ -1782,7 +1740,7 @@ namespace VozniPark
 
                 AddGorivo.Text = "DODAJ";
                 crudButtonDesign(AddGorivo);
-                DeleteGorivo.Text = "OBRISI";
+                DeleteGorivo.Text = "OBRIŠI";
                 crudButtonDesign(DeleteGorivo);
                 UpdateGorivo.Text = "IZMIJENI";
                 crudButtonDesign(UpdateGorivo);
@@ -1807,21 +1765,20 @@ namespace VozniPark
 
             if (state == StateEnum.Add)
             {
-
                 if (poljaIspravnoPopunjena == false)
                 {
-                    CustomMessageBox dodanServis = new CustomMessageBox("Obaviještenje o unosu", "Uspjesno uneseni podaci o sipanju goriva", MessageBoxIcon.Exclamation);
+                    CustomMessageBox dodanServis = new CustomMessageBox("Obavještenje o unosu", "Uspješno uneseni podaci o sipanju goriva", MessageBoxIcon.Exclamation);
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassGorivo();
 
-                    PopulateControls("Unesite podatke o tocenju goriva");
+                    PopulateControls("Unos podataka o točenju goriva");
 
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajGorivo = new Button();
                     Button btnOtkaziGorivo = new Button();
-                    btnDodajGorivo.Text = "SACUVAJ";
+                    btnDodajGorivo.Text = "SAČUVAJ";
                     dodajButtonDesign(btnDodajGorivo);
-                    btnOtkaziGorivo.Text = "OTKAZI";
+                    btnOtkaziGorivo.Text = "OTKAŽI";
                     dodajButtonDesign(btnOtkaziGorivo);
                     btnDodajGorivo.Click += BtnDodajGorivo_Click;
                     btnOtkaziGorivo.Click += BtnOtkaziGorivo_Click;
@@ -1831,8 +1788,7 @@ namespace VozniPark
                     panel.Controls.Add(btnDodajGorivo);
                     panel.Controls.Add(btnOtkaziGorivo);
                     pnlDashboard.Controls.Add(panel);
-                }
-
+                }              
             }
             else if (state == StateEnum.Update)
             {
@@ -1865,7 +1821,7 @@ namespace VozniPark
 
                     AddGorivo.Text = "DODAJ";
                     crudButtonDesign(AddGorivo);
-                    DeleteGorivo.Text = "OBRISI";
+                    DeleteGorivo.Text = "OBRIŠI";
                     crudButtonDesign(DeleteGorivo);
                     UpdateGorivo.Text = "IZMIJENI";
                     crudButtonDesign(UpdateGorivo);
@@ -1910,11 +1866,9 @@ namespace VozniPark
                 MetroTile Pretraga = new MetroTile();
                 Pretraga.Click += Pretraga_Click;
 
-
-
                 AddServis.Text = "DODAJ";
                 crudButtonDesign(AddServis);
-                DeleteServis.Text = "OBRISI";
+                DeleteServis.Text = "OBRIŠI";
                 crudButtonDesign(DeleteServis);
                 UpdateServis.Text = "IZMIJENI";
                 crudButtonDesign(UpdateServis);
@@ -1934,7 +1888,6 @@ namespace VozniPark
 
                 nov.Height = 100;
                 nov.Width = 470;
-
 
                 pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
@@ -1963,11 +1916,9 @@ namespace VozniPark
                 MetroTile Pretraga = new MetroTile();
                 Pretraga.Click += Pretraga_Click;
 
-
-
                 AddServis.Text = "DODAJ";
                 crudButtonDesign(AddServis);
-                DeleteServis.Text = "OBRISI";
+                DeleteServis.Text = "OBRIŠI";
                 crudButtonDesign(DeleteServis);
                 UpdateServis.Text = "IZMIJENI";
                 crudButtonDesign(UpdateServis);
@@ -1982,13 +1933,10 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-
-
-                FlowLayoutPanel nov = new FlowLayoutPanel();
-
+                
+                FlowLayoutPanel nov = new FlowLayoutPanel();       
                 nov.Height = 100;
                 nov.Width = 470;
-
 
                 pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
@@ -2002,21 +1950,20 @@ namespace VozniPark
 
             if (state == StateEnum.Add)
             {
-
                 if (poljaIspravnoPopunjena == false)
                 {
-                    CustomMessageBox dodanServis = new CustomMessageBox("Unesen servis", "Uspiješno dodan novi servis", MessageBoxIcon.Exclamation);
+                    CustomMessageBox dodanServis = new CustomMessageBox("Dodan servis", "Uspješno dodan novi servis", MessageBoxIcon.Exclamation);
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassServisiranjeVozila();
 
-                    PopulateControls("Unesite podatke o servisiranju");
-
+                    PopulateControls("Unos podataka o servisiranju");
+                
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajServis = new Button();
                     Button btnOtkazi1 = new Button();
-                    btnDodajServis.Text = "SACUVAJ";
+                    btnDodajServis.Text = "SAČUVAJ";
                     dodajButtonDesign(btnDodajServis);
-                    btnOtkazi1.Text = "OTKAZI";
+                    btnOtkazi1.Text = "OTKAŽI";
                     otkaziButtonDesign(btnOtkazi1);
                     btnDodajServis.Click += BtnDodajServis_Click;
                     btnOtkazi1.Click += BtnOtkazi1_Click;
@@ -2030,19 +1977,17 @@ namespace VozniPark
                     panel.Controls.Add(btnOtkazi1);
 
                     pnlDashboard.Controls.Add(panel);
-                }
-
+                }             
             }
             else if (state == StateEnum.Update)
             {
                 myProperty = new PropertyClassServisiranjeVozila();
 
-
                 if (poljaIspravnoPopunjena == false)
                 {
-                    CustomMessageBox izmijenaServisa = new CustomMessageBox("Potvrda o izmjeni", "Podaci o servisu su izmijenjeni", MessageBoxIcon.Information);
+                    CustomMessageBox izmijenaServisa = new CustomMessageBox("Izmjena servisa", "Podaci o servisu su izmijenjeni", MessageBoxIcon.Information);
                     Button button = sender as Button;
-                    button.Name = "btnServis";
+                    button.Name = "btnPregled";
                     BtnPodmeniServis_Click(button, e);
                 }
             }
@@ -2052,7 +1997,7 @@ namespace VozniPark
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
             delete(dtg);
-            CustomMessageBox brisanjeServisa = new CustomMessageBox("Servis obrisan", "Servis uspiješno obrisan", MessageBoxIcon.Error);
+            CustomMessageBox brisanjeServisa = new CustomMessageBox("Servis obrisan", "Servis uspješno obrisan", MessageBoxIcon.Error);
 
             Button button = sender as Button;
             button.Name = "btnPregled";
@@ -2070,11 +2015,12 @@ namespace VozniPark
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
-            btnDodajServis.Text = "SACUVAJ";
+            btnDodajServis.Text = "SAČUVAJ";
             dodajButtonDesign(btnDodajServis);
-            btnOtkazi1.Text = "OTKAZI";
+            btnOtkazi1.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkazi1);
             btnDodajServis.Click += BtnDodajServis_Click;
+          
             btnOtkazi1.Click += BtnOtkazi1_Click;
 
             panel.Height = 100;
@@ -2091,14 +2037,14 @@ namespace VozniPark
             pnlDashboard.Controls.Clear();
             myProperty = new PropertyClassServisiranjeVozila();
 
-            PopulateControls("Unesite podatke o servisiranju");
+            PopulateControls("Unos podataka o servisiranju");
 
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
             btnDodajServis.Text = "DODAJ SERVIS";
             dodajButtonDesign(btnDodajServis);
-            btnOtkazi1.Text = "OTKAZI";
+            btnOtkazi1.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkazi1);
             btnDodajServis.Click += BtnDodajServis_Click;
             btnOtkazi1.Click += BtnOtkazi1_Click;
@@ -2110,11 +2056,9 @@ namespace VozniPark
             panel.Controls.Add(btnDodajServis);
             panel.Controls.Add(btnOtkazi1);
             pnlDashboard.Controls.Add(panel);
-
         }
 
         #endregion
-
 
         #region ostaleMetode
         private void PopulateGrid()
@@ -2139,18 +2083,14 @@ namespace VozniPark
                                         ).FirstOrDefault().GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault().DisplayName;
             }
 
-
             for (int i = 0; i < grid.Columns.Count; i++)
             {
                 if (grid.Columns[i].Name == "Boja" || grid.Columns[i].Name == "BrojVrata" || grid.Columns[i].Name == "Dostupnost" || grid.Columns[i].Name == "GodinaProizvodnje")
                 {
                     grid.Columns[i].Width = 100;
-
                 }
-
                 else if (grid.Columns[i].Name == "Kilometraza")
                     grid.Columns[i].DefaultCellStyle.Format = "#,0.###";
-
                 else
                     grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
@@ -2186,7 +2126,6 @@ namespace VozniPark
                     pnlDashboard.Controls.Add(lookup);
 
                     if (state == StateEnum.Razduzi) lookup.Enabled = false;
-
                 }
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
                 {
@@ -2219,7 +2158,6 @@ namespace VozniPark
                     {
                         ic.Enabled = false;
                     }
-
                     if (state == StateEnum.Update)
                     {
                         if (item.GetValue(myProperty) != null)
@@ -2227,7 +2165,6 @@ namespace VozniPark
                         else
                             ic.UnosPolje = "";
                     }
-
                     if (ic.Naziv == "Dostupnost")
                     {
                         ic.Visible = false;
@@ -2238,8 +2175,7 @@ namespace VozniPark
                     {
                         ic.Enabled = false;
                         ic.UnosPolje = "0";
-                    }
-
+                    }                  
                     pnlDashboard.Controls.Add(ic);
                 }
             }
@@ -2281,7 +2217,7 @@ namespace VozniPark
                     {
                         nepravlinoIspunjenoPolje = true;
                         if (poruka == "")
-                            poruka += "Morate popuniti sva polja.\n";
+                            poruka += "Molimo popunite sva polja.\n";
                     }
                     else
                     {
@@ -2299,7 +2235,7 @@ namespace VozniPark
                     {
                         nepravlinoIspunjenoPolje = true;
                         if (poruka == "")
-                            poruka += "Morate popuniti sva polja.\n";
+                            poruka += "Molimo popunite sva polja.\n";
                     }
                     else if ((input.Naziv == "Boja" || input.Naziv == "Ime" || input.Naziv == "Prezime" || input.Naziv == "Radno mjesto") && Regex.IsMatch(value, @"[0-9]"))
                     {
@@ -2310,7 +2246,7 @@ namespace VozniPark
                         input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraza") && Regex.IsMatch(value, @"[a-zA-Z]"))
                     {
                         nepravlinoIspunjenoPolje = true;
-                        poruka += input.Naziv + " ne smije sadrzavati slova.\n";
+                        poruka += input.Naziv + " ne može sadržavati slova.\n";
                     }
                     else
                     {
@@ -2331,7 +2267,7 @@ namespace VozniPark
 
             if (nepravlinoIspunjenoPolje == true)
             {
-                CustomMessageBox mb = new CustomMessageBox("Greska", poruka, MessageBoxIcon.Error);
+                CustomMessageBox mb = new CustomMessageBox("Greška", poruka, MessageBoxIcon.Error);
                 poljaIspravnoPopunjena = true;
                 return poljaIspravnoPopunjena;
             }
@@ -2391,7 +2327,12 @@ namespace VozniPark
                 }
             }
             else
+            {
+                SqlHelper.ExecuteNonQuery(SqlHelper.GetConnectionString(), CommandType.Text,
+                    myProperty.GetDeleteQuery(), myProperty.GetDeleteParameters().ToArray());
+
                 return "Uspijeh";
+            }           
         }
 
         private void ucitajVrijednostiUPolja()
@@ -2405,14 +2346,14 @@ namespace VozniPark
             {
                 if ((state == StateEnum.Update || state == StateEnum.Razduzi) && myProperty.GetType() == typeof(PropertyClassZaduzenja))
                 {
-                    if (grid.Columns[i].HeaderText == "Datum razduzenja")
+                    if (grid.Columns[i].HeaderText == "Datum razduženja")
                     {
                         string value = DateTime.Now.ToString();
 
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if (grid.Columns[i].HeaderText == "Predjena kilometraza")
+                    else if(grid.Columns[i].HeaderText == "Predjena kilometraža")
                     {
                         string value = "0";
 
@@ -2662,23 +2603,22 @@ namespace VozniPark
                     btn.TileImage = global::VozniPark.Properties.Resources.icons8_add_property_50;
 
             }
-            else if (btn.Text.Contains("OBRISI"))
+            else if (btn.Text.Contains("OBRIŠI"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_close_window_50;
             else if (btn.Text.Contains("IZMIJENI"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_edit_file_50;
             else if (btn.Text.Contains("DETALJNO"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_more_filled_50;
-            else if (btn.Text.Contains("ZADUZI"))
+            else if (btn.Text.Contains("ZADUŽI"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_lease_filled_50;
             else if (btn.Text.Contains("PRETRA"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
-            else if (btn.Text.Contains("Pretrazi"))
+            else if (btn.Text.Contains("Pretraži"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
             else if (btn.Text.Contains("Pretraga"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
             else if (btn.Text.Contains("Pretraga servisa"))
                 btn.TileImage = global::VozniPark.Properties.Resources.icons8_google_web_search_filled_50;
-
         }
 
         private void detaljnoFormaLoad(MetroForm forma, int x, int y)
@@ -2694,7 +2634,6 @@ namespace VozniPark
                 if (j < y)
                     j += (int)y / 10;
             }
-
         }
         private void DetaljanPregledZaposlenog_FormClosed(object sender, FormClosedEventArgs e)
         {

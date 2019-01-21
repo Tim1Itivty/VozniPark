@@ -29,7 +29,7 @@ namespace VozniPark.PropertiesClass
         [ForeignField("Vozilo ID")]
         public string Model { get; set; }
 
-        [DisplayName("Kolicina  goriva")]
+        [DisplayName("Količina  goriva")]
         [SqlName("KolicinaGoriva")]
         public decimal KolicinaNatocenogGoriva { get; set; }
 
@@ -38,7 +38,7 @@ namespace VozniPark.PropertiesClass
         public decimal Cijena { get; set; }
 
 
-        [DisplayName("Datum tocenja")]
+        [DisplayName("Datum točenja")]
         [SqlName("DatumTocenja")]
         [DateTimeAttribute]
         public DateTime DatumTocenja { get; set; }
