@@ -121,6 +121,7 @@ namespace VozniPark
             this.Controls.Add(this.btnNoviModel);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.lookupGrid);
+            this.MaximizeBox = false;
             this.Name = "LookupForm";
             this.Resizable = false;
             ((System.ComponentModel.ISupportInitialize)(this.lookupGrid)).EndInit();

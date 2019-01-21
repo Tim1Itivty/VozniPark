@@ -63,7 +63,7 @@ namespace VozniPark
                 flpPodmeni.Controls.Add(btnPodmeni);
             }
         }
-
+        
         private void BtnPodmeni_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -111,6 +111,7 @@ namespace VozniPark
 
                 PopulateGrid();
                 dgvDimeznije(dtg);
+               
             }
             else if (button.Name == "btnDodajVozilo")
             {
@@ -163,6 +164,7 @@ namespace VozniPark
                 dgvDimeznije(dtg);
             }
         }
+        
 
         private void Registruj_Click(object sender, EventArgs e)
         {
@@ -434,8 +436,11 @@ namespace VozniPark
 
             if (dtg.Rows.Count > 0) dtg.Rows[0].Selected = true;
 
+           
+
         }
 
+       
         private void Delete_Click(object sender, EventArgs e)
         {
             DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
@@ -2537,7 +2542,10 @@ namespace VozniPark
                     }
                 }
             }
+            
         }
+
+        
 
         private void buttonDesign(Button btnPodmeni)
         {
