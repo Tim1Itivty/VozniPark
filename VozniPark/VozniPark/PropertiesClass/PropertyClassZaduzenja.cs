@@ -25,14 +25,16 @@ namespace VozniPark.PropertiesClass
         [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
         public int VozilaID { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite registarski broj!")]
+        [DisplayName("Registarski broj")]
+        [SqlNameAttribute("RegistracijskiBroj")]
+        public string RegistarskiBroj { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID zaposlenog!")]
         [DisplayName("Zaposleni ID")]
         [SqlName("ZaposleniID")]
         [ForeignKey("dbo.Zaposleni", "ZaposleniID", "VozniPark.PropertiesClass.PropertyClassZaposleni")]
         public int ZaposleniID { get; set; }
-
-        
-
 
         [Required(AllowEmptyStrings = true)]
         [DisplayName("Pređena kilometraža")]
@@ -62,10 +64,7 @@ namespace VozniPark.PropertiesClass
         public int ModelID { get; set; }
 
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite registarski broj!")]
-        [DisplayName("Registarski broj")]
-        [SqlNameAttribute("RegistracijskiBroj")]
-        public string RegistarskiBroj { get; set; }
+       
 
         [DisplayName("Model")]
         [SqlName("Naziv")]
@@ -78,7 +77,6 @@ namespace VozniPark.PropertiesClass
         public string ImeZaposlenog { get; set; }
 
         #endregion
-
 
         #region queries
 

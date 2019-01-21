@@ -37,7 +37,7 @@ namespace VozniPark.PropertiesClass
         [ForeignField]
         public int GodinaProizvodnje { get; set; }
 
-        [DisplayName("Kilometraza")]
+        [DisplayName("Kilometraža")]
         [SqlNameAttribute("Kilometraza")]
         [ForeignField]
         public int Kilometraza { get; set; }

@@ -18,6 +18,10 @@ namespace VozniPark
             get { return txtLookupID.Text; }
             set { txtLookupID.Text = value; }
         }
+
+        
+
+
         public string Value
         {
             get { return txtLookupNaziv.Text; }

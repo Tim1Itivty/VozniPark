@@ -456,7 +456,7 @@ namespace VozniPark
             state = StateEnum.Update;
             myProperty = new PropertyClassVozila();
             DataGridView grid = pnlDashboard.Controls[0] as DataGridView;
-            ucitajVrijednostiUPolja();
+            ucitajVrijednostiUPolja();      
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajVozilo = new Button();
             Button btnOtkazi = new Button();
@@ -2119,7 +2119,7 @@ namespace VozniPark
                     lookup.setLabel(item.GetCustomAttribute<DisplayNameAttribute>().DisplayName);
                     lookup.Margin = new Padding(100, 0, 0, 0);
 
-                    if (state == StateEnum.Update && lookup.Name == "Model ID") lookup.Enabled = false;
+                    if (state == StateEnum.Update) lookup.Enabled = false; 
 
                     else if (item.GetCustomAttribute<ForeignField>() != null) continue;
 
@@ -2134,13 +2134,13 @@ namespace VozniPark
                     dateTime.Name = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
                     pnlDashboard.Controls.Add(dateTime);
                     dateTime.Margin = new Padding(100, 0, 0, 0);
-                    if (state == StateEnum.Add && dateTime.Naziv == "Datum razduzenja")
+                    if (state == StateEnum.Add && dateTime.Naziv == "Datum razduženja")
                         dateTime.Enabled = false;
-                    if (state == StateEnum.Razduzi && dateTime.Naziv != "Datum razduzenja")
+                    if (state == StateEnum.Razduzi && dateTime.Naziv != "Datum razduženja")
                         dateTime.Enabled = false;
-                    if (state == StateEnum.Razduzi && dateTime.Naziv == "Planirano razduzenje")
+                    if (state == StateEnum.Razduzi && dateTime.Naziv == "Planirano razduženje")
                         dateTime.Enabled = false;
-                    if (state == StateEnum.Update && dateTime.Naziv == "Datum razduzenja")
+                    if (state == StateEnum.Update && dateTime.Naziv == "Datum razduženja")
                         dateTime.Enabled = false;
                 }
                 else if (item.GetCustomAttribute<ForeignField>() != null) continue;
@@ -2170,12 +2170,17 @@ namespace VozniPark
                         ic.Visible = false;
                         ic.UnosPolje = "True";
                     }
-
-                    if (ic.Naziv == "Predjena kilometraza" && (state == StateEnum.Add || state == StateEnum.Update))
+                    if (ic.Naziv == "Pređena kilometraža" && (state == StateEnum.Add || state == StateEnum.Update))
                     {
                         ic.Enabled = false;
                         ic.UnosPolje = "0";
-                    }                  
+                    } 
+                    if(ic.Naziv == "Registarski broj" && state == StateEnum.Razduzi)
+                         ic.Enabled = false;
+                    if (ic.Naziv == "Registarski broj" && state == StateEnum.Add)
+                        ic.Visible = false;
+
+
                     pnlDashboard.Controls.Add(ic);
                 }
             }
@@ -2353,7 +2358,7 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if(grid.Columns[i].HeaderText == "Predjena kilometraža")
+                    else if(grid.Columns[i].HeaderText == "Pređena kilometraža")
                     {
                         string value = "0";
 

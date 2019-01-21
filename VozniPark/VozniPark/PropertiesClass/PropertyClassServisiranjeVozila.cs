@@ -21,10 +21,8 @@ namespace VozniPark.PropertiesClass
         [DisplayName("Vozilo ID")]
         [SqlName("VoziloID")]
         [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        [LookupKey]
-        
+        [LookupKey]   
         public int VoziloId { get; set; }
-
 
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
