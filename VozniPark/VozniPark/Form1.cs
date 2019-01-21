@@ -29,7 +29,7 @@ namespace VozniPark
         {
             InitializeComponent();
         }
-        
+
         #region meniVozila
         private void btnVozila_Click(object sender, EventArgs e)
         {
@@ -185,7 +185,7 @@ namespace VozniPark
             panel.Height = 100;
             panel.Width = 470;
 
-            
+
             panel.Controls.Add(btnDodajRegistraciju);
             panel.Controls.Add(btnOtkazi2);
             pnlDashboard.Controls.Add(panel);
@@ -289,7 +289,7 @@ namespace VozniPark
             Label lblKilometraza = new Label();
             Label lblDostupnost = new Label();
 
-            
+
             lblVozilo.Text = "Vozilo \n";
             lblVozilo.Text += detaljiDT.Rows[0].ItemArray[1].ToString();
             lblVozilo.Text += " " + detaljiDT.Rows[0].ItemArray[2].ToString() + "\n";
@@ -338,7 +338,7 @@ namespace VozniPark
 
             FlowLayoutPanel pnlDesni = new FlowLayoutPanel();
             pnlDesni.Dock = DockStyle.Right;
-            pnlDesni.Size = new Size (640, DetaljanPregledVozilaForm.Height);
+            pnlDesni.Size = new Size(640, DetaljanPregledVozilaForm.Height);
             pnlDesni.Padding = new Padding(20, 10, 10, 20);
             pnlDesni.BorderStyle = System.Windows.Forms.BorderStyle.None;
             DetaljanPregledVozilaForm.Controls.Add(pnlDesni);
@@ -355,7 +355,7 @@ namespace VozniPark
             dgvServisi.DataSource = detaljiServisDT;
 
             DetaljnoDgvDimenzije(dgvServisi);
-            
+
             // DGV REGISTRACIJE SELEKTOVANOG VOZILA
             string QueryRegistracijeVozila = "Exec [dbo].[SveRegistracijeZaVozilo]  @VoziloID";
             SqlCommand cmdRegistracijeVozila = new SqlCommand(QueryRegistracijeVozila, sqlConnection);
@@ -368,7 +368,7 @@ namespace VozniPark
             dgvRegistracije.DataSource = detaljiRegistracijaDT;
 
             DetaljnoDgvDimenzije(dgvRegistracije);
-            
+
             // DGV ZADUZENJA SELEKTOVANOG VOZILA
             string QueryZaduzenjaVozila = "Exec [dbo].[VoziloDetaljanPregledZaduzenja]  @VoziloID";
             SqlCommand cmdZaduzenjaVozila = new SqlCommand(QueryZaduzenjaVozila, sqlConnection);
@@ -388,13 +388,13 @@ namespace VozniPark
             mtc.TabPages.Add("Servisi");
             mtc.TabPages.Add("Registracije");
             mtc.TabPages.Add("Zaduzenja");
-            mtc.Size = new Size(560, 320);
+            mtc.Size = new Size(560, 320);            
             pnlDesni.Controls.Add(mtc);
 
             mtc.TabPages[0].Controls.Add(dgvServisi);
             mtc.TabPages[1].Controls.Add(dgvRegistracije);
             mtc.TabPages[2].Controls.Add(dgvZaduzenja);
-            
+
         }
 
         private void DetaljnoDgvDimenzije(DataGridView dtg)
@@ -404,7 +404,9 @@ namespace VozniPark
             dtg.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dtg.BackgroundColor = Color.White;
             dtg.RowHeadersVisible = false;
-            dtg.Width = 560;
+            dtg.Width = 550;
+            dtg.Height = 270;
+
 
             dtg.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -434,7 +436,6 @@ namespace VozniPark
 
             if (dtg.Rows.Count > 0) dtg.Rows[0].Selected = true;
 
-           
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -523,7 +524,7 @@ namespace VozniPark
                     pnlDashboard.Controls.Add(panel);
                 }
 
-                
+
             }
             else if (state == StateEnum.Update)
             {
@@ -535,7 +536,7 @@ namespace VozniPark
                     button.Name = "btnPregled";
                     BtnPodmeni_Click(button, e);
                 }
-                
+
             }
         }
 
@@ -931,14 +932,14 @@ namespace VozniPark
                 btn.Name = "btnPregled";
                 BtnPodmeniZaposleni_Click(btn, e);
             }
-            
+
         }
 
         private void BtnDodaj_Click(object sender, EventArgs e)
         {
             bool poljaIspravnoPopunjena = false;
             poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
-           
+
 
             if (poljaIspravnoPopunjena == false)
             {
@@ -949,7 +950,7 @@ namespace VozniPark
                 BtnPodmeniZaposleni_Click(btn, e);
             }
 
-            
+
         }
 
         #endregion
@@ -1004,6 +1005,7 @@ namespace VozniPark
                 pnlDashboard.Controls.Clear();
                 DataGridView dtg = new DataGridView();
                 myProperty = new PropertyClassZaduzenja();
+                
 
                 FlowLayoutPanel flpButoni = new FlowLayoutPanel();
                 flpButoni.FlowDirection = FlowDirection.LeftToRight;
@@ -1012,6 +1014,8 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(dtg);
                 pnlDashboard.Controls.Add(flpButoni);
+
+                
 
                 for (int i = 0; i < 3; i++)
                 {
@@ -1037,6 +1041,9 @@ namespace VozniPark
                 }
 
                 PopulateGrid();
+
+                dtg.Columns[9].Visible = false;
+                dtg.Columns[10].Visible = false;
                 dgvDimeznije(dtg);
             }
             else if (button.Name == "btnZaduzi")
@@ -1105,21 +1112,21 @@ namespace VozniPark
                 btnPretraga.Name = "btnPretraga";
                 btnPretraga.Text = "PRETRAGA";
                 crudButtonDesign(btnPretraga);
-                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 flpanel.Controls.Add(btnPretraga);
                 pnlDashboard.Controls.Add(flpanel);
                 btnPretraga.Click += BtnPretraga_Click;
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
         }
 
         private void BtnPretraga_Click(object sender, EventArgs e)
         {
             MetroTile btnPretraga = sender as MetroTile;
-            
+
             FlowLayoutPanel flpanel = btnPretraga.Parent as FlowLayoutPanel;
-           
+
             if (btnPretraga.Text == "PRETRAGA")
             {
                 btnPretraga.Text = "PRETRAZI";
@@ -1252,7 +1259,7 @@ namespace VozniPark
                 btnZaduzenja_Click(sender, e);
                 BtnPodmeniZaduzenja_Click(sender, e);
             }
-            
+
         }
 
         private void BtnCrud_Click(object sender, EventArgs e)
@@ -1342,7 +1349,7 @@ namespace VozniPark
                 podmeniTrenutna.Name = "btnPregled";
                 BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
             }
-            
+
         }
 
         #endregion
@@ -1394,8 +1401,8 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-              
-                
+
+
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
@@ -1410,7 +1417,7 @@ namespace VozniPark
 
                 MetroTile Pretraga = new MetroTile();
                 Pretraga.Click += Pretraga_Click;
-                
+
                 AddServis.Text = "DODAJ";
                 crudButtonDesign(AddServis);
                 DeleteServis.Text = "OBRISI";
@@ -1428,12 +1435,12 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-                
+
                 FlowLayoutPanel nov = new FlowLayoutPanel();
-                
+
                 nov.Height = 100;
                 nov.Width = 470;
-                
+
                 pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
                 dgvDimeznije(dtg);
@@ -1469,7 +1476,7 @@ namespace VozniPark
                 DataGridView dtg = new DataGridView();
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassGorivo();
-                
+
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
@@ -1513,7 +1520,7 @@ namespace VozniPark
             {
                 FlowLayoutPanel panel = PretragaGorivo.Parent as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = new FlowLayoutPanel();
-                
+
                 MetroDateTime prvi = new MetroDateTime();
                 prvi.Format = DateTimePickerFormat.Custom;
                 prvi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
@@ -1524,17 +1531,17 @@ namespace VozniPark
                 drugi.Format = DateTimePickerFormat.Custom;
                 drugi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
                 drugi.MaxDate = DateTime.Today;
-                
+
                 noviPanel.Controls.Add(prvi);
                 noviPanel.Controls.Add(drugi);
                 panel.Controls.Add(noviPanel);
-                
+
                 PretragaGorivo.Text = "Pretrazi";
 
             }
             else
             {
-                
+
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 FlowLayoutPanel panel = pnlDashboard.Controls[1] as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = pnlDashboard.Controls[1].Controls[1] as FlowLayoutPanel;
@@ -1542,9 +1549,9 @@ namespace VozniPark
 
                 DateTimePicker prvi = pnlDashboard.Controls[1].Controls[4].Controls[0] as DateTimePicker;
                 DateTimePicker drugi = pnlDashboard.Controls[1].Controls[4].Controls[1] as DateTimePicker;
-                
+
                 myProperty = new PropertyClassGorivo();
-               
+
                 string PretragaServis = "SELECT * FROM dbo.pretragaGorivo(@datum1,@datum2)";
 
                 SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
@@ -1553,7 +1560,7 @@ namespace VozniPark
 
                 SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
                 SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
-                
+
                 sqlcom.Parameters.Add(parametar);
                 sqlcom.Parameters.Add(parametar2);
 
@@ -1570,7 +1577,7 @@ namespace VozniPark
                 PretragaGorivo.Text = "Pretraga";
 
                 panel.Controls.RemoveAt(4);
-                
+
             }
         }
 
@@ -1582,7 +1589,7 @@ namespace VozniPark
             {
                 FlowLayoutPanel panel = Pretraga.Parent as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = new FlowLayoutPanel();
-                
+
                 MetroDateTime prvi = new MetroDateTime();
                 prvi.Format = DateTimePickerFormat.Custom;
                 prvi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
@@ -1593,7 +1600,7 @@ namespace VozniPark
                 drugi.Format = DateTimePickerFormat.Custom;
                 drugi.CustomFormat = "MM/dd/yyyy hh:mm:ss";
                 drugi.MaxDate = DateTime.Today;
-                
+
                 noviPanel.Controls.Add(prvi);
                 noviPanel.Controls.Add(drugi);
                 panel.Controls.Add(noviPanel);
@@ -1604,16 +1611,16 @@ namespace VozniPark
             }
             else
             {
-                
+
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 FlowLayoutPanel panel = pnlDashboard.Controls[1] as FlowLayoutPanel;
                 FlowLayoutPanel noviPanel = pnlDashboard.Controls[1].Controls[4] as FlowLayoutPanel;
-                
+
                 DateTimePicker prvi = pnlDashboard.Controls[1].Controls[4].Controls[0] as DateTimePicker;
                 DateTimePicker drugi = pnlDashboard.Controls[1].Controls[4].Controls[1] as DateTimePicker;
-                
+
                 myProperty = new PropertyClassServisiranjeVozila();
-               
+
                 string PretragaServisa = "SELECT * FROM dbo.pretraga(@datum1,@datum2)";
 
                 SqlConnection konekcija = new SqlConnection(SqlHelper.GetConnectionString());
@@ -1622,7 +1629,7 @@ namespace VozniPark
 
                 SqlParameter parametar = new SqlParameter("@datum1", SqlDbType.Date);
                 SqlParameter parametar2 = new SqlParameter("@datum2", SqlDbType.Date);
-                
+
                 sqlcom.Parameters.Add(parametar);
                 sqlcom.Parameters.Add(parametar2);
 
@@ -1639,9 +1646,9 @@ namespace VozniPark
                 Pretraga.Text = "Pretraga servisa";
 
                 panel.Controls.RemoveAt(4);
-                
+
             }
-            
+
         }
 
         private void DeleteGorivo_Click(object sender, EventArgs e)
@@ -1825,7 +1832,7 @@ namespace VozniPark
                     panel.Controls.Add(btnOtkaziGorivo);
                     pnlDashboard.Controls.Add(panel);
                 }
-                
+
             }
             else if (state == StateEnum.Update)
             {
@@ -1886,7 +1893,7 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-               
+
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
@@ -1922,9 +1929,9 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-                
+
                 FlowLayoutPanel nov = new FlowLayoutPanel();
-                
+
                 nov.Height = 100;
                 nov.Width = 470;
 
@@ -1939,7 +1946,7 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
-               
+
                 dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
@@ -1975,10 +1982,10 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-                
+
 
                 FlowLayoutPanel nov = new FlowLayoutPanel();
-                
+
                 nov.Height = 100;
                 nov.Width = 470;
 
@@ -1992,7 +1999,7 @@ namespace VozniPark
         {
             bool poljaIspravnoPopunjena = false;
             poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
-          
+
             if (state == StateEnum.Add)
             {
 
@@ -2003,7 +2010,7 @@ namespace VozniPark
                     myProperty = new PropertyClassServisiranjeVozila();
 
                     PopulateControls("Unesite podatke o servisiranju");
-                
+
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajServis = new Button();
                     Button btnOtkazi1 = new Button();
@@ -2024,7 +2031,7 @@ namespace VozniPark
 
                     pnlDashboard.Controls.Add(panel);
                 }
-                
+
             }
             else if (state == StateEnum.Update)
             {
@@ -2097,7 +2104,7 @@ namespace VozniPark
             btnOtkazi1.Click += BtnOtkazi1_Click;
             dodajButtonDesign(btnDodajServis);
             otkaziButtonDesign(btnOtkazi1);
-            
+
             panel.Height = 100;
             panel.Width = 470;
             panel.Controls.Add(btnDodajServis);
@@ -2119,7 +2126,7 @@ namespace VozniPark
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.GetConnectionString(), CommandType.Text,
                 myProperty.GetSelectQuery());
 
-            dt.Load(reader);
+            dt.Load(reader); 
             reader.Close();
 
             grid.DataSource = dt;
@@ -2232,7 +2239,7 @@ namespace VozniPark
                         ic.Enabled = false;
                         ic.UnosPolje = "0";
                     }
-                    
+
                     pnlDashboard.Controls.Add(ic);
                 }
             }
@@ -2287,7 +2294,7 @@ namespace VozniPark
                     InputControl input = item as InputControl;
                     if (!input.Enabled) continue;
                     string value = input.UnosPolje;
-                    
+
                     if ((value == null || value == ""))
                     {
                         nepravlinoIspunjenoPolje = true;
@@ -2299,7 +2306,7 @@ namespace VozniPark
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + " ne smije sadrzavati brojeve.\n";
                     }
-                    else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Kolicina  goriva" || 
+                    else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Kolicina  goriva" ||
                         input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraza") && Regex.IsMatch(value, @"[a-zA-Z]"))
                     {
                         nepravlinoIspunjenoPolje = true;
@@ -2316,13 +2323,13 @@ namespace VozniPark
                 {
                     DateTimeControl date = item as DateTimeControl;
                     DateTime value = date.Unos;
-                    
+
                     PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                 }
             }
 
-            if(nepravlinoIspunjenoPolje == true)
+            if (nepravlinoIspunjenoPolje == true)
             {
                 CustomMessageBox mb = new CustomMessageBox("Greska", poruka, MessageBoxIcon.Error);
                 poljaIspravnoPopunjena = true;
@@ -2393,7 +2400,7 @@ namespace VozniPark
             var type = myProperty.GetType();
             var properties = type.GetProperties();
             int i = 0;
-            
+
             foreach (DataGridViewCell cell in grid.SelectedRows[0].Cells)
             {
                 if ((state == StateEnum.Update || state == StateEnum.Razduzi) && myProperty.GetType() == typeof(PropertyClassZaduzenja))
@@ -2405,7 +2412,7 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if(grid.Columns[i].HeaderText == "Predjena kilometraza")
+                    else if (grid.Columns[i].HeaderText == "Predjena kilometraza")
                     {
                         string value = "0";
 
@@ -2420,10 +2427,10 @@ namespace VozniPark
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
                 }
-                
+
                 else if (state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassRegistracija))
                 {
-                    
+
                     if (grid.Columns[i].HeaderText == "Datum registracije" || grid.Columns[i].HeaderText == "Datum isteka registracije")
                     {
                         string value = DateTime.Now.ToString();
@@ -2481,11 +2488,11 @@ namespace VozniPark
                     }
                 }
                 i++;
-            } 
-            
+            }
+
             pnlDashboard.Controls.Clear();
             PopulateControls("Izvrsite izmjenu");
-            
+
             foreach (var item in pnlDashboard.Controls)
             {
                 if (item.GetType() == typeof(InputControl))
@@ -2499,18 +2506,18 @@ namespace VozniPark
                 {
                     DateTimeControl control = item as DateTimeControl;
                     PropertyInfo property = properties.Where(x => control.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
-                   
-                        if (property.GetValue(myProperty) != null) control.Unos = (DateTime)property.GetValue(myProperty);
+
+                    if (property.GetValue(myProperty) != null) control.Unos = (DateTime)property.GetValue(myProperty);
                 }
                 else if (item.GetType() == typeof(LookupControl))
                 {
                     LookupControl control = item as LookupControl;
                     PropertyInfo property = properties.Where(x => control.getLabel() == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                     if (property != null) control.Key = property.GetValue(myProperty).ToString();
-                    
+
                     PropertyInfo property2 = properties.Where(x => x.GetCustomAttribute<ForeignField>() != null && control.getLabel() == x.GetCustomAttribute<ForeignField>().tableKey).FirstOrDefault();
                     if (property2 != null) control.Value = property2.GetValue(myProperty).ToString();
-                        
+
                 }
             }
         }
@@ -2556,7 +2563,7 @@ namespace VozniPark
                 if (item.Name.Contains("ID"))
                     item.Visible = false;
             }
-            if(myProperty.GetType() == typeof(PropertyClassVozila))
+            if (myProperty.GetType() == typeof(PropertyClassVozila))
             {
                 foreach (DataGridViewRow item in dtg.Rows)
                 {
@@ -2570,7 +2577,7 @@ namespace VozniPark
                     }
                 }
             }
-            else if(myProperty.GetType() == typeof(PropertyClassRegistracija))
+            else if (myProperty.GetType() == typeof(PropertyClassRegistracija))
             {
                 foreach (DataGridViewRow item in dtg.Rows)
                 {
@@ -2619,7 +2626,7 @@ namespace VozniPark
             }
 
             Button btn = sender as Button;
-            btn.Image = global::VozniPark.Properties.Resources.New_Project;
+            btn.Image = global::VozniPark.Properties.Resources.New_Project__3_;
             btn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
         }
 
@@ -2677,7 +2684,7 @@ namespace VozniPark
         private void detaljnoFormaLoad(MetroForm forma, int x, int y)
         {
             forma.StartPosition = FormStartPosition.CenterScreen;
-            for (int i = 0, j = 0; i < x; i += (int)x/10)
+            for (int i = 0, j = 0; i < x; i += (int)x / 10)
             {
                 if (forma.Location.X > 340)
                     forma.Location = new Point(1362 - i, 673 - j);
@@ -2685,7 +2692,7 @@ namespace VozniPark
                 forma.Size = new Size(i, j);
 
                 if (j < y)
-                    j += (int)y/10;
+                    j += (int)y / 10;
             }
 
         }
@@ -2742,7 +2749,7 @@ namespace VozniPark
         }
 
         #endregion
-        
+
     }
 }
 

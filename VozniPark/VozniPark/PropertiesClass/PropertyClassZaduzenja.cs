@@ -31,6 +31,8 @@ namespace VozniPark.PropertiesClass
         [ForeignKey("dbo.Zaposleni", "ZaposleniID", "VozniPark.PropertiesClass.PropertyClassZaposleni")]
         public int ZaposleniID { get; set; }
 
+        
+
 
         [Required(AllowEmptyStrings = true)]
         [DisplayName("Predjena kilometraza")]
@@ -58,6 +60,12 @@ namespace VozniPark.PropertiesClass
         [SqlName("ModelID")]
         [ForeignField("")]
         public int ModelID { get; set; }
+
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite registarski broj!")]
+        [DisplayName("Registarski broj")]
+        [SqlNameAttribute("RegistracijskiBroj")]
+        public string RegistarskiBroj { get; set; }
 
         [DisplayName("Model")]
         [SqlName("Naziv")]
@@ -97,7 +105,7 @@ namespace VozniPark.PropertiesClass
                      ZaduzenjaID,
                      VozilaID,
                      m.ModelID,
-                     p.Naziv + ' ' + m.Naziv as Naziv,
+                     p.Naziv + ' ' + m.Naziv as Naziv,r.RegistracijskiBroj,
                      zap.ZaposleniID,
                      zap.Ime + ' ' + zap.Prezime as ImeIPrezime,
                      DatumZaduzenja,
@@ -107,6 +115,7 @@ namespace VozniPark.PropertiesClass
                      from dbo.Zaduzenja as z
                      join dbo.Zaposleni as zap on z.ZaposleniID = zap.ZaposleniID
                      join dbo.Vozila as v on v.VoziloID = z.VozilaID
+					 JOIN dbo.Registracija r ON v.VoziloID=r.VoziloID
                      join dbo.Model as m on m.ModelID = v.ModelID
                      join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
                      where DatumRazduzenja is null";

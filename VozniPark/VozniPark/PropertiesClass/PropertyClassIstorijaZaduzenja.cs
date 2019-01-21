@@ -26,6 +26,11 @@ namespace VozniPark.PropertiesClass
         [SqlName("Model")]
         public string Model { get; set; }
 
+       
+        [DisplayName("Registarski broj")]
+        [SqlNameAttribute("RegistracijskiBroj")]
+        public string RegistarskiBroj { get; set; }
+
         [DisplayName("Datum zaduzenja")]
         [SqlName("DatumZaduzenja")]
         public DateTime DatumZaduzenja { get; set; }
@@ -70,7 +75,7 @@ namespace VozniPark.PropertiesClass
             return @"SELECT					
                             iz.IstorijaZaduzenjaID, 
                             z.Ime+ ' '+  z.Prezime AS [Zaposleni],							
-                            p.Naziv + ' ' + mdel.Naziv AS [Model] ,
+                            p.Naziv + ' ' + mdel.Naziv AS [Model] ,r.RegistracijskiBroj,
                             iz.DatumZaduzenja, 
                             iz.DatumRazduzenja
                             FROM dbo.IstorijaZaduzenja iz
@@ -78,6 +83,7 @@ namespace VozniPark.PropertiesClass
                             ON z.ZaposleniID = iz.ZaposleniID
                             left JOIN dbo.Vozila v
                             ON v.VoziloID = iz.VoziloID
+							LEFT JOIN dbo.Registracija r ON v.VoziloID=r.VoziloID
                             left JOIN dbo.Model mdel
                             ON mdel.ModelID = v.ModelID
                             LEFT JOIN dbo.Proizvodjac p

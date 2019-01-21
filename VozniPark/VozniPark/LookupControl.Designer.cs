@@ -36,9 +36,10 @@
             // 
             // lblLookup
             // 
-            this.lblLookup.Location = new System.Drawing.Point(4, 4);
+            this.lblLookup.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblLookup.Location = new System.Drawing.Point(3, 7);
             this.lblLookup.Name = "lblLookup";
-            this.lblLookup.Size = new System.Drawing.Size(109, 23);
+            this.lblLookup.Size = new System.Drawing.Size(120, 23);
             this.lblLookup.TabIndex = 0;
             // 
             // txtLookupID
@@ -55,8 +56,9 @@
             this.txtLookupID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtLookupID.CustomButton.UseSelectable = true;
             this.txtLookupID.CustomButton.Visible = false;
+            this.txtLookupID.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtLookupID.Lines = new string[0];
-            this.txtLookupID.Location = new System.Drawing.Point(155, 4);
+            this.txtLookupID.Location = new System.Drawing.Point(213, 7);
             this.txtLookupID.MaxLength = 32767;
             this.txtLookupID.Name = "txtLookupID";
             this.txtLookupID.PasswordChar = '\0';
@@ -74,8 +76,10 @@
             // 
             // btnLookup
             // 
+            this.btnLookup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnLookup.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.btnLookup.Location = new System.Drawing.Point(195, 4);
+            this.btnLookup.ForeColor = System.Drawing.Color.Black;
+            this.btnLookup.Location = new System.Drawing.Point(253, 7);
             this.btnLookup.Name = "btnLookup";
             this.btnLookup.Size = new System.Drawing.Size(28, 23);
             this.btnLookup.TabIndex = 2;
@@ -97,8 +101,9 @@
             this.txtLookupNaziv.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtLookupNaziv.CustomButton.UseSelectable = true;
             this.txtLookupNaziv.CustomButton.Visible = false;
+            this.txtLookupNaziv.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtLookupNaziv.Lines = new string[0];
-            this.txtLookupNaziv.Location = new System.Drawing.Point(229, 4);
+            this.txtLookupNaziv.Location = new System.Drawing.Point(287, 7);
             this.txtLookupNaziv.MaxLength = 32767;
             this.txtLookupNaziv.Name = "txtLookupNaziv";
             this.txtLookupNaziv.PasswordChar = '\0';
@@ -123,7 +128,7 @@
             this.Controls.Add(this.txtLookupID);
             this.Controls.Add(this.lblLookup);
             this.Name = "LookupControl";
-            this.Size = new System.Drawing.Size(417, 33);
+            this.Size = new System.Drawing.Size(467, 39);
             this.ResumeLayout(false);
 
         }

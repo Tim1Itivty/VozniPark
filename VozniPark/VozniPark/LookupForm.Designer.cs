@@ -43,6 +43,7 @@ namespace VozniPark
             // lookupGrid
             // 
             this.lookupGrid.AllowUserToAddRows = false;
+            this.lookupGrid.AllowUserToDeleteRows = false;
             this.lookupGrid.AllowUserToResizeColumns = false;
             this.lookupGrid.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(239)))), ((int)(((byte)(249)))));
@@ -53,7 +54,7 @@ namespace VozniPark
             this.lookupGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(25)))), ((int)(((byte)(72)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -64,7 +65,7 @@ namespace VozniPark
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkTurquoise;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.lookupGrid.DefaultCellStyle = dataGridViewCellStyle3;
@@ -80,7 +81,7 @@ namespace VozniPark
             // 
             // btnReturn
             // 
-            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(165)))), ((int)(((byte)(232)))));
+            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnReturn.FlatAppearance.BorderSize = 0;
             this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReturn.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -96,11 +97,11 @@ namespace VozniPark
             // btnNoviModel
             // 
             this.btnNoviModel.BackColor = System.Drawing.Color.White;
-            this.btnNoviModel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(165)))), ((int)(((byte)(232)))));
+            this.btnNoviModel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnNoviModel.FlatAppearance.BorderSize = 2;
             this.btnNoviModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNoviModel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNoviModel.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.btnNoviModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
             this.btnNoviModel.Location = new System.Drawing.Point(330, 336);
             this.btnNoviModel.Name = "btnNoviModel";
             this.btnNoviModel.Size = new System.Drawing.Size(120, 34);
@@ -121,6 +122,7 @@ namespace VozniPark
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.lookupGrid);
             this.Name = "LookupForm";
+            this.Resizable = false;
             ((System.ComponentModel.ISupportInitialize)(this.lookupGrid)).EndInit();
             this.ResumeLayout(false);
 

@@ -123,7 +123,7 @@ namespace VozniPark
             {
                 if (i == 0)
                 {
-                    lookupGrid.Columns[0].Width = 40;
+                    lookupGrid.Columns[0].Width = 65;
                 }
                 else
                     lookupGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
