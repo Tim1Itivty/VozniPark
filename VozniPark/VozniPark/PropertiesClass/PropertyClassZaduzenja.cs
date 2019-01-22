@@ -100,7 +100,7 @@ namespace VozniPark.PropertiesClass
         public string GetSelectQuery()
         {
             return @"select 
-                     ZaduzenjaID,
+                     distinct ZaduzenjaID,
                      VozilaID,
                      m.ModelID,
                      p.Naziv + ' ' + m.Naziv as Naziv,r.RegistracijskiBroj,
@@ -113,7 +113,7 @@ namespace VozniPark.PropertiesClass
                      from dbo.Zaduzenja as z
                      join dbo.Zaposleni as zap on z.ZaposleniID = zap.ZaposleniID
                      join dbo.Vozila as v on v.VoziloID = z.VozilaID
-					 JOIN dbo.Registracija r ON v.VoziloID=r.VoziloID
+					 left JOIN dbo.Registracija r ON v.VoziloID=r.VoziloID
                      join dbo.Model as m on m.ModelID = v.ModelID
                      join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
                      where DatumRazduzenja is null";

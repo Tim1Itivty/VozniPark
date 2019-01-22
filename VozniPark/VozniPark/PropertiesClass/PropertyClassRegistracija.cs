@@ -117,9 +117,10 @@ namespace VozniPark.PropertiesClass
 					on m.ProizvodjacID=p.ProizvodjacID
                     WHERE r.Obrisano = 0 and (DATEDIFF(day,getdate(),cast(r.DatumIstekaRegistracije as date))<=7) AND r.DatumIstekaRegistracije IN (SELECT Max(r.DatumIstekaRegistracije) 
 					FROM Registracija r 
-					JOIN dbo.Vozila v 
-					ON v.VoziloID=r.VoziloID
-					GROUP BY r.VoziloID) OR r.RegistracijaID is NULL";
+					JOIN dbo.Vozila v1 
+					ON v1.VoziloID=r.VoziloID
+					GROUP BY r.VoziloID
+                    HAVING v.VoziloID = r.VoziloID) OR r.RegistracijaID is NULL";
         }
 
         public string GetInsertQuery()
