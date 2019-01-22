@@ -34,12 +34,13 @@
             this.pnlSelected2 = new System.Windows.Forms.Panel();
             this.pnlSelected3 = new System.Windows.Forms.Panel();
             this.pnlSelected1 = new System.Windows.Forms.Panel();
-            this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
             this.btnServis = new System.Windows.Forms.Button();
             this.btnZaposleni = new System.Windows.Forms.Button();
             this.btnZaduzenja = new System.Windows.Forms.Button();
             this.btnVozila = new System.Windows.Forms.Button();
+            this.flpPodmeni = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlDashboard = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlMeni.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +48,7 @@
             // 
             this.pnlMeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlMeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(56)))), ((int)(((byte)(107)))));
+            this.pnlMeni.Controls.Add(this.button1);
             this.pnlMeni.Controls.Add(this.pnlSelected4);
             this.pnlMeni.Controls.Add(this.pnlSelected2);
             this.pnlMeni.Controls.Add(this.pnlSelected3);
@@ -93,28 +95,6 @@
             this.pnlSelected1.Name = "pnlSelected1";
             this.pnlSelected1.Size = new System.Drawing.Size(10, 54);
             this.pnlSelected1.TabIndex = 0;
-            // 
-            // flpPodmeni
-            // 
-            this.flpPodmeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
-            this.flpPodmeni.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flpPodmeni.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpPodmeni.Location = new System.Drawing.Point(202, 60);
-            this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flpPodmeni.Name = "flpPodmeni";
-            this.flpPodmeni.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
-            this.flpPodmeni.Size = new System.Drawing.Size(233, 613);
-            this.flpPodmeni.TabIndex = 5;
-            // 
-            // pnlDashboard
-            // 
-            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlDashboard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
-            this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(903, 613);
-            this.pnlDashboard.TabIndex = 6;
             // 
             // btnServis
             // 
@@ -201,6 +181,38 @@
             this.btnVozila.UseVisualStyleBackColor = false;
             this.btnVozila.Click += new System.EventHandler(this.btnVozila_Click);
             // 
+            // flpPodmeni
+            // 
+            this.flpPodmeni.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flpPodmeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(214)))), ((int)(((byte)(216)))));
+            this.flpPodmeni.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpPodmeni.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpPodmeni.Location = new System.Drawing.Point(202, 60);
+            this.flpPodmeni.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.flpPodmeni.Name = "flpPodmeni";
+            this.flpPodmeni.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.flpPodmeni.Size = new System.Drawing.Size(233, 613);
+            this.flpPodmeni.TabIndex = 5;
+            // 
+            // pnlDashboard
+            // 
+            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlDashboard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.pnlDashboard.Location = new System.Drawing.Point(435, 60);
+            this.pnlDashboard.Name = "pnlDashboard";
+            this.pnlDashboard.Size = new System.Drawing.Size(903, 613);
+            this.pnlDashboard.TabIndex = 6;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(30, 294);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -237,6 +249,7 @@
         private System.Windows.Forms.Panel pnlSelected2;
         private System.Windows.Forms.Panel pnlSelected3;
         private System.Windows.Forms.FlowLayoutPanel pnlDashboard;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -33,11 +33,11 @@
             // 
             // reportViewer1
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(14, 64);
+            this.reportViewer1.Location = new System.Drawing.Point(16, 64);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Remote;
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.ServerReport.ReportPath = "/VozniParkReport/Izvjestaj";
+            this.reportViewer1.ServerReport.ReportPath = "/VozniParkReport/ZaduzenjaPoVozilima";
             this.reportViewer1.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
             this.reportViewer1.Size = new System.Drawing.Size(753, 363);
             this.reportViewer1.TabIndex = 0;
