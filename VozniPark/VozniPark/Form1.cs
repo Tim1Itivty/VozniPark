@@ -2111,7 +2111,7 @@ namespace VozniPark
                 {
                     grid.Columns[i].Width = 100;
                 }
-                else if (grid.Columns[i].Name == "Kilometraza")
+                else if (grid.Columns[i].Name == "Kilometraža")
                     grid.Columns[i].DefaultCellStyle.Format = "#,0.###";
                 else
                     grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -2269,18 +2269,18 @@ namespace VozniPark
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere.\n";
                     }
-                    else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Kolicina  goriva" || 
-                        input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraza") && (Regex.IsMatch(value, @"[a-zA-Z]")|| Regex.IsMatch(value, @"[a-zA-Z@#%&',.\s-+$]")))
+                    else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Količina  goriva" || 
+                        input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraža") && (Regex.IsMatch(value, @"[a-zA-Z]")|| Regex.IsMatch(value, @"[a-zA-Z@#%&',.\s-+$]")))
                     {
                         nepravlinoIspunjenoPolje = true;
-                        poruka += input.Naziv + " ne smije sadrzavati slova i specijalne karaktere.\n";
+                        poruka += input.Naziv + " ne smije sadržavati slova i specijalne karaktere.\n";
                     }
                     else if ((input.Naziv == "Broj vrata" )  &&( Regex.IsMatch(value, @"[6789]")))
                     {
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + "  nije ispravan.\n";
                     }
-                    else if ((input.Naziv == "Kilometraza") && (Regex.IsMatch(value, @"")))
+                    else if ((input.Naziv == "Kilometraža") && (Regex.IsMatch(value, @"")))
                     {
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + "  nije ispravan.\n";
