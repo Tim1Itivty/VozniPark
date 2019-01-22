@@ -736,7 +736,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
-                PopulateControls("Dodajte novog zaposlenog");
+                PopulateControls("Unos novog zaposlenika");
                 Button btnDodaj = new Button();
                 btnDodaj.Text = "DODAJ";
                 dodajButtonDesign(btnDodaj);
@@ -1978,7 +1978,7 @@ namespace VozniPark
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassServisiranjeVozila();
 
-                    PopulateControls("Unos podataka o servisiranju");
+                    PopulateControls("Unos podataka o servisu");
                 
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     Button btnDodajServis = new Button();
@@ -2194,13 +2194,18 @@ namespace VozniPark
                     }
                     if (ic.Naziv == "Pređena kilometraža" && (state == StateEnum.Add || state == StateEnum.Update))
                     {
-                        ic.Enabled = false;
+                        ic.Visible = false;
                         ic.UnosPolje = "0";
+                        
                     } 
                     if(ic.Naziv == "Registarski broj" && state == StateEnum.Razduzi)
                          ic.Enabled = false;
                     if (ic.Naziv == "Registarski broj" && state == StateEnum.Add)
+                    {
                         ic.Visible = false;
+                        ic.UnosPolje = "0";
+                    }
+                        
 
 
                     pnlDashboard.Controls.Add(ic);
@@ -2244,7 +2249,7 @@ namespace VozniPark
                     {
                         nepravlinoIspunjenoPolje = true;
                         if (poruka == "")
-                            poruka += "Molimo popunite sva polja.\n";
+                           poruka += "Molimo popunite sva polja.\n";
                     }
                     else
                     {
@@ -2280,12 +2285,8 @@ namespace VozniPark
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + "  nije ispravan.\n";
                     }
-                    else if ((input.Naziv == "Kilometraža") && (Regex.IsMatch(value, @"")))
-                    {
-                        nepravlinoIspunjenoPolje = true;
-                        poruka += input.Naziv + "  nije ispravan.\n";
-                    }
-                    else
+                    
+                    else if (input.Naziv != "Pređena kilometraža")
                     {
                         PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
@@ -2469,7 +2470,11 @@ namespace VozniPark
             }
 
             pnlDashboard.Controls.Clear();
-            PopulateControls("Izvrsite izmjenu");
+            if (state == StateEnum.Razduzi)
+                PopulateControls("Razduživanje vozila");
+            else
+                PopulateControls("Izmjena");
+
 
             foreach (var item in pnlDashboard.Controls)
             {
