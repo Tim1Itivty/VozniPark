@@ -164,6 +164,10 @@ namespace VozniPark
             
         }
 
+        private void DodajModelForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }

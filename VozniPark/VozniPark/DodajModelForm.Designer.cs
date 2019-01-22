@@ -36,20 +36,21 @@
             this.flpModel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpModel.Location = new System.Drawing.Point(23, 62);
             this.flpModel.Name = "flpModel";
-            this.flpModel.Size = new System.Drawing.Size(389, 142);
+            this.flpModel.Size = new System.Drawing.Size(544, 142);
             this.flpModel.TabIndex = 0;
             // 
             // DodajModelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 227);
+            this.ClientSize = new System.Drawing.Size(620, 227);
             this.Controls.Add(this.flpModel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DodajModelForm";
             this.Resizable = false;
             this.Text = "Dodaj model";
+            this.Load += new System.EventHandler(this.DodajModelForm_Load);
             this.ResumeLayout(false);
 
         }
