@@ -55,6 +55,7 @@
     <Report Include="Izvjestaj.rdl" />
     <Report Include="PutniNalog.rdl" />
     <Report Include="ZaduzenjaPoVozilima.rdl" />
+    <Report Include="ServisIzvjestaj.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
