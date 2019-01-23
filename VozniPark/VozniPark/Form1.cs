@@ -2225,7 +2225,7 @@ namespace VozniPark
                         ic.UnosPolje = "0";
                     }
 
-                    if (ic.Naziv == "Registarski broj" && state == StateEnum.Update)
+                    if (ic.Naziv == "Registarski broj" && state == StateEnum.Update && myProperty.GetType() == typeof(PropertyClassZaduzenja))
                     {
                         ic.Visible = false;
                         ic.UnosPolje = "0";
