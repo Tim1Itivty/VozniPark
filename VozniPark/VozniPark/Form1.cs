@@ -2783,11 +2783,7 @@ namespace VozniPark
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ReportForm rf = new ReportForm();
-            rf.Show();
-        }
+        
         #region meniIzvjestaji
         private void btnIzvjestaj_Click(object sender, EventArgs e)
         {
@@ -2831,38 +2827,31 @@ namespace VozniPark
         {
             pnlDashboard.Controls.Clear();
             Button btnIzvjestaj = sender as Button;
+            ReportViewer rv = new ReportViewer();
+            rv.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Remote;
+            rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
+            rv.Size = new Size(pnlDashboard.Size.Width - 10, pnlDashboard.Size.Height - 100);
             if (btnIzvjestaj.Name == "btnIzvjestajPregledVozila")
             {
-                ReportViewer rv = new ReportViewer();
-                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
                 rv.ServerReport.ReportPath = "/VozniParkReport/ZaduzenjaPoVozilima";
                 pnlDashboard.Controls.Add(rv);
-                rv.Size = pnlDashboard.Size;
             }
             else if(btnIzvjestaj.Name == "btnIzvjestajZaposleni")
             {
-                ReportViewer rv = new ReportViewer();
-                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
                 rv.ServerReport.ReportPath = "/VozniParkReport/ZaduzenjaPoZaposlenima";
                 pnlDashboard.Controls.Add(rv);
-                rv.Size = pnlDashboard.Size;
             }
             else if(btnIzvjestaj.Name == "btnIzvjestajServisi")
             {
-                ReportViewer rv = new ReportViewer();
-                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
                 rv.ServerReport.ReportPath = "/VozniParkReport/ServisIzvjestaj";
                 pnlDashboard.Controls.Add(rv);
-                rv.Size = pnlDashboard.Size;
             }
             else if(btnIzvjestaj.Name == "btnIzvjestajTocenjegoriva")
             {
-                ReportViewer rv = new ReportViewer();
-                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
                 rv.ServerReport.ReportPath = "/VozniParkReport/TocenjeGorivaIzvjestaj";
                 pnlDashboard.Controls.Add(rv);
-                rv.Size = pnlDashboard.Size;
             }
+            rv.RefreshReport();
         }
         #endregion
     }
