@@ -1334,9 +1334,18 @@ namespace VozniPark
         {
             bool poljaIspravnoPopunjena = false;
             poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
-            if (poljaIspravnoPopunjena == false)
+            if (poljaIspravnoPopunjena == false && state==StateEnum.Razduzi)
             {
                 CustomMessageBox izmjena = new CustomMessageBox("Vozilo razduženo", "Vozilo uspješno razduženo", MessageBoxIcon.Exclamation);
+                pnlDashboard.Controls.Clear();
+                btnZaduzenja_Click(sender, e);
+                Button podmeniTrenutna = sender as Button;
+                podmeniTrenutna.Name = "btnPregled";
+                BtnPodmeniZaduzenja_Click(podmeniTrenutna, e);
+            }
+           else if (poljaIspravnoPopunjena == false && state == StateEnum.Update)
+            {
+                CustomMessageBox izmjena = new CustomMessageBox("Vozilo izmijenjeno", "Vozilo uspješno izmijenjeno", MessageBoxIcon.Exclamation);
                 pnlDashboard.Controls.Clear();
                 btnZaduzenja_Click(sender, e);
                 Button podmeniTrenutna = sender as Button;
@@ -1702,11 +1711,9 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassGorivo();
 
-                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
-
                 MetroTile AddGorivo = new MetroTile();
                 AddGorivo.Click += AddGorivo_Click;
 
@@ -1736,6 +1743,7 @@ namespace VozniPark
                 panel.Controls.Add(PretragaGorivo);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
             else if (state == StateEnum.Update)
             {
@@ -1744,11 +1752,9 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassGorivo();
 
-                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
-
                 MetroTile AddGorivo = new MetroTile();
                 AddGorivo.Click += AddGorivo_Click;
 
@@ -1778,6 +1784,7 @@ namespace VozniPark
                 panel.Controls.Add(PretragaGorivo);
                 pnlDashboard.Controls.Add(panel);
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
         }
 
@@ -1875,7 +1882,6 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
 
-                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
@@ -1916,6 +1922,7 @@ namespace VozniPark
 
                 pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
             else if (state == StateEnum.Update)
             {
@@ -1925,7 +1932,6 @@ namespace VozniPark
                 pnlDashboard.Controls.Add(dtg);
                 myProperty = new PropertyClassServisiranjeVozila();
 
-                dgvDimeznije(dtg);
                 pnlDashboard.Controls.Add(dtg);
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 panel.Padding = new Padding(50, 0, 0, 0);
@@ -1958,13 +1964,15 @@ namespace VozniPark
                 panel.Controls.Add(Pretraga);
 
                 pnlDashboard.Controls.Add(panel);
-                
-                FlowLayoutPanel nov = new FlowLayoutPanel();       
+
+                FlowLayoutPanel nov = new FlowLayoutPanel();
+
                 nov.Height = 100;
                 nov.Width = 470;
 
                 pnlDashboard.Controls.Add(nov);
                 PopulateGrid();
+                dgvDimeznije(dtg);
             }
         }
 
@@ -2205,10 +2213,19 @@ namespace VozniPark
                         ic.Visible = false;
                         ic.UnosPolje = "0";
                         
-                    } 
-                    if(ic.Naziv == "Registarski broj" && state == StateEnum.Razduzi)
-                         ic.Enabled = false;
-                    if (ic.Naziv == "Registarski broj" && state == StateEnum.Add)
+                    }
+                    if (ic.Naziv == "Registarski broj" && state == StateEnum.Razduzi)
+                    {
+                        ic.Visible = false;
+                        
+                    }
+                    if (ic.Naziv == "Registarski broj" && state == StateEnum.Add && myProperty.GetType() == typeof(PropertyClassZaduzenja))
+                    {
+                        ic.Visible = false;
+                        ic.UnosPolje = "0";
+                    }
+
+                    if (ic.Naziv == "Registarski broj" && state == StateEnum.Update)
                     {
                         ic.Visible = false;
                         ic.UnosPolje = "0";
@@ -2293,8 +2310,8 @@ namespace VozniPark
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + "  nije ispravan.\n";
                     }
-                    
-                    else if (input.Naziv != "Pređena kilometraža")
+                    else if(input.Naziv == "Pređena kilometraža" || input.Naziv == "Registarski broj") { }
+                    else
                     {
                         PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
@@ -2402,7 +2419,7 @@ namespace VozniPark
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
                     }
-                    else if(grid.Columns[i].HeaderText == "Pređena kilometraža")
+                    else if(grid.Columns[i].HeaderText == "Pređena kilometraža" || grid.Columns[i].HeaderText == "Registarski broj")
                     {
                         string value = "0";
 

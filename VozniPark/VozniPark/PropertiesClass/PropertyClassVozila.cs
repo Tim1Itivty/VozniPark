@@ -114,11 +114,13 @@ namespace VozniPark.PropertiesClass
 
         public string GetLookupQuery()
         {
-            return @"select VoziloID, p.Naziv + ' ' + m.Naziv as Model, GodinaProizvodnje, Boja
+            return @"select distinct v.VoziloID, p.Naziv + ' ' + m.Naziv as Model,r.RegistracijskiBroj, GodinaProizvodnje, Boja
                     from dbo.Vozila as v
                     join dbo.Model as m on v.ModelId = m.ModelID
                     join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
-                    where v.Dostupnost = 'True' AND VoziloID in (SELECT r.VoziloID FROM dbo.Registracija as r WHERE r.DatumIstekaRegistracije > GETDATE()) ";
+					JOIN dbo.Registracija r ON r.VoziloID = v.VoziloID
+                    where v.Dostupnost = 'True' AND v.VoziloID in (SELECT r.VoziloID FROM dbo.Registracija as r WHERE r.DatumIstekaRegistracije > GETDATE()) 
+       ";
         }
         #endregion
 

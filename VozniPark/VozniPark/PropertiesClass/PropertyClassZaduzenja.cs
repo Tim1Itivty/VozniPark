@@ -129,7 +129,11 @@ namespace VozniPark.PropertiesClass
             return @"update dbo.Zaduzenja set DatumRazduzenja = @DatumRazduzenja, PredjenaKilometraza = @PredjenaKilometraza where ZaduzenjaID = @ZaduzenjaID
                      UPDATE dbo.Vozila
                      SET Dostupnost = 'True'
-                     where VoziloID = @VozilaID";
+                     where VoziloID = @VozilaID
+                     Update dbo.Vozila 
+                        Set Kilometraza+=@PredjenaKilometraza
+                      where VoziloID = @VozilaID
+";
         }
 
         public string GetLookupQuery()
