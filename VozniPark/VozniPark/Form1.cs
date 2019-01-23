@@ -2151,6 +2151,10 @@ namespace VozniPark
                     pnlDashboard.Controls.Add(lookup);
 
                     if (state == StateEnum.Razduzi) lookup.Enabled = false;
+
+
+                    if (state == StateEnum.Update &&lookup.Name == "VoziloID" )
+                        lookup.Visible = false;
                 }
                 else if (item.GetCustomAttribute<DateTimeAttribute>() != null)
                 {
