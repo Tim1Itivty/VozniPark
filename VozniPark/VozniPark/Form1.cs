@@ -736,7 +736,7 @@ namespace VozniPark
                 state = StateEnum.Add;
                 pnlDashboard.Controls.Clear();
                 myProperty = new PropertyClassZaposleni();
-                PopulateControls("Unos novog zaposlenika");
+                PopulateControls("Dodavanje novog zaposlenika");
                 Button btnDodaj = new Button();
                 btnDodaj.Text = "DODAJ";
                 dodajButtonDesign(btnDodaj);
@@ -810,7 +810,7 @@ namespace VozniPark
             {
                 DataGridView dtg = pnlDashboard.Controls[0] as DataGridView;
                 delete(dtg);
-                CustomMessageBox zaposleniObrisano = new CustomMessageBox("Zaposleni je obrisan", "Zaposleni uspješno obrisan", MessageBoxIcon.Error);
+                CustomMessageBox zaposleniObrisano = new CustomMessageBox("Zaposleni je obrisan", "Zaposleni uspješno obrisan.", MessageBoxIcon.Error);
                 pnlDashboard.Controls.Clear();
                 btnZaposleni_Click(sender, e);
                 Button btnPregled = sender as Button;
@@ -940,6 +940,7 @@ namespace VozniPark
             poljaIspravnoPopunjena = AddUpdate(poljaIspravnoPopunjena);
             if (poljaIspravnoPopunjena == false)
             {
+                CustomMessageBox zaposleniIzmjenjen = new CustomMessageBox("Izmjena zaposlenog", "Uspjesno izvrsena izmjena zaposlenog.", MessageBoxIcon.Information);
                 pnlDashboard.Controls.Clear();
                 btnZaposleni_Click(sender, e);
                 Button btn = sender as Button;
@@ -955,7 +956,7 @@ namespace VozniPark
            
             if (poljaIspravnoPopunjena == false)
             {
-                CustomMessageBox dodanZaposleni = new CustomMessageBox("Dodan novi zaposleni", "Uspješno dodan novi zaposleni", MessageBoxIcon.Exclamation);
+                CustomMessageBox dodanZaposleni = new CustomMessageBox("Dodan novi zaposleni", "Uspješno dodan novi zaposleni.", MessageBoxIcon.Exclamation);
                 btnZaposleni_Click(sender, e);
                 Button btn = sender as Button;
                 btn.Name = "btnDodajZaposlenog";
