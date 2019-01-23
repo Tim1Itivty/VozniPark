@@ -150,7 +150,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0.72917in</Top>
+            <Top>0.77652in</Top>
             <Left>3.90625in</Left>
             <Height>0.25in</Height>
             <Width>2.46875in</Width>
@@ -169,13 +169,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.63542in</Width>
+                  <Width>1.60417in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.43626in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.4075in</Width>
+                  <Width>1.41792in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -225,7 +225,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Datum Zaduzenja</Value>
+                                  <Value>Datum Zaduženja</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -262,7 +262,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Datum Razduzenja</Value>
+                                  <Value>Datum Razduženja</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -525,10 +525,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet2</DataSetName>
-            <Top>0.95708in</Top>
+            <Top>1.08208in</Top>
             <Left>0.31125in</Left>
             <Height>0.5in</Height>
-            <Width>5.71876in</Width>
+            <Width>5.69792in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
