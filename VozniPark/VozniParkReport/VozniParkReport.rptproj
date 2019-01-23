@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="Izvjestaj.rdl" />
+    <Report Include="TocenjeGorivaIzvjestaj.rdl" />
     <Report Include="PutniNalog.rdl" />
     <Report Include="ZaduzenjaPoVozilima.rdl" />
     <Report Include="ServisIzvjestaj.rdl" />
