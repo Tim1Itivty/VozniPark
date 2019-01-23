@@ -2156,6 +2156,7 @@ namespace VozniPark
                     DateTimeControl dateTime = new DateTimeControl();
                     dateTime.Naziv = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
                     dateTime.Name = item.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
+                    
                     pnlDashboard.Controls.Add(dateTime);
                     dateTime.Margin = new Padding(100, 0, 0, 0);
                     if (state == StateEnum.Add && dateTime.Naziv == "Datum razduženja")

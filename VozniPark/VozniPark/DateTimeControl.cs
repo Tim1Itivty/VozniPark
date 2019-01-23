@@ -26,6 +26,7 @@ namespace VozniPark
         public DateTimeControl()
         {
             InitializeComponent();
+            
         }
 
         public DateTimeControl(string Naziv, DateTime Unos)
@@ -33,6 +34,8 @@ namespace VozniPark
             InitializeComponent();
             this.Naziv = Naziv;
             this.Unos = Unos;
+            
+
         }
     }
 }

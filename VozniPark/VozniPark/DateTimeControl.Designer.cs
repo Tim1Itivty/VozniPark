@@ -45,6 +45,7 @@
             this.dtValue.CustomFormat = "MM/dd/yyyy hh:mm:ss";
             this.dtValue.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtValue.Location = new System.Drawing.Point(212, 5);
+            this.dtValue.MinDate = new System.DateTime(2019, 1, 23, 0, 0, 0, 0);
             this.dtValue.MinimumSize = new System.Drawing.Size(0, 29);
             this.dtValue.Name = "dtValue";
             this.dtValue.Size = new System.Drawing.Size(248, 29);
