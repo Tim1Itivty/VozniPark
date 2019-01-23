@@ -227,6 +227,7 @@
     <None Include="Resources\New Project %281%29.png" />
     <None Include="Resources\New Project %282%29.png" />
     <None Include="Resources\New Project %283%29.png" />
+    <None Include="Resources\icons8-report-card-32.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll" />
     <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll" />

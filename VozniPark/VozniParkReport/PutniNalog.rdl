@@ -48,6 +48,19 @@
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT top 1 ZaduzenjaID FROM dbo.Zaduzenja
+order by ZaduzenjaID desc</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ZaduzenjaID">
+          <DataField>ZaduzenjaID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -994,6 +1007,12 @@
     <ReportParameter Name="ZaduzenjeID">
       <DataType>Integer</DataType>
       <Nullable>true</Nullable>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>DataSet1</DataSetName>
+          <ValueField>ZaduzenjaID</ValueField>
+        </DataSetReference>
+      </DefaultValue>
       <Prompt>Zaduzenje ID</Prompt>
     </ReportParameter>
   </ReportParameters>

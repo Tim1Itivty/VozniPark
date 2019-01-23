@@ -17,6 +17,7 @@ using MetroFramework.Forms;
 using MetroFramework.Controls;
 using System.Text.RegularExpressions;
 using VozniPark.Properties;
+using Microsoft.Reporting.WinForms;
 
 namespace VozniPark
 {
@@ -38,6 +39,7 @@ namespace VozniPark
             pnlSelected2.Visible = false;
             pnlSelected3.Visible = false;
             pnlSelected4.Visible = false;
+            pnlSelected5.Visible = false;
 
             for (int i = 0; i < 3; i++)
             {
@@ -660,6 +662,7 @@ namespace VozniPark
             pnlSelected2.Visible = true;
             pnlSelected3.Visible = false;
             pnlSelected4.Visible = false;
+            pnlSelected5.Visible = false;
 
             for (int i = 0; i < 2; i++)
             {
@@ -975,6 +978,7 @@ namespace VozniPark
             pnlSelected2.Visible = false;
             pnlSelected3.Visible = true;
             pnlSelected4.Visible = false;
+            pnlSelected5.Visible = false;
 
             for (int i = 0; i < 4; i++)
             {
@@ -1252,6 +1256,12 @@ namespace VozniPark
             if (poljaIspravnoPopunjena == false)
             {
                 CustomMessageBox dodanoZaduzenje = new CustomMessageBox("Zaduženo vozilo", "Uspješno dodano novo zaduženje", MessageBoxIcon.Exclamation);
+                if(dodanoZaduzenje.DialogResult == DialogResult.OK)
+                {
+                    ReportForm rForm = new ReportForm();
+                    rForm.Show();
+                    rForm.Activate();
+                }
                 pnlDashboard.Controls.Clear();
                 btnZaduzenja_Click(sender, e);
                 BtnPodmeniZaduzenja_Click(sender, e);
@@ -1367,6 +1377,7 @@ namespace VozniPark
             pnlSelected2.Visible = false;
             pnlSelected3.Visible = false;
             pnlSelected4.Visible = true;
+            pnlSelected5.Visible = false;
 
             for (int i = 0; i < 3; i++)
             {
@@ -2777,6 +2788,83 @@ namespace VozniPark
             ReportForm rf = new ReportForm();
             rf.Show();
         }
+        #region meniIzvjestaji
+        private void btnIzvjestaj_Click(object sender, EventArgs e)
+        {
+            pnlSelected1.Visible = false;
+            pnlSelected2.Visible = false;
+            pnlSelected3.Visible = false;
+            pnlSelected4.Visible = false;
+            pnlSelected5.Visible = true;
+            flpPodmeni.Controls.Clear();
+            for (int i = 0; i <= 3; i++)
+            {
+                Button btnPodmeniIzvjestaj = new Button();
+                buttonDesign(btnPodmeniIzvjestaj);
+                if (i == 0)
+                {
+                    btnPodmeniIzvjestaj.Text = "Ispis zaduženja vozila";
+                    btnPodmeniIzvjestaj.Name = "btnIzvjestajPregledVozila";
+                }
+                if (i == 1)
+                {
+                    btnPodmeniIzvjestaj.Text = "Ispis zaduženja po \nzaposlenima";
+                    btnPodmeniIzvjestaj.Name = "btnIzvjestajZaposleni";
+                }
+                if (i == 2)
+                {
+                    btnPodmeniIzvjestaj.Text = "Ispis servisa za \nodređeni period";
+                    btnPodmeniIzvjestaj.Name = "btnIzvjestajServisi";
+                }
+                if (i == 3)
+                {
+                    btnPodmeniIzvjestaj.Text = "Ispis podataka o \ntočenju goriva";
+                    btnPodmeniIzvjestaj.Name = "btnIzvjestajTocenjegoriva";
+                }
+
+                btnPodmeniIzvjestaj.Click += BtnPodmeniIzvjestaj_Click;
+                flpPodmeni.Controls.Add(btnPodmeniIzvjestaj);
+            }
+        }
+
+        private void BtnPodmeniIzvjestaj_Click(object sender, EventArgs e)
+        {
+            pnlDashboard.Controls.Clear();
+            Button btnIzvjestaj = sender as Button;
+            if (btnIzvjestaj.Name == "btnIzvjestajPregledVozila")
+            {
+                ReportViewer rv = new ReportViewer();
+                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
+                rv.ServerReport.ReportPath = "/VozniParkReport/ZaduzenjaPoVozilima";
+                pnlDashboard.Controls.Add(rv);
+                rv.Size = pnlDashboard.Size;
+            }
+            else if(btnIzvjestaj.Name == "btnIzvjestajZaposleni")
+            {
+                ReportViewer rv = new ReportViewer();
+                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
+                rv.ServerReport.ReportPath = "/VozniParkReport/ZaduzenjaPoZaposlenima";
+                pnlDashboard.Controls.Add(rv);
+                rv.Size = pnlDashboard.Size;
+            }
+            else if(btnIzvjestaj.Name == "btnIzvjestajServisi")
+            {
+                ReportViewer rv = new ReportViewer();
+                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
+                rv.ServerReport.ReportPath = "/VozniParkReport/ServisIzvjestaj";
+                pnlDashboard.Controls.Add(rv);
+                rv.Size = pnlDashboard.Size;
+            }
+            else if(btnIzvjestaj.Name == "btnIzvjestajTocenjegoriva")
+            {
+                ReportViewer rv = new ReportViewer();
+                rv.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
+                rv.ServerReport.ReportPath = "/VozniParkReport/TocenjeGorivaIzvjestaj";
+                pnlDashboard.Controls.Add(rv);
+                rv.Size = pnlDashboard.Size;
+            }
+        }
+        #endregion
     }
 }
 

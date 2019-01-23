@@ -3,44 +3,51 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="VozniParkDB">
+    <DataSource Name="DataSource1">
       <DataSourceReference>VozniParkDB</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>84f81b82-521d-483c-963f-8dc92b738de7</rd:DataSourceID>
+      <rd:DataSourceID>52ee72ae-edf1-4630-a0c9-f4a029c9ef3d</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>VozniParkDB</DataSourceName>
+        <DataSourceName>DataSource1</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@ZaposleniID">
-            <Value>=Parameters!ZaposleniID.Value</Value>
+          <QueryParameter Name="@DatumOd">
+            <Value>=Parameters!DatumOd.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@DatumDo">
+            <Value>=Parameters!DatumDo.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
-        <CommandText>DetaljanPregledZaposlenog</CommandText>
+        <CommandText>pregledSvihZaduzenjaReport</CommandText>
       </Query>
       <Fields>
-        <Field Name="ZaposleniID">
-          <DataField>ZaposleniID</DataField>
+        <Field Name="ModelID">
+          <DataField>ModelID</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="Ime">
-          <DataField>Ime</DataField>
+        <Field Name="ModelVozila">
+          <DataField>ModelVozila</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Prezime">
-          <DataField>Prezime</DataField>
+        <Field Name="ImeZaposlenog">
+          <DataField>ImeZaposlenog</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="RadnoMjesto">
-          <DataField>RadnoMjesto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="DatumZaduzenja">
+          <DataField>DatumZaduzenja</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="Obrisano">
-          <DataField>Obrisano</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
+        <Field Name="DatumRazduzenja">
+          <DataField>DatumRazduzenja</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="RegistracijskiBroj">
+          <DataField>RegistracijskiBroj</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -52,6 +59,9 @@
           <Tablix Name="Tablix1">
             <TablixBody>
               <TablixColumns>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
                 </TablixColumn>
@@ -75,7 +85,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Ime</Value>
+                                  <Value>Model Vozila</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -105,7 +115,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Prezime</Value>
+                                  <Value>Registracijski Broj</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -135,7 +145,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Radno Mjesto</Value>
+                                  <Value>Datum Zaduzenja</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -156,6 +166,38 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox9">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Datum Razduzenja</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -163,21 +205,21 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Ime">
+                        <Textbox Name="ModelVozila">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Ime.Value</Value>
+                                  <Value>=Fields!ModelVozila.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Ime</rd:DefaultName>
+                          <rd:DefaultName>ModelVozila</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -193,21 +235,21 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Prezime">
+                        <Textbox Name="RegistracijskiBroj">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Prezime.Value</Value>
+                                  <Value>=Fields!RegistracijskiBroj.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Prezime</rd:DefaultName>
+                          <rd:DefaultName>RegistracijskiBroj</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -223,21 +265,53 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="RadnoMjesto">
+                        <Textbox Name="DatumZaduzenja">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!RadnoMjesto.Value</Value>
+                                  <Value>=Fields!DatumZaduzenja.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>RadnoMjesto</rd:DefaultName>
+                          <rd:DefaultName>DatumZaduzenja</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DatumRazduzenja">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DatumRazduzenja.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DatumRazduzenja</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -260,23 +334,107 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
+                  <TablixHeader>
+                    <Size>1in</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox7">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Ime Zaposlenog</Value>
+                                <Style>
+                                  <FontFamily>Arial</FontFamily>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox7</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
                   <KeepWithGroup>After</KeepWithGroup>
                 </TablixMember>
                 <TablixMember>
-                  <Group Name="Details" />
+                  <Group Name="ImeZaposlenog">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!ImeZaposlenog.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!ImeZaposlenog.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixHeader>
+                    <Size>1in</Size>
+                    <CellContents>
+                      <Textbox Name="ImeZaposlenog">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>=Fields!ImeZaposlenog.Value</Value>
+                                <Style>
+                                  <FontFamily>Arial</FontFamily>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>ImeZaposlenog</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Group Name="Details" />
+                    </TablixMember>
+                  </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
-            <Top>0.3425in</Top>
-            <Left>0.97792in</Left>
+            <Top>0.43625in</Top>
+            <Left>0.43625in</Left>
             <Height>0.5in</Height>
-            <Width>3in</Width>
+            <Width>5in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -298,9 +456,15 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="ZaposleniID">
-      <DataType>Integer</DataType>
-      <Prompt>Zaposleni ID</Prompt>
+    <ReportParameter Name="DatumOd">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>Datum Od</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DatumDo">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <Prompt>Datum Do</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
@@ -311,11 +475,16 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>ZaposleniID</ParameterName>
+          <ParameterName>DatumOd</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DatumDo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>ffc7eec2-6379-4a74-aa15-d57438483120</rd:ReportID>
+  <rd:ReportID>fb93bf40-957d-4225-9bde-7d5030999d1e</rd:ReportID>
 </Report>

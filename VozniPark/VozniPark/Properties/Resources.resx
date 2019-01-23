@@ -151,14 +151,17 @@
   <data name="icons8-add-user-male-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-add-user-male-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="New Project (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\New Project (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="oie_transparent (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\oie_transparent (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="success_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\success_background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="oie_transparent (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\oie_transparent (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="New Project (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\New Project (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="New Project (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\New Project (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-traffic-jam-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-traffic-jam-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,7 +175,7 @@
   <data name="icons8-add-file-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-add-file-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="New Project (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\New Project (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-report-card-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-report-card-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

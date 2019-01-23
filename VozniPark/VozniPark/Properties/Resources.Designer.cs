@@ -173,6 +173,16 @@ namespace VozniPark.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_report_card_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-report-card-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_traffic_jam_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8-traffic-jam-50", resourceCulture);

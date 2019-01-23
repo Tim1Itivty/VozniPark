@@ -52,11 +52,11 @@
     <DataSource Include="VozniParkDB.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="Izvjestaj.rdl" />
-    <Report Include="TocenjeGorivaIzvjestaj.rdl" />
     <Report Include="PutniNalog.rdl" />
-    <Report Include="ZaduzenjaPoVozilima.rdl" />
     <Report Include="ServisIzvjestaj.rdl" />
+    <Report Include="TocenjeGorivaIzvjestaj.rdl" />
+    <Report Include="ZaduzenjaPoVozilima.rdl" />
+    <Report Include="ZaduzenjaPoZaposlenima.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
