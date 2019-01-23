@@ -74,7 +74,7 @@ namespace VozniPark.PropertiesClass
         public string GetSelectQuery()
         {
             return @"SELECT					
-                            iz.IstorijaZaduzenjaID, 
+                            DISTINCT iz.IstorijaZaduzenjaID, 
                             z.Ime+ ' '+  z.Prezime AS [Zaposleni],							
                             p.Naziv + ' ' + mdel.Naziv AS [Model] ,r.RegistracijskiBroj,
                             iz.DatumZaduzenja, 
