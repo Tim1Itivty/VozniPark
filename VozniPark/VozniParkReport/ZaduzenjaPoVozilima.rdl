@@ -100,10 +100,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>PREGLED ZADUŽENJA PO VOZILIMA</Value>
+                    <Value>Pregled zaduženja po vozilima</Value>
                     <Style>
                       <FontFamily>Segoe UI Light</FontFamily>
                       <FontSize>18pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -113,7 +114,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>0.05556in</Top>
+            <Top>0.04167in</Top>
             <Height>0.52083in</Height>
             <Width>6.5in</Width>
             <Style>
@@ -135,15 +136,13 @@
                   <TextRun>
                     <Value xml:space="preserve"> </Value>
                     <Style>
-                      <Format>"Datum:"    dd.MM.yyyy 
-" Vrijeme:"  HH:mm</Format>
+                      <Format>"Datum:" dd.MM.yyyy "Vrijeme:" HH:mm</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=Now()</Value>
                     <Style>
-                      <Format>"Datum:"    dd.MM.yyyy 
-" Vrijeme:"  HH:mm</Format>
+                      <Format>"Datum:" dd.MM.yyyy "Vrijeme:" HH:mm</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -151,10 +150,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.51958in</Top>
-            <Left>4.65501in</Left>
+            <Top>0.72917in</Top>
+            <Left>3.90625in</Left>
             <Height>0.25in</Height>
-            <Width>1.375in</Width>
+            <Width>2.46875in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -192,7 +191,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Ime Zaposlenog</Value>
+                                  <Value>Zaposleni</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -526,7 +525,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet2</DataSetName>
-            <Top>0.78in</Top>
+            <Top>0.95708in</Top>
             <Left>0.31125in</Left>
             <Height>0.5in</Height>
             <Width>5.71876in</Width>
