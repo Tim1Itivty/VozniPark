@@ -2320,7 +2320,7 @@ namespace VozniPark
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere.\n";
                     }
-                    else if(input.Naziv == "Pređena kilometraža" || input.Naziv == "Registarski broj") { }
+                    else if(input.Naziv == "Pređena kilometraža" || (input.Naziv == "Registarski broj" && myProperty.GetType() == typeof(PropertyClassZaduzenja))){ }
                     else
                     {
                         PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
