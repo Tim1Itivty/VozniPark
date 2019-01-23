@@ -109,16 +109,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.7993in</Width>
+                  <Width>0.66652in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.7368in</Width>
+                  <Width>1.60402in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.59097in</Width>
+                  <Width>1.45819in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.2993in</Width>
+                  <Width>1.16652in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -151,6 +151,10 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -430,7 +434,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.96597in</Size>
+                    <Size>0.78195in</Size>
                     <CellContents>
                       <Textbox Name="Textbox20">
                         <CanGrow>true</CanGrow>
@@ -485,7 +489,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>0.96597in</Size>
+                    <Size>0.78195in</Size>
                     <CellContents>
                       <Textbox Name="Vozilo">
                         <CanGrow>true</CanGrow>
@@ -532,7 +536,7 @@
             <Top>0.50917in</Top>
             <Left>0.55431in</Left>
             <Height>0.66666in</Height>
-            <Width>6.39235in</Width>
+            <Width>5.67722in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -556,8 +560,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>1.79042in</Top>
-            <Left>5.94666in</Left>
+            <Top>1.72792in</Top>
+            <Left>5.24626in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>1</ZIndex>
@@ -591,8 +595,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>1.79042in</Top>
-            <Left>4.91125in</Left>
+            <Top>1.72792in</Top>
+            <Left>4.21085in</Left>
             <Height>0.25in</Height>
             <Width>0.85417in</Width>
             <ZIndex>2</ZIndex>
@@ -624,8 +628,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox12</rd:DefaultName>
-            <Top>1.44667in</Top>
-            <Left>4.76541in</Left>
+            <Top>1.38417in</Top>
+            <Left>4.06501in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>3</ZIndex>
@@ -656,8 +660,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>1.47792in</Top>
-            <Left>5.94666in</Left>
+            <Top>1.41542in</Top>
+            <Left>5.24626in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>4</ZIndex>
@@ -672,17 +676,17 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.27083in</Height>
+        <Height>5.76791cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>7.57167in</Width>
+      <Width>19.23204cm</Width>
       <Page>
         <PageHeader>
-          <Height>0.95833in</Height>
+          <Height>2.43416cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -784,7 +788,7 @@
               <Top>0.3425in</Top>
               <Left>0.61751in</Left>
               <Height>0.24653in</Height>
-              <Width>0.66667in</Width>
+              <Width>0.71875in</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -816,9 +820,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.3425in</Top>
-              <Left>6.88417in</Left>
+              <Left>5.85821in</Left>
               <Height>0.28125in</Height>
-              <Width>0.64583in</Width>
+              <Width>0.59459in</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -848,9 +852,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>0.3425in</Top>
-              <Left>6.19319in</Left>
+              <Left>5.24626in</Left>
               <Height>0.28125in</Height>
-              <Width>0.63542in</Width>
+              <Width>0.58418in</Width>
               <ZIndex>7</ZIndex>
               <Style>
                 <Border>
@@ -905,7 +909,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>1in</Height>
+          <Height>2.54cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -947,10 +951,13 @@
             </Border>
           </Style>
         </PageFooter>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>27.94cm</PageHeight>
+        <PageWidth>21.59cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>2.54cm</TopMargin>
+        <BottomMargin>2.54cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
@@ -985,6 +992,6 @@
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>5536c653-7cb2-428c-8afc-72eedf682c36</rd:ReportID>
 </Report>

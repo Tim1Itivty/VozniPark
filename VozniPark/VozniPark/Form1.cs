@@ -1447,7 +1447,7 @@ namespace VozniPark
                 FlowLayoutPanel panel = new FlowLayoutPanel();
                 Button btnDodajServis = new Button();
                 Button btnOtkazi1 = new Button();
-                btnDodajServis.Text = "DODAJ SERVIS";
+                btnDodajServis.Text = "SAČUVAJ";
                 dodajButtonDesign(btnDodajServis);
                 btnOtkazi1.Text = "OTKAŽI";
                 otkaziButtonDesign(btnOtkazi1);
@@ -1790,6 +1790,8 @@ namespace VozniPark
                 if (poljaIspravnoPopunjena == false)
                 {
                     CustomMessageBox dodanServis = new CustomMessageBox("Obavještenje o unosu", "Uspješno uneseni podaci o sipanju goriva", MessageBoxIcon.Exclamation);
+                 
+           
                     pnlDashboard.Controls.Clear();
                     myProperty = new PropertyClassGorivo();
 
@@ -1801,7 +1803,7 @@ namespace VozniPark
                     btnDodajGorivo.Text = "SAČUVAJ";
                     dodajButtonDesign(btnDodajGorivo);
                     btnOtkaziGorivo.Text = "OTKAŽI";
-                    dodajButtonDesign(btnOtkaziGorivo);
+                    otkaziButtonDesign(btnOtkaziGorivo);
                     btnDodajGorivo.Click += BtnDodajGorivo_Click;
                     btnOtkaziGorivo.Click += BtnOtkaziGorivo_Click;
 
@@ -2064,7 +2066,7 @@ namespace VozniPark
             FlowLayoutPanel panel = new FlowLayoutPanel();
             Button btnDodajServis = new Button();
             Button btnOtkazi1 = new Button();
-            btnDodajServis.Text = "DODAJ SERVIS";
+            btnDodajServis.Text = "SAČUVAJ";
             dodajButtonDesign(btnDodajServis);
             btnOtkazi1.Text = "OTKAŽI";
             otkaziButtonDesign(btnOtkazi1);
@@ -2275,7 +2277,7 @@ namespace VozniPark
                         poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere.\n";
                     }
                     else if ((input.Naziv == "Broj vrata" || input.Naziv == "Cijena servisa" || input.Naziv == "Količina  goriva" || 
-                        input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraža") && (Regex.IsMatch(value, @"[a-zA-Z]")|| Regex.IsMatch(value, @"[a-zA-Z@#%&',.\s-+$]")))
+                        input.Naziv == "Cijena" || input.Naziv == "Godina proizvodnje" || input.Naziv == "Kilometraža") && (Regex.IsMatch(value, @"[a-zA-Z]")|| Regex.IsMatch(value, @"[a-zA-Z@#%&'\s-+$]")))
                     {
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + " ne smije sadržavati slova i specijalne karaktere.\n";
@@ -2297,6 +2299,8 @@ namespace VozniPark
                 {
                     DateTimeControl date = item as DateTimeControl;
                     DateTime value = date.Unos;
+                    
+                 
 
                     PropertyInfo property = properties.Where(x => x.GetCustomAttribute<DisplayNameAttribute>().DisplayName == date.Naziv).FirstOrDefault();
                     property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
@@ -2387,6 +2391,7 @@ namespace VozniPark
                     if (grid.Columns[i].HeaderText == "Datum razduženja")
                     {
                         string value = DateTime.Now.ToString();
+                      
 
                         PropertyInfo property = properties.Where(x => grid.Columns[i].HeaderText == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
                         property.SetValue(myProperty, Convert.ChangeType(value, property.PropertyType));
