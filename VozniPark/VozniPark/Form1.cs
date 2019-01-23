@@ -2294,7 +2294,7 @@ namespace VozniPark
                         if (poruka == "")
                             poruka += "Molimo popunite sva polja.\n";
                     }
-                    else if ((input.Naziv == "Boja" || input.Naziv == "Ime" || input.Naziv == "Prezime" ) && Regex.IsMatch(value, @"[0-9@#%&',.\s-+$]"))
+                    else if (( input.Naziv == "Ime" || input.Naziv == "Prezime" ) && Regex.IsMatch(value, @"[0-9@#%&',.\+$]"))
                     {
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere.\n";
@@ -2314,6 +2314,11 @@ namespace VozniPark
                     {
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + "  ne smije sadržavati specijalne karaktere.\n";
+                    }
+                    else if ((input.Naziv == "Boja" ) && Regex.IsMatch(value, @"[0-9@#%&',.\+$]"))
+                    {
+                        nepravlinoIspunjenoPolje = true;
+                        poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere.\n";
                     }
                     else if(input.Naziv == "Pređena kilometraža" || input.Naziv == "Registarski broj") { }
                     else

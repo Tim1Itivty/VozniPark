@@ -130,7 +130,7 @@ namespace VozniPark
                         if (poruka == "")
                             poruka += "Morate popuniti sva polja.\n";
                     }
-                    else if (input.Naziv == "Naziv" && Regex.IsMatch(value, @"[@#%&',.\s+$]") )
+                    else if (input.Naziv == "Naziv" && Regex.IsMatch(value, @"[@#%&',.\+$]") )
                     {
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + " ne smije sadržavati specijalne karaktere .\n";
