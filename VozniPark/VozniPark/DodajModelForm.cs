@@ -32,7 +32,7 @@ namespace VozniPark
             btnDodajModel.Name = "btnDodajModel";
             btnDodajModel.Visible = true;
             btnDodajModel.FlatStyle = FlatStyle.Flat;
-            btnDodajModel.BackColor = Color.FromArgb(23, 165, 232);
+            btnDodajModel.BackColor = Color.FromArgb(5, 56, 107);
             btnDodajModel.ForeColor = Color.White;
             btnDodajModel.Size = new Size(120, 34);
             btnDodajModel.Margin = new Padding(135, 10, 3, 3);
