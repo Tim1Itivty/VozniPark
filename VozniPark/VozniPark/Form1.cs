@@ -2331,7 +2331,7 @@ namespace VozniPark
                         nepravlinoIspunjenoPolje = true;
                         poruka += input.Naziv + " ne smije sadrzavati brojeve i specijalne karaktere.\n";
                     }
-                    else if(input.Naziv == "Pređena kilometraža" || (input.Naziv == "Registarski broj" && myProperty.GetType() == typeof(PropertyClassZaduzenja))){ }
+                    else if((input.Naziv == "Pređena kilometraža" && state != StateEnum.Razduzi) || (input.Naziv == "Registarski broj" && myProperty.GetType() == typeof(PropertyClassZaduzenja))){ }
                     else
                     {
                         PropertyInfo property = properties.Where(x => input.Naziv == x.GetCustomAttribute<DisplayNameAttribute>().DisplayName).FirstOrDefault();
@@ -2737,6 +2737,8 @@ namespace VozniPark
         private void dodajButtonDesign(Button btn)
         {
             btn.Margin = new Padding(230, 20, 0, 0);
+            if (btn.Text.Contains("RAZDUŽI"))
+               btn.Margin = new Padding(20, 20, 0, 0);
             btn.Size = new Size(100, 35);
             btn.BackColor = Color.FromArgb(5, 56, 107);
             btn.ForeColor = Color.White;

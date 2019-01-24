@@ -131,7 +131,7 @@ namespace VozniPark.PropertiesClass
                      SET Dostupnost = 'True'
                      where VoziloID = @VozilaID
                      Update dbo.Vozila 
-                        Set Kilometraza+=@PredjenaKilometraza
+                        Set Kilometraza = Kilometraza + @PredjenaKilometraza
                       where VoziloID = @VozilaID
 ";
         }
