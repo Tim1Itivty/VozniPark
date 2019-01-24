@@ -39,16 +39,18 @@
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.ServerReport.ReportPath = "/VozniParkReport/PutniNalog";
             this.reportViewer1.ServerReport.ReportServerUrl = new System.Uri("http://10.226.9.13/ReportServer_ITIVITY", System.UriKind.Absolute);
-            this.reportViewer1.Size = new System.Drawing.Size(753, 363);
+            this.reportViewer1.Size = new System.Drawing.Size(753, 756);
             this.reportViewer1.TabIndex = 0;
             // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(803, 838);
             this.Controls.Add(this.reportViewer1);
+            this.MaximizeBox = false;
             this.Name = "ReportForm";
+            this.Resizable = false;
             this.Text = "Potvrda o zaduživanju";
             this.Load += new System.EventHandler(this.ReportForm_Load);
             this.ResumeLayout(false);

@@ -1261,6 +1261,7 @@ namespace VozniPark
                     ReportForm rForm = new ReportForm();
                     rForm.Show();
                     rForm.Activate();
+                    rForm.TopMost = true;
                 }
                 pnlDashboard.Controls.Clear();
                 btnZaduzenja_Click(sender, e);
@@ -2737,7 +2738,7 @@ namespace VozniPark
         private void dodajButtonDesign(Button btn)
         {
             btn.Margin = new Padding(230, 20, 0, 0);
-            if (btn.Text.Contains("RAZDUŽI"))
+            if (btn.Text.Contains("RAZDUŽI") || btn.Text.Contains("REGISTRUJ"))
                btn.Margin = new Padding(20, 20, 0, 0);
             btn.Size = new Size(100, 35);
             btn.BackColor = Color.FromArgb(5, 56, 107);
