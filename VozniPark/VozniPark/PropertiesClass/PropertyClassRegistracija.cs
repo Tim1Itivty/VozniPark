@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -13,28 +14,30 @@ namespace VozniPark.PropertiesClass
     {
         #region Atributi
 
-
-      
-        //[PrimaryKey]
-        //[DisplayName("Vozilo ID")]
-        //[SqlNameAttribute("VoziloID")]
-        //[LookupKey]
-        //public int VoziloID { get; set; }
+        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
+        [DisplayName("VoziloID")]
+        [SqlNameAttribute("VoziloID")]
+        [LookupKey]
+        [ForeignField("")]
+        public int VoziloID { get; set; }
 
         [ForeignKeyAttribute("dbo.Model", "ModelID", "VozniPark.PropertiesClass.PropertyClassModel")]
         [DisplayName("Model ID")]
         [SqlNameAttribute("ModelID")]
-        [LookupValue]
-        [ForeignField]
         public int ModelID { get; set; }
-
+        
+        [DisplayName("Model")]
+        [SqlName("NazivModela")]
+        [ForeignField("Model ID")]
+        [LookupValue]
+        public string NazivModela { get; set; }
 
         [DisplayName("Godina proizvodnje")]
         [SqlNameAttribute("GodinaProizvodnje")]
         [ForeignField]
         public int GodinaProizvodnje { get; set; }
 
-        [DisplayName("Kilometraza")]
+        [DisplayName("Kilometraža")]
         [SqlNameAttribute("Kilometraza")]
         [ForeignField]
         public int Kilometraza { get; set; }
@@ -59,40 +62,28 @@ namespace VozniPark.PropertiesClass
         [SqlNameAttribute("RegistracijaID")]
         public int RegistracijaID { get; set; }
 
-        
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite registarski broj!")]
         [DisplayName("Registarski broj")]
         [SqlNameAttribute("RegistracijskiBroj")]
         public string RegistarskiBroj { get; set; }
 
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum registracije!")]
         [DisplayName("Datum registracije")]
         [SqlNameAttribute("DatumRegistracije")]
         [DateTime]
         public DateTime DatumRegistracije { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum isteka registracije!")]
         [DisplayName("Datum isteka registracije")]
         [SqlNameAttribute("DatumIstekaRegistracije")]
         [DateTime]
         public DateTime DatumIstekaRegistracije { get; set; }
 
-
-        
-
-       
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite cijenu!")]
         [DisplayName("Cijena")]
         [SqlNameAttribute("Cijena")]
         public double Cijena { get; set; }
-
-
-
-        [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        [DisplayName("VoziloID")]
-        [SqlNameAttribute("VoziloID")]
-        public int VoziloID { get; set; }
-        //[ForeignKey("dbo.Vozila","VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
-        //[DisplayName("VoziloID")]
-        //[SqlNameAttribute("VoziloID")]
-        //public int VoziloID { get; set; }
+        
 
         #endregion
 
@@ -102,11 +93,15 @@ namespace VozniPark.PropertiesClass
         {
             return @"SELECT 
                     v.ModelID,
+					p.Naziv + ' ' + m.Naziv AS NazivModela,
                     v.GodinaProizvodnje,
                     v.Kilometraza,
                     v.Boja,
-                    v.BrojVrata
-                    ,v.Dostupnost,
+                    v.BrojVrata,
+                    case
+                    when v.Dostupnost = 1 then 'Dostupno'
+                    when v.Dostupnost = 0 then 'Nije dostupno'
+                    end as Dostupnost,
                     r.RegistracijaID,
                     r.RegistracijskiBroj,
                     r.DatumRegistracije,
@@ -116,7 +111,16 @@ namespace VozniPark.PropertiesClass
                     FROM Vozila v
                     left JOIN Registracija r
                     ON v.VoziloID=r.VoziloID
-                    WHERE r.DatumIstekaRegistracije<GETDATE() OR r.RegistracijaID is NULL";
+					LEFT JOIN Model m 
+					ON v.ModelID=m.ModelID
+					LEFT JOIN Proizvodjac p 
+					on m.ProizvodjacID=p.ProizvodjacID
+                    WHERE r.Obrisano = 0 and (DATEDIFF(day,getdate(),cast(r.DatumIstekaRegistracije as date))<=7) AND r.DatumIstekaRegistracije IN (SELECT Max(r.DatumIstekaRegistracije) 
+					FROM Registracija r 
+					JOIN dbo.Vozila v1 
+					ON v1.VoziloID=r.VoziloID
+					GROUP BY r.VoziloID
+                    HAVING v.VoziloID = r.VoziloID) OR r.RegistracijaID is NULL";
         }
 
         public string GetInsertQuery()

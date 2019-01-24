@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -18,21 +19,24 @@ namespace VozniPark.PropertiesClass
         [LookupKey]
         public int ModelID { get; set; }
 
-        [DisplayName("Proizvodjac")]
+        [DisplayName("Proizvođač")]
         [SqlName("Proizvodjac")]
         [ForeignField]
         [LookupValue]
         public int Proizvodjac { get; set; }
 
+        [DisplayName("Proizvodjac ID")]
+        [SqlName("ProizvodjacID")]
+        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertiesClass.PropertyClassProizvodjac")]
+        public int ProizvodjacID { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite naziv!")]
         [DisplayName("Naziv")]
         [SqlName("Naziv")]
         [LookupValue]
         public string Naziv { get; set; }
 
-        [DisplayName("Proizvodjac ID")]
-        [SqlName("ProizvodjacID")]
-        [ForeignKey("dbo.Proizvodjac", "ProizvodjacID", "VozniPark.PropertiesClass.PropertyClassProizvodjac")]
-        public int ProizvodjacID { get; set; }
+        
 
         
         #endregion

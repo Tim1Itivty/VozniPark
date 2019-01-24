@@ -34,19 +34,21 @@
             // 
             // lblInput
             // 
-            this.lblInput.Location = new System.Drawing.Point(0, 3);
+            this.lblInput.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblInput.Location = new System.Drawing.Point(3, 4);
             this.lblInput.Name = "lblInput";
-            this.lblInput.Size = new System.Drawing.Size(168, 23);
+            this.lblInput.Size = new System.Drawing.Size(199, 34);
             this.lblInput.TabIndex = 2;
             // 
             // dtValue
             // 
             this.dtValue.CustomFormat = "MM/dd/yyyy hh:mm:ss";
             this.dtValue.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtValue.Location = new System.Drawing.Point(174, 3);
+            this.dtValue.Location = new System.Drawing.Point(212, 5);
+            this.dtValue.MinDate = new System.DateTime(2018, 1, 1, 0, 0, 0, 0);
             this.dtValue.MinimumSize = new System.Drawing.Size(0, 29);
             this.dtValue.Name = "dtValue";
-            this.dtValue.Size = new System.Drawing.Size(232, 29);
+            this.dtValue.Size = new System.Drawing.Size(248, 29);
             this.dtValue.TabIndex = 3;
             // 
             // DateTimeControl
@@ -56,7 +58,7 @@
             this.Controls.Add(this.dtValue);
             this.Controls.Add(this.lblInput);
             this.Name = "DateTimeControl";
-            this.Size = new System.Drawing.Size(428, 33);
+            this.Size = new System.Drawing.Size(546, 41);
             this.ResumeLayout(false);
 
         }

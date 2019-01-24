@@ -25,29 +25,35 @@ namespace VozniPark.PropertiesClass
         [ForeignKey("dbo.Vozila", "VoziloID", "VozniPark.PropertiesClass.PropertyClassVozila")]
         public int VozilaID { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite registarski broj!")]
+        [DisplayName("Registarski broj")]
+        [SqlNameAttribute("RegistracijskiBroj")]
+        public string RegistarskiBroj { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite ID zaposlenog!")]
         [DisplayName("Zaposleni ID")]
         [SqlName("ZaposleniID")]
         [ForeignKey("dbo.Zaposleni", "ZaposleniID", "VozniPark.PropertiesClass.PropertyClassZaposleni")]
         public int ZaposleniID { get; set; }
 
-
         [Required(AllowEmptyStrings = true)]
-        [DisplayName("Predjena kilometraza")]
+        [DisplayName("Pređena kilometraža")]
         [SqlName("PredjenaKilometraza")]
         public int PredjenaKilometraza { get; set; }
 
-        [DisplayName("Datum zaduzenja")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Unesite datum zaduzenja!")]
+        [DisplayName("Datum zaduženja")]
         [SqlName("DatumZaduzenja")]
         [DateTime]
         public DateTime DatumZaduzenja { get; set; }
 
         [Required(AllowEmptyStrings = true)]
-        [DisplayName("Datum razduzenja")]
+        [DisplayName("Datum razduženja")]
         [SqlName("DatumRazduzenja")]
         [DateTime]
         public DateTime DatumRazduzenja { get; set; }
 
-        [DisplayName("Planirano razduzenje")]
+        [DisplayName("Planirano razduženje")]
         [SqlName("PlaniranoRazduzenje")]
         [DateTime]
         public DateTime PlaniranoRazduzenje { get; set; }
@@ -56,6 +62,9 @@ namespace VozniPark.PropertiesClass
         [SqlName("ModelID")]
         [ForeignField("")]
         public int ModelID { get; set; }
+
+
+       
 
         [DisplayName("Model")]
         [SqlName("Naziv")]
@@ -69,26 +78,32 @@ namespace VozniPark.PropertiesClass
 
         #endregion
 
-
         #region queries
 
         public string GetDeleteQuery()
         {
-            return "delete from dbo.Zaduzenja where ZaduzenjaID = @ZaduzenjaID";
+            return @"delete from dbo.Zaduzenja where ZaduzenjaID = @ZaduzenjaID
+                     UPDATE dbo.Vozila
+                     SET Dostupnost = 'True'
+                     where VoziloID = @VozilaID"; 
         }
 
         public string GetInsertQuery()
         {
-            return "insert into dbo.Zaduzenja (VozilaID,ZaposleniID,DatumZaduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@DatumZaduzenja,@PlaniranoRazduzenje)";
+            return @"insert into dbo.Zaduzenja (VozilaID,ZaposleniID,DatumZaduzenja,PlaniranoRazduzenje) values (@VozilaID,@ZaposleniID,@DatumZaduzenja,@PlaniranoRazduzenje)
+                    
+                     UPDATE dbo.Vozila
+                     SET Dostupnost = 'False'
+                     where VoziloID = @VozilaID";
         }
 
         public string GetSelectQuery()
         {
             return @"select 
-                     ZaduzenjaID,
+                     distinct ZaduzenjaID,
                      VozilaID,
                      m.ModelID,
-                     p.Naziv + ' ' + m.Naziv as Naziv,
+                     p.Naziv + ' ' + m.Naziv as Naziv,r.RegistracijskiBroj,
                      zap.ZaposleniID,
                      zap.Ime + ' ' + zap.Prezime as ImeIPrezime,
                      DatumZaduzenja,
@@ -98,13 +113,32 @@ namespace VozniPark.PropertiesClass
                      from dbo.Zaduzenja as z
                      join dbo.Zaposleni as zap on z.ZaposleniID = zap.ZaposleniID
                      join dbo.Vozila as v on v.VoziloID = z.VozilaID
+					 left JOIN dbo.Registracija r ON v.VoziloID=r.VoziloID
                      join dbo.Model as m on m.ModelID = v.ModelID
-                     join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID";
+                     join dbo.Proizvodjac as p on m.ProizvodjacID = p.ProizvodjacID
+                     where DatumRazduzenja is null";
         }
 
         public string GetUpdateQuery()
         {
-            return "update dbo.Zaposlenja set VozilaID = @VozilaID,ZaposleniID = @ZaposleniID,  PredjenaKilometraza = @PredjenaKilometraza, DatumZaduzenja = @DatumZaduzenja,DatumRazduzenja=@DatumRazduzenja, PlaniranoRazduzenje=@PlaniranoRazduzenje where ZaduzenjaID = @ZaduzenjaID";
+            return @"update dbo.Zaduzenja set VozilaID = @VozilaID,ZaposleniID = @ZaposleniID, DatumZaduzenja = @DatumZaduzenja, PlaniranoRazduzenje=@PlaniranoRazduzenje where ZaduzenjaID = @ZaduzenjaID";
+        }
+
+        public string RazduziQuery()
+        {
+            return @"update dbo.Zaduzenja set DatumRazduzenja = @DatumRazduzenja, PredjenaKilometraza = @PredjenaKilometraza where ZaduzenjaID = @ZaduzenjaID
+                     UPDATE dbo.Vozila
+                     SET Dostupnost = 'True'
+                     where VoziloID = @VozilaID
+                     Update dbo.Vozila 
+                        Set Kilometraza = Kilometraza + @PredjenaKilometraza
+                      where VoziloID = @VozilaID
+";
+        }
+
+        public string GetLookupQuery()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -116,6 +150,11 @@ namespace VozniPark.PropertiesClass
             {
                 SqlParameter parameter = new SqlParameter("ZaduzenjaID", System.Data.SqlDbType.Int);
                 parameter.Value = ZaduzenjaID;
+                list.Add(parameter);
+            }
+            {
+                SqlParameter parameter = new SqlParameter("VozilaID", System.Data.SqlDbType.Int);
+                parameter.Value = VozilaID;
                 list.Add(parameter);
             }
             return list;
@@ -143,7 +182,6 @@ namespace VozniPark.PropertiesClass
                 parameter.Value = DatumZaduzenja;
                 list.Add(parameter);
             }
-           
             {
                 SqlParameter parameter = new SqlParameter("PlaniranoRazduzenje", System.Data.SqlDbType.DateTime);
                 parameter.Value = PlaniranoRazduzenje;
@@ -173,18 +211,8 @@ namespace VozniPark.PropertiesClass
                 list.Add(parameter);
             }
             {
-                SqlParameter parameter = new SqlParameter("PredjenaKilometraza", System.Data.SqlDbType.Int);
-                parameter.Value = PredjenaKilometraza;
-                list.Add(parameter);
-            }
-            {
                 SqlParameter parameter = new SqlParameter("DatumZaduzenja", System.Data.SqlDbType.DateTime);
                 parameter.Value = DatumZaduzenja;
-                list.Add(parameter);
-            }
-            {
-                SqlParameter parameter = new SqlParameter("DatumRazduzenja", System.Data.SqlDbType.DateTime);
-                parameter.Value = DatumRazduzenja;
                 list.Add(parameter);
             }
             {
@@ -194,10 +222,32 @@ namespace VozniPark.PropertiesClass
             }
             return list;
         }
-
-        public string GetLookupQuery()
+        
+        public List<SqlParameter> GetRazduziParameters()
         {
-            throw new NotImplementedException();
+            List<SqlParameter> list = new List<SqlParameter>();
+            {
+                SqlParameter parameter = new SqlParameter("ZaduzenjaID", System.Data.SqlDbType.Int);
+                parameter.Value = ZaduzenjaID;
+                list.Add(parameter);
+            }
+            {
+                SqlParameter parameter = new SqlParameter("VozilaID", System.Data.SqlDbType.Int);
+                parameter.Value = VozilaID;
+                list.Add(parameter);
+            }
+            {
+                SqlParameter parameter = new SqlParameter("DatumRazduzenja", System.Data.SqlDbType.DateTime);
+                parameter.Value = DatumRazduzenja;
+                list.Add(parameter);
+            }
+            {
+                SqlParameter parameter = new SqlParameter("PredjenaKilometraza", System.Data.SqlDbType.Int);
+                parameter.Value = PredjenaKilometraza;
+                list.Add(parameter);
+            }
+
+            return list;
         }
 
 
